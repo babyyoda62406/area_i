@@ -15,7 +15,7 @@ export class UsuarioService {
      * @param user Este es el Skema del usuario  
      */
     async crearUsuario(user: CrearUsuarioDTO) {
-        const {correo, password} = user
+        const { correo, password } = user
 
         const userClon = await this.dbUsuario.findOne({
             where: {
@@ -25,11 +25,22 @@ export class UsuarioService {
 
         if (userClon) throw new HttpException(`EL correo ${user.correo} esta ocupado`, HttpStatus.BAD_REQUEST)
 
-        const salt  = bycrypt.genSaltSync(10);
+        const salt = bycrypt.genSaltSync(10);
         user.password = bycrypt.hashSync(password, salt)
-        
-
         return await this.dbUsuario.save(this.dbUsuario.create(user));
 
+    }
+
+    async getUsuarioByCorreo(correo: string) {
+
+        const tempUser =await  this.dbUsuario.findOne({
+            where: {
+                correo
+            }
+        })
+
+        if(!tempUser) throw new HttpException(`No Existe usuario con el correo ${correo}` ,  HttpStatus.NOT_FOUND);
+
+        return tempUser ; 
     }
 }

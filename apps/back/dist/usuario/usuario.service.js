@@ -35,6 +35,16 @@ let UsuarioService = class UsuarioService {
         user.password = bycrypt.hashSync(password, salt);
         return await this.dbUsuario.save(this.dbUsuario.create(user));
     }
+    async getUsuarioByCorreo(correo) {
+        const tempUser = await this.dbUsuario.findOne({
+            where: {
+                correo
+            }
+        });
+        if (!tempUser)
+            throw new common_1.HttpException(`No Existe usuario con el correo ${correo}`, common_1.HttpStatus.NOT_FOUND);
+        return tempUser;
+    }
 };
 exports.UsuarioService = UsuarioService;
 exports.UsuarioService = UsuarioService = __decorate([

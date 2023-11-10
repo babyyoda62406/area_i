@@ -9,8 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Usuario = void 0;
+exports.Usuario = exports.estados_usuario = void 0;
 const typeorm_1 = require("typeorm");
+var estados_usuario;
+(function (estados_usuario) {
+    estados_usuario["Activo"] = "Activo";
+    estados_usuario["Inactivo"] = "Inactivo";
+    estados_usuario["Eliminado"] = "Eliminado";
+})(estados_usuario || (exports.estados_usuario = estados_usuario = {}));
 let Usuario = class Usuario {
 };
 exports.Usuario = Usuario;
@@ -26,6 +32,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Usuario.prototype, "password", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: estados_usuario.Activo }),
+    __metadata("design:type", String)
+], Usuario.prototype, "estado", void 0);
 exports.Usuario = Usuario = __decorate([
     (0, typeorm_1.Entity)()
 ], Usuario);
