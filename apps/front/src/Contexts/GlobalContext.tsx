@@ -9,10 +9,10 @@ export const GlobalContext = createContext<typeGlobalContext>({
 
 })
 
-export const GlobalContextProvider: FC<typeProviderContext> = () => {
+export const GlobalContextProvider: FC<typeProviderContext> = ({children}) => {
     
 
     return <GlobalContext.Provider value={{}}>
-        children
+        {children}
     </GlobalContext.Provider>
 }
