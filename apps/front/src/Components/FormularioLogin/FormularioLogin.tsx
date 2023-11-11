@@ -7,6 +7,7 @@ import { MdDangerous as IconError } from 'react-icons/md'
 import { FetchService } from '../../Services/FetchService'
 import { RutaServer } from '../../Helpers/RutaServer'
 import { GlobalContext } from '../../Contexts/GlobalContext'
+import { ALerta } from '../../Services/Alerta'
 
 
 const FormularioLogin: FC<typeFormularioLogin> = () => {
@@ -66,6 +67,19 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
      */
     const GestionarDatos = (event: any) => {
         event.preventDefault()
+
+        ALerta({
+            titulo: 'hola',
+            texto: '',
+            icono: 'success',
+            button: false,
+            showConfirmButton:false,
+            tiempo: 2000,
+            position:'top-right'
+        })
+
+
+
         setErrorForm((prevDatos: object) => ({
             ...prevDatos,
             ['email']: false,
