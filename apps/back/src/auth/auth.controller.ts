@@ -6,8 +6,6 @@ import { CrearUsuarioDTO } from 'src/usuario/dto/CrearUsuario.dto';
 import { UsuarioService } from 'src/usuario/usuario.service';
 import { AutenticarUsuarioDTO } from './dto/AutenticarUsuario.dto';
 import { estados_usuario } from 'src/usuario/entities/usuario.entity';
-// import { estados_usuario } from 'src/usuario/entities/usuario.entity';
-
 
 @Controller('auth')
 export class AuthController {
@@ -36,7 +34,7 @@ export class AuthController {
 
         const token = await this.jwt.generarJwt({id: tempUser.id})
 
-        return res.status(200).json({message: 'Usuario logeado' , token});
+        res.status(200).json({message: 'Usuario logeado' , token});
         
 
     }

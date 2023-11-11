@@ -12,12 +12,19 @@ const usuario_controller_1 = require("./usuario.controller");
 const usuario_service_1 = require("./usuario.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const usuario_entity_1 = require("./entities/usuario.entity");
+const ValidarToken_middleware_1 = require("../security/ValidarToken.middleware");
+const jwt_module_1 = require("../jwt/jwt.module");
 let UsuarioModule = class UsuarioModule {
+    configure(consumer) {
+        consumer
+            .apply(ValidarToken_middleware_1.ValidarToken)
+            .forRoutes('usuarios/');
+    }
 };
 exports.UsuarioModule = UsuarioModule;
 exports.UsuarioModule = UsuarioModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([usuario_entity_1.Usuario])],
+        imports: [jwt_module_1.JwtModule, typeorm_1.TypeOrmModule.forFeature([usuario_entity_1.Usuario])],
         controllers: [usuario_controller_1.UsuarioController],
         providers: [usuario_service_1.UsuarioService],
         exports: [usuario_service_1.UsuarioService]

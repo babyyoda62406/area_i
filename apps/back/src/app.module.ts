@@ -8,6 +8,7 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Usuario } from './usuario/entities/usuario.entity';
 import { JwtModule } from './jwt/jwt.module';
+import { SecurityModule } from './security/security.module';
 import * as dotenv from "dotenv";
 
 dotenv.config();
@@ -29,6 +30,7 @@ dotenv.config();
     AuthModule,
     UsuarioModule,
     JwtModule,
+    SecurityModule,
   ],
   controllers: [AppController],
   providers: [AppService],

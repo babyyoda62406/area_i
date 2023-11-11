@@ -10,5 +10,5 @@ export declare class AuthController {
         msg: string;
         token: string;
     }>;
-    autenticarUsuario(user: AutenticarUsuarioDTO, res: any): Promise<any>;
+    autenticarUsuario(user: AutenticarUsuarioDTO, res: any): Promise<void>;
 }

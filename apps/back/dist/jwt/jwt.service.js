@@ -29,6 +29,17 @@ let JwtService = class JwtService {
         });
     }
     ;
+    validarJwt(token) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const payload = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
+                resolve(payload);
+            }
+            catch (err) {
+                reject(err);
+            }
+        });
+    }
 };
 exports.JwtService = JwtService;
 exports.JwtService = JwtService = __decorate([

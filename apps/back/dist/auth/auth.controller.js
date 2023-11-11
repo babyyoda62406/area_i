@@ -38,7 +38,7 @@ let AuthController = class AuthController {
         if (tempUser.estado != usuario_entity_1.estados_usuario.Activo)
             throw new common_1.HttpException('Su usuario está pendiente de aprobación', common_1.HttpStatus.FORBIDDEN);
         const token = await this.jwt.generarJwt({ id: tempUser.id });
-        return res.status(200).json({ message: 'Usuario logeado', token });
+        res.status(200).json({ message: 'Usuario logeado', token });
     }
 };
 exports.AuthController = AuthController;

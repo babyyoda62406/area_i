@@ -17,6 +17,7 @@ const usuario_module_1 = require("./usuario/usuario.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const usuario_entity_1 = require("./usuario/entities/usuario.entity");
 const jwt_module_1 = require("./jwt/jwt.module");
+const security_module_1 = require("./security/security.module");
 const dotenv = require("dotenv");
 dotenv.config();
 let AppModule = class AppModule {
@@ -40,6 +41,7 @@ exports.AppModule = AppModule = __decorate([
             auth_module_1.AuthModule,
             usuario_module_1.UsuarioModule,
             jwt_module_1.JwtModule,
+            security_module_1.SecurityModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
