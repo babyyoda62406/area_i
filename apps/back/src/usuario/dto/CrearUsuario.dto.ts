@@ -1,5 +1,8 @@
 import {  IsNotEmpty, IsString } from "class-validator";
 
+/**
+ * Objeto de Trasnferencia de Datos para crear usuario.
+ */
 export class CrearUsuarioDTO{
     @IsNotEmpty({
         message:'El correo es obligatorio',context: 'correo'
