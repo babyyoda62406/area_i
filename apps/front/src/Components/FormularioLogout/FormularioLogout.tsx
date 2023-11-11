@@ -82,7 +82,7 @@ const FormularioLogout: FC<typeFormularioLogout> = () => {
 
             <label htmlFor="">Cuenta de Correo</label>
             
-            <input type="text" autoFocus className='InpEmailOut' onChange={(arg) => { GuardarDatos('email', arg.target.value) }} />
+            <input type="email" autoFocus className='InpEmailOut' onChange={(arg) => { GuardarDatos('email', arg.target.value) }} />
             
             {errorForm.email === true ? <span className='IconErrorEmOut' onClick={() => { eliminarError('email', false) }}><IconError /></span> : ''}
         </div>
