@@ -42,6 +42,16 @@ let UsuarioService = class UsuarioService {
             }
         });
     }
+    async getUsuario(id) {
+        const tempUser = await this.dbUsuario.findOne({
+            where: {
+                id
+            }
+        });
+        if (!tempUser)
+            throw new common_1.HttpException(`No existe el usuario con el id ${id}`, common_1.HttpStatus.NOT_FOUND);
+        return tempUser;
+    }
     async getUsuarioByCorreo(correo) {
         const tempUser = await this.dbUsuario.findOne({
             where: {

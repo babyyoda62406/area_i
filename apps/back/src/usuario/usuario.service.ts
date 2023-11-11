@@ -32,18 +32,34 @@ export class UsuarioService {
     }
 
 
-     /**
-      * Obtener usuarios
-      * @returns usuarios[]
-      */
-    async getUsuarios(){   
+    /**
+     * Obtener usuarios
+     * @returns usuarios[]
+     */
+    async getUsuarios() {
         return await this.dbUsuario.find({
-            where:{
+            where: {
                 estado: Not(estados_usuario.Eliminado)
             }
-        }); 
+        });
     }
 
+    /**
+     * Obtener un usuario por su ID
+     * @param id :number id del usuario a buscar
+     * @return Usuario | HttpException
+     */
+    async getUsuario(id: number){
+        const tempUser =  await this.dbUsuario.findOne({
+            where:{
+                id
+            }
+        })
+
+        if(!tempUser) throw new HttpException(`No existe el usuario con el id ${id}` , HttpStatus.NOT_FOUND);
+        return tempUser ; 
+    }
+    
     /**
      * Obtener un usuario por el correo
      * @param correo :string correo del usuario
@@ -51,16 +67,16 @@ export class UsuarioService {
      */
     async getUsuarioByCorreo(correo: string) {
 
-        const tempUser =await  this.dbUsuario.findOne({
+        const tempUser = await this.dbUsuario.findOne({
             where: {
                 correo
             }
         })
 
-        if(!tempUser) throw new HttpException(`No Existe usuario con el correo ${correo}` ,  HttpStatus.NOT_FOUND);
+        if (!tempUser) throw new HttpException(`No Existe usuario con el correo ${correo}`, HttpStatus.NOT_FOUND);
 
-        return tempUser ; 
+        return tempUser;
     }
 
-    
+
 }

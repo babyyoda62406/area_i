@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { CrearUsuarioDTO } from './dto/CrearUsuario.dto';
 import { UsuarioService } from './usuario.service';
 
@@ -16,12 +16,24 @@ export class UsuarioController {
      * @returns Usuarios[] | HttpException
      */
     @Get()
-    async getAllUsuarios() {        
+    async getAllUsuarios() {
         const tempUsuarios = await this.svUsuario.getUsuarios();
-        if(!tempUsuarios.length) throw new HttpException('No hay usuarios que mostrar', HttpStatus.NO_CONTENT)
+        if (!tempUsuarios.length) throw new HttpException('No hay usuarios que mostrar', HttpStatus.NO_CONTENT)
 
-        return tempUsuarios ; 
+        return tempUsuarios;
     }
+
+    /***
+     * Obtener un usuario Por ID
+     * @param /id se concatena el id al final de la peticion get
+     */
+
+    @Get(':id')
+    async getUsuario(@Param('id', ParseIntPipe) id: number) {
+        const tempUser = await this.svUsuario.getUsuario(id);
+        return {message: 'Usuario obtenido' , usuario: Object.assign(tempUser , {password: '****'})}
+    }
+
 
     /**
      * Controlador para agregar un usuario
@@ -30,11 +42,11 @@ export class UsuarioController {
      */
     @Post()
     async crearUsuario(@Body() user: CrearUsuarioDTO) {
-        const tempUser  = await this.svUsuario.crearUsuario(user); 
+        const tempUser = await this.svUsuario.crearUsuario(user);
 
         return {
             message: 'Usuario Creado',
-            id: tempUser.id            
+            id: tempUser.id
         };
     }
 

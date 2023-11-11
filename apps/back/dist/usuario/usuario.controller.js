@@ -26,6 +26,10 @@ let UsuarioController = class UsuarioController {
             throw new common_1.HttpException('No hay usuarios que mostrar', common_1.HttpStatus.NO_CONTENT);
         return tempUsuarios;
     }
+    async getUsuario(id) {
+        const tempUser = await this.svUsuario.getUsuario(id);
+        return { message: 'Usuario obtenido', usuario: Object.assign(tempUser, { password: '****' }) };
+    }
     async crearUsuario(user) {
         const tempUser = await this.svUsuario.crearUsuario(user);
         return {
@@ -41,6 +45,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "getAllUsuarios", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], UsuarioController.prototype, "getUsuario", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
