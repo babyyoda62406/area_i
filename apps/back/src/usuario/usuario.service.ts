@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Usuario } from './entities/usuario.entity';
-import { Repository } from 'typeorm';
+import { Usuario, estados_usuario } from './entities/usuario.entity';
+import { Not, Repository } from 'typeorm';
 import { CrearUsuarioDTO } from './dto/CrearUsuario.dto';
 import * as bycrypt from 'bcrypt';
 
@@ -31,6 +31,20 @@ export class UsuarioService {
 
     }
 
+    
+    async getUsuarios(){   
+        return await this.dbUsuario.find({
+            where:{
+                estado: Not(estados_usuario.Eliminado)
+            }
+        }); 
+    }
+
+    /**
+     * Obtener un usuario por el correo
+     * @param correo :string correo del usuario
+     * @returns Usuario | HttpException
+     */
     async getUsuarioByCorreo(correo: string) {
 
         const tempUser =await  this.dbUsuario.findOne({
@@ -43,4 +57,6 @@ export class UsuarioService {
 
         return tempUser ; 
     }
+
+    
 }

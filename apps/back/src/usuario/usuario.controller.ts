@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Post } from '@nestjs/common';
 import { CrearUsuarioDTO } from './dto/CrearUsuario.dto';
 import { UsuarioService } from './usuario.service';
 
@@ -11,12 +11,24 @@ export class UsuarioController {
 
     }
 
-    @Get()
-    getAllUsuarios() {
+    /**
+     * Obtener todos los usuario
+     * @returns Usuarios[] | HttpException
+     */
 
-        return 'Todos los usuarios';
+    @Get()
+    async getAllUsuarios() {        
+        const tempUsuarios = await this.svUsuario.getUsuarios();
+        if(!tempUsuarios.length) throw new HttpException('No hay usuarios que mostrar', HttpStatus.NO_CONTENT)
+
+        return tempUsuarios ; 
     }
 
+    /**
+     * Controlador para agregar un usuario
+     * @param user Objeto de tranferencia de datos que reprecenta el usuario
+     * @returns Objeto response.
+     */
     @Post()
     async crearUsuario(@Body() user: CrearUsuarioDTO) {
         const tempUser  = await this.svUsuario.crearUsuario(user); 
@@ -26,5 +38,6 @@ export class UsuarioController {
             id: tempUser.id            
         };
     }
+
 }
 

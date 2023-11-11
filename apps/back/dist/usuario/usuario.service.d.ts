@@ -5,5 +5,6 @@ export declare class UsuarioService {
     private dbUsuario;
     constructor(dbUsuario: Repository<Usuario>);
     crearUsuario(user: CrearUsuarioDTO): Promise<Usuario>;
+    getUsuarios(): Promise<Usuario[]>;
     getUsuarioByCorreo(correo: string): Promise<Usuario>;
 }

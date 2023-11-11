@@ -20,8 +20,11 @@ let UsuarioController = class UsuarioController {
     constructor(svUsuario) {
         this.svUsuario = svUsuario;
     }
-    getAllUsuarios() {
-        return 'Todos los usuarios';
+    async getAllUsuarios() {
+        const tempUsuarios = await this.svUsuario.getUsuarios();
+        if (!tempUsuarios.length)
+            throw new common_1.HttpException('No hay usuarios que mostrar', common_1.HttpStatus.NO_CONTENT);
+        return tempUsuarios;
     }
     async crearUsuario(user) {
         const tempUser = await this.svUsuario.crearUsuario(user);
@@ -36,7 +39,7 @@ __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "getAllUsuarios", null);
 __decorate([
     (0, common_1.Post)(),

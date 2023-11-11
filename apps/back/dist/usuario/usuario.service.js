@@ -35,6 +35,13 @@ let UsuarioService = class UsuarioService {
         user.password = bycrypt.hashSync(password, salt);
         return await this.dbUsuario.save(this.dbUsuario.create(user));
     }
+    async getUsuarios() {
+        return await this.dbUsuario.find({
+            where: {
+                estado: (0, typeorm_2.Not)(usuario_entity_1.estados_usuario.Eliminado)
+            }
+        });
+    }
     async getUsuarioByCorreo(correo) {
         const tempUser = await this.dbUsuario.findOne({
             where: {
