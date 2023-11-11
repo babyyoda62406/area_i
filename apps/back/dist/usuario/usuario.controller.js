@@ -14,21 +14,39 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsuarioController = void 0;
 const common_1 = require("@nestjs/common");
+const CrearUsuario_dto_1 = require("./dto/CrearUsuario.dto");
+const usuario_service_1 = require("./usuario.service");
 let UsuarioController = class UsuarioController {
-    getAllUsuarios(req) {
-        console.log(req.payload);
+    constructor(svUsuario) {
+        this.svUsuario = svUsuario;
+    }
+    getAllUsuarios() {
         return 'Todos los usuarios';
+    }
+    async crearUsuario(user) {
+        const tempUser = await this.svUsuario.crearUsuario(user);
+        return {
+            message: 'Usuario Creado',
+            id: tempUser.id
+        };
     }
 };
 exports.UsuarioController = UsuarioController;
 __decorate([
     (0, common_1.Get)(),
-    __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], UsuarioController.prototype, "getAllUsuarios", null);
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [CrearUsuario_dto_1.CrearUsuarioDTO]),
+    __metadata("design:returntype", Promise)
+], UsuarioController.prototype, "crearUsuario", null);
 exports.UsuarioController = UsuarioController = __decorate([
-    (0, common_1.Controller)('usuarios')
+    (0, common_1.Controller)('usuarios'),
+    __metadata("design:paramtypes", [usuario_service_1.UsuarioService])
 ], UsuarioController);
 //# sourceMappingURL=usuario.controller.js.map

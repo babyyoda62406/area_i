@@ -14,7 +14,7 @@ export class UsuarioService {
      * Esta Funcion crea un usuario
      * @param user Este es el Skema del usuario  
      */
-    async crearUsuario(user: CrearUsuarioDTO) {
+    async crearUsuario(user: CrearUsuarioDTO): Promise<Usuario> {
         const { correo, password } = user
 
         const userClon = await this.dbUsuario.findOne({
