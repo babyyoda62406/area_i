@@ -1,13 +1,13 @@
 
-.FormularioLogin{
-    background-color: var(--azul-envolvente);
+.FormularioLogout{
+    background-color: var(--bs-primary);
     border-radius: 10px;
     padding-top: 1rem;
     padding-bottom: 1rem;
 
 }
 
-.ElementsFormLogin{
+.ElementsFormLogout{
     width: 80%;
     height: auto;
     margin-top: 5%;
@@ -17,7 +17,7 @@
     flex-direction: column;
 }
 
-.ElementsFormLogin>label{
+.ElementsFormLogout>label{
     margin-left: 2.0erm;
     margin-bottom: 1.3rem;
     font-size: 1.5rem;
@@ -26,30 +26,30 @@
     transition: all 500ms;
 }
 
-.ElementsFormLogin>label:hover{
+.ElementsFormLogout>label:hover{
     cursor: none;
     color: var(--bs-gray-600)
 }
 
-.ElementsFormLogin>input{
+.ElementsFormLogout>input{
     padding: 0.5rem;
     font-size: 1.4rem;
     border-radius: 7px;
 
 }
 
-.ElementsFormLogin>input:focus-visible{
+.ElementsFormLogout>input:focus-visible{
     outline: none !important;
 }
 
-.EnvioLogin{
+.EnvioLogout{
     display: flex;
     width:100%;
     justify-content: center;
     margin: 1rem;
 }
 
-.EnvioLogin>Input{
+.EnvioLogout>Input{
     padding: 0.7rem;
     padding-left: 1.0rem;
     padding-right: 1.0rem;
@@ -64,14 +64,14 @@
     
 }
 
-.EnvioLogin>input:hover{
+.EnvioLogout>input:hover{
     cursor: pointer;
     background-color: var(--bs-teal);
     color: var(--azul-profundo);
     box-shadow:none;
 }
 
-.EnvioLogin>input:active{
+.EnvioLogout>input:active{
     background-color: var(--azul-profundo);
     color:var(--bs-white) ;
 }

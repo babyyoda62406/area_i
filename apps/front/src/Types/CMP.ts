@@ -4,14 +4,28 @@ type typeLoginLayout = {
 
 }
 
+type typeBienvenida = {
+
+}
+
 type typeFormularioLogin = {
     registro: any
-    gestionForm:any
+    gestionForm: any
+    
     
 }
 
+type typeFormularioLogout = {
+    registro: any
+    gestionForm: any
+    
+}
+
+
 export type {
     typeLoginLayout,
-    typeFormularioLogin
+    typeFormularioLogin,
+    typeBienvenida,
+    typeFormularioLogout
 
 }
