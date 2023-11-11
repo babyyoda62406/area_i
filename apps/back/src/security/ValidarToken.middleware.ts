@@ -8,6 +8,9 @@ declare module 'express' {
     }
 }
 
+/**
+ * Middleware para corroborar el token.
+ */
 @Injectable()
 export class ValidarToken implements NestMiddleware {
     constructor(private jwt: JwtService) {
