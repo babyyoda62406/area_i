@@ -8,16 +8,26 @@
 }
 
 .ElementsFormLogout{
-    width: 80%;
+    width: 85%;
     height: auto;
     margin-top: 5%;
     margin-left: 10%;
     margin-right: 10%;
-    display: flex;
-    flex-direction: column;
+    
+    display: grid;
+    grid-template-areas:
+        "labEmail labEmail labEmail"
+        "inpEmail inpEmail errorE"
+        "labPassw labPassw labPassw"
+        "inpPassw inpPassw errorP"
+        /* ""
+        ""
+        ""
+        ""*/ ; 
 }
 
 .ElementsFormLogout>label{
+    grid-area: labEmail;
     margin-left: 2.0erm;
     margin-bottom: 1.3rem;
     font-size: 1.5rem;
@@ -41,6 +51,72 @@
 .ElementsFormLogout>input:focus-visible{
     outline: none !important;
 }
+
+.InpEmail{
+    grid-area: inpEmail;
+}
+
+.InpPass{
+    grid-area: inpPassw;
+}
+
+
+.IconErrorE{
+    grid-area:errorE ;
+    margin-left: 1.0rem;
+    margin-top: 0.2rem;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px ;
+    background-color:white;
+    box-shadow: 1px 1px 3px red;
+    
+}
+.IconErrorE>svg{
+    width: 20px;
+    height: 20px;
+    fill: var(--bs-danger) !important;
+    transition: all 500ms;
+}
+
+.IconErrorE>svg:hover{
+    cursor: pointer;
+    fill: var(--bs-dark) !important;
+}
+
+
+
+.IconErrorP{
+    grid-area:errorP ;
+    margin-left: 1.0rem;
+    margin-bottom: 0.3rem;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px ;
+    background-color:white;
+    box-shadow: 1px 1px 3px red;
+    
+}
+.IconErrorP>svg{
+    width: 20px;
+    height: 20px;
+    fill: var(--bs-danger) !important;
+    transition: all 500ms;
+}
+
+.IconErrorP>svg:hover{
+    cursor: pointer;
+    fill: var(--bs-dark) !important;
+}
+
 
 .EnvioLogout{
     display: flex;

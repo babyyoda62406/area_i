@@ -49,6 +49,11 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
         }
     }
 
+    /**
+     * guarda los datos k se introducen en el formulario
+     * @param clave 
+     * @param value 
+     */
     const GuardarDatos = (clave:keyof typeDatosForm, value:string) => {
         setDatosForm((prevDatos) => ({
             ...prevDatos,
