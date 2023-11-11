@@ -9,7 +9,7 @@
 
 
 
-export const ValidarCampos = (tipo: string, formulario: string): boolean | string => {
+export const ValidarCampos = (tipo: string, formulario: string): boolean => {
     
     const expresionRegularEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
@@ -37,7 +37,7 @@ export const ValidarCampos = (tipo: string, formulario: string): boolean | strin
             break;
 
         default:
-            return 'este tipo de formulario aun no esta validado'
+            return true
             break;
     }
 

@@ -2,13 +2,16 @@ import { FC, useState } from 'react'
 import './FormularioLogin.css'
 import { typeFormularioLogin } from '../../Types/CMP'
 import { ValidarCampos } from '../../Services/ValidarCampos'
-import { typeDatosForm } from '../../Types/UseStates'
+import { typeDatosForm, typeErrorForm } from '../../Types/UseStates'
 import {MdDangerous as IconError} from 'react-icons/md'
 
 
 const FormularioLogin: FC<typeFormularioLogin> = () => {
 
-    const [errorForm, setErrorForm] = useState<number>(0)
+    const [errorForm, setErrorForm] = useState<typeErrorForm>({
+        'email': false,
+        'password': false
+    })
 
     const [ datosForm, setDatosForm ] = useState<typeDatosForm>({
         "email":'',
@@ -24,7 +27,11 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
      */
     const GestionarDatos = (event: any) => {
         event.preventDefault()
-        setErrorForm(0)
+        setErrorForm((prevDatos:object) => ({
+            ...prevDatos,
+            ['email']: false,
+            ['password']:false
+          }))
         
         const errorEmail = ValidarCampos('email', datosForm.email);
         const errorPassword = ValidarCampos('password', datosForm.password)
@@ -36,8 +43,8 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
             datosEnviar.set('password', datosForm.password)
             
         } else {
-            errorEmail ?    setErrorForm(1) : ''
-            errorPassword ? setErrorForm(2) : ''
+            errorEmail ? setErrorForm({['email']: errorEmail,['password']:errorPassword}) : ''
+            errorPassword ? setErrorForm({['email']: errorEmail,['password']:errorPassword}) : ''
         
         }
     }
@@ -53,11 +60,13 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
     return <form action="" className='FormularioLogin' onSubmit={(event) => GestionarDatos(event)}>
         <div className='ElementsFormLogin'>
             <label htmlFor="">Cuenta de Correo</label>
-            <input type="text" onChange={(arg)=>{GuardarDatos('email',arg.target.value)}} />
+            <input type="email" className='InpEmail' onChange={(arg) => { GuardarDatos('email', arg.target.value) }} />
+            {errorForm.email===true?<span className='IconErrorE'><IconError/></span>:'' }
         </div>
         <div className='ElementsFormLogin'>
             <label htmlFor="">Contraseña</label>
-            <input type="text" onChange={(arg)=>{GuardarDatos('password',arg.target.value)}}/>
+            <input type="text" className='InpPass' onChange={(arg)=>{GuardarDatos('password',arg.target.value)}}/>
+            {errorForm.password===true?<span className='IconErrorP'><IconError/></span>:'' }
         </div>
         <div className='EnvioLogin'>
             <input type="submit" value='Entrar' /></div>

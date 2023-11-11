@@ -4,6 +4,16 @@ type typeDatosForm = {
     password:string
 }
 
+/**
+ * hook para controlar los errores en la validacion
+ */
+type typeErrorForm = {
+    email: boolean
+    password:boolean
+}
+
+
 export type {
-    typeDatosForm
+    typeDatosForm,
+    typeErrorForm
 }
