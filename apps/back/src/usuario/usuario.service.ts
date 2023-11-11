@@ -31,7 +31,11 @@ export class UsuarioService {
 
     }
 
-    
+
+     /**
+      * Obtener usuarios
+      * @returns usuarios[]
+      */
     async getUsuarios(){   
         return await this.dbUsuario.find({
             where:{

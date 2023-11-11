@@ -15,7 +15,6 @@ export class UsuarioController {
      * Obtener todos los usuario
      * @returns Usuarios[] | HttpException
      */
-
     @Get()
     async getAllUsuarios() {        
         const tempUsuarios = await this.svUsuario.getUsuarios();
