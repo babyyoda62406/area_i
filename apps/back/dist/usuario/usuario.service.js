@@ -45,7 +45,8 @@ let UsuarioService = class UsuarioService {
     async getUsuario(id) {
         const tempUser = await this.dbUsuario.findOne({
             where: {
-                id
+                id,
+                estado: (0, typeorm_2.Not)(usuario_entity_1.estados_usuario.Eliminado)
             }
         });
         if (!tempUser)
@@ -55,11 +56,23 @@ let UsuarioService = class UsuarioService {
     async getUsuarioByCorreo(correo) {
         const tempUser = await this.dbUsuario.findOne({
             where: {
-                correo
+                correo,
+                estado: (0, typeorm_2.Not)(usuario_entity_1.estados_usuario.Eliminado)
             }
         });
         if (!tempUser)
             throw new common_1.HttpException(`No Existe usuario con el correo ${correo}`, common_1.HttpStatus.NOT_FOUND);
+        return tempUser;
+    }
+    async softDeleteUsuarioById(id) {
+        const tempUser = await this.getUsuario(id);
+        tempUser.estado = usuario_entity_1.estados_usuario.Eliminado;
+        await this.dbUsuario.save(tempUser);
+        return tempUser;
+    }
+    async hardDeleteUsuarioById(id) {
+        const tempUser = await this.getUsuario(id);
+        await this.dbUsuario.delete(tempUser);
         return tempUser;
     }
 };

@@ -14,4 +14,5 @@ export declare class UsuarioController {
         message: string;
         id: number;
     }>;
+    deleteUsuario(id: number): Promise<import("./entities/usuario.entity").Usuario>;
 }

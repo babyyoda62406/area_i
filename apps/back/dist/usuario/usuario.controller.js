@@ -37,6 +37,9 @@ let UsuarioController = class UsuarioController {
             id: tempUser.id
         };
     }
+    async deleteUsuario(id) {
+        return await this.svUsuario.softDeleteUsuarioById(id);
+    }
 };
 exports.UsuarioController = UsuarioController;
 __decorate([
@@ -59,6 +62,13 @@ __decorate([
     __metadata("design:paramtypes", [CrearUsuario_dto_1.CrearUsuarioDTO]),
     __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "crearUsuario", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], UsuarioController.prototype, "deleteUsuario", null);
 exports.UsuarioController = UsuarioController = __decorate([
     (0, common_1.Controller)('usuarios'),
     __metadata("design:paramtypes", [usuario_service_1.UsuarioService])

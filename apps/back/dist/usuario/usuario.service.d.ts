@@ -8,4 +8,6 @@ export declare class UsuarioService {
     getUsuarios(): Promise<Usuario[]>;
     getUsuario(id: number): Promise<Usuario>;
     getUsuarioByCorreo(correo: string): Promise<Usuario>;
+    softDeleteUsuarioById(id: number): Promise<Usuario>;
+    hardDeleteUsuarioById(id: number): Promise<Usuario>;
 }

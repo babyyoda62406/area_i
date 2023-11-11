@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { CrearUsuarioDTO } from './dto/CrearUsuario.dto';
 import { UsuarioService } from './usuario.service';
 
@@ -49,6 +49,12 @@ export class UsuarioController {
             id: tempUser.id
         };
     }
+
+    @Delete(':id')
+    async deleteUsuario(@Param('id', ParseIntPipe) id: number){
+        return await this.svUsuario.softDeleteUsuarioById(id); 
+    }
+
 
 }
 

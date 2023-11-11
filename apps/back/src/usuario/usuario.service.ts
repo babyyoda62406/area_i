@@ -49,10 +49,12 @@ export class UsuarioService {
      * @param id :number id del usuario a buscar
      * @return Usuario | HttpException
      */
+    
     async getUsuario(id: number){
         const tempUser =  await this.dbUsuario.findOne({
             where:{
-                id
+                id,
+                estado: Not(estados_usuario.Eliminado)
             }
         })
 
@@ -69,13 +71,41 @@ export class UsuarioService {
 
         const tempUser = await this.dbUsuario.findOne({
             where: {
-                correo
+                correo,
+                estado: Not(estados_usuario.Eliminado)
             }
         })
 
         if (!tempUser) throw new HttpException(`No Existe usuario con el correo ${correo}`, HttpStatus.NOT_FOUND);
 
         return tempUser;
+    }
+
+
+
+    /**
+     * Marcar usuario como eliminado
+     * @param id Id del usuario
+     * @returns Usuario | HTTPException
+     */
+    async softDeleteUsuarioById(id: number){
+        const tempUser = await  this.getUsuario(id) ; 
+        tempUser.estado = estados_usuario.Eliminado
+
+        await this.dbUsuario.save(tempUser)
+        return tempUser;
+    }
+
+
+    /**
+     * Eliminar Usuario de Forma permanente en la base de datos
+     * @param id :number id del usuarios
+     * @returns Usuario  | HttpException
+     */
+    async hardDeleteUsuarioById(id: number){
+        const tempUser = await  this.getUsuario(id) ; 
+        await this.dbUsuario.delete(tempUser); 
+        return tempUser ;
     }
 
 
