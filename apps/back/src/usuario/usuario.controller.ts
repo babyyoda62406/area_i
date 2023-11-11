@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { CrearUsuarioDTO } from './dto/CrearUsuario.dto';
 import { UsuarioService } from './usuario.service';
+import { EditarUsuarioDTO } from './dto/EditarUsuario.dto';
 
 /**
  * Controladores de la ruta /usuarios
@@ -31,7 +32,7 @@ export class UsuarioController {
     @Get(':id')
     async getUsuario(@Param('id', ParseIntPipe) id: number) {
         const tempUser = await this.svUsuario.getUsuario(id);
-        return {message: 'Usuario obtenido' , usuario: Object.assign(tempUser , {password: '****'})}
+        return { message: 'Usuario obtenido', usuario: Object.assign(tempUser, { password: '****' }) }
     }
 
 
@@ -50,9 +51,33 @@ export class UsuarioController {
         };
     }
 
+
+    /**
+     * Controlador para editar Usuairos
+     * @param id :number ID del usuario a editar
+     * @param user :  EditarUsuarioDTO 
+     * @returns JSON | HttpException
+     */
+    @Patch(':id')
+    async setUsuario(@Param('id', ParseIntPipe) id: number,@Body() user: EditarUsuarioDTO) {
+        if(!Object.keys(user).length) throw new HttpException('Debe enviar al menos un campo para editar :|', HttpStatus.BAD_REQUEST)
+        
+        return {menssage: "Usuario editado" , id: (await this.svUsuario.setUsuario(id, user)).id};
+    }
+
+    /**
+     * Eliminar usuario 
+     * @param id :number --> Get /:id
+     * @returns id del usuario Eliminado | HttpException
+     */
     @Delete(':id')
-    async deleteUsuario(@Param('id', ParseIntPipe) id: number){
-        return await this.svUsuario.softDeleteUsuarioById(id); 
+    async deleteUsuario(@Param('id', ParseIntPipe) id: number) {
+        const tempUser = await this.svUsuario.softDeleteUsuarioById(id);
+
+        return {
+            message: 'Usuario Eliminado',
+            id: tempUser.id
+        }
     }
 
 

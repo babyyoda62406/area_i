@@ -16,6 +16,7 @@ exports.UsuarioController = void 0;
 const common_1 = require("@nestjs/common");
 const CrearUsuario_dto_1 = require("./dto/CrearUsuario.dto");
 const usuario_service_1 = require("./usuario.service");
+const EditarUsuario_dto_1 = require("./dto/EditarUsuario.dto");
 let UsuarioController = class UsuarioController {
     constructor(svUsuario) {
         this.svUsuario = svUsuario;
@@ -37,8 +38,17 @@ let UsuarioController = class UsuarioController {
             id: tempUser.id
         };
     }
+    async setUsuario(id, user) {
+        if (!Object.keys(user).length)
+            throw new common_1.HttpException('Debe enviar al menos un campo para editar :|', common_1.HttpStatus.BAD_REQUEST);
+        return { menssage: "Usuario editado", id: (await this.svUsuario.setUsuario(id, user)).id };
+    }
     async deleteUsuario(id) {
-        return await this.svUsuario.softDeleteUsuarioById(id);
+        const tempUser = await this.svUsuario.softDeleteUsuarioById(id);
+        return {
+            message: 'Usuario Eliminado',
+            id: tempUser.id
+        };
     }
 };
 exports.UsuarioController = UsuarioController;
@@ -62,6 +72,14 @@ __decorate([
     __metadata("design:paramtypes", [CrearUsuario_dto_1.CrearUsuarioDTO]),
     __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "crearUsuario", null);
+__decorate([
+    (0, common_1.Patch)(':id'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, EditarUsuario_dto_1.EditarUsuarioDTO]),
+    __metadata("design:returntype", Promise)
+], UsuarioController.prototype, "setUsuario", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),

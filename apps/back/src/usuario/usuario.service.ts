@@ -4,6 +4,7 @@ import { Usuario, estados_usuario } from './entities/usuario.entity';
 import { Not, Repository } from 'typeorm';
 import { CrearUsuarioDTO } from './dto/CrearUsuario.dto';
 import * as bycrypt from 'bcrypt';
+import { EditarUsuarioDTO } from './dto/EditarUsuario.dto';
 
 @Injectable()
 export class UsuarioService {
@@ -49,19 +50,18 @@ export class UsuarioService {
      * @param id :number id del usuario a buscar
      * @return Usuario | HttpException
      */
-    
-    async getUsuario(id: number){
-        const tempUser =  await this.dbUsuario.findOne({
-            where:{
+    async getUsuario(id: number) {
+        const tempUser = await this.dbUsuario.findOne({
+            where: {
                 id,
                 estado: Not(estados_usuario.Eliminado)
             }
         })
 
-        if(!tempUser) throw new HttpException(`No existe el usuario con el id ${id}` , HttpStatus.NOT_FOUND);
-        return tempUser ; 
+        if (!tempUser) throw new HttpException(`No existe el usuario con el id ${id}`, HttpStatus.NOT_FOUND);
+        return tempUser;
     }
-    
+
     /**
      * Obtener un usuario por el correo
      * @param correo :string correo del usuario
@@ -82,14 +82,46 @@ export class UsuarioService {
     }
 
 
+    /**
+     * Metodo para editar usuarios
+     * @param id :number Id del usuario que se desea editar.
+     * @param user :EditarUsuarioDTO Parámetros del usuario editar.
+     * @returns Usuario | HttpException
+     */
+    async setUsuario(id: number, user: EditarUsuarioDTO) {
+        let tempUsuario:Usuario ; 
+
+        if (user.correo) {
+            tempUsuario = await this.dbUsuario.findOne({
+                where: {
+                    correo: user.correo
+                }
+            })
+        }
+
+        if(tempUsuario) throw new HttpException(`El correo ${user.correo} no esta disponible`, HttpStatus.BAD_REQUEST);
+
+        tempUsuario = await this.getUsuario(id);
+
+        if(user.password){
+            user.password = bycrypt.hashSync( user.password ,  bycrypt.genSaltSync(10)); 
+        }
+
+        const newUsuario = Object.assign(tempUsuario, user);
+
+        await this.dbUsuario.save(newUsuario);
+        return { id: newUsuario.id, correo: newUsuario.correo, password: newUsuario.password, estado: newUsuario.estado };
+    }
+
+
 
     /**
      * Marcar usuario como eliminado
      * @param id Id del usuario
      * @returns Usuario | HTTPException
      */
-    async softDeleteUsuarioById(id: number){
-        const tempUser = await  this.getUsuario(id) ; 
+    async softDeleteUsuarioById(id: number) {
+        const tempUser = await this.getUsuario(id);
         tempUser.estado = estados_usuario.Eliminado
 
         await this.dbUsuario.save(tempUser)
@@ -102,10 +134,10 @@ export class UsuarioService {
      * @param id :number id del usuarios
      * @returns Usuario  | HttpException
      */
-    async hardDeleteUsuarioById(id: number){
-        const tempUser = await  this.getUsuario(id) ; 
-        await this.dbUsuario.delete(tempUser); 
-        return tempUser ;
+    async hardDeleteUsuarioById(id: number) {
+        const tempUser = await this.getUsuario(id);
+        await this.dbUsuario.delete(tempUser);
+        return tempUser;
     }
 
 

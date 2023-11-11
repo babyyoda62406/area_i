@@ -64,6 +64,25 @@ let UsuarioService = class UsuarioService {
             throw new common_1.HttpException(`No Existe usuario con el correo ${correo}`, common_1.HttpStatus.NOT_FOUND);
         return tempUser;
     }
+    async setUsuario(id, user) {
+        let tempUsuario;
+        if (user.correo) {
+            tempUsuario = await this.dbUsuario.findOne({
+                where: {
+                    correo: user.correo
+                }
+            });
+        }
+        if (tempUsuario)
+            throw new common_1.HttpException(`El correo ${user.correo} no esta disponible`, common_1.HttpStatus.BAD_REQUEST);
+        tempUsuario = await this.getUsuario(id);
+        if (user.password) {
+            user.password = bycrypt.hashSync(user.password, bycrypt.genSaltSync(10));
+        }
+        const newUsuario = Object.assign(tempUsuario, user);
+        await this.dbUsuario.save(newUsuario);
+        return { id: newUsuario.id, correo: newUsuario.correo, password: newUsuario.password, estado: newUsuario.estado };
+    }
     async softDeleteUsuarioById(id) {
         const tempUser = await this.getUsuario(id);
         tempUser.estado = usuario_entity_1.estados_usuario.Eliminado;

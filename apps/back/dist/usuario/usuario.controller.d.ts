@@ -1,5 +1,6 @@
 import { CrearUsuarioDTO } from './dto/CrearUsuario.dto';
 import { UsuarioService } from './usuario.service';
+import { EditarUsuarioDTO } from './dto/EditarUsuario.dto';
 export declare class UsuarioController {
     private svUsuario;
     constructor(svUsuario: UsuarioService);
@@ -14,5 +15,12 @@ export declare class UsuarioController {
         message: string;
         id: number;
     }>;
-    deleteUsuario(id: number): Promise<import("./entities/usuario.entity").Usuario>;
+    setUsuario(id: number, user: EditarUsuarioDTO): Promise<{
+        menssage: string;
+        id: number;
+    }>;
+    deleteUsuario(id: number): Promise<{
+        message: string;
+        id: number;
+    }>;
 }
