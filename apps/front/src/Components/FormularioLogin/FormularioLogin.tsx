@@ -8,27 +8,37 @@ import {MdDangerous as IconError} from 'react-icons/md'
 
 const FormularioLogin: FC<typeFormularioLogin> = () => {
 
-    const [errorForm, setErrorForm] = useState<boolean>(false)
+    const [errorForm, setErrorForm] = useState<number>(0)
+
     const [ datosForm, setDatosForm ] = useState<typeDatosForm>({
         "email":'',
         "password":''
     })
     
 
+    /** 
+     * 
+     * @param event
+     * prevenir el  onsubmit
+     * se controla la validacion del formulario  
+     */
     const GestionarDatos = (event: any) => {
         event.preventDefault()
+        setErrorForm(0)
         
         const errorEmail = ValidarCampos('email', datosForm.email);
         const errorPassword = ValidarCampos('password', datosForm.password)
 
 
-        if (!errorPassword && errorEmail) {
+        if (!errorPassword && !errorEmail) {
             const datosEnviar = new FormData()
             datosEnviar.set('email', datosForm.email)
             datosEnviar.set('password', datosForm.password)
             
         } else {
-            alert('rellena bien el formulario cabezon')
+            errorEmail ?    setErrorForm(1) : ''
+            errorPassword ? setErrorForm(2) : ''
+        
         }
     }
 
