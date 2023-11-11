@@ -62,16 +62,35 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
 
     }
 
+    /**
+     * FUncion para eliminar el componente visual del error
+     * recibe el tipo de input como clave 
+     * y el valor booleano k deberia ser falso
+     * @param clave 
+     * @param value 
+     */
+    const eliminarError = (clave: keyof typeErrorForm, value: boolean) => {
+
+        setErrorForm((prevDatos) => ({
+            ...prevDatos,
+            [clave]: value,
+        }));
+    }
+
     return <form action="" className='FormularioLogin' onSubmit={(event) => GestionarDatos(event)}>
         <div className='ElementsFormLogin'>
             <label htmlFor="">Cuenta de Correo</label>
-            <input type="email" className='InpEmail' onChange={(arg) => { GuardarDatos('email', arg.target.value) }} />
-            {errorForm.email===true?<span className='IconErrorE'><IconError/></span>:'' }
+
+            <input type="email" className='InpEmailIn' onChange={(arg) => { GuardarDatos('email', arg.target.value) }} />
+            
+            {errorForm.email === true ? <span className='IconErrorEmIn' onClick={() => { eliminarError('email', false) }}><IconError /></span> : ''}
         </div>
         <div className='ElementsFormLogin'>
             <label htmlFor="">Contraseña</label>
-            <input type="text" className='InpPass' onChange={(arg)=>{GuardarDatos('password',arg.target.value)}}/>
-            {errorForm.password===true?<span className='IconErrorP'><IconError/></span>:'' }
+            
+            <input type="text" className='InpPassIn' onChange={(arg) => { GuardarDatos('password', arg.target.value) }} />
+            
+            {errorForm.password === true ? <span className='IconErrorPsIn' onClick={() => { eliminarError('password', false) }}><IconError /></span> : ''}
         </div>
         <div className='EnvioLogin'>
             <input type="submit" value='Entrar' /></div>

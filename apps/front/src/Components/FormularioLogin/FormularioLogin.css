@@ -53,15 +53,15 @@
     outline: none !important;
 }
 
-.InpEmail{
+.InpEmailIn{
     grid-area: inpEmail;
 }
 
-.InpPass{
+.InpPassIn{
     grid-area: inpPassw;
 }
 
-.IconErrorE{
+.IconErrorEmIn{
     grid-area:errorE ;
     margin-left: 1.0rem;
     margin-top: 0.2rem;
@@ -76,21 +76,21 @@
     box-shadow: 1px 1px 3px red;
     
 }
-.IconErrorE>svg{
+.IconErrorEmIn>svg{
     width: 20px;
     height: 20px;
     fill: var(--bs-danger) !important;
     transition: all 500ms;
 }
 
-.IconErrorE>svg:hover{
+.IconErrorEmIn>svg:hover{
     cursor: pointer;
     fill: var(--bs-dark) !important;
 }
 
 
 
-.IconErrorP{
+.IconErrorPsIn{
     grid-area:errorP ;
     margin-left: 1.0rem;
     margin-bottom: 0.3rem;
@@ -105,14 +105,14 @@
     box-shadow: 1px 1px 3px red;
     
 }
-.IconErrorP>svg{
+.IconErrorPsIn>svg{
     width: 20px;
     height: 20px;
     fill: var(--bs-danger) !important;
     transition: all 500ms;
 }
 
-.IconErrorP>svg:hover{
+.IconErrorPsIn>svg:hover{
     cursor: pointer;
     fill: var(--bs-dark) !important;
 }
