@@ -3,21 +3,21 @@ import './FormularioLogin.css'
 import { typeFormularioLogin } from '../../Types/CMP'
 
 
-const FormularioLogin: FC<typeFormularioLogin> = ({ registro, gestionForm }) => {
+const FormularioLogin: FC<typeFormularioLogin> = () => {
 
 
-    const GestionarDatos = (data: object) => {
-        console.log(data)
+    const GestionarDatos = (event:object) => {
+        console.log(event)
     }
 
-    return <form action="" className='FormularioLogin' onSubmit={gestionForm(GestionarDatos)}>
+    return <form action="" className='FormularioLogin' onSubmit={(event)=>GestionarDatos(event)}>
             <div className='ElementsFormLogin'>
                 <label htmlFor="">Cuenta de Correo</label>
-                <input type="text" autoFocus {...registro('email')} />
+                <input type="text"  />
             </div>
             <div className='ElementsFormLogin'>
                 <label htmlFor="">Contraseña</label>
-                <input type="text" {...registro('password')} />
+                <input type="text"  />
             </div>
             <div className='EnvioLogin'>
                 <input type="submit" value='Entrar' /></div>
