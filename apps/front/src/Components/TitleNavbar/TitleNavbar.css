@@ -1,0 +1,18 @@
+
+.TitleNavbar{
+    
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   transition: all 500ms;
+}
+.TitleNavbar>span{
+    display: block;
+    font-size: 2.0rem;
+    color:var(--bs-gray-100);
+    text-transform: capitalize;
+    
+}
+.TitleNavbar:hover{
+    cursor: pointer;
+}

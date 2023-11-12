@@ -1,0 +1,47 @@
+.SearchNavbar{
+    width: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    overflow: hidden;
+    margin-left: 1.0rem;
+    transition: all 500ms;
+}
+
+.InputSearch{
+    padding: 0.5rem;
+    font-size: 1.4rem;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 5px;
+    border: 2px solid var(--bs-gray-700);
+    animation: movInSearch 1s linear forwards;
+}
+
+.InputSearch:focus-visible{
+    outline: none !important;
+    
+}
+
+@keyframes movInSearch{
+    from{
+        transform: translateX(-300px);
+    }
+    
+    to{
+        transform: translateX(0px)
+    }
+    
+
+}
+
+.SearchNavbar >span>svg{
+    width: 40px;
+    height: 40px;
+    color: var(--bs-gray-100);
+    transition: all 500ms;
+}
+
+.SearchNavbar >span>svg:hover{
+    cursor: pointer;
+}
