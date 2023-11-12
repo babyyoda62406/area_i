@@ -1,10 +1,11 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Usuario, estados_usuario } from '../../entities/usuario.entity';
+import { Usuario} from '../../entities/usuario.entity';
 import { Not, Repository } from 'typeorm';
 import { CrearUsuarioDTO } from './dto/CrearUsuario.dto';
 import * as bycrypt from 'bcrypt';
 import { EditarUsuarioDTO } from './dto/EditarUsuario.dto';
+import { nomenclador } from 'src/enums/nomenclador';
 
 
 @Injectable()
@@ -41,7 +42,7 @@ export class UsuarioService {
     async getUsuarios() {
         return await this.dbUsuario.find({
             where: {
-                estado: Not(estados_usuario.Eliminado)
+                estado: Not(nomenclador.Eliminado)
             }
         });
     }
@@ -55,7 +56,7 @@ export class UsuarioService {
         const tempUser = await this.dbUsuario.findOne({
             where: {
                 id,
-                estado: Not(estados_usuario.Eliminado)
+                estado: Not(nomenclador.Eliminado)
             },
             relations: ['proyectos'] 
         })
@@ -74,7 +75,7 @@ export class UsuarioService {
         const tempUser = await this.dbUsuario.findOne({
             where: {
                 correo,
-                estado: Not(estados_usuario.Eliminado)
+                estado: Not(nomenclador.Eliminado)
             }
         })
 
@@ -124,7 +125,7 @@ export class UsuarioService {
      */
     async softDeleteUsuarioById(id: number) {
         const tempUser = await this.getUsuario(id);
-        tempUser.estado = estados_usuario.Eliminado
+        tempUser.estado = nomenclador.Eliminado
 
         await this.dbUsuario.save(tempUser)
         return tempUser;

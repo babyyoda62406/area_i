@@ -1,5 +1,5 @@
 import { IsEnum, IsOptional, IsString } from "class-validator";
-import { estados_usuario } from "../../../entities/usuario.entity";
+import { nomenclador } from "src/enums/nomenclador";
 
 
 /**
@@ -31,5 +31,5 @@ export class EditarUsuarioDTO{
     @IsEnum(estados_usuarioPermitidos , {
         message: `Debe ajsutarse a los estados permitidos Activo | Inactivo`
     } )
-    estado: estados_usuario
+    estado: nomenclador
 }

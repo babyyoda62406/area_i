@@ -9,8 +9,7 @@ export class ProyectosController {
     
     @Post()
     async crearProyecto(@Body() proyecto: CrearProyectoDTO){
-        const tempProyecto = await this.svProyectos.crearProyecto(proyecto);
-        
+        const tempProyecto = await this.svProyectos.crearProyecto(proyecto);       
         return{message: 'Proyecto creado' , proyecto:this.svHelpers.filterObjet(tempProyecto, ['id', 'nombre', 'organizacion'])}; 
     }
 

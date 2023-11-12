@@ -1,14 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Proyecto } from "./proyecto.entity";
+import { nomenclador } from "src/enums/nomenclador";
 
-/**
- * Enum de los estados del usuario
- */
-export enum estados_usuario {
-    Activo   = "Activo",
-    Inactivo = 'Inactivo',
-    Eliminado = 'Eliminado'
-}
 
 /**
  * Entidad Usuario (Se refleja en postrgeSQL )
@@ -28,8 +21,8 @@ export class Usuario{
     @OneToMany(()=>Proyecto , proyecto=> proyecto.owner)
     proyectos: Proyecto[]
 
-    @Column({default: estados_usuario.Activo})
-    estado: estados_usuario
+    @Column({default: nomenclador.Activo})
+    estado: nomenclador
 
 
 }

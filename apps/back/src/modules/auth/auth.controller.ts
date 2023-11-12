@@ -5,7 +5,8 @@ import * as bycrypt from 'bcrypt';
 import { CrearUsuarioDTO } from 'src/modules/usuario/dto/CrearUsuario.dto';
 import { UsuarioService } from 'src/modules/usuario/usuario.service';
 import { AutenticarUsuarioDTO } from './dto/AutenticarUsuario.dto';
-import { estados_usuario } from 'src/entities/usuario.entity';
+import { nomenclador } from 'src/enums/nomenclador';
+
 
 /**
  * Clase q agrupa los controladores de la ruta /auth
@@ -48,7 +49,7 @@ export class AuthController {
 
         if (!bycrypt.compareSync(password, tempUser.password)) throw new HttpException('Contraseña incorrecta', HttpStatus.UNAUTHORIZED);
 
-        if (tempUser.estado != estados_usuario.Activo) throw new HttpException('Su usuario está pendiente de aprobación', HttpStatus.FORBIDDEN);
+        if (tempUser.estado != nomenclador.Activo) throw new HttpException('Su usuario está pendiente de aprobación', HttpStatus.FORBIDDEN);
 
         const token = await this.jwt.generarJwt({ id: tempUser.id })
 

@@ -1,5 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Usuario } from "./usuario.entity";
+import { nomenclador } from "src/enums/nomenclador";
+
 
 @Entity()
 export class Proyecto{ 
@@ -17,4 +19,8 @@ export class Proyecto{
 
     @ManyToOne(()=> Usuario  , user=> user.proyectos)
     owner: Usuario
+
+    @Column({default: nomenclador.Activo})
+    estado: nomenclador
+    
 }
