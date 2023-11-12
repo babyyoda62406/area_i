@@ -24,7 +24,36 @@
     height: 50px;
     margin-left:1.0rem ;
     margin-top: 0.7rem;
-}
-.BtnHamburguer{
     color: white;
+    
+}
+
+
+.ActiveHamburguer{
+    animation: ActivarH 1s linear forwards;
+    
+}
+
+.DesactiveHamburguer{
+    animation: CerrarH 1s linear forwards;
+}
+
+@keyframes ActivarH{
+    from{
+       transform: translateX(0px);
+    }
+    to{
+        transform: translateX(200px);
+        
+    }
+}
+
+@keyframes CerrarH{
+    from{
+       transform: translateX(200px);
+    }
+    to{
+        transform: translateX(0px);
+        
+    }
 }

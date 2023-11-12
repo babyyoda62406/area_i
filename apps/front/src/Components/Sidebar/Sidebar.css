@@ -1,0 +1,40 @@
+
+
+.Sidebar{
+    display: flex;
+    position: absolute;
+    width: 210px;
+    height: 97%;
+    border: 1px solid white;
+    box-shadow: 2px 2px 3px var(--bs-gray-500);
+    border-radius: 5px 10px 10px 0px;
+    background-color: var(--azul-profundo);
+    left: -300px;
+
+}
+
+.ShowAside{
+    animation: mostrarAside 1s linear forwards;
+}
+
+@keyframes mostrarAside{
+    from{
+        transform: translateX(0px)
+    }
+    to{
+        transform: translateX(300px);
+    }
+}
+
+.CerrarAside{
+    animation: cerrarAside 2s linear forwards;
+}
+
+@keyframes cerrarAside{
+    from{
+        transform: translateX(300px)
+    }
+    to{
+        transform: translateX(-100px);
+    }
+} 
