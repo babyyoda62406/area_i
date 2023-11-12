@@ -12,6 +12,7 @@ import { SecurityModule } from './modules/security/security.module';
 import { ProyectosModule } from './modules/proyectos/proyectos.module';
 import * as dotenv from "dotenv";
 import { Proyecto } from './entities/proyecto.entity';
+import { HelpersModule } from './modules/helpers/helpers.module';
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ dotenv.config();
     JwtModule,
     SecurityModule,
     ProyectosModule,
+    HelpersModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -25,7 +25,7 @@ export class Usuario{
     password: string
 
 
-    @OneToMany(()=>Proyecto , proyecto=> proyecto.ownerId)
+    @OneToMany(()=>Proyecto , proyecto=> proyecto.owner)
     proyectos: Proyecto[]
 
     @Column({default: estados_usuario.Activo})

@@ -6,6 +6,7 @@ import { CrearUsuarioDTO } from './dto/CrearUsuario.dto';
 import * as bycrypt from 'bcrypt';
 import { EditarUsuarioDTO } from './dto/EditarUsuario.dto';
 
+
 @Injectable()
 export class UsuarioService {
     constructor(@InjectRepository(Usuario) private dbUsuario: Repository<Usuario>) {
@@ -55,7 +56,8 @@ export class UsuarioService {
             where: {
                 id,
                 estado: Not(estados_usuario.Eliminado)
-            }
+            },
+            relations: ['proyectos'] 
         })
 
         if (!tempUser) throw new HttpException(`No existe el usuario con el id ${id}`, HttpStatus.NOT_FOUND);
