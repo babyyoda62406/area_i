@@ -11,6 +11,7 @@ import { JwtModule } from './modules/jwt/jwt.module';
 import { SecurityModule } from './modules/security/security.module';
 import { ProyectosModule } from './modules/proyectos/proyectos.module';
 import * as dotenv from "dotenv";
+import { Proyecto } from './entities/proyecto.entity';
 
 dotenv.config();
 
@@ -23,7 +24,7 @@ dotenv.config();
       port: Number(process.env.PORT_DB),
       password: process.env.PASSWORD,
       synchronize: true,
-      entities: [Usuario]
+      entities: [Usuario, Proyecto]
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../../front/dist'),

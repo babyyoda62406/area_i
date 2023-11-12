@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Proyecto } from "./proyecto.entity";
 
 /**
  * Enum de los estados del usuario
@@ -19,11 +20,17 @@ export class Usuario{
     @Column({unique: true})
     correo: string
 
+
     @Column()
     password: string
 
+
+    @OneToMany(()=>Proyecto , proyecto=> proyecto.ownerId)
+    proyectos: Proyecto[]
+
     @Column({default: estados_usuario.Activo})
     estado: estados_usuario
+
 
 }
 
