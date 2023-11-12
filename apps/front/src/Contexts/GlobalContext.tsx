@@ -8,7 +8,7 @@ export const GlobalContext = createContext<typeGlobalContext>({
     token: '',
     
 
-    setToken: (arg)=>{}
+    setToken: ()=>{}
 
 })
 

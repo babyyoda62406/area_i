@@ -5,13 +5,14 @@ import FormularioLogin from '../FormularioLogin/FormularioLogin'
 
 import Bienvenida from '../Bienvenida/Bienvenida'
 import FormularioLogout from '../FormularioLogout/FormularioLogout'
+import { MagicMotion } from 'react-magic-motion'
 
 
 
 const LoginLayout: FC<typeLoginLayout> = () => {
 
     const [tipo, setTipo] = useState<boolean>(false)
-    
+
     const cambiarForm = () => {
         setTipo(!tipo)
     }
@@ -19,14 +20,17 @@ const LoginLayout: FC<typeLoginLayout> = () => {
     return <div className="LoginLayout">
         <div className='FormLogin'>
             <Bienvenida />
-            <div className='ItemViews'>
-                <span className={`ItemIniciar ${!tipo?'ItemLoginActive':''}`} onClick={()=>{cambiarForm()}} >Iniciar Sesion</span>
-                <span className={`ItemRegistrar ${tipo?'ItemLoginActive':''}`} onClick={()=>{cambiarForm()}}> Registrarse</span>
-            </div>
-            {tipo?<FormularioLogout />:<FormularioLogin  />}
-
+            <MagicMotion transition={{ duration: 5000, ease: "easeInOut" }}>
+                <div className='ItemViews'>
+                    <span className={`ItemIniciar ${!tipo ? 'ItemLoginActive' : ''}`} onClick={() => { cambiarForm() }} >Iniciar Sesion</span>
+                    <span className={`ItemRegistrar ${tipo ? 'ItemLoginActive' : ''}`} onClick={() => { cambiarForm() }}> Registrarse</span>
+                </div>
+            </MagicMotion >
+            
+                {tipo ? <FormularioLogout /> : <FormularioLogin />}
+            
         </div>
-        
+
 
     </div>
 }

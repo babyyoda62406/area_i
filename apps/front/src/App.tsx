@@ -1,6 +1,7 @@
 import './App.css'
 import FondoPantalla from './Components/Fondopantalla/Fondopantalla'
-import LoginLayout from './Components/LoginLayout/LoginLayout'
+import HomeLayout from './Components/HomeLayout/HomeLayout'
+
 
 const App = ()=> {
   
@@ -8,7 +9,7 @@ const App = ()=> {
 
   return <>
     <FondoPantalla />
-    <LoginLayout/>
+    <HomeLayout/>
   </>
 }
 
