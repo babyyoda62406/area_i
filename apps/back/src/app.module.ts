@@ -9,6 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Usuario } from './usuario/entities/usuario.entity';
 import { JwtModule } from './jwt/jwt.module';
 import { SecurityModule } from './security/security.module';
+import { ProyectosModule } from './proyectos/proyectos.module';
 import * as dotenv from "dotenv";
 
 dotenv.config();
@@ -31,6 +32,7 @@ dotenv.config();
     UsuarioModule,
     JwtModule,
     SecurityModule,
+    ProyectosModule,
   ],
   controllers: [AppController],
   providers: [AppService],
