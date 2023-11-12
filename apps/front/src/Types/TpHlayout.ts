@@ -18,6 +18,14 @@ type typeSidebar = {
     Show:boolean
 }
 
+type typeTablaElements = {
+
+}
+
+type typeColumnLeyend = {
+
+}
+
 
 
 export type { 
@@ -25,5 +33,7 @@ export type {
     typeNavbar,
     typeTitleNavb,
     typeHerrmtasNavb,
-    typeSidebar
+    typeSidebar,
+    typeTablaElements,
+    typeColumnLeyend
  }
