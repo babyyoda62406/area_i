@@ -8,9 +8,11 @@ import { FetchService } from '../../Services/FetchService'
 import { RutaServer } from '../../Helpers/RutaServer'
 import { GlobalContext } from '../../Contexts/GlobalContext'
 import { ALerta } from '../../Services/Alerta'
+import { useNavigate } from 'react-router-dom'
 
 
 const FormularioLogin: FC<typeFormularioLogin> = () => {
+    const navigation = useNavigate()
 
     const {setToken} = useContext(GlobalContext)
 
@@ -97,7 +99,10 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
                              const {token, message:title} = await res.json();
                             setToken(token)
                             
-                            ALerta({title,position:'top-right'})
+                            ALerta({ title, position: 'top-right' })
+                            setInterval(() => {
+                                navigation('Home')
+                            },2000)
                             
                             break;  
                         case 404:
