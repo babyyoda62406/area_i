@@ -25,7 +25,21 @@ export class RolesProyectosService {
         await this.dbRolProyectos.save(newRolProyecto)
 
         return {message: 'Rol Creado', id: newRolProyecto.id}
-        
+   
     }
+
+
+    async obtenerRolesProyectos(){
+        const tempRolesProyectos =  await this.dbRolProyectos.find({
+            where: {
+                estado: Not(nomenclador.Eliminado)
+            }
+        })
+
+        if(!tempRolesProyectos.length) throw new HttpException('' , HttpStatus.NO_CONTENT); 
+
+        return tempRolesProyectos; 
+    }
+
 
 }
