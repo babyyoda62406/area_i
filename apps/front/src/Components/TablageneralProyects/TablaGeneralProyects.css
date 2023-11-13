@@ -1,0 +1,63 @@
+.TablageneralProyects{
+    width: 80%;
+    
+    
+    margin-left: 1.0rem;
+    margin-top: 0.5rem;
+    border-radius: 0.5rem; 
+    
+}
+
+
+div.TablageneralProyects .mantine-1bd5g77{
+    background-color: var(--azul-polvoriento);
+}
+
+
+/* Cabecera de la tabla */
+div.TablageneralProyects th {
+    background-color: var(--azul-envolvente);
+    font-size: 1.5rem;
+     
+}
+
+div.TablageneralProyects th>div>div>div{
+    font-size: 1.2rem;
+    color: var(--bs-gray-200);
+}
+
+div.TablageneralProyects th  > div >  div , div.TablageneralProyects th  > div >  div  svg {
+    color: var(--bs-gray-200);
+}
+
+div.TablageneralProyects  table   tbody tr {
+     background-color: red;  
+}
+
+div.TablageneralProyects  table   tbody tr > td {
+    background-color: var(--azul-profundo);
+    color: var(--bs-white);
+    font-size: 1.1rem; 
+    padding-inline-start: 1.5rem;
+}
+
+div.TablageneralProyects  table   tbody tr > td:hover{
+    color: black;
+    background-color: var( --bs-blue);
+}
+
+div.TablageneralProyects  .mantine-vl6xmj{
+    background-color: var(--azul-envolvente);
+}
+
+
+div.TablageneralProyects  .mantine-vl6xmj >div>div>div label{
+    color: var(--bs-gray-200);
+    font-size: 1.2rem;
+}
+
+div.TablageneralProyects  .mantine-vl6xmj >div>div button> svg> path{
+    color: var(--bs-gray-200);
+
+}
+

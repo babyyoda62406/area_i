@@ -1,0 +1,43 @@
+
+.LoginLayout{
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.FormLogin{
+    width: 400px;
+    height: 400px;
+    background-color: var(--azul-profundo);
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 2.0rem;
+}
+
+.ItemViews{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    margin-top: 2.0rem;
+    font-size: 2.0rem;
+    color: var(--bs-gray-200);
+}
+
+.ItemViews > span{
+    padding: 0.5rem;
+    border-radius: 5px 5px 0px 0px;
+    transition: all 500ms;
+
+}
+
+.ItemViews > span:hover{
+    cursor: pointer;
+    color: var(--bs-gray-700);
+}
+
+.ItemLoginActive{
+    background-color: var(--azul-envolvente) ;
+}
