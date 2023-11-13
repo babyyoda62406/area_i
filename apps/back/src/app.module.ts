@@ -13,6 +13,8 @@ import { ProyectosModule } from './modules/proyectos/proyectos.module';
 import * as dotenv from "dotenv";
 import { Proyecto } from './entities/proyecto.entity';
 import { HelpersModule } from './modules/helpers/helpers.module';
+import { RolesModule } from './roles/roles.module';
+import { RolesProyectosModule } from './modules/roles-proyectos/roles-proyectos.module';
 
 dotenv.config();
 
@@ -35,7 +37,9 @@ dotenv.config();
     JwtModule,
     SecurityModule,
     ProyectosModule,
-    HelpersModule
+    HelpersModule,
+    RolesModule,
+    RolesProyectosModule
   ],
   controllers: [AppController],
   providers: [AppService],
