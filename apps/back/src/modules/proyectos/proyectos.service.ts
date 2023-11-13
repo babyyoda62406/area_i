@@ -55,9 +55,14 @@ export class ProyectosService {
         return tempProyectos ; 
     }
 
+    async eliminarProyecto(id: number){
+        const tempProyecto  = await this.obtenerProyecto(id)
+        tempProyecto.estado = nomenclador.Eliminado
 
+        await this.dbProyecto.save(tempProyecto)
 
-
+        return {message: 'Proyecto eliminado' , id: tempProyecto.id}
+    }
 
 
     async crearProyecto(proyecto: CrearProyectoDTO){

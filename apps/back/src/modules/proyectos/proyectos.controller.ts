@@ -1,7 +1,8 @@
-import { Body, Controller,  Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller,  Delete,  Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { CrearProyectoDTO } from './dto/CrearProyecto.dto';
 import { ProyectosService } from './proyectos.service';
 import { HelpersService } from '../helpers/helpers.service';
+
 
 @Controller('proyectos')
 export class ProyectosController {
@@ -31,6 +32,11 @@ export class ProyectosController {
         return{message: 'Proyecto creado' , proyecto:this.svHelpers.filterObjet(tempProyecto, ['id', 'nombre', 'organizacion'])}; 
     }
 
+
+    @Delete(':id')
+    async eliminarProyectos(@Param('id', ParseIntPipe) id: number){
+        return await this.svProyectos.eliminarProyecto(id); 
+    }
     
 
 }
