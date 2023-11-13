@@ -22,5 +22,4 @@ export class Proyecto{
 
     @Column({default: nomenclador.Activo})
     estado: nomenclador
-    
 }

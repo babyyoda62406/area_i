@@ -1,7 +1,8 @@
-import { Body, Controller,  Delete,  Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller,  Delete,  Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { CrearProyectoDTO } from './dto/CrearProyecto.dto';
 import { ProyectosService } from './proyectos.service';
 import { HelpersService } from '../helpers/helpers.service';
+import { EditarProyectoDTO } from './dto/EditarProyecto.dto';
 
 
 @Controller('proyectos')
@@ -32,10 +33,14 @@ export class ProyectosController {
         return{message: 'Proyecto creado' , proyecto:this.svHelpers.filterObjet(tempProyecto, ['id', 'nombre', 'organizacion'])}; 
     }
 
+    @Patch(':id')
+    async editarProyecto(@Param('id', ParseIntPipe) id: number, @Body() proyecto:EditarProyectoDTO){
+        return await this.svProyectos.editarProyecto(id , proyecto); 
+    }
 
     @Delete(':id')
     async eliminarProyectos(@Param('id', ParseIntPipe) id: number){
-        return await this.svProyectos.eliminarProyecto(id); 
+        return await this.svProyectos.softDeleteProyecto(id); 
     }
     
 
