@@ -8,9 +8,12 @@ import { FetchService } from '../../Services/FetchService'
 import { RutaServer } from '../../Helpers/RutaServer'
 import { ALerta } from '../../Services/Alerta'
 import { GlobalContext } from '../../Contexts/GlobalContext'
+import { useNavigate } from 'react-router-dom'
+
+
 
 const FormularioLogout: FC<typeFormularioLogout> = () => {
-
+    const navigate = useNavigate()
     const {setToken}= useContext(GlobalContext)
 
     /**
@@ -65,6 +68,8 @@ const FormularioLogout: FC<typeFormularioLogout> = () => {
      * se controla la validacion del formulario  
      */
     const GestionarDatos = (event: any) => {
+                
+
         event.preventDefault()
         setErrorForm((prevDatos: object) => ({
             ...prevDatos,
@@ -95,6 +100,10 @@ const FormularioLogout: FC<typeFormularioLogout> = () => {
                             console.log(res.status)
                             const {token, message:title} = await res.json()
                             setToken(token)
+                            setInterval(() => {
+                                navigate('Home',{replace:false,unstable_viewTransition:true})
+                            },2000)
+                            
                             ALerta({ title: title })
 
 
