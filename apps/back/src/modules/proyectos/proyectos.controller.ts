@@ -19,6 +19,10 @@ export class ProyectosController {
     }
 
 
+    @Get('user/:ownerId')
+    async getProyectosPorUsuario(@Param('ownerId' , ParseIntPipe) ownerId: number){
+        return await this.svProyectos.ObtenerProyectosPorUsuario(ownerId) ;       
+    }
     
     
     @Post()

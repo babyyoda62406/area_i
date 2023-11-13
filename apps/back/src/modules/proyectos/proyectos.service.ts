@@ -6,14 +6,12 @@ import { Not, Repository } from 'typeorm';
 import { UsuarioService } from '../usuario/usuario.service';
 import { nomenclador } from 'src/enums/nomenclador';
 
-
-
 @Injectable()
 export class ProyectosService {
 
     constructor(@InjectRepository(Proyecto) private dbProyecto: Repository<Proyecto> , private svUsuario: UsuarioService){}
 
-    // --Test
+    // --Test !!!
     async obtenerProyectos(){
         const tempProyectos =  await this.dbProyecto.find({
             where:{
@@ -26,7 +24,7 @@ export class ProyectosService {
         return tempProyectos; 
     }
 
-    
+    // --Test !!!
     async obtenerProyecto(id: number){
         const tempProyecto = await this.dbProyecto.findOne({
             where: {
@@ -39,6 +37,25 @@ export class ProyectosService {
 
         return tempProyecto; 
     }
+
+    // --Test
+    async ObtenerProyectosPorUsuario(ownerId: number){
+
+        await this.svUsuario.getUsuario(ownerId)
+
+        const tempProyectos = await this.dbProyecto.find({
+            where:{
+                ownerId, 
+                estado: Not(nomenclador.Eliminado)
+            }
+        })
+
+        if(!tempProyectos.length) throw new HttpException('', HttpStatus.NO_CONTENT)
+
+        return tempProyectos ; 
+    }
+
+
 
 
 
