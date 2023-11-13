@@ -2,8 +2,9 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CrearProyectoDTO } from './dto/CrearProyecto.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Proyecto } from 'src/entities/proyecto.entity';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { UsuarioService } from '../usuario/usuario.service';
+import { nomenclador } from 'src/enums/nomenclador';
 
 
 
@@ -12,6 +13,14 @@ export class ProyectosService {
 
     constructor(@InjectRepository(Proyecto) private dbProyecto: Repository<Proyecto> , private svUsuario: UsuarioService){}
 
+
+    async obtenerProyectos(){
+        return await this.dbProyecto.find({
+            where:{
+                estado: Not(nomenclador.Eliminado)
+            }
+        })
+    }
 
 
     async crearProyecto(proyecto: CrearProyectoDTO){
@@ -34,5 +43,8 @@ export class ProyectosService {
         
         return newProyecto 
     }
+
+
+    
 
 }
