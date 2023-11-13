@@ -13,8 +13,8 @@ import { ProyectosModule } from './modules/proyectos/proyectos.module';
 import * as dotenv from "dotenv";
 import { Proyecto } from './entities/proyecto.entity';
 import { HelpersModule } from './modules/helpers/helpers.module';
-import { RolesModule } from './roles/roles.module';
 import { RolesProyectosModule } from './modules/roles-proyectos/roles-proyectos.module';
+import { RolesProyectos } from './modules/roles-proyectos/entities/roles-proyectos.entity';
 
 dotenv.config();
 
@@ -27,7 +27,7 @@ dotenv.config();
       port: Number(process.env.PORT_DB),
       password: process.env.PASSWORD,
       synchronize: true,
-      entities: [Usuario, Proyecto]
+      entities: [Usuario, Proyecto, RolesProyectos]
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../../front/dist'),
@@ -38,7 +38,6 @@ dotenv.config();
     SecurityModule,
     ProyectosModule,
     HelpersModule,
-    RolesModule,
     RolesProyectosModule
   ],
   controllers: [AppController],
