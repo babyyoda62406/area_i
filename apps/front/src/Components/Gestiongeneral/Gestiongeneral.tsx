@@ -1,4 +1,5 @@
 
+import TablageneralProyects from '../TablageneralProyects/TablaGeneralProyects'
 import './GestionGeneral.css'
 
 const GestionGeneral = () => {
@@ -6,7 +7,7 @@ const GestionGeneral = () => {
 
     return <div className="GestionGeneral">
 
-
+    <TablageneralProyects/>
 
     </div>
 }
