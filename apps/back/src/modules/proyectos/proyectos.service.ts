@@ -13,14 +13,34 @@ export class ProyectosService {
 
     constructor(@InjectRepository(Proyecto) private dbProyecto: Repository<Proyecto> , private svUsuario: UsuarioService){}
 
-
+    // --Test
     async obtenerProyectos(){
-        return await this.dbProyecto.find({
+        const tempProyectos =  await this.dbProyecto.find({
             where:{
                 estado: Not(nomenclador.Eliminado)
             }
         })
+
+        if(!tempProyectos) throw new HttpException('' , HttpStatus.NO_CONTENT)
+
+        return tempProyectos; 
     }
+
+    
+    async obtenerProyecto(id: number){
+        const tempProyecto = await this.dbProyecto.findOne({
+            where: {
+                id, 
+                estado: Not(nomenclador.Eliminado)
+            }
+        })
+
+        if(!tempProyecto) throw new HttpException(`No existe Proyecto con el id ${id}`, HttpStatus.NOT_FOUND)
+
+        return tempProyecto; 
+    }
+
+
 
 
     async crearProyecto(proyecto: CrearProyectoDTO){

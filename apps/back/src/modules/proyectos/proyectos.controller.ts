@@ -1,4 +1,4 @@
-import { Body, Controller,  Get, Post } from '@nestjs/common';
+import { Body, Controller,  Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { CrearProyectoDTO } from './dto/CrearProyecto.dto';
 import { ProyectosService } from './proyectos.service';
 import { HelpersService } from '../helpers/helpers.service';
@@ -12,6 +12,12 @@ export class ProyectosController {
     async getProyectos(){
         return this.svProyectos.obtenerProyectos() ; 
     }
+
+    @Get(':id')
+    async getProyectoById(@Param('id' , ParseIntPipe) id: number){
+        return await this.svProyectos.obtenerProyecto(id); 
+    }
+
 
     
     
