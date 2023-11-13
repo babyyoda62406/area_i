@@ -1,12 +1,12 @@
-import { FC, useContext, useState } from 'react'
+import { FC, useState } from 'react'
 import './FormularioLogin.css'
 import { typeFormularioLogin } from '../../Types/CMP'
 import { ValidarCampos } from '../../Services/ValidarCampos'
 import { typeDatosForm, typeErrorForm } from '../../Types/UseStates'
 import { MdDangerous as IconError } from 'react-icons/md'
-import { FetchService } from '../../Services/FetchService'
-import { RutaServer } from '../../Helpers/RutaServer'
-import { GlobalContext } from '../../Contexts/GlobalContext'
+// import { FetchService } from '../../Services/FetchService'
+// import { RutaServer } from '../../Helpers/RutaServer'
+// import { GlobalContext } from '../../Contexts/GlobalContext'
 import { ALerta } from '../../Services/Alerta'
 
 
