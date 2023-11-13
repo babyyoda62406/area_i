@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { CrearRolProyectoDTO } from './dto/CrearRolProyecto.dto';
 import { RolesProyectosService } from './roles-proyectos.service';
 
@@ -15,4 +15,11 @@ export class RolesProyectosController {
     async getRolesProyectos(){
         return await this.svRolProyectos.obtenerRolesProyectos();
     }
+
+
+    @Delete(':id')
+    async deleteRolesProyectos(@Param('id' , ParseIntPipe) id: number){
+        return  await this.svRolProyectos.eliminarRolesProyectos(id); 
+    }
+
 }

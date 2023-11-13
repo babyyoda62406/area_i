@@ -28,7 +28,7 @@ export class RolesProyectosService {
    
     }
 
-
+    // 
     async obtenerRolesProyectos(){
         const tempRolesProyectos =  await this.dbRolProyectos.find({
             where: {
@@ -39,6 +39,27 @@ export class RolesProyectosService {
         if(!tempRolesProyectos.length) throw new HttpException('' , HttpStatus.NO_CONTENT); 
 
         return tempRolesProyectos; 
+    }
+
+
+    async eliminarRolesProyectos(id: number){
+        const tempRolesProyecto = await this.dbRolProyectos.findOne({
+            where:{
+                id , 
+                estado: Not(nomenclador.Eliminado)
+            }
+        })
+
+
+        if(!tempRolesProyecto) throw new HttpException(`No existe Rol con el id ${id}`, HttpStatus.NOT_FOUND)
+
+        tempRolesProyecto.estado = nomenclador.Eliminado
+
+        await this.dbRolProyectos.save(tempRolesProyecto)
+
+        return {message: 'Rol eliminado'}
+
+
     }
 
 
