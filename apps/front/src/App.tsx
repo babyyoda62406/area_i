@@ -12,15 +12,15 @@ const App = ()=> {
 
 
   return <>
-    
+    <FondoPantalla />
     <Routes>
       <Route path='/' element={<Login />} />
-      <Route path='Home' element={<Home />} />
-      <Route path='VistaGeneral' element={<GestionGeneral/> } />
+      <Route path='/Home' element={<Home />} />
+      <Route path='/VistaGeneral' element={<GestionGeneral/> } />
 
     </Routes>
-    <FondoPantalla />
-    <HomeLayout/>
+    
+    
   </>
 }
 

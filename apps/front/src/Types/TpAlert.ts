@@ -1,12 +1,13 @@
 
 
-export type TPAlert = {
-    titulo: string
-    texto: string
-    icono: 'success' | 'error' | 'warning' | 'info' | 'question'
-    button: boolean
+export type TPAlert = Partial<
+{
+    title: string
+    text: string
+    icon: 'success' | 'error' | 'warning' | 'info' | 'question'
+   
     showConfirmButton:boolean
-    tiempo: number
+    timer: number
     position: 'top'
     | 'top-start'
     | 'top-end'
@@ -22,4 +23,4 @@ export type TPAlert = {
     | 'bottom-end'
     | 'bottom-left'
     | 'bottom-right'
-}
+}>

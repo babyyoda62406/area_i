@@ -1,7 +1,7 @@
 import { typesRutasServer } from "../Types/TpRutasServer";
 
 export const RutaServer:typesRutasServer = {
-    iniciarUsuario: '',
+    iniciarUsuario: '/api/v1/auth/login',
     registrarUsuario: '',
     
 

@@ -1,6 +1,6 @@
 
 type typeDatosForm = {
-    email: string|string
+    correo: string|string
     password:string
 }
 

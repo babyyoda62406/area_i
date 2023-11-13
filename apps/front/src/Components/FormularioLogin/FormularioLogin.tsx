@@ -1,18 +1,18 @@
-import { FC, useState } from 'react'
+import { FC, useContext, useState } from 'react'
 import './FormularioLogin.css'
 import { typeFormularioLogin } from '../../Types/CMP'
 import { ValidarCampos } from '../../Services/ValidarCampos'
 import { typeDatosForm, typeErrorForm } from '../../Types/UseStates'
 import { MdDangerous as IconError } from 'react-icons/md'
-// import { FetchService } from '../../Services/FetchService'
-// import { RutaServer } from '../../Helpers/RutaServer'
-// import { GlobalContext } from '../../Contexts/GlobalContext'
+import { FetchService } from '../../Services/FetchService'
+import { RutaServer } from '../../Helpers/RutaServer'
+import { GlobalContext } from '../../Contexts/GlobalContext'
 import { ALerta } from '../../Services/Alerta'
 
 
 const FormularioLogin: FC<typeFormularioLogin> = () => {
 
-    // const {token, setToken} = useContext(GlobalContext)
+    const {setToken} = useContext(GlobalContext)
 
 
     /**
@@ -25,7 +25,7 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
     })
 
     const [datosForm, setDatosForm] = useState<typeDatosForm>({
-        "email": '',
+        "correo": '',
         "password": ''
     })
 
@@ -68,15 +68,7 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
     const GestionarDatos = (event: any) => {
         event.preventDefault()
 
-        ALerta({
-            titulo: 'hola',
-            texto: '',
-            icono: 'success',
-            button: false,
-            showConfirmButton:false,
-            tiempo: 2000,
-            position:'top-right'
-        })
+        
 
 
 
@@ -86,33 +78,45 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
             ['password']: false
         }))
 
-        const errorEmail = ValidarCampos('email', datosForm.email);
+        const errorEmail = ValidarCampos('email', datosForm.correo);
         const errorPassword = ValidarCampos('password', datosForm.password)
 
 
         if (!errorPassword && !errorEmail) {
-            const datosEnviar = new FormData()
-            datosEnviar.set('email', datosForm.email)
-            datosEnviar.set('password', datosForm.password)
+
 
             /**
              * envio de datos para inciar sesion en el usuario via post 
              *  */
-            // FetchService(RutaServer.iniciarUsuario, {
-            //     method: 'Post',
-            //     body: datosEnviar,
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data'
-            //     }
-            // }, (res: JSON) => {
-            //     /**
-            //      * aki se deberia de gestionar el token y guardar cosas de la respuesat del server
-            //      */
-            //     console.log(res)
+            FetchService(RutaServer.iniciarUsuario, { method: "POST", body: JSON.stringify(datosForm) })
+                .then(async (res) => {
+                    
 
-            // }, (err: object) => { console.log(err) }
+                    switch (res.status) {
+                        case 200:
+                             const {token, message:title} = await res.json();
+                            setToken(token)
+                            
+                            ALerta({title,position:'top-right'})
+                            
+                            break;  
+                        case 404:
+                            const {message:error} = await res.json();
+                            ALerta({title:error,icon:'error'})
+                            
+                            break;
+                        
+                        default:
 
-            // )
+                            alert(`Status desconocido ${res.status}`)
+                    }
+                })
+                .catch((err: Error) => {
+                    // Desarrollo 
+                    alert(err)
+                    console.log(err)
+                })
+
 
         } else {
             errorEmail ? setErrorForm({ ['email']: errorEmail, ['password']: errorPassword }) : ''
@@ -127,7 +131,7 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
         <div className='ElementsFormLogin'>
             <label htmlFor="">Cuenta de Correo</label>
 
-            <input type="email" required className='InpEmailIn' onChange={(arg) => { GuardarDatos('email', arg.target.value) }} />
+            <input type="email" required className='InpEmailIn' onChange={(arg) => { GuardarDatos('correo', arg.target.value) }} />
 
             {errorForm.email === true ? <span className='IconErrorEmIn' onClick={() => { eliminarError('email', false) }}><IconError /></span> : ''}
         </div>
