@@ -4,6 +4,7 @@ import { RolesProyectos } from './entities/roles-proyectos.entity';
 import { Not, Repository } from 'typeorm';
 import { CrearRolProyectoDTO } from './dto/CrearRolProyecto.dto';
 import { nomenclador } from 'src/enums/nomenclador';
+import { EditarRolProyecto } from './dto/EditarRolProyecto.dto';
 
 @Injectable()
 export class RolesProyectosService {
@@ -28,7 +29,7 @@ export class RolesProyectosService {
    
     }
 
-    // 
+    
     async obtenerRolesProyectos(){
         const tempRolesProyectos =  await this.dbRolProyectos.find({
             where: {
@@ -60,6 +61,38 @@ export class RolesProyectosService {
         return {message: 'Rol eliminado'}
 
 
+    }
+
+    async editarRolProyecto(id: number , rolProyecto: EditarRolProyecto){
+        if(!Object.keys(rolProyecto).length) throw new HttpException('Debe intentar editar al menos un campo ', HttpStatus.BAD_REQUEST )
+
+        const tempRolProyect  = await this.dbRolProyectos.findOne({
+            where:{
+                id, 
+                estado: Not(nomenclador.Eliminado)
+            }
+        })
+
+        if(!tempRolProyect) throw new HttpException(`No existe rol de proyecto con el id ${id}`, HttpStatus.NOT_FOUND)
+
+        if(rolProyecto.nombre){
+            const existNombre = await this.dbRolProyectos.findOne({
+                where: {
+                    nombre: rolProyecto.nombre
+                }
+            })
+
+            if(existNombre) throw new HttpException(`El nombre de rol ${rolProyecto.nombre} no esta disponible`, HttpStatus.CONFLICT)
+        }
+
+        const newRolProyecto: RolesProyectos  = Object.assign( tempRolProyect ,  rolProyecto ); 
+
+
+        await this.dbRolProyectos.save(newRolProyecto)
+
+        return newRolProyecto ; 
+
+        
     }
 
 
