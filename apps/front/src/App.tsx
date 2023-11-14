@@ -12,7 +12,7 @@ const App = () => {
   
   
 
-  return <>
+  return <div className='App'>
     <FondoPantalla />
     <Routes>
       <Route path='/' element={<Login />} />
@@ -22,7 +22,7 @@ const App = () => {
     </Routes>
     
     
-  </>
+  </div>
 }
 
 export default App
