@@ -2,7 +2,9 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Usuario } from "./usuario.entity";
 import { nomenclador } from "src/enums/nomenclador";
 
-
+/**
+ * Entidad que reprecenta los proyectos
+ */
 @Entity()
 export class Proyecto{ 
     @PrimaryGeneratedColumn()
