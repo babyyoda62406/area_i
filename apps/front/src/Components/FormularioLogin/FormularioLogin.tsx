@@ -100,9 +100,12 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
                             setToken(token)
                             
                             ALerta({ title, position: 'top-right' })
-                            setInterval(() => {
-                                navigation('Home')
-                            },2000)
+                            
+                            setTimeout(() => {
+                                navigation('Home') 
+                            }, 1000);
+                            
+                            
                             
                             break;  
                         case 404:

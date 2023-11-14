@@ -21,6 +21,12 @@ type typeSidebar = {
 type typeTablaElements = {
 
 }
+type typeDatosTabla = {
+    id: string
+    organizacion: string
+    nombre:string
+}
+
 
 type typeColumnLeyend = {
 
@@ -35,5 +41,6 @@ export type {
     typeHerrmtasNavb,
     typeSidebar,
     typeTablaElements,
-    typeColumnLeyend
+    typeColumnLeyend,
+    typeDatosTabla
  }
