@@ -9,6 +9,7 @@ import { RutaServer } from '../../Helpers/RutaServer'
 import { GlobalContext } from '../../Contexts/GlobalContext'
 import { ALerta } from '../../Services/Alerta'
 import { useNavigate } from 'react-router-dom'
+import { CookieToken } from '../../Services/CookieToken'
 
 
 const FormularioLogin: FC<typeFormularioLogin> = () => {
@@ -96,9 +97,11 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
 
                     switch (res.status) {
                         case 200:
-                             const {token, message:title} = await res.json();
+                            const {token, message:title} = await res.json();
                             setToken(token)
+                            CookieToken(token)
                             
+
                             ALerta({ title, position: 'top-right' })
                             
                             setTimeout(() => {
