@@ -15,6 +15,7 @@ import { Proyecto } from './entities/proyecto.entity';
 import { HelpersModule } from './modules/helpers/helpers.module';
 import { RolesProyectosModule } from './modules/roles-proyectos/roles-proyectos.module';
 import { RolesProyectos } from './modules/roles-proyectos/entities/roles-proyectos.entity';
+import { NivelExperticiaModule } from './modules/nivel-experticia/nivel-experticia.module';
 
 dotenv.config();
 
@@ -38,7 +39,8 @@ dotenv.config();
     SecurityModule,
     ProyectosModule,
     HelpersModule,
-    RolesProyectosModule
+    RolesProyectosModule,
+    NivelExperticiaModule
   ],
   controllers: [AppController],
   providers: [AppService],
