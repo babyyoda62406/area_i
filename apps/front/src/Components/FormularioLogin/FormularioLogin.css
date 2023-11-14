@@ -1,7 +1,8 @@
 
 .FormularioLogin{
-    background-color: var(--azul-envolvente);
-    border-radius: 10px;
+    margin-top: 3rem;
+    background-color: var(--morado-claro);
+    border-radius: 5px;
     padding-top: 1rem;
     padding-bottom: 1rem;
 
@@ -130,20 +131,20 @@
     padding-left: 1.0rem;
     padding-right: 1.0rem;
     
-    background-color: var(--bs-cyan);
-    border: 1px solid var(--bs-white) !important;
-    border-radius: 5px ;
+    background-color: var(--bs-blue-oscuro);
+    border: 1px solid var(--bs-gray-600) !important;
+    /* border-radius: 5px ; */
     transition: all 700ms;
-    color: var(--bs-gray-900);
+    color: var(--bs-gray-400);
     font-size: 1.6rem;
-    box-shadow: 1.5px 1.5px 4px var(--bs-white);
+    box-shadow: 1.5px 1.5px 1px var(--bs-gray-500);
     
 }
 
 .EnvioLogin>input:hover{
     cursor: pointer;
-    background-color: var(--bs-teal);
-    color: var(--azul-profundo);
+    background-color: var(--azul-profundo);
+    color:var(--bs-white);
     box-shadow:none;
 }
 

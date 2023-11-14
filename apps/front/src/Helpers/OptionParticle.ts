@@ -4,7 +4,7 @@ export const OptionParticle:ISourceOptions =  {
                     
     background: {
         color: {
-            value: "#345b7e",
+            value: "#46719e",
         },
     },
     

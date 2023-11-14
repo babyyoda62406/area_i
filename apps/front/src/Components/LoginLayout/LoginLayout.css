@@ -10,10 +10,9 @@
 
 .FormLogin{
     width: 400px;
-    height: 400px;
-    background-color: var(--azul-profundo);
-    border: 1px solid white;
-    border-radius: 10px;
+    height: 350px;
+    background-color: var(--azul-envolvente);
+    
     padding: 2.0rem;
 }
 
