@@ -1,6 +1,8 @@
 import {IsNotEmpty, IsNumber } from 'class-validator';
 
-
+/**
+ * Objeto de Trasferencia de Datos para crear proyectos
+ */
 export class CrearProyectoDTO {
 
     @IsNotEmpty({

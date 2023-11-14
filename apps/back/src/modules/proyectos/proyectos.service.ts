@@ -12,7 +12,7 @@ export class ProyectosService {
 
     constructor(@InjectRepository(Proyecto) private dbProyecto: Repository<Proyecto>, private svUsuario: UsuarioService) { }
 
-    // --Test !!!
+    
     async obtenerProyectos() {
         const tempProyectos = await this.dbProyecto.find({
             where: {
@@ -25,7 +25,7 @@ export class ProyectosService {
         return tempProyectos;
     }
 
-    // --Test !!!
+    
     async obtenerProyecto(id: number) {
         const tempProyecto = await this.dbProyecto.findOne({
             where: {
@@ -39,7 +39,7 @@ export class ProyectosService {
         return tempProyecto;
     }
 
-    // --Test
+    
     async ObtenerProyectosPorUsuario(ownerId: number) {
 
         await this.svUsuario.getUsuario(ownerId)
