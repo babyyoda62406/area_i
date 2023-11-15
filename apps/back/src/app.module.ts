@@ -16,6 +16,7 @@ import { HelpersModule } from './modules/helpers/helpers.module';
 import { RolesProyectosModule } from './modules/roles-proyectos/roles-proyectos.module';
 import { RolesProyectos } from './modules/roles-proyectos/entities/roles-proyectos.entity';
 import { NivelExperticiaModule } from './modules/nivel-experticia/nivel-experticia.module';
+import { NivelExperticia } from './modules/nivel-experticia/entities/nivel-experticia.entity';
 
 dotenv.config();
 
@@ -28,7 +29,7 @@ dotenv.config();
       port: Number(process.env.PORT_DB),
       password: process.env.PASSWORD,
       synchronize: true,
-      entities: [Usuario, Proyecto, RolesProyectos]
+      entities: [Usuario, Proyecto, RolesProyectos, NivelExperticia]
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../../front/dist'),
