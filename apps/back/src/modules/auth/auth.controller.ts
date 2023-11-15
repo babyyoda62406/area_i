@@ -23,7 +23,8 @@ export class AuthController {
      * @param user Recibe un objeto de tipo CrearUsuarioDTO
      * @returns JSON | HttpException :(
      */
-    @Post('register')
+    // @Post('register')
+//!!!!! Este método  fue baneado en las sombras  , pq la app no incluye autoregistro.
     async registrarUsuario(@Body() user: CrearUsuarioDTO) {
         
         const { id } = await this.userService.crearUsuario(user);
