@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CrearNivelExperticia } from './dto/CrearNivelExperticia.dto';
 import { NivelExperticiaService } from './nivel-experticia.service';
 
@@ -13,6 +13,13 @@ export class NivelExperticiaController {
         const tempNivelExperticia = await this.svNivelExperticia.crearNivelExpdrticia(nivelExperticia);         
         return {message: 'Nivel de experticia creado' , id: tempNivelExperticia.id}
     }
+
+    @Get()
+    async getNivelesExperticia(){
+        return this.svNivelExperticia.obetenerNivelesDeExperticia(); 
+    }
+
+
     
 }
 
