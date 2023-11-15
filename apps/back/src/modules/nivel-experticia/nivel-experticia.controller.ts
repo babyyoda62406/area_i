@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { CrearNivelExperticia } from './dto/CrearNivelExperticia.dto';
 import { NivelExperticiaService } from './nivel-experticia.service';
 
@@ -16,9 +16,17 @@ export class NivelExperticiaController {
 
     @Get()
     async getNivelesExperticia(){
-        return this.svNivelExperticia.obetenerNivelesDeExperticia(); 
+        return this.svNivelExperticia.obetenerNivelesExperticia(); 
     }
 
+
+    @Delete(':id')
+    async deleteNivelExperticia(@Param('id', ParseIntPipe) id: number){
+        const tempNivelExperticia =await  this.svNivelExperticia.eliminarNivelExperticia(id);        
+        return {message: 'Nivel de experticia eliminado',  id: tempNivelExperticia.id}
+    }
+
+    
 
     
 }
