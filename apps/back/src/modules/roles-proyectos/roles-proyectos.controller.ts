@@ -30,6 +30,16 @@ export class RolesProyectosController {
     }
 
     /**
+     * Controlador de la ruta para obtener un rol de proyecto por su id
+     * @param id :number Id del rol de proyecto q se desea obtener
+     * @returns RolPRoyecto | HttpException
+     */
+    @Get(':id')
+    async getRolProyecto(@Param('id', ParseIntPipe) id: number){
+        return await this.svRolProyectos.obtenerRolPRoyectos(id)
+    }
+
+    /**
      * Controlador de la ruta para eliminar Roles de Proyecto
      * @param id :number Id del proyecto que se desea eliminar
      * @returns JSON | HttpStatus
