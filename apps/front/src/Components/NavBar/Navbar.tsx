@@ -25,7 +25,7 @@ const Navbar: FC<typeNavbar> = () => {
             <Sidebar Show={isOpen} />
         </MagicMotion>
         <TitleNavbar />
-        <HerramientasNavbar />
+        {/* <HerramientasNavbar /> */}
 
     </div>
 }

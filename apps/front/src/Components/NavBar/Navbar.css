@@ -2,21 +2,21 @@
 .Navbar{
     width: 99%;
     height: 70px;
-    border: 1px solid var(--bs-gray-300);
+    border: 2px solid var(--bg-white-5);
     margin-top:0.5rem;
     margin-left: 0.5rem;
-    
-    box-shadow: 2px 2px 3px var(--bs-blue);
-    border-radius: 5px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     transition: all 500ms;
 }
 .Navbar:hover{
     cursor:wait;
-    background-color: #071324;
-    box-shadow: none;
-    border: 1px solid var(--bs-gray-600);
+    background-color: var(--bg-blue-9); 
+    
+}
+
+.Navbar:hover .TitleNavbar >span{
+    color: var(--bg-white-4);
 }
 
 .BtnHamburguer{
