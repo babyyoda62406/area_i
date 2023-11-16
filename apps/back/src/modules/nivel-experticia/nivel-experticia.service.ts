@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { NivelExperticia } from './entities/nivel-experticia.entity';
 import { Not, Repository } from 'typeorm';
 import { nomenclador } from 'src/enums/nomenclador';
+import { EditarNivelExperticia } from './dto/EditarNivelExperticia.dto';
 
 @Injectable()
 export class NivelExperticiaService {
@@ -52,7 +53,33 @@ export class NivelExperticiaService {
         tempNivelExperticia.estado = nomenclador.Eliminado
 
         return await this.dbNivelExperticia.save(tempNivelExperticia)
+    }
 
+
+    async editarNivelExperticia(id: number, nivelExperticia: EditarNivelExperticia){
+        const tempNivelExperticia = await this.dbNivelExperticia.findOne({
+            where:{
+                id, 
+                estado: Not(nomenclador.Eliminado)
+            }
+        })
+
+        if(!tempNivelExperticia) throw new HttpException(`No existe nivel de experticia con el id ${id}` , HttpStatus.NOT_FOUND)
+
+        if(nivelExperticia.nombre){
+            const tempNivelExperticia = await this.dbNivelExperticia.findOne({
+                where: {
+                    nombre: nivelExperticia.nombre
+                }
+            })
+
+            if( tempNivelExperticia) throw new HttpException(`El nombre de nivel de experticia ${nivelExperticia.nombre} no esta disponible`, HttpStatus.CONFLICT)
+        }
         
+        const newNivelExperticia: NivelExperticia = Object.assign(tempNivelExperticia  , nivelExperticia); 
+
+        await this.dbNivelExperticia.save(newNivelExperticia)
+
+        return newNivelExperticia; 
     }
 }
