@@ -17,13 +17,13 @@ const HomeLayout:FC<typeHomeLayout> = () => {
 
    
     useEffect(() => {
-        console.log(token)
+        
 
       token ===''? navigation('/'):''
         
      },[])
     
-    console.log('prueba de Home')
+    
     
     return <div className="HomeLayout">
         <Navbar />

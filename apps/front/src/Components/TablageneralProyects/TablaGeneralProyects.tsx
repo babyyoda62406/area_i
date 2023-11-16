@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useMemo, useState } from 'react'
+import { FC, useContext, useMemo, useState } from 'react'
 import './TablaGeneralProyects.css'
 import { typeDatosTabla, typeTablaElements } from '../../Types/TpHlayout'
 import { MantineReactTable, useMantineReactTable, type MRT_ColumnDef, } from 'mantine-react-table'
@@ -35,8 +35,13 @@ const TablaGeneralProyects: FC<typeTablaElements> = () => {
                         
                         break
                     
+                    case 400:
+                        const { message: errorMess } = await res.json()
+                        ALerta({ title: errorMess, icon: 'error' })
+                        break
+                    
                     default:
-                        ALerta({title:'tiene algun error',icon:'warning'})
+                        console.log('error en tabla de gestion general')
                         break
                 }
         })

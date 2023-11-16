@@ -3,7 +3,7 @@ import './LoginLayout.css'
 import { typeLoginLayout } from '../../Types/CMP'
 import FormularioLogin from '../FormularioLogin/FormularioLogin'
 
-import Bienvenida from '../Bienvenida/Bienvenida'
+// import Bienvenida from '../Bienvenida/Bienvenida'
 
 
 
