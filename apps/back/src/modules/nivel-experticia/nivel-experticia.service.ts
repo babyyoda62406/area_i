@@ -25,6 +25,19 @@ export class NivelExperticiaService {
     }
 
 
+    async obtenerNivelExperticia(id: number){
+        const tempNivelEperticia = await this.dbNivelExperticia.findOne({
+            where: {
+                id, 
+                estado: Not(nomenclador.Eliminado)
+            }
+        })
+
+        if(!tempNivelEperticia) throw new HttpException(`No existe nivel de expelrticia con el id  ${id}`, HttpStatus.NOT_FOUND )
+
+        return tempNivelEperticia ;
+
+    }
 
     async obetenerNivelesExperticia() {
 

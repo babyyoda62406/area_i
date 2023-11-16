@@ -20,6 +20,11 @@ export class NivelExperticiaController {
         return this.svNivelExperticia.obetenerNivelesExperticia();
     }
 
+    @Get(':id')
+    async getNivelExperticia(@Param('id', ParseIntPipe) id: number) {
+        return await this.svNivelExperticia.obtenerNivelExperticia(id)
+    }
+
     @Delete(':id')
     async deleteNivelExperticia(@Param('id', ParseIntPipe) id: number) {
         const tempNivelExperticia = await this.svNivelExperticia.eliminarNivelExperticia(id);
@@ -27,10 +32,9 @@ export class NivelExperticiaController {
     }
 
     @Patch(':id')
-    async setNivelExperticia(@Param('id', ParseIntPipe) id: number,@Body() nivelExperticia: EditarNivelExperticia) {
-           const newNivelExperticia = await this.svNivelExperticia.editarNivelExperticia(id , nivelExperticia);
-
-           return {message:'Nivel de experticia editado' , id: newNivelExperticia.id}
+    async setNivelExperticia(@Param('id', ParseIntPipe) id: number, @Body() nivelExperticia: EditarNivelExperticia) {
+        const newNivelExperticia = await this.svNivelExperticia.editarNivelExperticia(id, nivelExperticia);
+        return { message: 'Nivel de experticia editado', id: newNivelExperticia.id }
     }
 
 }
