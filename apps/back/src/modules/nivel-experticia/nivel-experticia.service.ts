@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { NivelExperticia } from './entities/nivel-experticia.entity';
 import { Not, Repository } from 'typeorm';
 import { nomenclador } from 'src/enums/nomenclador';
-import { EditarNivelExperticia } from './dto/EditarNivelExperticia.dto';
+import { EditarNivelExperticiaDTO } from './dto/EditarNivelExperticia.dto';
 
 @Injectable()
 export class NivelExperticiaService {
@@ -62,7 +62,7 @@ export class NivelExperticiaService {
     }
 
 
-    async editarNivelExperticia(id: number, nivelExperticia: EditarNivelExperticia){
+    async editarNivelExperticia(id: number, nivelExperticia: EditarNivelExperticiaDTO){
         const tempNivelExperticia = await this.obtenerNivelExperticia(id)
 
 
