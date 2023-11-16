@@ -54,14 +54,7 @@ export class NivelExperticiaService {
 
 
     async eliminarNivelExperticia(id: number){
-        const tempNivelExperticia = await this.dbNivelExperticia.findOne({
-            where: {
-                id, 
-                estado: Not(nomenclador.Eliminado)
-            }
-        })
-
-        if(!tempNivelExperticia) throw new HttpException(`No existe nivel de experticia con el id ${id}` , HttpStatus.NOT_FOUND)
+        const tempNivelExperticia = await this.obtenerNivelExperticia(id)
 
         tempNivelExperticia.estado = nomenclador.Eliminado
 
@@ -70,14 +63,8 @@ export class NivelExperticiaService {
 
 
     async editarNivelExperticia(id: number, nivelExperticia: EditarNivelExperticia){
-        const tempNivelExperticia = await this.dbNivelExperticia.findOne({
-            where:{
-                id, 
-                estado: Not(nomenclador.Eliminado)
-            }
-        })
+        const tempNivelExperticia = await this.obtenerNivelExperticia(id)
 
-        if(!tempNivelExperticia) throw new HttpException(`No existe nivel de experticia con el id ${id}` , HttpStatus.NOT_FOUND)
 
         if(nivelExperticia.nombre){
             const tempNivelExperticia = await this.dbNivelExperticia.findOne({

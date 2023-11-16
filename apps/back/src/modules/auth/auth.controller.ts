@@ -54,7 +54,7 @@ export class AuthController {
 
         const token = await this.jwt.generarJwt({ id: tempUser.id })
 
-        res.status(200).json({ message: 'Usuario logeado', token });
+        res.status(200).json({ message: 'Usuario logueado', token });
 
 
     }
