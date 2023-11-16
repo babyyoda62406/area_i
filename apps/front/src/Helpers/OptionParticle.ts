@@ -4,7 +4,7 @@ export const OptionParticle:ISourceOptions =  {
                     
     background: {
         color: {
-            value: "#46719e",
+            value: "#69adf6d6",
         },
     },
     
@@ -34,10 +34,10 @@ export const OptionParticle:ISourceOptions =  {
     particles: {
         
         color: {
-            value: "#3e5271",
+            value: "#b2c3ded4",
         },
         links: {
-            color: "#b1b3b5",
+            color: "#e2ecf5c1",
             distance: 160,
             enable: true,
             opacity: 1.0,

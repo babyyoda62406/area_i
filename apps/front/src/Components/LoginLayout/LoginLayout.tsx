@@ -14,7 +14,7 @@ const LoginLayout: FC<typeLoginLayout> = () => {
 
     return <div className="LoginLayout">
         <div className='FormLogin'>
-            <Bienvenida />
+            {/* <Bienvenida /> */}
 
 
             <FormularioLogin />

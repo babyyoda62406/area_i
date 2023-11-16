@@ -3,7 +3,7 @@ import './FormularioLogin.css'
 import { typeFormularioLogin } from '../../Types/CMP'
 import { ValidarCampos } from '../../Services/ValidarCampos'
 import { typeDatosForm, typeErrorForm } from '../../Types/UseStates'
-import { MdDangerous as IconError } from 'react-icons/md'
+
 import { FetchService } from '../../Services/FetchService'
 import { RutaServer } from '../../Helpers/RutaServer'
 import { GlobalContext } from '../../Contexts/GlobalContext'
@@ -14,8 +14,11 @@ import { CookieToken } from '../../Services/CookieToken'
 
 const FormularioLogin: FC<typeFormularioLogin> = () => {
     const navigation = useNavigate()
-
-    const {setToken} = useContext(GlobalContext)
+    const { setToken } = useContext(GlobalContext)
+    const [formState, setFormState] = useState({
+    loading: false,
+    message: 'Iniciar',
+  })
 
 
     /**
@@ -71,7 +74,7 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
     const GestionarDatos = (event: any) => {
         event.preventDefault()
 
-        
+        setFormState({ loading: true, message: 'Autenticando' })
 
 
 
@@ -138,25 +141,25 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
 
 
 
-    return <form action="" className='FormularioLogin' onSubmit={(event) => GestionarDatos(event)}>
-        <div className='ElementsFormLogin'>
-            <label htmlFor="">Cuenta de Correo</label>
-
-            <input type="email" required className='InpEmailIn' onChange={(arg) => { GuardarDatos('correo', arg.target.value) }} />
-
-            {errorForm.email === true ? <span className='IconErrorEmIn' onClick={() => { eliminarError('email', false) }}><IconError /></span> : ''}
-        </div>
-        <div className='ElementsFormLogin'>
-            <label htmlFor="">Contraseña</label>
-
-            <input type="text" required className='InpPassIn' onChange={(arg) => { GuardarDatos('password', arg.target.value) }} />
-
-            {errorForm.password === true ? <span className='IconErrorPsIn' onClick={() => { eliminarError('password', false) }}><IconError /></span> : ''}
-        </div>
-        <div className='EnvioLogin'>
-            <input type="submit" value='Entrar' /></div>
-    </form>
-
+    return (
+        <div className="LoginForm">
+          
+            <div className="ContentForm">
+              <form className={formState.loading ? 'login loading' : 'login'} onSubmit={GestionarDatos}>
+                <p className="title">Iniciar Sesion</p>
+                <input type="text" className="InputLogin" placeholder="Correo" autoFocus />
+                <i className="fa fa-user"></i>
+                <input type="password" className="InputLogin" placeholder="Contraseña" />
+                <i className="fa fa-key"></i>
+                <a href="#" className='RecupPass'>Ha olvidado su contraseña?</a>
+                <button className="BTNLogin">
+                  <i className="spinner"></i>
+                  <span className="state">{formState.message}</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        );
 }
 
 export default FormularioLogin

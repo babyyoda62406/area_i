@@ -11,7 +11,7 @@
 .FormLogin{
     width: 400px;
     height: 350px;
-    background-color: var(--azul-envolvente);
+    background-color: transparent;
     
     padding: 2.0rem;
 }
