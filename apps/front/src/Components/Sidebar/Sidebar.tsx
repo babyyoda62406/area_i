@@ -1,27 +1,44 @@
 
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import './Sidebar.css'
 import { typeSidebar } from '../../Types/TpHlayout'
-import { OptionsSidebar } from '../../Helpers/OptionsSidebar'
+
+import { Collapse, CollapseProps } from 'antd'
+import { itemASide1, itemASide2, itemASide3 } from '../../Helpers/OptionsSidebar'
 
 
 const Sidebar:FC<typeSidebar> = ({Show}) => {
     
-    const [seleccionado, setSeleccionado] = useState<number>(0)
+    const ElementsStyle = {
+        // marginBottom: '100px'
+    }   
 
-    const mostrarElemento = (posicion:number) => {
-        setSeleccionado(posicion)
-
+    const ElementSidebar:CollapseProps['items'] = [
+    
+        {
+            key: '1',
+            label: itemASide1.name,
+            children: <p>{itemASide1.children}</p>,
+            style:ElementsStyle,
+          },
+          {
+            key: '2',
+            label: itemASide2.name,
+            children: <p>{itemASide2.children}</p>,
+          },
+          {
+            key: '3',
+            label: itemASide3.name,
+            children: <p>{itemASide3.children}</p>,
+          },
         
-    }
+    ]
+
     
 
     return <div className={`Sidebar ${Show ? 'ShowAside': 'CerrarAside'}`}>
-        {OptionsSidebar.map((element, index) => {
-            const{nombre } = element
-
-            return <span className={`ElementAside ${seleccionado===index?'ElementActive':''}`} onClick={()=>{mostrarElemento(index)}} key={index}>{ nombre}</span>
-        })}
+        <Collapse accordion items={ElementSidebar} defaultActiveKey={['1']}>
+        </Collapse>    
 
     </div>
 }

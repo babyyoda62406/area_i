@@ -9,7 +9,7 @@
     border: 1px solid white;
     box-shadow: 2px 2px 3px var(--bs-gray-500);
     border-radius: 5px 10px 10px 0px;
-    background-color: var(--azul-profundo);
+    background-color: var(--bg-white-7);
     left: -300px;
     padding-top: 1.0rem;
     
@@ -42,28 +42,3 @@
     }
 } 
 
-.ElementAside{
-    margin: 1.0rem;
-    font-size: 1.5rem;
-    color: white;
-    text-indent: 1.0rem;
-    border:1px solid var(--bs-indigo);
-    border-radius: 0.5rem;
-    padding: 1.0rem;
-    transition: all 500ms;
-}
-
-.ElementAside:hover{
-    cursor: pointer;
-    background-color: var(--bs-indigo);
-    color: var(--bs-gray-100);
-}
-
-.ElementActive{
-    background-color: var(--bs-indigo);
-    color: var(--bs-gray-100);
-}
-
-.ElementActive:hvoer{
-    cursor: pointer;
-}

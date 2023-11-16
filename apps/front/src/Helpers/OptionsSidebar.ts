@@ -1,14 +1,19 @@
-import { typeOptionASide } from "../Types/TpOptionsAside";
 
-export const OptionsSidebar:typeOptionASide[] = [
-    { 'nombre': 'Gestion General' },
-    { 'nombre': 'Gestion Roles' },
-    { 'nombre': 'Informacion Roles' },
-    { 'nombre': 'Gestionar Plazas' },
-    { 'nombre': 'Gestionar Personal' },
-    { 'nombre': 'Vincular personal' },
-    { 'nombre': 'Gestionar Tarifas' },
-    { 'nombre': 'Gestionar RM' },
-    
-    
-]
+import { typeOptionAside } from "../Types/OptionsAside";
+
+
+
+
+
+export const itemASide1: typeOptionAside = {
+    name: 'ejemplo 1',
+    children: 'children 1'
+} 
+export const itemASide2: typeOptionAside = {
+    name: 'ejemplo 2',
+    children: 'children 1'
+} 
+export const itemASide3: typeOptionAside = {
+    name: 'ejemplo 3',
+    children: 'children 1'
+} 

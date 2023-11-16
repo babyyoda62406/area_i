@@ -15,8 +15,8 @@ const App = () => {
   return <div className='App'>
     <FondoPantalla />
     <Routes>
-      <Route path='/' element={<Login />} />
-      <Route path='Home' element={ <Home/> } />
+      {/* <Route path='/' element={<Login />} /> */}
+      <Route path='/' element={ <Home/> } />
       <Route path='VistaGeneral' element={ <GestionGeneral/> } />
       
     </Routes>
