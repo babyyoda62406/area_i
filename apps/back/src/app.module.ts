@@ -19,7 +19,7 @@ import { NivelExperticiaModule } from './modules/nivel-experticia/nivel-expertic
 import { NivelExperticia } from './entities/nivel-experticia.entity';
 import {  APP_PIPE } from '@nestjs/core';
 import { CustomValidationPipe } from './CustomValidationPipe';
-import { TarifaModule } from './tarifa/tarifa.module';
+import { TarifaModule } from './modules/tarifa/tarifa.module';
 import { Tarifa } from './entities/tarifa.entity';
 
 dotenv.config();
