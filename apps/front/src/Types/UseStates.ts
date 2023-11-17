@@ -12,8 +12,12 @@ type typeErrorForm = {
     password:boolean
 }
 
+type typeSubElAside = {
+    element:string
+}
 
 export type {
     typeDatosForm,
-    typeErrorForm
+    typeErrorForm,
+    typeSubElAside
 }

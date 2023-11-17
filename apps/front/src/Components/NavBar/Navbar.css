@@ -10,11 +10,11 @@
     grid-template-columns: repeat(3, 1fr);
     transition: all 500ms;
 }
-.Navbar:hover{
+/* .Navbar:hover{
     cursor:wait;
     background-color: var(--bg-blue-9); 
     
-}
+} */
 
 
 
@@ -28,13 +28,13 @@
 }
 
 
-.ActiveHamburguer{
-    animation: ActivarH 1s linear forwards;
+/* .ActiveHamburguer{
+    animation: ActivarH 500ms linear forwards;
     
 }
 
 .DesactiveHamburguer{
-    animation: CerrarH 1s linear forwards;
+    animation: CerrarH 500ms linear forwards;
 }
 
 @keyframes ActivarH{
@@ -55,4 +55,4 @@
         transform: translateX(0px);
         
     }
-}
+} */

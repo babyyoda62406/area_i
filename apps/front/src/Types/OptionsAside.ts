@@ -2,7 +2,7 @@
 
 type typeOptionAside = {
     name: string
-    children:string
+    children:string[]
 }
 
 export type {

@@ -16,7 +16,7 @@ const Navbar: FC<typeNavbar> = () => {
 
     return <div className="Navbar">
 
-        <div className={`BtnHamburguer ${isOpen ? 'ActiveHamburguer' : 'DesactiveHamburguer'}`}>
+        <div className={`BtnHamburguer `}>
             
             <Hamburguer toggled={isOpen} toggle={setOpen} />
         </div>

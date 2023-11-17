@@ -1,46 +1,42 @@
 
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import './Sidebar.css'
 import { typeSidebar } from '../../Types/TpHlayout'
 
 import { Collapse, CollapseProps } from 'antd'
-import { itemASide1, itemASide2, itemASide3 } from '../../Helpers/OptionsSidebar'
+import { itemsASide } from '../../Helpers/OptionsSidebar'
+import { typeSubElAside } from '../../Types/UseStates'
+
 
 
 const Sidebar: FC<typeSidebar> = ({ Show }) => {
 
   const ElementsStyle = {
     marginBottom: '',
-    backgroundColor: '#bec8d1',
-
-
+    borderRadius: 'none'
+    
   }
+  
+  const [elementActive, setElementActive] = useState<typeSubElAside>({
+    element: ''
+  })
 
-  const ElementSidebar: CollapseProps['items'] = [
+  const ElementSidebar: CollapseProps['items'] = itemsASide.map((element, index) => {
+    return {
+      key: index,
+      className: 'ElementCollapse',
+      label: element.name,
+      children: element.children.map((elemento, index) => {
+        
+        return <span key={index} className={`SubElementCollapse ${elementActive.element==elemento?"SubElementActive":''}`} onClick={() => { setElementActive({element:elemento })}}>{ elemento}</span>
+      }),
+      style:ElementsStyle
+    }
+  })
 
-    {
-      key: '1',
-      className: 'ElementCollapse',
-      label: itemASide1.name,
-      children: <p className='FuncionCollapse'>{itemASide1.children}</p>,
-      style: ElementsStyle,
-    },
-    {
-      key: '2',
-      className: 'ElementCollapse',
-      label: itemASide2.name,
-      children: <p>{itemASide2.children}</p>,
-      style: ElementsStyle,
-    },
-    {
-      key: '3',
-      className: 'ElementCollapse',
-      label: itemASide3.name,
-      children: <p>{itemASide3.children}</p>,
-      style: ElementsStyle,
-    },
+    
 
-  ]
+  
 
 
 

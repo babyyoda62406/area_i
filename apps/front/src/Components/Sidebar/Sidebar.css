@@ -5,11 +5,11 @@
     flex-direction: column;
     position: absolute;
     width: 210px;
-    height: 95%;
+    height: 80%;
     border: 1px solid white;
-    
-    border-radius: 5px 10px 10px 0px;
-    background-color: var(--bg-blue-7);
+    margin-top: 6.1rem;
+   
+    background-color: var(--bg-blue-6);
     left: -300px;
     padding-top: 1.0rem;
     
@@ -17,7 +17,7 @@
 }
 
 .ShowAside{
-    animation: mostrarAside 1s linear forwards;
+    animation: mostrarAside 500ms linear forwards;
 }
 
 @keyframes mostrarAside{
@@ -30,7 +30,7 @@
 }
 
 .CerrarAside{
-    animation: cerrarAside 2s linear forwards;
+    animation: cerrarAside 1s linear forwards;
 }
 
 @keyframes cerrarAside{
@@ -42,24 +42,74 @@
     }
 } 
 
-/* estilos al collapse general  */
-.FuncionCollapse{
-    text-transform: capitalize;
-}
+
+
 
 /* estilos a los items visibles */
 .ElementCollapse{
-    background-color: red ;
+    background-color: var(--bg-blue-4) ;
+    border-radius: 0px !important;
+    
+    
 }
 
+.ElementCollapse div:nth-child(1){
+    border-radius: 0px !important;
+}
+
+.ElementCollapse div:nth-child(1)>span{
+    color: var(--bg-white-4);
+    text-transform: capitalize;
+    transition: all 500ms;
+}
+
+.ElementCollapse div:nth-child(1)>div>span>svg{
+    color: var(--bg-white-1);
+}
+
+.ElementCollapse:hover div:nth-child(1)>span,
+.ElementCollapse:hover div:nth-child(1)>div>span>svg{
+    color: var(--bg-white-5);
+    
+}
+
+
+
+
+
+
 /* estilos a la caja desplegable */
-.ElementCollapse  div:nth-child(2){
- background-color: yellow;
+.ElementCollapse  div:nth-child(2)>div{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-blue-5);
+
+
+}
+
+/* estilos  de los items desplegables*/
+.SubElementCollapse{
+    
+    text-transform: capitalize;
+    color: var(--bg-white-1) ;
+    font-size: 1.3rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    transition: all 500ms;
+    
+}
+
+.SubElementCollapse:hover{
+    padding-left: 2.0rem;  
+    cursor: pointer;
+}
+
+.SubElementActive{
+    padding-left: 2.3rem;
 }
 
 /* estilo al interior de la caja desplegable */
 .ElementCollapse  div:nth-child(2)>div{
-    background-color: #69b1ff ;
-    padding-bottom: 10px;
-    padding-top: 0px !important;
+    background-color: var(--bg-blue-5);
+   
 }
