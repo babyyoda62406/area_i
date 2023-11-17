@@ -9,7 +9,8 @@ import { NivelExperticia } from '../../entities/nivel-experticia.entity';
 @Module({
   imports:[ TypeOrmModule.forFeature([NivelExperticia]), JwtModule], 
   controllers: [NivelExperticiaController],
-  providers: [NivelExperticiaService]
+  providers: [NivelExperticiaService],
+  exports:[NivelExperticiaService]
 })
 export class NivelExperticiaModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

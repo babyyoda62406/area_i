@@ -20,6 +20,7 @@ import { NivelExperticia } from './entities/nivel-experticia.entity';
 import {  APP_PIPE } from '@nestjs/core';
 import { CustomValidationPipe } from './CustomValidationPipe';
 import { TarifaModule } from './tarifa/tarifa.module';
+import { Tarifa } from './entities/tarifa.entity';
 
 dotenv.config();
 
@@ -32,7 +33,7 @@ dotenv.config();
       port: Number(process.env.PORT_DB),
       password: process.env.PASSWORD,
       synchronize: true,
-      entities: [Usuario, Proyecto, RolesProyectos, NivelExperticia]
+      entities: [Usuario, Proyecto, RolesProyectos, NivelExperticia, Tarifa]
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../../front/dist'),
