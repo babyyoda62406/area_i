@@ -2,6 +2,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn
 import { RolesProyectos } from "./roles-proyectos.entity";
 import { NivelExperticia } from "./nivel-experticia.entity";
 import { Proyecto } from "./proyecto.entity";
+import { nomenclador } from "src/enums/nomenclador";
 
 @Entity()
 export class Tarifa{
@@ -24,5 +25,8 @@ export class Tarifa{
 
     @Column()
     value: number
+    
+    @Column()
+    estado: nomenclador
     
 }
