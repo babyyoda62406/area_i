@@ -14,9 +14,9 @@ import * as dotenv from "dotenv";
 import { Proyecto } from './entities/proyecto.entity';
 import { HelpersModule } from './modules/helpers/helpers.module';
 import { RolesProyectosModule } from './modules/roles-proyectos/roles-proyectos.module';
-import { RolesProyectos } from './modules/roles-proyectos/entities/roles-proyectos.entity';
+import { RolesProyectos } from './entities/roles-proyectos.entity';
 import { NivelExperticiaModule } from './modules/nivel-experticia/nivel-experticia.module';
-import { NivelExperticia } from './modules/nivel-experticia/entities/nivel-experticia.entity';
+import { NivelExperticia } from './entities/nivel-experticia.entity';
 import {  APP_PIPE } from '@nestjs/core';
 import { CustomValidationPipe } from './CustomValidationPipe';
 

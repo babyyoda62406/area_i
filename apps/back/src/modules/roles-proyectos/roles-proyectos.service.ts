@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { RolesProyectos } from './entities/roles-proyectos.entity';
+import { RolesProyectos } from '../../entities/roles-proyectos.entity';
 import { Not, Repository } from 'typeorm';
 import { CrearRolProyectoDTO } from './dto/CrearRolProyecto.dto';
 import { nomenclador } from 'src/enums/nomenclador';

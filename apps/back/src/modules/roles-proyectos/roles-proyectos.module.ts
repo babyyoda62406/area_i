@@ -2,7 +2,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { RolesProyectosController } from './roles-proyectos.controller';
 import { RolesProyectosService } from './roles-proyectos.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RolesProyectos } from './entities/roles-proyectos.entity';
+import { RolesProyectos } from '../../entities/roles-proyectos.entity';
 import { ValidarToken } from '../security/ValidarToken.middleware';
 import { JwtModule } from '../jwt/jwt.module';
 

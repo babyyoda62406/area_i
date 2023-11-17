@@ -4,7 +4,7 @@ import { NivelExperticiaService } from './nivel-experticia.service';
 import { JwtModule } from '../jwt/jwt.module';
 import { ValidarToken } from '../security/ValidarToken.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { NivelExperticia } from './entities/nivel-experticia.entity';
+import { NivelExperticia } from '../../entities/nivel-experticia.entity';
 
 @Module({
   imports:[ TypeOrmModule.forFeature([NivelExperticia]), JwtModule], 

@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CrearNivelExperticia } from './dto/CrearNivelExperticia.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { NivelExperticia } from './entities/nivel-experticia.entity';
+import { NivelExperticia } from '../../entities/nivel-experticia.entity';
 import { Not, Repository } from 'typeorm';
 import { nomenclador } from 'src/enums/nomenclador';
 import { EditarNivelExperticiaDTO } from './dto/EditarNivelExperticia.dto';
