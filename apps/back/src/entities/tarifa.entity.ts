@@ -26,7 +26,7 @@ export class Tarifa{
     @Column()
     value: number
     
-    @Column()
+    @Column({default: nomenclador.Activo})
     estado: nomenclador
     
 }
