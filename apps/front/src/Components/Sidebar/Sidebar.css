@@ -42,3 +42,24 @@
     }
 } 
 
+/* estilos al collapse general  */
+.FuncionCollapse{
+    text-transform: capitalize;
+}
+
+/* estilos a los items visibles */
+.ElementCollapse{
+    background-color: red !important;
+}
+
+/* estilos a la caja desplegable */
+.ElementCollapse  div:nth-child(2){
+
+}
+
+/* estilo al interior de la caja desplegable */
+.ElementCollapse  div:nth-child(2)>div{
+    background-color: #69b1ff ;
+    padding-bottom: 10px;
+    padding-top: 0px !important;
+}
