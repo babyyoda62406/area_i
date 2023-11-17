@@ -2,8 +2,8 @@
 .Navbar{
     width: 99%;
     height: 70px;
-    border: 2px solid var(--bg-white-4);
-    background-color: var(--bg-white-7);
+    border: 1px solid var(--bg-white-4);
+    background-color: var(--bg-blue-6);
     margin-top:0.5rem;
     margin-left: 0.5rem;
     display: grid;

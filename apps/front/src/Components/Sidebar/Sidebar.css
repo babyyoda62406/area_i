@@ -7,9 +7,9 @@
     width: 210px;
     height: 95%;
     border: 1px solid white;
-    box-shadow: 2px 2px 3px var(--bs-gray-500);
+    
     border-radius: 5px 10px 10px 0px;
-    background-color: var(--bg-white-7);
+    background-color: var(--bg-blue-7);
     left: -300px;
     padding-top: 1.0rem;
     
@@ -49,12 +49,12 @@
 
 /* estilos a los items visibles */
 .ElementCollapse{
-    background-color: red !important;
+    background-color: red ;
 }
 
 /* estilos a la caja desplegable */
 .ElementCollapse  div:nth-child(2){
-
+ background-color: yellow;
 }
 
 /* estilo al interior de la caja desplegable */
