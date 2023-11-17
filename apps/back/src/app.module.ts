@@ -17,6 +17,8 @@ import { RolesProyectosModule } from './modules/roles-proyectos/roles-proyectos.
 import { RolesProyectos } from './modules/roles-proyectos/entities/roles-proyectos.entity';
 import { NivelExperticiaModule } from './modules/nivel-experticia/nivel-experticia.module';
 import { NivelExperticia } from './modules/nivel-experticia/entities/nivel-experticia.entity';
+import {  APP_PIPE } from '@nestjs/core';
+import { CustomValidationPipe } from './CustomValidationPipe';
 
 dotenv.config();
 
@@ -44,6 +46,10 @@ dotenv.config();
     NivelExperticiaModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, 
+  {
+    provide: APP_PIPE, 
+    useClass: CustomValidationPipe
+  }],
 })
 export class AppModule {}
