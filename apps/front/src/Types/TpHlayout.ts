@@ -18,19 +18,22 @@ type typeSidebar = {
     Show:boolean
 }
 
-type typeTablaElements = {
+type typeGestionG = {
+    
+}
+
+type typeTablaProyectos = {
 
 }
-type typeDatosTabla = {
+type typeDatosTablaProyectos = {
     id: string
     organizacion: string
-    nombre:string
+    nombre: string
+    estado:string
 }
 
 
-type typeColumnLeyend = {
 
-}
 
 
 
@@ -40,7 +43,7 @@ export type {
     typeTitleNavb,
     typeHerrmtasNavb,
     typeSidebar,
-    typeTablaElements,
-    typeColumnLeyend,
-    typeDatosTabla
+    typeGestionG,
+    typeTablaProyectos,
+    typeDatosTablaProyectos
  }

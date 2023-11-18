@@ -27,7 +27,7 @@ const HomeLayout:FC<typeHomeLayout> = () => {
     
     return <div className="HomeLayout">
         <Navbar />
-        {/* <GestionGeneral/>  */}
+        <GestionGeneral/> 
         
     </div>
 }
