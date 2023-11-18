@@ -21,7 +21,7 @@ export class CrearTarfiaDTO{
         message: 'Debe proporcionar un proyecto'
     })
     @IsNumber({}, {
-        message: 'El id del proyecto es obligatorio'
+        message: 'El id del proyecto debe ser un numero '
     })
     ownerId: number
 

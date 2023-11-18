@@ -5,9 +5,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Tarifa } from 'src/entities/tarifa.entity';
 import { ValidarToken } from 'src/modules/security/ValidarToken.middleware';
 import { JwtModule } from 'src/modules/jwt/jwt.module';
+import { ProyectosModule } from '../proyectos/proyectos.module';
+import { NivelExperticiaModule } from '../nivel-experticia/nivel-experticia.module';
+import { RolesProyectosModule } from '../roles-proyectos/roles-proyectos.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Tarifa]), JwtModule],
+  imports: [TypeOrmModule.forFeature([Tarifa]), JwtModule, ProyectosModule , NivelExperticiaModule , RolesProyectosModule],
   controllers: [TarifaController],
   providers: [TarifaService]
 })
