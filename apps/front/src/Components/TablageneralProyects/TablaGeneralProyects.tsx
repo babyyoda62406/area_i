@@ -11,7 +11,7 @@ import { ColumnsType } from 'antd/es/table';
 
 const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
 
-  const { token } = useContext(GlobalContext)
+  const { token,showSidebar } = useContext(GlobalContext)
   const [proyectosServer, setProyectosSever] = useState<typeDatosTablaProyectos[]>([])
   const[actualizarTabla,setActualizarTabla] = useState<number>(0)
 
@@ -111,9 +111,9 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
   
   
 
-  return <div className="TablageneralProyects">
+  return <div className={`TablageneralProyects ${showSidebar?'MovDer':'MovIzq'}`}>
     
-    <Table columns={columnas}  dataSource={data}   />
+    <Table columns={columnas} size='middle' dataSource={data}   />
 
   </div>
 }

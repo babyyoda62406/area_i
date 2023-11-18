@@ -1,9 +1,11 @@
 
 export type typeGlobalContext = {
-    token:string
+    token: string
+    showSidebar:boolean
     
 
-    setToken:(arg:string)=>void
+    setToken: (arg: string) => void
+    setShowSidebar: (value:boolean)=>void
 }
 
 export type typeProviderContext = {

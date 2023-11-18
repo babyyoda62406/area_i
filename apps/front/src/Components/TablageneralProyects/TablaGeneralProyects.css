@@ -8,6 +8,31 @@
     
 }
 
+.MovDer{
+    animation: moverDer 500ms linear forwards;
+}
+
+@keyframes moverDer{
+    from{
+        margin-left: 0px;
+    }
+    to{
+        margin-left: 14%;
+    }
+}
+
+.MovIzq{
+    animation: moverIzq 500ms linear forwards;
+}
+
+@keyframes moverIzq{
+    from{
+        margin-left: 14%;
+    }
+    to{
+        margin-left: 0px;
+    }
+}
 
 .ant-tooltip-inner{
     display: none;
