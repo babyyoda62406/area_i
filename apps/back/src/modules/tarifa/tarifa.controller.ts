@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post} from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post} from '@nestjs/common';
 import { CrearTarfiaDTO } from './dto/crearTarifa.dto';
 import { TarifaService } from './tarifa.service';
 
@@ -17,4 +17,10 @@ export class TarifaController {
     async getAllTarfias(){
         return  await this.svTarifa.obtenerTarifas()
     }
+
+    @Get(':id')
+    async getTarfiaById(@Param('id', ParseIntPipe) id: number){
+        return await this.svTarifa.obtenerTarifaById(id)
+    }
+
 }

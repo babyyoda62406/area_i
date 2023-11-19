@@ -58,4 +58,18 @@ export class TarifaService {
 
         return tempTarifas
     }
+
+    async obtenerTarifaById(id: number){
+        const tempTarifa = await this.dbTarifa.findOne({
+            where: {
+                id, 
+                estado: Not(nomenclador.Eliminado)
+            },
+            relations:['proyecto', 'rolProyecto', 'nivelExperticia']
+        })
+
+        if(!tempTarifa) throw new HttpException(`No existe tarifa con el id ${id}` , HttpStatus.NOT_FOUND)
+
+        return tempTarifa
+    }
 }
