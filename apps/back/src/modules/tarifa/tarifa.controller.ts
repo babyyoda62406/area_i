@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post} from '@nestjs/common';
 import { CrearTarfiaDTO } from './dto/crearTarifa.dto';
 import { TarifaService } from './tarifa.service';
+
 
 @Controller('tarifa')
 export class TarifaController {
@@ -27,6 +28,12 @@ export class TarifaController {
     @Get('proyecto/:id')
     async getTarifasPorProyetos(@Param('id', ParseIntPipe) id: number){
         return await this.svTarifa.obtenerTarifaByproyectId(id); 
+    }
+
+    @Delete(':id')
+    async deleteTarifa(@Param('id',ParseIntPipe) id:number ){
+        const tempTarifa = await  this.svTarifa.eliminarTarifa(id)
+        return {message: 'Tarifa eliminada' , id: tempTarifa.id}
     }
 
 }

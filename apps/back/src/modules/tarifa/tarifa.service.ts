@@ -73,7 +73,6 @@ export class TarifaService {
         return tempTarifa
     }
 
-
     async obtenerTarifaByproyectId(id: number){
         const tempProyecto  = await this.svProyectos.obtenerProyecto(id)
 
@@ -89,5 +88,15 @@ export class TarifaService {
 
         return tempTarifas
 
+    }
+
+    async eliminarTarifa(id: number){
+        const tempTarfia  = await this.obtenerTarifaById(id)        
+        
+        tempTarfia.estado = nomenclador.Eliminado
+
+        await this.dbTarifa.save(tempTarfia)
+
+        return tempTarfia ; 
     }
 }
