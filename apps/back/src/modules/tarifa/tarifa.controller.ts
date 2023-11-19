@@ -9,6 +9,7 @@ export class TarifaController {
     }
     @Post()
     async addTarifa(@Body() tarfia: CrearTarfiaDTO){
-        return await this.svTarifa.crearTarifa(tarfia)
+        const newTarifa = await this.svTarifa.crearTarifa(tarfia); 
+        return {message:'Tarifa Creada' , id: newTarifa.id}
     }
 }
