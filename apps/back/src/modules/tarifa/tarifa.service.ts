@@ -72,4 +72,22 @@ export class TarifaService {
 
         return tempTarifa
     }
+
+
+    async obtenerTarifaByproyectId(id: number){
+        const tempProyecto  = await this.svProyectos.obtenerProyecto(id)
+
+        const tempTarifas = await this.dbTarifa.find({
+            where: {
+                estado: Not(nomenclador.Eliminado), 
+                proyecto: tempProyecto
+            },
+            relations:['proyecto', 'rolProyecto', 'nivelExperticia']
+        })
+
+        if(!tempTarifas.length) throw new HttpException('', HttpStatus.NO_CONTENT)
+
+        return tempTarifas
+
+    }
 }

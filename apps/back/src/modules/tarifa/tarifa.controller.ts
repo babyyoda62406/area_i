@@ -23,4 +23,10 @@ export class TarifaController {
         return await this.svTarifa.obtenerTarifaById(id)
     }
 
+
+    @Get('proyecto/:id')
+    async getTarifasPorProyetos(@Param('id', ParseIntPipe) id: number){
+        return await this.svTarifa.obtenerTarifaByproyectId(id); 
+    }
+
 }
