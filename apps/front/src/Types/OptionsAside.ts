@@ -2,7 +2,7 @@
 
 type typeChildrenAside = {
     name: string
-    optionFunc:string | Function
+    optionFunc:string 
 }
 
 type typeOptionAside = {

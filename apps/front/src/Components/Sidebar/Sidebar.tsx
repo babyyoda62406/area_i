@@ -70,7 +70,7 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
       */
       children: element.children.map((elemento, index) => {
         
-        return <span key={index}  className={`SubElementCollapse ${elementActive.element == elemento.name ? "SubElementActive" : ''}`}  onClick={()=>{activarSubItem(elemento.name)}} >{elemento.name }</span>
+        return <span key={index} onClickCapture={()=>mostrarModal(elemento.optionFunc)} className={`SubElementCollapse ${elementActive.element == elemento.name ? "SubElementActive" : ''}`}  onClick={()=>{activarSubItem(elemento.name)}} >{elemento.name }</span>
       }),
       style: ElementsStyle
     }

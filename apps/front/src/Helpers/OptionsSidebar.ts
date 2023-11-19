@@ -11,7 +11,7 @@ export const itemsASide: typeOptionAside[] = [
         children: [
             {
                 name: 'Agregar Proyecto',
-                optionFunc: ''
+                optionFunc: 'proyectos'
             },
             {
                 name: 'itemExample1',
