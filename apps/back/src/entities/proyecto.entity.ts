@@ -17,14 +17,12 @@ export class Proyecto{
     @Column()
     organizacion: string
 
-    @Column()
-    ownerId: number
-
     @ManyToOne(()=> Usuario  , user=> user.proyectos)
     owner: Usuario
 
-    @OneToMany(()=> Tarifa , tarifa=> tarifa.ownerId)
+    @OneToMany(()=> Tarifa, tarfia=> tarfia.proyecto)
     tarifas: Tarifa[]
+
 
     @Column({default: nomenclador.Activo})
     estado: nomenclador

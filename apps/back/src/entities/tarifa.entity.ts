@@ -1,32 +1,30 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { RolesProyectos } from "./roles-proyectos.entity";
-import { NivelExperticia } from "./nivel-experticia.entity";
-import { Proyecto } from "./proyecto.entity";
+import { Column, Entity,  ManyToOne,  PrimaryGeneratedColumn } from "typeorm";
 import { nomenclador } from "src/enums/nomenclador";
+import { Proyecto } from "./proyecto.entity";
+import { NivelExperticia } from "./nivel-experticia.entity";
+import { RolesProyectos } from "./roles-proyectos.entity";
+
+
 
 @Entity()
 export class Tarifa{
     @PrimaryGeneratedColumn()
     id: number
 
-    @OneToOne(()=> RolesProyectos)
-    @JoinColumn()
-    rolProyecto: RolesProyectos
-
-    @OneToOne(()=> NivelExperticia)
-    @JoinColumn()
-    nivelExperticia: NivelExperticia
-
-    @Column()
-    ownerId: number
-
-    @ManyToOne(()=>Proyecto, proyecto=>proyecto.tarifas)
-    owner: Proyecto
-
     @Column()
     value: number
     
     @Column({default: nomenclador.Activo})
     estado: nomenclador
-    
+
+    @ManyToOne(()=> Proyecto, proyecto=>proyecto.tarifas)
+    proyecto: Proyecto
+
+
+    @ManyToOne(()=> NivelExperticia , nivelExperticia => nivelExperticia.tarifas)
+    nivelExperticia: NivelExperticia
+
+    @ManyToOne(()=> RolesProyectos , rolProyectos => rolProyectos.tarifas)
+    rolProyecto: RolesProyectos
+
 }

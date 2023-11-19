@@ -23,7 +23,7 @@ export class CrearTarfiaDTO{
     @IsNumber({}, {
         message: 'El id del proyecto debe ser un numero '
     })
-    ownerId: number
+    proyectoId: number
 
     @IsNotEmpty({
         message: 'La tarifa debe tener un valor'

@@ -53,11 +53,11 @@ export class ProyectosService {
      */
     async ObtenerProyectosPorUsuario(ownerId: number) {
 
-        await this.svUsuario.getUsuario(ownerId)
+        const tempUsuario  = await this.svUsuario.getUsuario(ownerId)
 
         const tempProyectos = await this.dbProyecto.find({
             where: {
-                ownerId,
+                owner: tempUsuario, 
                 estado: Not(nomenclador.Eliminado)
             }
         })
@@ -94,7 +94,7 @@ export class ProyectosService {
         const tempProyecto = await this.dbProyecto.findOne({
             where: {
                 nombre: proyecto.nombre,
-                ownerId
+                owner: tempUser
             }
         })
 
@@ -118,11 +118,11 @@ export class ProyectosService {
         const tempProyect = await this.obtenerProyecto(id);
 
         if (proyecto.nombre) {
-            const { ownerId } = tempProyect;
+            const { owner } = tempProyect;
             const NombreEnUso = await this.dbProyecto.findOne({
                 where: {
                     nombre: proyecto.nombre,
-                    ownerId, 
+                    owner, 
                     estado: Not(nomenclador.Eliminado)
                 }
             })
