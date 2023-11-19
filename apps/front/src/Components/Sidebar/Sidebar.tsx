@@ -1,14 +1,17 @@
 
-import { FC, useState } from 'react'
+import { FC, useContext, useState } from 'react'
 import './Sidebar.css'
 import { typeSidebar } from '../../Types/TpHlayout'
 
 import { Collapse, CollapseProps } from 'antd'
 import { itemsASide } from '../../Helpers/OptionsSidebar'
-import { typeSubElAside } from '../../Types/UseStates'
+import { typeShowModal, typeSubElAside } from '../../Types/UseStates'
+import { GlobalContext } from '../../Contexts/GlobalContext'
 
 
 const Sidebar: FC<typeSidebar> = ({ Show }) => {
+
+  const {setShowModal} = useContext(GlobalContext)
 
   const ElementsStyle = {
     marginBottom: '',
@@ -20,6 +23,16 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
     element: ''
   })
 
+
+  const mostrarModal = (arg:string) => {
+    setShowModal((prevShowModal: typeShowModal) => {
+      return{...prevShowModal,
+      [arg]:true,}
+    })
+
+  } 
+
+
   const ElementSidebar: CollapseProps['items'] = itemsASide.map((element, index) => {
     return {
       key: index,
@@ -27,7 +40,7 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
       label: element.name,
       children: element.children.map((elemento, index) => {
 
-        return <span key={index} className={`SubElementCollapse ${elementActive.element == elemento ? "SubElementActive" : ''}`} onClick={() => { setElementActive({ element: elemento }) }}>{elemento}</span>
+        return <span key={index} onClickCapture={()=>mostrarModal(elemento)} className={`SubElementCollapse ${elementActive.element == elemento ? "SubElementActive" : ''}`} onClick={() => { setElementActive({ element: elemento }) }}>{elemento}</span>
       }),
       style: ElementsStyle
     }

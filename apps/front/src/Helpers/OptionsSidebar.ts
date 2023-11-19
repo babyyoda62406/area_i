@@ -7,8 +7,8 @@ import { typeOptionAside } from "../Types/OptionsAside";
 
 export const itemsASide: typeOptionAside[] = [
     {
-        name: 'example1',
-        children: ['item12', 'item23']
+        name: 'Gestion General',
+        children: ['Agregar Proyecto', 'item23']
     },
     {
         name: 'example2',

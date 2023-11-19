@@ -13,10 +13,12 @@ type typeFormularioLogin = {
     
 }
 
-type typeFormularioLogout = {
-    
+
+type typeModalFormulario = {
+    proyectos:boolean
     
 }
+
 
 
 
@@ -24,6 +26,7 @@ export type {
     typeLoginLayout,
     typeFormularioLogin,
     typeBienvenida,
-    typeFormularioLogout
+    typeModalFormulario
+    
 
 }

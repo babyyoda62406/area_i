@@ -16,8 +16,14 @@ type typeSubElAside = {
     element:string
 }
 
+type typeShowModal = {
+    proyectos: boolean
+}
+
+
 export type {
     typeDatosForm,
     typeErrorForm,
-    typeSubElAside
+    typeSubElAside,
+    typeShowModal
 }
