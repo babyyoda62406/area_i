@@ -5,6 +5,7 @@ import Navbar from '../NavBar/Navbar'
 import GestionGeneral from '../Gestiongeneral/Gestiongeneral'
 import { useNavigate } from 'react-router-dom'
 import { GlobalContext } from '../../Contexts/GlobalContext'
+import ModalFormulario from '../ModalFormulario/ModalFormulario'
 
 
 
@@ -27,7 +28,8 @@ const HomeLayout:FC<typeHomeLayout> = () => {
     
     return <div className="HomeLayout">
         <Navbar />
-        <GestionGeneral/> 
+        <GestionGeneral /> 
+        <ModalFormulario tipoModal='proyectos'/>
         
     </div>
 }

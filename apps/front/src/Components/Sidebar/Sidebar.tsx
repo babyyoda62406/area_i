@@ -24,6 +24,16 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
   })
 
 
+  const activarSubItem = (arg: string) => {
+    setElementActive((prevelementActive) => {
+      return {
+        ...prevelementActive,
+        ['element']:arg
+      }
+    })
+  }
+
+
   const mostrarModal = (arg:string) => {
     setShowModal((prevShowModal: typeShowModal) => {
       return{...prevShowModal,
@@ -33,14 +43,17 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
   } 
 
 
+
   const ElementSidebar: CollapseProps['items'] = itemsASide.map((element, index) => {
     return {
       key: index,
       className: 'ElementCollapse',
       label: element.name,
       children: element.children.map((elemento, index) => {
-
-        return <span key={index} onClickCapture={()=>mostrarModal(elemento)} className={`SubElementCollapse ${elementActive.element == elemento ? "SubElementActive" : ''}`} onClick={() => { setElementActive({ element: elemento }) }}>{elemento}</span>
+        
+        // onClickCapture={() => mostrarModal('proyectos')}
+        // className={`SubElementCollapse ${elementActive.element == elemento ? "SubElementActive" : ''}`} onClick={() => { setElementActive({elemento.name }) }}
+        return <span key={index} className={`SubElementCollapse ${elementActive.element == elemento.name ? "SubElementActive" : ''}`}  onClick={()=>{activarSubItem(elemento.name)}} >{elemento.name }</span>
       }),
       style: ElementsStyle
     }

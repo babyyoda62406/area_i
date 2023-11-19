@@ -8,19 +8,67 @@ import { typeOptionAside } from "../Types/OptionsAside";
 export const itemsASide: typeOptionAside[] = [
     {
         name: 'Gestion General',
-        children: ['Agregar Proyecto', 'item23']
+        children: [
+            {
+                name: 'Agregar Proyecto',
+                optionFunc: ''
+            },
+            {
+                name: 'itemExample1',
+                optionFunc: ''
+            },
+            {
+                name: 'ItemExample2',
+            optionFunc:''},
+        ]
     },
     {
-        name: 'example2',
-        children:[ 'item14','item25' ]
+        name: 'Example2',
+        children: [
+            {
+                name: 'item1',
+                optionFunc: ''
+            },
+            {
+                name: 'item2',
+                optionFunc: ''
+            },
+            {
+                name: 'item3',
+            optionFunc:''},
+        ]
     },
     {
-        name: 'example3',
-        children:['item15','item26']
+        name: 'Example3',
+        children: [
+            {
+                name: 'item1',
+                optionFunc: ''
+            },
+            {
+                name: 'item2',
+                optionFunc: ''
+            },
+            {
+                name: 'item3',
+            optionFunc:''},
+        ]
     },
     {
-        name: 'example4',
-        children:['item16','item27']
-    }
+        name: 'Example 4',
+        children: [
+            {
+                name: 'item1',
+                optionFunc: ''
+            },
+            {
+                name: 'item2',
+                optionFunc: ''
+            },
+            {
+                name: 'item3',
+            optionFunc:''},
+        ]
+    },
 ]
 

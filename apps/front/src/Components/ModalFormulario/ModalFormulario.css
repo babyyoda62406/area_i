@@ -1,0 +1,21 @@
+
+.ModalFormulario{
+    height: 200px;
+    position: absolute;
+    border: 1px solid rgb(155, 13, 13);
+    top: 10%;
+    left: 25%;
+    background-color: blue;
+    z-index: 2;
+}
+.ModalGen{
+    width: 100%;
+    height: auto;
+    border: 1px solid yellow;
+    z-index: 20;
+}
+
+.titleModal{
+    color: black;
+    background-color: red;
+}

@@ -15,7 +15,7 @@ type typeFormularioLogin = {
 
 
 type typeModalFormulario = {
-    proyectos:boolean
+    tipoModal:string
     
 }
 
