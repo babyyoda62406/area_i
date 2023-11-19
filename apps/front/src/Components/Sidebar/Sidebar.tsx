@@ -24,6 +24,11 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
   })
 
 
+  /**
+   * 
+   * @param arg 
+   *nombre del elemento k se kiere activar en el aside
+   */
   const activarSubItem = (arg: string) => {
     setElementActive((prevelementActive) => {
       return {
@@ -34,6 +39,11 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
   }
 
 
+/**
+ * 
+ * @param arg 
+ * arg: tipo de modal a mostrar
+ */
   const mostrarModal = (arg:string) => {
     setShowModal((prevShowModal: typeShowModal) => {
       return{...prevShowModal,
@@ -43,17 +53,24 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
   } 
 
 
-
+/**
+ * recibe un array de objetos para generar los componentes del sidebar
+ */
   const ElementSidebar: CollapseProps['items'] = itemsASide.map((element, index) => {
     return {
       key: index,
       className: 'ElementCollapse',
       label: element.name,
+      /** 
+       * children: subitems del sidebar
+       * recorre el array de objetos de children
+       * se genera un span
+       * onClick: activa el elemento en el sidebar
+       * onClickCapture: hace una llamada a una funcion
+      */
       children: element.children.map((elemento, index) => {
         
-        // onClickCapture={() => mostrarModal('proyectos')}
-        // className={`SubElementCollapse ${elementActive.element == elemento ? "SubElementActive" : ''}`} onClick={() => { setElementActive({elemento.name }) }}
-        return <span key={index} className={`SubElementCollapse ${elementActive.element == elemento.name ? "SubElementActive" : ''}`}  onClick={()=>{activarSubItem(elemento.name)}} >{elemento.name }</span>
+        return <span key={index}  className={`SubElementCollapse ${elementActive.element == elemento.name ? "SubElementActive" : ''}`}  onClick={()=>{activarSubItem(elemento.name)}} >{elemento.name }</span>
       }),
       style: ElementsStyle
     }
