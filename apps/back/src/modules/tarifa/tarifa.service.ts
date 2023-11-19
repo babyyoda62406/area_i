@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CrearTarfiaDTO } from './dto/crearTarifa.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tarifa } from 'src/entities/tarifa.entity';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { NivelExperticiaService } from '../nivel-experticia/nivel-experticia.service';
 import { ProyectosService } from '../proyectos/proyectos.service';
 import { RolesProyectosService } from '../roles-proyectos/roles-proyectos.service';
@@ -44,5 +44,18 @@ export class TarifaService {
         tempTarifa.rolProyecto = tempRolProyecto
 
         return await this.dbTarifa.save(tempTarifa)
+    }
+
+    async obtenerTarifas(){
+        const tempTarifas = await this.dbTarifa.find({
+            where: {
+                estado: Not(nomenclador.Eliminado)
+            },
+            relations:['proyecto', 'rolProyecto', 'nivelExperticia']
+        })
+
+        if(!tempTarifas.length) throw new HttpException('', HttpStatus.NO_CONTENT)
+
+        return tempTarifas
     }
 }

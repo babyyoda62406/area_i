@@ -1,4 +1,4 @@
-import { Body, Controller, Post} from '@nestjs/common';
+import { Body, Controller, Get, Post} from '@nestjs/common';
 import { CrearTarfiaDTO } from './dto/crearTarifa.dto';
 import { TarifaService } from './tarifa.service';
 
@@ -11,5 +11,10 @@ export class TarifaController {
     async addTarifa(@Body() tarfia: CrearTarfiaDTO){
         const newTarifa = await this.svTarifa.crearTarifa(tarfia); 
         return {message:'Tarifa Creada' , id: newTarifa.id}
+    }
+
+    @Get()
+    async getAllTarfias(){
+        return  await this.svTarifa.obtenerTarifas()
     }
 }

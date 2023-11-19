@@ -11,7 +11,7 @@ export class Tarifa{
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
+    @Column({type:'decimal' , precision:  10 , scale: 3})
     value: number
     
     @Column({default: nomenclador.Activo})
