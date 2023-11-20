@@ -6,18 +6,21 @@ export const FormulariosTPModal: typeFormularioTPModal = {
             name: 'Nombre del Proyecto',
             title: '',
             type: 'text',
+            isRequired:true
             
         },
         {
             name: 'Identificador',
             title: '',
-            type: 'text'
+            type: 'text',
+            isRequired:true
         },
         
         {
             name: 'Nombre de la Organizacion',
             title: '',
-            type: 'text'
+            type: 'text',
+            isRequired:true
         }
         
         

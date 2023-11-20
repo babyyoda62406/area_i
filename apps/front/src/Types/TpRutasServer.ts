@@ -3,5 +3,6 @@
 export type typesRutasServer = {
     iniciarUsuario:   string
     registrarUsuario: string
-    getProyectos:     string
+    getProyectos: string
+    setProyectos: string
 }

@@ -16,7 +16,7 @@ type typeFormModal = {
     name: string
     title: string
     type:string
-   
+    isRequired:boolean
 }
 
 type typeElementsFormMo = {
