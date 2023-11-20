@@ -26,6 +26,8 @@
     "react-magic-motion": "^1.1.1",
     "react-router-dom": "^6.18.0",
     "react-tsparticles": "^2.12.2",
+    "survey-core": "^1.9.117",
+    "survey-react-ui": "^1.9.117",
     "sweetalert2": "^11.9.0",
     "sweetalert2-react-content": "^5.0.7",
     "tsparticles-engine": "^2.12.0",
