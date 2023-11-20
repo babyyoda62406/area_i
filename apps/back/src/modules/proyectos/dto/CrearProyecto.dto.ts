@@ -19,9 +19,19 @@ export class CrearProyectoDTO {
         message: 'El nombre del proyecto es obligatorio'
     })
     nombre: string 
+
+
+    @IsNotEmpty({
+        message: 'El identificador del proyecto es obligatorio'
+    })
+    uid:string
+
     @IsNotEmpty({
         message: 'El nombre de la organización es obligatorio'
     })
     organizacion: string 
+
+    
+
     
 }

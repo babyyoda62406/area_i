@@ -12,6 +12,9 @@ export class Proyecto{
     id: number
 
     @Column()
+    uid: string 
+
+    @Column()
     nombre: string  
 
     @Column()

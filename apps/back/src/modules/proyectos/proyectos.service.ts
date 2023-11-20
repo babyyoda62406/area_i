@@ -45,7 +45,7 @@ export class ProyectosService {
 
         return tempProyecto;
     }
-  
+
     /**
      * Servicio para obtener proyectos "de" un usuario determinado
      * @param ownerId :number Id del usuario 
@@ -53,11 +53,11 @@ export class ProyectosService {
      */
     async ObtenerProyectosPorUsuario(ownerId: number) {
 
-        const tempUsuario  = await this.svUsuario.getUsuario(ownerId)
+        const tempUsuario = await this.svUsuario.getUsuario(ownerId)
 
         const tempProyectos = await this.dbProyecto.find({
             where: {
-                owner: tempUsuario, 
+                owner: tempUsuario,
                 estado: Not(nomenclador.Eliminado)
             }
         })
@@ -88,17 +88,21 @@ export class ProyectosService {
      */
     async crearProyecto(proyecto: CrearProyectoDTO) {
 
-        const { ownerId } = proyecto
+        const { ownerId, uid } = proyecto
         const tempUser = await this.svUsuario.getUsuario(ownerId);
 
         const tempProyecto = await this.dbProyecto.findOne({
-            where: {
-                nombre: proyecto.nombre,
-                owner: tempUser
-            }
+            where: [
+                {
+                    nombre: proyecto.nombre,
+                },
+                {
+                    uid
+                }
+            ]
         })
 
-        if (tempProyecto) throw new HttpException('Este nombre de proyecto no está disponible para este usuario', HttpStatus.BAD_REQUEST);
+        if (tempProyecto) throw new HttpException(`El ${(tempProyecto.nombre==proyecto.nombre)?'Nombre':'UID'} de proyecto no esta disponible disponible`, HttpStatus.BAD_REQUEST);
 
         const newProyecto = this.dbProyecto.create(proyecto)
         newProyecto.owner = tempUser
@@ -122,14 +126,16 @@ export class ProyectosService {
             const NombreEnUso = await this.dbProyecto.findOne({
                 where: {
                     nombre: proyecto.nombre,
-                    owner, 
+                    owner,
                     estado: Not(nomenclador.Eliminado)
                 }
             })
 
-            if(NombreEnUso) throw new HttpException( 'Nombre de proyecto no disonible' , HttpStatus.BAD_REQUEST)
+            if (NombreEnUso) throw new HttpException('Nombre de proyecto no disonible', HttpStatus.BAD_REQUEST)
 
         }
+
+
 
         const newProyecto = Object.assign(tempProyect, proyecto);
 
