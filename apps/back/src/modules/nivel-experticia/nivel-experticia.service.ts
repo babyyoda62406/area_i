@@ -6,10 +6,18 @@ import { Not, Repository } from 'typeorm';
 import { nomenclador } from 'src/enums/nomenclador';
 import { EditarNivelExperticiaDTO } from './dto/EditarNivelExperticia.dto';
 
+/**
+ * Servicio de gestion de niveles de experticia
+ */
 @Injectable()
 export class NivelExperticiaService {
     constructor(@InjectRepository(NivelExperticia) private dbNivelExperticia: Repository<NivelExperticia>) { }
 
+    /**
+     * Servicio para crear nivel de experticia
+     * @param nivelExperticia  :CrearNivelExperticia (DTO)
+     * @returns NivelExperticia | HttpException
+     */
     async crearNivelExpdrticia(nivelExperticia: CrearNivelExperticia) {
         const tempNivelExperticia = await this.dbNivelExperticia.findOne({
             where: {
@@ -24,7 +32,11 @@ export class NivelExperticiaService {
         return newNivelExperticia;
     }
 
-
+    /**
+     * Servicio para Obtener un nivel de experticia por ID
+     * @param id :number Número del nivel de experticia que se quiere obtener
+     * @returns NivelExperticia | HTTPException
+     */
     async obtenerNivelExperticia(id: number){
         const tempNivelEperticia = await this.dbNivelExperticia.findOne({
             where: {
@@ -39,6 +51,10 @@ export class NivelExperticiaService {
 
     }
 
+    /**
+     *Servicio para  Obtener niveles de experticia
+     * @returns NivelExperticia | HttpException
+     */
     async obetenerNivelesExperticia() {
 
         const tempNivelExperticia = await this.dbNivelExperticia.find({
@@ -52,7 +68,11 @@ export class NivelExperticiaService {
         return tempNivelExperticia ; 
     }
 
-
+    /**
+     * Servicio para eliminar nivel de experticia por ID 
+     * @param id :number Numero del nivel de experticia que se desea obtener.
+     * @returns NivelExperticia | HttpException
+     */
     async eliminarNivelExperticia(id: number){
         const tempNivelExperticia = await this.obtenerNivelExperticia(id)
 
@@ -61,7 +81,12 @@ export class NivelExperticiaService {
         return await this.dbNivelExperticia.save(tempNivelExperticia)
     }
 
-
+    /**
+     * Servicio para editar nivel de experticia 
+     * @param id :id Id del nivel de experticia que se desea editar 
+     * @param nivelExperticia : EditarNivelExperticiaDTO
+     * @returns NivelExperticia | HttpException
+     */
     async editarNivelExperticia(id: number, nivelExperticia: EditarNivelExperticiaDTO){
         const tempNivelExperticia = await this.obtenerNivelExperticia(id)
 

@@ -5,6 +5,10 @@ import { NivelExperticia } from "./nivel-experticia.entity";
 import { RolesProyectos } from "./roles-proyectos.entity";
 
 
+/**
+ * Entidad Tarifa
+ */
+
 
 @Entity()
 export class Tarifa{
