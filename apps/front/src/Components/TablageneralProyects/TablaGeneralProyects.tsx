@@ -30,8 +30,12 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
         case 200:
           let data = await res.json()
           setProyectosSever(data)
-
           break
+        
+        case 204:
+          ALerta({title:'por favor agregue algun proyecto', icon:'warning'})
+          break
+        
         case 304:
           let dataNM = await res.json()
           setProyectosSever(dataNM)
