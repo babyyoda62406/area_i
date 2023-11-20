@@ -13,6 +13,7 @@ import { CookieToken } from '../../Services/CookieToken'
 
 
 const FormularioLogin: FC<typeFormularioLogin> = () => {
+
     const navigation = useNavigate()
     const { setToken } = useContext(GlobalContext)
 
@@ -55,6 +56,8 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
         const errorEmail = ValidarCampos('email', datosForm.correo);
         const errorPassword = ValidarCampos('password', datosForm.password)
 
+        console.log(errorEmail)
+        console.log(errorPassword)
 
         if (!errorPassword && !errorEmail) {
             setFormState({ loading: true, message: 'Autenticando' })
@@ -80,32 +83,38 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
                         
                         case 400:
                             const { message: cliError } = await res.json();
-                            ALerta({ text:cliError})
+                            ALerta({ text: cliError })
+                            setFormState({ loading: false, message: 'Iniciar' })
                             break;
 
                         case 401:
                             const { message: passError } = await res.json();
                             ALerta({ title: passError, icon: 'error', })
+                            setFormState({ loading: false, message: 'Iniciar' })
                             break;
 
                         case 404:
                             const { message: error } = await res.json();
                             ALerta({ title: error, icon: 'error' })
+                            setFormState({ loading: false, message: 'Iniciar' })
 
                             break;
                         default:
 
                             alert(`Status desconocido ${res.status}`)
+                            setFormState({ loading: false, message: 'Iniciar' })
                     }
                 })
                 .catch((err: Error) => {
                     // Desarrollo 
                     alert(err)
+                    setFormState({ loading: false, message: 'Iniciar' })
                     console.log(err)
                 })
 
 
         } else {
+            setFormState({ loading: false, message: 'Iniciar' })
             ALerta({ text: 'por favor rectifique su informacion de sesion', icon: 'error', position: 'center' })
         }
     }

@@ -29,7 +29,7 @@ export const ValidarCampos = (tipo: string, formulario: string): boolean => {
             if (!formulario.trim().length) {
                 console.log('la cadena de password esta vacia')
                 return true
-            }else if(formulario.trim().length <= 8) {
+            }else if(formulario.trim().length < 8) {
                 return true
             }
 
