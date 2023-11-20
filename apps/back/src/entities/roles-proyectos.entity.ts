@@ -1,6 +1,10 @@
 import { nomenclador } from 'src/enums/nomenclador';
-import {Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {Column, Entity,  OneToMany,  PrimaryGeneratedColumn } from 'typeorm';
+import { Tarifa } from './tarifa.entity';
 
+/**
+ * Entidad Roles de Proyectos
+ */
 @Entity()
 export class RolesProyectos {
     @PrimaryGeneratedColumn()
@@ -11,5 +15,8 @@ export class RolesProyectos {
 
     @Column({default: nomenclador.Activo})
     estado: nomenclador
+
+    @OneToMany(()=> Tarifa , tarifa=> tarifa.rolProyecto )
+    tarifas: Tarifa[]
 
 }

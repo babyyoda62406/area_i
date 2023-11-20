@@ -14,7 +14,13 @@ import * as dotenv from "dotenv";
 import { Proyecto } from './entities/proyecto.entity';
 import { HelpersModule } from './modules/helpers/helpers.module';
 import { RolesProyectosModule } from './modules/roles-proyectos/roles-proyectos.module';
-import { RolesProyectos } from './modules/roles-proyectos/entities/roles-proyectos.entity';
+import { RolesProyectos } from './entities/roles-proyectos.entity';
+import { NivelExperticiaModule } from './modules/nivel-experticia/nivel-experticia.module';
+import { NivelExperticia } from './entities/nivel-experticia.entity';
+import {  APP_PIPE } from '@nestjs/core';
+import { CustomValidationPipe } from './CustomValidationPipe';
+import { TarifaModule } from './modules/tarifa/tarifa.module';
+import { Tarifa } from './entities/tarifa.entity';
 
 dotenv.config();
 
@@ -27,7 +33,7 @@ dotenv.config();
       port: Number(process.env.PORT_DB),
       password: process.env.PASSWORD,
       synchronize: true,
-      entities: [Usuario, Proyecto, RolesProyectos]
+      entities: [Usuario, Proyecto, RolesProyectos, NivelExperticia, Tarifa]
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../../front/dist'),
@@ -38,9 +44,15 @@ dotenv.config();
     SecurityModule,
     ProyectosModule,
     HelpersModule,
-    RolesProyectosModule
+    RolesProyectosModule,
+    NivelExperticiaModule,
+    TarifaModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, 
+  {
+    provide: APP_PIPE, 
+    useClass: CustomValidationPipe
+  }],
 })
 export class AppModule {}

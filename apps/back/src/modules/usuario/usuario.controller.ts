@@ -61,8 +61,8 @@ export class UsuarioController {
     @Patch(':id')
     async setUsuario(@Param('id', ParseIntPipe) id: number,@Body() user: EditarUsuarioDTO) {
         if(!Object.keys(user).length) throw new HttpException('Debe enviar al menos un campo para editar :|', HttpStatus.BAD_REQUEST)
-        
-        return {menssage: "Usuario editado" , id: (await this.svUsuario.setUsuario(id, user)).id};
+        return {user}
+        // return {menssage: "Usuario editado" , id: (await this.svUsuario.setUsuario(id, user)).id};
     }
 
     /**

@@ -11,7 +11,8 @@ import { HelpersModule } from '../helpers/helpers.module';
 @Module({
   imports: [TypeOrmModule.forFeature([Proyecto]), JwtModule , UsuarioModule, HelpersModule],
   controllers: [ProyectosController],
-  providers: [ProyectosService]
+  providers: [ProyectosService],
+  exports: [ProyectosService]
 })
 export class ProyectosModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
