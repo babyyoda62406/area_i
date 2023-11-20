@@ -23,7 +23,7 @@ export class ProyectosService {
             }
         })
 
-        if (!tempProyectos) throw new HttpException('', HttpStatus.NO_CONTENT)
+        if (!tempProyectos.length) throw new HttpException('', HttpStatus.NO_CONTENT)
 
         return tempProyectos;
     }
