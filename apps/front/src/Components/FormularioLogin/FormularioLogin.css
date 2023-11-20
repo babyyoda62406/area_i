@@ -1,153 +1,174 @@
 
-.FormularioLogin{
-    background-color: var(--azul-envolvente);
-    border-radius: 10px;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-
-}
-
-.ElementsFormLogin{
-    width: 85%;
-    height: auto;
-    margin-top: 5%;
-    margin-left: 10%;
-    margin-right: 10%;
-    
-    display: grid;
-    grid-template-areas:
-        "labEmail labEmail labEmail"
-        "inpEmail inpEmail errorE"
-        "labPassw labPassw labPassw"
-        "inpPassw inpPassw errorP"
-        /* ""
-        ""
-        ""
-        ""*/ ; 
-}
-
-.ElementsFormLogin>label{
-    grid-area: labEmail;
-    margin-left: 2.0erm;
-    margin-bottom: 1.3rem;
-    font-size: 1.5rem;
-    color: var(--bs-white);
-    font-weight: 500;
-    transition: all 500ms;
-}
-
-.ElementsFormLogin>label:hover{
-    cursor: none;
-    color: var(--bs-gray-600)
-}
-
-.ElementsFormLogin>input{
-    
-    padding: 0.5rem;
-    font-size: 1.4rem;
-    border-radius: 7px;
-
-}
-
-.ElementsFormLogin>input:focus-visible{
-    outline: none !important;
-}
-
-.InpEmailIn{
-    grid-area: inpEmail;
-}
-
-.InpPassIn{
-    grid-area: inpPassw;
-}
-
-.IconErrorEmIn{
-    grid-area:errorE ;
-    margin-left: 1.0rem;
-    margin-top: 0.2rem;
-    width: 30px;
-    height: 30px;
+@keyframes spinner {
+    0% {
+      transform: rotateZ(0deg);
+    }
+  
+    100% {
+      transform: rotateZ(359deg);
+    }
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .ContentForm {
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
     align-items: center;
-    border-radius: 20px ;
-    background-color:white;
-    box-shadow: 1px 1px 3px red;
-    
-}
-.IconErrorEmIn>svg{
-    width: 20px;
-    height: 20px;
-    fill: var(--bs-danger) !important;
-    transition: all 500ms;
-}
-
-.IconErrorEmIn>svg:hover{
-    cursor: pointer;
-    fill: var(--bs-dark) !important;
-}
-
-
-
-.IconErrorPsIn{
-    grid-area:errorP ;
-    margin-left: 1.0rem;
-    margin-bottom: 0.3rem;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    flex-wrap: nowrap;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    border-radius: 20px ;
-    background-color:white;
-    box-shadow: 1px 1px 3px red;
+    width: 100%;
     
-}
-.IconErrorPsIn>svg{
-    width: 20px;
+    min-height: 100%;
+    padding: 20px;
+    background: transparent;
+  }
+  
+  
+  .login {
+    border-radius: 2px 2px 5px 5px;
+    padding: 10px 20px 20px 20px;
+    width: 90%;
+    max-width: 320px;
+    background: #ffffff;
+    position: relative;
+    padding-bottom: 80px;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.3);
+  }
+  
+  .login.loading .BTNLogin {
+    max-height: 100%;
+    padding-top: 50px;
+    color: white;
+  }
+  
+  .state{
+    color: white;
+    font-size: 1.1rem;
+  }
+  
+  .BTNLogin:hover .state{
+    color: black;
+  }
+  
+  .login.loading .BTNLogin .spinner {
+    opacity: 1;
+    top: 40%;
+    
+  }
+  
+  
+  
+  .login.ok .BTNLogin .spinner {
+    border-radius: 0;
+    border-top-color: transparent;
+    border-right-color: transparent;
     height: 20px;
-    fill: var(--bs-danger) !important;
-    transition: all 500ms;
-}
-
-.IconErrorPsIn>svg:hover{
-    cursor: pointer;
-    fill: var(--bs-dark) !important;
-}
-
-
-.EnvioLogin{
-    display: flex;
-    width:100%;
-    justify-content: center;
-    margin: 1rem;
-}
-
-.EnvioLogin>Input{
-    padding: 0.7rem;
-    padding-left: 1.0rem;
-    padding-right: 1.0rem;
+    animation: none;
     
-    background-color: var(--bs-cyan);
-    border: 1px solid var(--bs-white) !important;
-    border-radius: 5px ;
-    transition: all 700ms;
-    color: var(--bs-gray-900);
-    font-size: 1.6rem;
-    box-shadow: 1.5px 1.5px 4px var(--bs-white);
+    transform: rotateZ(-45deg);
+  }
+  
+  .login input {
+    display: block;
+    padding: 15px 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    border: 1px solid #ddd;
+    transition: border-width 0.2s ease;
+    border-radius: 2px;
+    color: black;
     
-}
-
-.EnvioLogin>input:hover{
+  }
+  .login input:focus-visible{
+    outline: 1px solid rgb(22, 9, 97);
+  }
+  
+  .login input + i.fa {
+    color: #fff;
+    font-size: 1rem;
+    position: absolute;
+    margin-top: -47px;
+    opacity: 0;
+    left: 0;
+    transition: all 0.1s ease-in;
+  }
+  
+  .login input:focus + i.fa {
+    opacity: 1;
+    left: 30px;
+    transition: all 0.25s ease-out;
+    outline: none;
+    color: #444;
+    border-color: var(--bg-celeste);
+    border-left-width: 35px;
+  }
+  
+  .login a {
+    font-size: 0.9rem;
+    color: var(--bg-celeste);
+    text-decoration: none;
+  }
+  
+  .login .title {
+    color: #444;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px 0 30px 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+  }
+  
+  .login .BTNLogin {
+    width: 100%;
+    height: 100%;
+    padding: 10px 10px;
+    background: var(--bg-celeste);
+    color: #fff;
+    display: block;
+    border: none;
+    margin-top: 20px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    max-height: 60px;
+    border: 0px solid rgba(0,0,0,0.1);
+    border-radius: 0 0 2px 2px;
+    transform: rotateZ(0deg);
+    transition: all 0.1s ease-out;
+    border-bottom-width: 7px;
+  }
+  
+  .login .BTNLogin:hover{
     cursor: pointer;
-    background-color: var(--bs-teal);
-    color: var(--azul-profundo);
-    box-shadow:none;
-}
-
-.EnvioLogin>input:active{
-    background-color: var(--azul-profundo);
-    color:var(--bs-white) ;
-}
+    background-color:rgb(150, 228, 232);
+    color: blue;
+  }
+  
+  .login .BTNLogin .spinner {
+    display: block;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    border: 4px solid #ffffff;
+    border-top-color: rgba(255,255,255,0.3);
+    border-radius: 100%;
+    left: 50%;
+    top: 0;
+    opacity: 0;
+    margin-left: -20px;
+    margin-top: -20px;
+    animation: spinner 0.6s infinite linear;
+    transition: top 0.3s 0.3s ease, opacity 0.3s 0.3s ease, border-radius 0.3s ease;
+    box-shadow: 0px 1px 0px rgba(0,0,0,0.2);
+  }
+  
+  .login:not(.loading) .BTNLogin:hover {
+    box-shadow: 0px 1px 3px var(--bg-celeste);
+  }
+  
+  .login:not(.loading) .BTNLogin:focus {
+    border-bottom-width: 4px;
+  }
+  

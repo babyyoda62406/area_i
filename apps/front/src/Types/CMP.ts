@@ -12,11 +12,31 @@ type typeFormularioLogin = {
     
     
 }
+type typeFormModal = {
+    name: string
+    title: string
+    type:string
+    isRequired:boolean
+}
 
-type typeFormularioLogout = {
-    
+type typeElementsFormMo = {
+    elements:typeFormModal[]
+}
+
+type typeFormularioTPModal = {
+    agregarProyectos:typeElementsFormMo
+}
+
+type typeModalFormulario = {
+    tipoModal:string
     
 }
+
+type typeDatosProyServer = {
+    name: string |number
+    value:string
+}
+
 
 
 
@@ -24,6 +44,9 @@ export type {
     typeLoginLayout,
     typeFormularioLogin,
     typeBienvenida,
-    typeFormularioLogout
+    typeModalFormulario,
+    typeFormularioTPModal,
+    typeDatosProyServer
+    
 
 }

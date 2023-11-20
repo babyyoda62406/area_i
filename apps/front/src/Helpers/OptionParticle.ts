@@ -4,9 +4,10 @@ export const OptionParticle:ISourceOptions =  {
                     
     background: {
         color: {
-            value: "#071324",
+            value: "#69adf6d6",
         },
     },
+    
     fpsLimit: 120,
     interactivity: {
         events: {
@@ -31,35 +32,36 @@ export const OptionParticle:ISourceOptions =  {
         },
     },
     particles: {
+        
         color: {
-            value: "#3e5271",
+            value: "#b2c3ded4",
         },
         links: {
-            color: "#b1b3b5",
+            color: "#e2ecf5c1",
             distance: 160,
             enable: true,
-            opacity: 0.6,
-            width: 2.5,
+            opacity: 1.0,
+            width: 3.0,
         },
         move: {
             direction: "none",
             enable: true,
             outModes: {
-                default: "bounce",
+                default: 'bounceHorizontal',
             },
             random: true,
-            speed: 2.3,
+            speed: 0.4,
             straight: false,
         },
         number: {
             density: {
                 enable: true,
-                area: 300,
+                area: 550,
             },
-            value: 30,
+            value: 65,
         },
         opacity: {
-            value: 0.5,
+            value: 0,
         },
         shape: {
             type: "bounce",

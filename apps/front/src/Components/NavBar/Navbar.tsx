@@ -1,31 +1,32 @@
 
-import { FC, useState } from 'react'
+import { FC, useContext } from 'react'
 import './Navbar.css'
 import { typeNavbar } from '../../Types/TpHlayout'
 import Hamburguer from 'hamburger-react'
 import TitleNavbar from '../TitleNavbar/TitleNavbar'
-import HerramientasNavbar from '../HerramientasNavbar/herramientasNavbar'
 import Sidebar from '../Sidebar/Sidebar'
 import { MagicMotion } from 'react-magic-motion'
+import { GlobalContext } from '../../Contexts/GlobalContext'
 
 const Navbar: FC<typeNavbar> = () => {
 
-    const [isOpen, setOpen] = useState(false)
+    const {setShowSidebar,showSidebar} = useContext(GlobalContext)
+    
 
-
+        
 
     return <div className="Navbar">
 
-        <div className={`BtnHamburguer ${isOpen ? 'ActiveHamburguer' : 'DesactiveHamburguer'}`}>
+        <div className={`BtnHamburguer `}>
             
-            <Hamburguer toggled={isOpen} toggle={setOpen} />
+            <Hamburguer toggled={showSidebar} toggle={()=>setShowSidebar(!showSidebar)} />
         </div>
 
         <MagicMotion>
-            <Sidebar Show={isOpen} />
+            <Sidebar Show={showSidebar} />
         </MagicMotion>
         <TitleNavbar />
-        <HerramientasNavbar />
+        {/* <HerramientasNavbar /> */}
 
     </div>
 }

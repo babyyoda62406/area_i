@@ -1,14 +1,74 @@
-import { typeOptionASide } from "../Types/TpOptionsAside";
 
-export const OptionsSidebar:typeOptionASide[] = [
-    { 'nombre': 'Gestion General' },
-    { 'nombre': 'Gestion Roles' },
-    { 'nombre': 'Informacion Roles' },
-    { 'nombre': 'Gestionar Plazas' },
-    { 'nombre': 'Gestionar Personal' },
-    { 'nombre': 'Vincular personal' },
-    { 'nombre': 'Gestionar Tarifas' },
-    { 'nombre': 'Gestionar RM' },
-    
-    
+import { typeOptionAside } from "../Types/OptionsAside";
+
+
+
+
+
+export const itemsASide: typeOptionAside[] = [
+    {
+        name: 'Gestion General',
+        children: [
+            {
+                name: 'Agregar Proyecto',
+                optionFunc: 'proyectos'
+            },
+            {
+                name: 'itemExample1',
+                optionFunc: ''
+            },
+            {
+                name: 'ItemExample2',
+            optionFunc:''},
+        ]
+    },
+    {
+        name: 'Example2',
+        children: [
+            {
+                name: 'item1',
+                optionFunc: ''
+            },
+            {
+                name: 'item2',
+                optionFunc: ''
+            },
+            {
+                name: 'item3',
+            optionFunc:''},
+        ]
+    },
+    {
+        name: 'Example3',
+        children: [
+            {
+                name: 'item1',
+                optionFunc: ''
+            },
+            {
+                name: 'item2',
+                optionFunc: ''
+            },
+            {
+                name: 'item3',
+            optionFunc:''},
+        ]
+    },
+    {
+        name: 'Example 4',
+        children: [
+            {
+                name: 'item1',
+                optionFunc: ''
+            },
+            {
+                name: 'item2',
+                optionFunc: ''
+            },
+            {
+                name: 'item3',
+            optionFunc:''},
+        ]
+    },
 ]
+

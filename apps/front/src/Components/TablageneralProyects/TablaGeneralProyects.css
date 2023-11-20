@@ -8,56 +8,34 @@
     
 }
 
-
-div.TablageneralProyects .mantine-1bd5g77{
-    background-color: var(--azul-polvoriento);
+.MovDer{
+    animation: moverDer 500ms linear forwards;
 }
 
-
-/* Cabecera de la tabla */
-div.TablageneralProyects th {
-    background-color: var(--azul-envolvente);
-    font-size: 1.5rem;
-     
+@keyframes moverDer{
+    from{
+        margin-left: 0px;
+    }
+    to{
+        margin-left: 14%;
+    }
 }
 
-div.TablageneralProyects th>div>div>div{
-    font-size: 1.2rem;
-    color: var(--bs-gray-200);
+.MovIzq{
+    animation: moverIzq 500ms linear forwards;
 }
 
-div.TablageneralProyects th  > div >  div , div.TablageneralProyects th  > div >  div  svg {
-    color: var(--bs-gray-200);
+@keyframes moverIzq{
+    from{
+        margin-left: 14%;
+    }
+    to{
+        margin-left: 0px;
+    }
 }
 
-div.TablageneralProyects  table   tbody tr {
-     background-color: red;  
+.ant-tooltip-inner{
+    display: none;
 }
 
-div.TablageneralProyects  table   tbody tr > td {
-    background-color: var(--azul-profundo);
-    color: var(--bs-white);
-    font-size: 1.1rem; 
-    padding-inline-start: 1.5rem;
-}
-
-div.TablageneralProyects  table   tbody tr > td:hover{
-    color: black;
-    background-color: var( --bs-blue);
-}
-
-div.TablageneralProyects  .mantine-vl6xmj{
-    background-color: var(--azul-envolvente);
-}
-
-
-div.TablageneralProyects  .mantine-vl6xmj >div>div>div label{
-    color: var(--bs-gray-200);
-    font-size: 1.2rem;
-}
-
-div.TablageneralProyects  .mantine-vl6xmj >div>div button> svg> path{
-    color: var(--bs-gray-200);
-
-}
 

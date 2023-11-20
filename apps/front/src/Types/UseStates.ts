@@ -1,6 +1,6 @@
 
 type typeDatosForm = {
-    email: string|string
+    correo: string|string
     password:string
 }
 
@@ -12,8 +12,18 @@ type typeErrorForm = {
     password:boolean
 }
 
+type typeSubElAside = {
+    element:string
+}
+
+type typeShowModal = {
+    proyectos: boolean
+}
+
 
 export type {
     typeDatosForm,
-    typeErrorForm
+    typeErrorForm,
+    typeSubElAside,
+    typeShowModal
 }

@@ -1,0 +1,40 @@
+
+/* alineacion dentral de modal */
+.ModalConten >div{
+    max-height: 500px;
+   overflow-y: auto;
+}
+
+
+
+.ModalConten>div>div{
+    padding: 15px !important;
+    border-radius: 0px !important;
+}
+
+
+.titleModal{
+    color: black;
+    background-color: red;
+}
+
+
+.sd-element__num{
+    display: none;
+}
+.ant-modal-footer{
+    display:none
+}
+
+.sd-page{
+    padding:5px !important;
+}
+
+.ModalConten form div>div>div{
+    padding: 5px !important;
+    margin: 0px !important;
+}
+
+.sd-row{
+
+}
