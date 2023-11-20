@@ -20,10 +20,14 @@ type typeShowModal = {
     proyectos: boolean
 }
 
+type typeActualizarTabla = {
+    tablaProyectos:number
+}
 
 export type {
     typeDatosForm,
     typeErrorForm,
     typeSubElAside,
-    typeShowModal
+    typeShowModal,
+    typeActualizarTabla
 }

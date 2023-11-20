@@ -4,7 +4,7 @@ import './ModalFormulario.css'
 import { Modal } from 'antd'
 import 'survey-core/defaultV2.css'
 import { GlobalContext } from '../../Contexts/GlobalContext'
-import { typeShowModal } from '../../Types/UseStates'
+import { typeActualizarTabla, typeShowModal } from '../../Types/UseStates'
 import { FormulariosTPModal } from '../../Helpers/FormulariosTPModal'
 import { Model } from 'survey-core'
 import { Survey } from 'survey-react-ui';
@@ -12,23 +12,37 @@ import { Survey } from 'survey-react-ui';
 import Theme from '../../config/themes-survey-ts/borderless-light'
 import { FetchService } from '../../Services/FetchService'
 import { RutaServer } from '../../Helpers/RutaServer'
-import { json } from 'react-router-dom'
+
 import { ALerta } from '../../Services/Alerta'
 
 
-
+/**
+ * 
+ * @param param0 
+ * @returns 
+ */
 const ModalFormulario: FC<typeModalFormulario> = ({ tipoModal }) => {
-    const { showModal, setShowModal, token } = useContext(GlobalContext)
+    const { token , showModal,actualizarTabla, setShowModal,setActualizarTabla } = useContext(GlobalContext)
 
 
 
+    // array de string con las claves del nombre de cada input del formulario se rekieren para 
+    // obtener los datos del formulario
     const guardarDatos = () => {
-        const datos: typeDatosProyServer[] = []
+        const datos: typeDatosProyServer = {
+            ownerId: 2,
+            nombre: modeloForm.getQuestionByName('NombreProyecto').value,
+            organizacion: modeloForm.getQuestionByName('IdProyecto').value,
+            uid: modeloForm.getQuestionByName('NombreOrganizacion').value
+        }
 
-        modeloForm.getPlainData().map(elemento => {
-
-            datos.push({ name: elemento.name, value: elemento.value })
-        })
+        const actualizarDatosTabla = (tabla:typeActualizarTabla):typeActualizarTabla => {
+            return {
+                ...tabla,
+                ['tablaProyectos']:actualizarTabla.tablaProyectos + 1
+            }
+        }
+        
 
         FetchService(RutaServer.setProyectos, {
             method: 'POST',
@@ -44,29 +58,27 @@ const ModalFormulario: FC<typeModalFormulario> = ({ tipoModal }) => {
                         const { message } = await res.json()
                         ALerta({ title: message, icon: 'success' })
                         cerrarModal()
-
+                        setActualizarTabla(actualizarDatosTabla(actualizarTabla))
                         break
+                    
                     case 400:
                         //@ts-ignore
-                        const messageError = await res.json().message[1]
-                        console.log(messageError)
+                        const {message: messageError } = await res.json()
                         ALerta({ title: messageError, icon: 'error' })
                         break
+                    
                     case 409:
                         const { messageConflicto } = await res.json()
                         ALerta({ title: messageConflicto, icon: 'error' })
                         break
                     
                     default:
-                        console.log('andas al verro')
+                        ALerta({ title: 'status desconocido', icon: 'warning' })
+                        break
                 }
 
             })
-
-
-
-        // cerrar el modal
-        // cerrarModal()
+    
     }
 
     const cerrarModal = () => {
@@ -87,13 +99,11 @@ const ModalFormulario: FC<typeModalFormulario> = ({ tipoModal }) => {
     modeloForm.applyTheme(Theme)
     modeloForm.onComplete.add(guardarDatos)
 
-
     return < Modal
         open={showModal.proyectos}
         onCancel={() => cerrarModal()}
         wrapClassName='ModalConten'
         style={{ top: 20 }}
-
     >
 
         <Survey model={modeloForm} className='FormularioModal' />

@@ -3,22 +3,22 @@ import { typeFormularioTPModal } from "../Types/CMP";
 export const FormulariosTPModal: typeFormularioTPModal = {
     agregarProyectos: {
         elements: [{
-            name: 'Nombre del Proyecto',
-            title: '',
+            name: 'NombreProyecto',
+            title: 'Nombre del Proyecto',
             type: 'text',
             isRequired:true
             
         },
         {
-            name: 'Identificador',
-            title: '',
+            name: 'IdProyecto',
+            title: 'Identificador del proyecto',
             type: 'text',
             isRequired:true
         },
         
         {
-            name: 'Nombre de la Organizacion',
-            title: '',
+            name: 'NombreOrganizacion',
+            title: 'Nombre de la Organizacion',
             type: 'text',
             isRequired:true
         }

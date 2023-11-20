@@ -11,9 +11,9 @@ import { ColumnsType } from 'antd/es/table';
 
 const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
 
-  const { token,showSidebar } = useContext(GlobalContext)
+  const { token , showSidebar , actualizarTabla } = useContext(GlobalContext)
   const [proyectosServer, setProyectosSever] = useState<typeDatosTablaProyectos[]>([])
-  const[actualizarTabla,setActualizarTabla] = useState<number>(0)
+  
 
 
   useEffect(() => {
