@@ -22,10 +22,10 @@ import { ALerta } from '../../Services/Alerta'
  * @returns 
  */
 const ModalFormulario: FC<typeModalFormulario> = ({ tipoModal }) => {
+    
     const { token , showModal,actualizarTabla, setShowModal,setActualizarTabla } = useContext(GlobalContext)
 
-
-
+    
     // array de string con las claves del nombre de cada input del formulario se rekieren para 
     // obtener los datos del formulario
     const guardarDatos = () => {

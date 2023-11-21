@@ -32,7 +32,9 @@ type typeDatosTablaProyectos = {
     estado:string
 }
 
+type typeModificar = {
 
+}
 
 
 
@@ -45,5 +47,6 @@ export type {
     typeSidebar,
     typeGestionG,
     typeTablaProyectos,
-    typeDatosTablaProyectos
+    typeDatosTablaProyectos,
+    typeModificar
  }
