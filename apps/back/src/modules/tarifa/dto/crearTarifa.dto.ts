@@ -1,5 +1,8 @@
 import { IsNotEmpty, IsNumber } from "class-validator"
 
+/**
+ * Objeto de transferencia de datos para crear tarifas
+ */
 export class CrearTarfiaDTO{
     @IsNotEmpty({
         message: 'Debe proporcionar un rol de Proyecto'

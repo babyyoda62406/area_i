@@ -6,6 +6,10 @@ enum estadosPermitidos{
     Inactivo = 'Inactivo',
 }
 
+/**
+ * Objeto de transferencia de Datos para editar tarifa 
+ */
+
 export class EditarTarfiaDTO{
     @IsOptional()
     @IsNumber({} , {

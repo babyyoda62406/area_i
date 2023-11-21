@@ -9,6 +9,9 @@ import { RolesProyectosService } from '../roles-proyectos/roles-proyectos.servic
 import { nomenclador } from 'src/enums/nomenclador';
 import { EditarTarfiaDTO } from './dto/editarTarifa.dto';
 
+/**
+ * Servicio de Gestion de Tarifa
+ */
 @Injectable()
 export class TarifaService {
     constructor(
@@ -18,6 +21,11 @@ export class TarifaService {
         private svRolProyectos: RolesProyectosService
     ) { }
 
+    /**
+     * Servicio para crear tarifa 
+     * @param tarifa :CrearTarifaDTO
+     * @returns Tarifa | HttpException 
+     */
     async crearTarifa(tarifa: CrearTarfiaDTO) {
         const { nivelExperticiaId, proyectoId, rolProyectoId, value } = tarifa
 
@@ -47,6 +55,10 @@ export class TarifaService {
         return await this.dbTarifa.save(tempTarifa)
     }
 
+    /**
+     * Servicio para obtener tarifas
+     * @returns Tarifa[] | HttpException
+     */
     async obtenerTarifas() {
         const tempTarifas = await this.dbTarifa.find({
             where: {
@@ -60,6 +72,11 @@ export class TarifaService {
         return tempTarifas
     }
 
+    /**
+     * Servicio para obtener tarfia por Id
+     * @param id :number Id de la tarifa que se desea obtener 
+     * @returns Tarifa | HttpException
+     */
     async obtenerTarifaById(id: number) {
         const tempTarifa = await this.dbTarifa.findOne({
             where: {
@@ -74,6 +91,12 @@ export class TarifaService {
         return tempTarifa
     }
 
+
+    /**
+     * Servicio para obtener las tarifas asociadas a un proyecto
+     * @param id :number Id del proyecto del cual se dean obtener las tarifas
+     * @returns Tarifa[]
+     */
     async obtenerTarifaByproyectId(id: number) {
         const tempProyecto = await this.svProyectos.obtenerProyecto(id)
 
@@ -91,6 +114,11 @@ export class TarifaService {
 
     }
 
+    /**
+     * Servicio para eliminar una tarifa
+     * @param id :number Id de la tarifa que desea eliminar 
+     * @returns Tarifa
+     */
     async eliminarTarifa(id: number) {
         const tempTarfia = await this.obtenerTarifaById(id)
 
@@ -101,6 +129,12 @@ export class TarifaService {
         return tempTarfia;
     }
 
+    /**
+     * Servicio para editar tarifa
+     * @param id :number Id de la tarifa que se desea eliminar
+     * @param tarifa :EditarTarifa
+     * @returns Tarifa[]
+     */
     async editarTarifa(id: number, tarifa: EditarTarfiaDTO) {
         if (!Object.keys(tarifa).length) throw new HttpException('Debe proveer al menos un campo a  editar', HttpStatus.BAD_REQUEST)
 
