@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { IndicadoresService } from './indicadores.service';
 import { CrearIndicadorDTO } from './dto/crearIndicador.dto';
 
@@ -10,7 +10,20 @@ export class IndicadoresController {
     }
 
     @Post()
-    async obtenerIdnicadores(@Body() indicador: CrearIndicadorDTO){
-        return await this.svIndicador.addIndicador(indicador);
+    async crearIdnicador(@Body() indicador: CrearIndicadorDTO){
+        const newIndicador = await this.svIndicador.addIndicador(indicador);
+
+        return {message:"Indicador Creado" , id: newIndicador.id}
     }
+
+    @Get()
+    async obtenerIndicadores(){
+        return await  this.svIndicador.getIdnicadores();
+    }
+
+    @Get(':id')
+    async obtenerIndicador(@Param('id', ParseIntPipe) id: number){
+        return await this.svIndicador.getIdnicador(id)
+    }
+
 }

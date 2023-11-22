@@ -1,8 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Indicador } from 'src/entities/indicador.entity';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { CrearIndicadorDTO } from './dto/crearIndicador.dto';
+import { nomenclador } from 'src/enums/nomenclador';
 
 @Injectable()
 export class IndicadoresService {
@@ -22,6 +23,32 @@ export class IndicadoresService {
         const newIndicador = this.dbIndicador.create(indicador)
 
         return  await this.dbIndicador.save(newIndicador)
+    }
+
+    async getIdnicadores(){
+        const tempIndicadores = await this.dbIndicador.find({
+            where: {
+                estado: Not(nomenclador.Eliminado)
+            }
+        })
+
+        if(!tempIndicadores.length) throw new HttpException('', HttpStatus.NO_CONTENT)
+
+        return tempIndicadores
+    }
+
+
+    async getIdnicador(id: number){
+        const tempIndicador = await this.dbIndicador.findOne({
+            where:{
+                id , 
+                estado: Not(nomenclador.Eliminado)
+            }
+        })
+
+        if(!tempIndicador) throw new HttpException(`No existe indicador con el id ${id}` , HttpStatus.NOT_FOUND)
+
+        return tempIndicador
     }
 
 
