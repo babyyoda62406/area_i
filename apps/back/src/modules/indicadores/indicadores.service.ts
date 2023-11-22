@@ -37,7 +37,6 @@ export class IndicadoresService {
         return tempIndicadores
     }
 
-
     async getIdnicador(id: number){
         const tempIndicador = await this.dbIndicador.findOne({
             where:{
@@ -49,6 +48,16 @@ export class IndicadoresService {
         if(!tempIndicador) throw new HttpException(`No existe indicador con el id ${id}` , HttpStatus.NOT_FOUND)
 
         return tempIndicador
+    }
+
+    async deleteIndicador(id: number){
+        const tempIndicador = await this.getIdnicador(id)
+
+        tempIndicador.estado = nomenclador.Eliminado
+        
+        await this.dbIndicador.save(tempIndicador)
+
+        return {message:"Indicador Eliminado" , id: tempIndicador.id}
     }
 
 
