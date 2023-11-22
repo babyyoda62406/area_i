@@ -102,7 +102,7 @@ export class ProyectosService {
             ]
         })
 
-        if (tempProyecto) throw new HttpException(`El ${(tempProyecto.nombre==proyecto.nombre)?'Nombre':'UID'} de proyecto no esta disponible disponible`, HttpStatus.CONFLICT);
+        if (tempProyecto) throw new HttpException(`El ${(tempProyecto.nombre==proyecto.nombre)?'Nombre':'UID'} de proyecto no esta disponible`, HttpStatus.CONFLICT);
 
         const newProyecto = this.dbProyecto.create(proyecto)
         newProyecto.owner = tempUser
