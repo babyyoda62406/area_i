@@ -21,6 +21,7 @@ import {  APP_PIPE } from '@nestjs/core';
 import { CustomValidationPipe } from './CustomValidationPipe';
 import { TarifaModule } from './modules/tarifa/tarifa.module';
 import { Tarifa } from './entities/tarifa.entity';
+import { IndicadoresModule } from './indicadores/indicadores.module';
 
 dotenv.config();
 
@@ -46,7 +47,8 @@ dotenv.config();
     HelpersModule,
     RolesProyectosModule,
     NivelExperticiaModule,
-    TarifaModule
+    TarifaModule,
+    IndicadoresModule
   ],
   controllers: [AppController],
   providers: [AppService, 
