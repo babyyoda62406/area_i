@@ -21,7 +21,8 @@ import {  APP_PIPE } from '@nestjs/core';
 import { CustomValidationPipe } from './CustomValidationPipe';
 import { TarifaModule } from './modules/tarifa/tarifa.module';
 import { Tarifa } from './entities/tarifa.entity';
-import { IndicadoresModule } from './indicadores/indicadores.module';
+import { IndicadoresModule } from './modules/indicadores/indicadores.module';
+import { Indicador } from './entities/indicador.entity';
 
 dotenv.config();
 
@@ -34,7 +35,7 @@ dotenv.config();
       port: Number(process.env.PORT_DB),
       password: process.env.PASSWORD,
       synchronize: true,
-      entities: [Usuario, Proyecto, RolesProyectos, NivelExperticia, Tarifa]
+      entities: [Usuario, Proyecto, RolesProyectos, NivelExperticia, Tarifa, Indicador]
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../../front/dist'),
