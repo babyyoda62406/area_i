@@ -6,7 +6,7 @@ import { FetchService } from '../../Services/FetchService';
 import { RutaServer } from '../../Helpers/RutaServer';
 import { GlobalContext } from '../../Contexts/GlobalContext';
 import { ALerta } from '../../Services/Alerta';
-import { Table, Form, Input, InputNumber, Popconfirm, Typography } from 'antd';
+import { Table, Form, Input, InputNumber, Popconfirm, Typography, Select, Space } from 'antd';
 import { Item, EditableCellProps } from '../../Interfaces/TableInterfaces';
 import { typeDatosEnviarTabla } from '../../Types/Tablas';
 // import { typeActualizarTabla } from '../../Types/UseStates';
@@ -18,6 +18,7 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
   const { token, showSidebar, actualizarTabla,setActualizarTabla } = useContext(GlobalContext)
   const [form] = Form.useForm();
   const [data, setData] = useState<Item[]>([]);
+  const [estadoProyecto, setEstadoProyecto] = useState<string>('Activo')
   const [editingKey, setEditingKey] = useState('');
 
   const isEditing = (record: Item) => record.key === editingKey;
@@ -73,6 +74,69 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
       })
   }, [actualizarTabla])
 
+  const columns = [
+    {
+      title: 'Nombre',
+      dataIndex: 'nombre',
+      width: '30%',
+      sorter: (a: Item, b: Item) => (a.name > b.name) ? 1 : -1,
+      editable: true,
+    },
+    {
+      title: 'Organizacion',
+      dataIndex: 'organizacion',
+      sorter: (a: Item, b: Item) => (a.name > b.name) ? 1 : -1,
+      width: '30%',
+      editable: true,
+    },
+    {
+      title: 'Estado',
+      dataIndex: 'estado',
+      sorter: (a: Item, b: Item) => (a.name > b.name) ? 1 : -1,
+      width: '15%',
+      editable: true,
+      filters: [
+        {
+          text: 'Activo',
+          value: 'Activo',
+        },
+        {
+          text: 'Inactivo',
+          value: 'Inactivo',
+        },
+      ],
+
+      onFilter: (value: React.Key | boolean, record:Item) => record.estado == value,
+      filterSearch: true,
+    },
+    {
+      title: 'Operacion',
+      dataIndex: 'operation',
+      render: (_: any, record: Item) => {
+        const editable = isEditing(record);
+        return editable ? (
+          <span>
+            <Typography.Link onClick={() => {
+              
+              save(record.key)
+            }} style={{ marginRight: 8 }}>
+              Guardar
+            </Typography.Link>
+            <Popconfirm title="Estas seguro de que quieres Cancelar?" onConfirm={cancel}>
+              <a>Cancelar</a>
+            </Popconfirm>
+          </span>
+        ) : (
+          <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
+            Editar
+          </Typography.Link>
+        );
+      },
+
+      
+    },
+  ];
+
 
   const EditableCell: React.FC<EditableCellProps> = ({
     editing,
@@ -84,7 +148,20 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
     children,
     ...restProps
   }) => {
-    const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+    const inputNode = inputType === 'select' ? <Space wrap>
+    <Select
+      defaultValue="Activo"
+        style={{ width: 120 }}
+        onChange={setEstadoProyecto}
+      options={[
+        { value: 'Activo', label: 'Activo' },
+        { value: 'Inactivo', label: 'Inactivo' },
+        
+      ]}
+    />
+    
+   
+  </Space> : <Input />;
 
     return (
       <td {...restProps}>
@@ -107,6 +184,24 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
       </td>
     );
   };
+
+
+  
+  const mergedColumns = columns.map((col) => {
+    if (!col.editable) {
+      return col;
+    }
+    return {
+      ...col,
+      onCell: (record: Item) => ({
+        record,
+        inputType: col.dataIndex === 'estado' ? 'select' : 'text',
+        dataIndex: col.dataIndex,
+        title: col.title,
+        editing: isEditing(record),
+      }),
+    };
+  });
 
 //editar
   const edit = (record: Partial<Item> & { key: React.Key }) => {
@@ -132,6 +227,7 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
 
       if (index > -1) {
   
+        row.estado = estadoProyecto
         const item = newData[index];
         
         const datosEnviar: typeDatosEnviarTabla = {}
@@ -180,86 +276,11 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
     }
   };
 
-  const columns = [
-    {
-      title: 'Nombre',
-      dataIndex: 'nombre',
-      width: '30%',
-      sorter: (a: Item, b: Item) => (a.name > b.name) ? 1 : -1,
-      editable: true,
-    },
-    {
-      title: 'Organizacion',
-      dataIndex: 'organizacion',
-      sorter: (a: Item, b: Item) => (a.name > b.name) ? 1 : -1,
-      width: '30%',
-      editable: true,
-    },
-    {
-      title: 'Estado',
-      dataIndex: 'estado',
-      sorter: (a: Item, b: Item) => (a.name > b.name) ? 1 : -1,
-      width: '15%',
-      editable: true,
-    },
-    {
-      title: 'Operacion',
-      dataIndex: 'operation',
-      render: (_: any, record: Item) => {
-        const editable = isEditing(record);
-        return editable ? (
-          <span>
-            <Typography.Link onClick={() => {
-              console.log(record.key)
-              save(record.key)
-            }} style={{ marginRight: 8 }}>
-              Guardar
-            </Typography.Link>
-            <Popconfirm title="Estas seguro de que quieres Cancelar?" onConfirm={cancel}>
-              <a>Cancelar</a>
-            </Popconfirm>
-          </span>
-        ) : (
-          <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-            Editar
-          </Typography.Link>
-        );
-      },
-
-      filters: [
-        {
-          text: 'Activo',
-          value: 'Activo',
-        },
-        {
-          text: 'Inactivo',
-          value: 'Inactivo',
-        },
-      ],
-
-      onFilter: (value: React.Key | boolean, record:Item) => record.estado == value,
-      filterSearch: true,
-    },
-  ];
+  
 
 
 
-
-  const mergedColumns = columns.map((col) => {
-    if (!col.editable) {
-      return col;
-    }
-    return {
-      ...col,
-      onCell: (record: Item) => ({
-        record,
-        inputType: col.dataIndex === 'age' ? 'number' : 'text',
-        dataIndex: col.dataIndex,
-        title: col.title,
-        editing: isEditing(record),
-      }),
-    };
-  });
+  
 
  
   
