@@ -36,12 +36,12 @@ const ModalFormulario: FC<typeModalFormulario> = ({ tipoModal }) => {
             uid: modeloForm.getQuestionByName('NombreOrganizacion').value
         }
 
-        const actualizarDatosTabla = (tabla:typeActualizarTabla):typeActualizarTabla => {
-            return {
-                ...tabla,
-                ['tablaProyectos']:actualizarTabla.tablaProyectos + 1
-            }
-        }
+        // const actualizarDatosTabla = (tabla:typeActualizarTabla):typeActualizarTabla => {
+        //     return {
+        //         ...tabla,
+        //         ['tablaProyectos']:actualizarTabla.tablaProyectos + 1
+        //     }
+        // }
         
 
         FetchService(RutaServer.setProyectos, {
@@ -58,7 +58,8 @@ const ModalFormulario: FC<typeModalFormulario> = ({ tipoModal }) => {
                         const { message } = await res.json()
                         ALerta({ title: message, icon: 'success' })
                         cerrarModal()
-                        setActualizarTabla(actualizarDatosTabla(actualizarTabla))
+                        
+                        setActualizarTabla(5)
                         break
                     
                     case 400:
@@ -78,6 +79,8 @@ const ModalFormulario: FC<typeModalFormulario> = ({ tipoModal }) => {
                 }
 
             })
+        
+        
     
     }
 
@@ -98,6 +101,7 @@ const ModalFormulario: FC<typeModalFormulario> = ({ tipoModal }) => {
     const modeloForm = new Model(FormulariosTPModal.agregarProyectos)
     modeloForm.applyTheme(Theme)
     modeloForm.onComplete.add(guardarDatos)
+    
 
     return < Modal
         open={showModal.proyectos}
@@ -106,7 +110,7 @@ const ModalFormulario: FC<typeModalFormulario> = ({ tipoModal }) => {
         style={{ top: 20 }}
     >
 
-        <Survey model={modeloForm} className='FormularioModal' />
+        <Survey model={modeloForm}  className='FormularioModal' />
 
     </Modal>
 

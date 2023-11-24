@@ -5,7 +5,7 @@ import { FetchService } from '../../Services/FetchService';
 import { RutaServer } from '../../Helpers/RutaServer';
 import { GlobalContext } from '../../Contexts/GlobalContext';
 import { ALerta } from '../../Services/Alerta';
-import { Table, Form, Input, Popconfirm, Typography, Select, Space, Button } from 'antd';
+import { Table, Form, Input, Popconfirm, Typography, Select, Space, Button, Pagination } from 'antd';
 import { Item, EditableCellProps } from '../../Interfaces/TableInterfaces';
 import { typeDatosEnviarTabla } from '../../Types/Tablas';
 
@@ -19,6 +19,11 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
   const [data, setData] = useState<Item[]>([]);
   const [estadoProyecto, setEstadoProyecto] = useState<string>('Activo')
   const [editingKey, setEditingKey] = useState('');
+
+  // paginacion
+  const [currentPage, setCurrentPage] = useState(1);
+  const tamannoPagina = data.length /2
+
 
   const isEditing = (record: Item) => record.key === editingKey;
 
@@ -308,8 +313,11 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
   //   setData(newData);
   // }
 
+  const onChangePage = (page:number) => {
+    setCurrentPage(page);
+  };
 
-
+ 
 
   return (
     < div className={`TablageneralProyects ${showSidebar ? 'MovDer' : 'MovIzq'}`}>
@@ -317,6 +325,7 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
         <Button onClick={agregarFila} type="primary" style={{ marginBottom: 16 }}>
           Agregar Proyecto
         </Button>
+        
         <Table
           components={{
             body: {
@@ -329,9 +338,14 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
           rowClassName="editable-row"
           size='middle'
           pagination={{
-            onChange: cancel,
+            current: currentPage,
+            pageSize: tamannoPagina,
+            total: data.length,
+            onChange: onChangePage,
           }}
+          
         />
+        
       </Form>
     </div>
   );
