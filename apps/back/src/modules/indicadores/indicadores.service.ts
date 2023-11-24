@@ -4,6 +4,7 @@ import { Indicador } from 'src/entities/indicador.entity';
 import { Not, Repository } from 'typeorm';
 import { CrearIndicadorDTO } from './dto/crearIndicador.dto';
 import { nomenclador } from 'src/enums/nomenclador';
+import { EditarIndicadorDTO } from './dto/editarIndicador.dto';
 
 @Injectable()
 export class IndicadoresService {
@@ -58,6 +59,30 @@ export class IndicadoresService {
         await this.dbIndicador.save(tempIndicador)
 
         return {message:"Indicador Eliminado" , id: tempIndicador.id}
+    }
+
+    async pathIndicador( id: number , indicador: EditarIndicadorDTO){
+        const tempIndicador  = await this.getIdnicador(id);
+        
+
+        if(indicador.nombre){
+            const existeIndicador  =  await this.dbIndicador.findOne({
+                where:{
+                    nombre: indicador.nombre,
+                    estado: nomenclador.Activo
+                }
+            })    
+
+            if(existeIndicador) throw new HttpException(`El nombre de indicador ${indicador.nombre} no está disponible` , HttpStatus.CONFLICT)
+        }
+
+        const newIndicador: Indicador = Object.assign(tempIndicador , indicador)
+        
+        await this.dbIndicador.save(newIndicador)
+
+
+        return {message: 'Indicador editado' , id: newIndicador.id}
+        
     }
 
 

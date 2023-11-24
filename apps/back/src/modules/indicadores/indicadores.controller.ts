@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { IndicadoresService } from './indicadores.service';
 import { CrearIndicadorDTO } from './dto/crearIndicador.dto';
+import { EditarIndicadorDTO } from './dto/editarIndicador.dto';
 
 @Controller('indicadores')
 export class IndicadoresController {
@@ -32,4 +33,12 @@ export class IndicadoresController {
     }
 
 
+    @Patch(':id')
+    async editarIndicador(@Param('id', ParseIntPipe) id:number,  @Body() indicador:EditarIndicadorDTO){
+        return await this.svIndicador.pathIndicador(id , indicador)
+    }
+    
+
+
 }
+
