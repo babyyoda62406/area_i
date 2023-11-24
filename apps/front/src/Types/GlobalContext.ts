@@ -10,7 +10,7 @@ export type typeGlobalContext = {
     setToken: (arg: string) => void
     setShowSidebar: (value: boolean) => void
     setShowModal: (value: any) => void
-    setActualizarTabla: (arg:typeActualizarTabla)=>void
+    setActualizarTabla: (arg:number)=>void
 }
 
 

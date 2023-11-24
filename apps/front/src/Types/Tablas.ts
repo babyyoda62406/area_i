@@ -6,6 +6,13 @@ type typeDataTypesProyects = {
     estado: string
 }
 
+type typeDatosEnviarTabla = {
+    name?: string
+    organizacion?: string
+    estado?:string
+ }
+
 export type {
-    typeDataTypesProyects
+    typeDataTypesProyects,
+    typeDatosEnviarTabla
 }

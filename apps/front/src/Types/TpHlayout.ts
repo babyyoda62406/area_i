@@ -26,10 +26,11 @@ type typeTablaProyectos = {
 
 }
 type typeDatosTablaProyectos = {
-    id: string
+    id?: string
     organizacion: string
     nombre: string
-    estado:string
+    estado: string
+    
 }
 
 type typeModificar = {

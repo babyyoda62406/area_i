@@ -6,7 +6,7 @@ import { typesRutasServer } from "../Types/TpRutasServer";
 export const RutaServer:typesRutasServer = {
     iniciarUsuario:   '/api/v1/auth/login',
     registrarUsuario: '/api/v1/auth/register',
-    getProyectos:     '/api/v1/proyectos/',
+    getProyectos:     '/api/v1/proyectos',
     setProyectos:     '/api/v1/proyectos/'
 
 }
