@@ -1,21 +1,20 @@
 import React, { FC, useContext, useEffect, useState } from 'react'
 import './TablaGeneralProyects.css'
-import {  typeTablaProyectos } from '../../Types/TpHlayout'
-
+import { typeTablaProyectos } from '../../Types/TpHlayout'
 import { FetchService } from '../../Services/FetchService';
 import { RutaServer } from '../../Helpers/RutaServer';
 import { GlobalContext } from '../../Contexts/GlobalContext';
 import { ALerta } from '../../Services/Alerta';
-import { Table, Form, Input, InputNumber, Popconfirm, Typography, Select, Space } from 'antd';
+import { Table, Form, Input, Popconfirm, Typography, Select, Space, Button } from 'antd';
 import { Item, EditableCellProps } from '../../Interfaces/TableInterfaces';
 import { typeDatosEnviarTabla } from '../../Types/Tablas';
-// import { typeActualizarTabla } from '../../Types/UseStates';
+
 
 
 const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
 
-  
-  const { token, showSidebar, actualizarTabla,setActualizarTabla } = useContext(GlobalContext)
+
+  const { token, showSidebar, actualizarTabla, setActualizarTabla } = useContext(GlobalContext)
   const [form] = Form.useForm();
   const [data, setData] = useState<Item[]>([]);
   const [estadoProyecto, setEstadoProyecto] = useState<string>('Activo')
@@ -42,7 +41,7 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
             datos.map((element: Item) => {
               return element.key = element.id
             })
-            
+
             break
 
           case 204:
@@ -61,12 +60,12 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
             const { message: errorMess } = await res.json()
             ALerta({ title: errorMess, icon: 'error' })
             break
-          
+
           case 500:
             const { message: messErr } = await res.json()
-            ALerta({title:messErr,icon:'error'})
+            ALerta({ title: messErr, icon: 'error' })
             break
-          
+
           default:
             console.log('error en tabla de gestion general')
             break
@@ -106,7 +105,7 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
         },
       ],
 
-      onFilter: (value: React.Key | boolean, record:Item) => record.estado == value,
+      onFilter: (value: React.Key | boolean, record: Item) => record.estado == value,
       filterSearch: true,
     },
     {
@@ -117,7 +116,7 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
         return editable ? (
           <span>
             <Typography.Link onClick={() => {
-              
+
               save(record.key)
             }} style={{ marginRight: 8 }}>
               Guardar
@@ -131,10 +130,21 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
             Editar
           </Typography.Link>
         );
-      },
 
-      
+      },
     },
+
+    {
+      title: '',
+      dataIndex: "eliminar",
+      render: (record: { key: React.Key }) =>
+        
+        <Popconfirm title="Estas seguro que quieres eliminarlo?" okText='Confirmar' cancelText='Cancelar' >  
+       <a>Eliminar</a>
+        </Popconfirm>
+
+
+    }
   ];
 
 
@@ -149,19 +159,19 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
     ...restProps
   }) => {
     const inputNode = inputType === 'select' ? <Space wrap>
-    <Select
-      defaultValue="Activo"
+      <Select
+        defaultValue={estadoProyecto}
         style={{ width: 120 }}
         onChange={setEstadoProyecto}
-      options={[
-        { value: 'Activo', label: 'Activo' },
-        { value: 'Inactivo', label: 'Inactivo' },
-        
-      ]}
-    />
-    
-   
-  </Space> : <Input />;
+        options={[
+          { value: 'Activo', label: 'Activo' },
+          { value: 'Inactivo', label: 'Inactivo' },
+
+        ]}
+      />
+
+
+    </Space> : <Input />;
 
     return (
       <td {...restProps}>
@@ -186,7 +196,7 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
   };
 
 
-  
+
   const mergedColumns = columns.map((col) => {
     if (!col.editable) {
       return col;
@@ -203,7 +213,7 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
     };
   });
 
-//editar
+  //editar
   const edit = (record: Partial<Item> & { key: React.Key }) => {
     form.setFieldsValue({ name: '', organizacion: '', estado: '', ...record });
     setEditingKey(record.key);
@@ -217,25 +227,27 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
 
   // guardar los datos modificados 
   const save = async (key: React.Key) => {
+
     try {
-      const row = (await form.validateFields()) as Item;
+      form.setFieldValue('estado',estadoProyecto)
+      const row = (await form.validateFields({ validateOnly: false})) as Item;
 
       const newData = [...data];
-      const index = newData.findIndex((item) => key === item.key);
-      console.log(newData)
+      const index = newData.findIndex((item) => key === item.id);
+      
+      console.log(key)
       console.log(index)
-
       if (index > -1) {
-  
+
         row.estado = estadoProyecto
         const item = newData[index];
-        
+
         const datosEnviar: typeDatosEnviarTabla = {}
         // validacion de campos para generar un nuevo objeto con las propiedades modificadas
         row.name !== item.name ? datosEnviar.name = row.name : ''
         row.organizacion !== item.organizacion ? datosEnviar.organizacion = row.organizacion : ''
-        row.estado !== item.estado? datosEnviar.estado= row.estado: ''
-        
+        row.estado !== item.estado ? datosEnviar.estado = row.estado : ''
+
         // url para hacer peticion PATH al server
         let newUrl = ` ${RutaServer.getProyectos}/${item.id}`
 
@@ -247,12 +259,12 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
           },
           body: JSON.stringify(datosEnviar),
         })
-          .then(async(res: Response) => { 
+          .then(async (res: Response) => {
             switch (res.status) {
-              
+
               case 200:
-                const { message:mesSucces, newProyecto } = await res.json()
-                ALerta({title:mesSucces,icon:"success",position:'top-right'})
+                const { message: mesSucces, newProyecto } = await res.json()
+                ALerta({ title: mesSucces, icon: "success", position: 'top-right' })
                 newData.splice(index, 1, {
                   ...item,
                   ...newProyecto,
@@ -261,12 +273,13 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
                 setActualizarTabla(2)
 
             }
-           })
-        
-        
+          })
+
+
         setEditingKey('');
 
       } else {
+        console.log(row)
         newData.push(row);
         setData(newData);
         setEditingKey('');
@@ -276,37 +289,55 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
     }
   };
 
-  
+  const agregarFila = () => {
+    // const newData: Item = {
+    //   key: '',
+    //   id: '',
+    //   name: '',
+    //   organizacion: '',
+    //   estado: estadoProyecto,
+    // };
+    // setData([...data, newData]);
+    // setCount(count + 1);
+  }
+
+  // const eliminarFila = (key: React.Key) => {
+  //   console.log(key)
+  //   const newData = data.filter((item) => item.key !== key);
+  //   console.log(newData)
+  //   setData(newData);
+  // }
 
 
 
-  
 
- 
-  
   return (
-   < div className={`TablageneralProyects ${showSidebar ? 'MovDer' : 'MovIzq'}`}>
-    <Form form={form} component={false}>
-      <Table
-        components={{
-          body: {
-            cell: EditableCell,
-          },
-        }}
-        bordered
-        dataSource={data}
-        columns={mergedColumns}
+    < div className={`TablageneralProyects ${showSidebar ? 'MovDer' : 'MovIzq'}`}>
+      <Form form={form} component={false}>
+        <Button onClick={agregarFila} type="primary" style={{ marginBottom: 16 }}>
+          Agregar Proyecto
+        </Button>
+        <Table
+          components={{
+            body: {
+              cell: EditableCell,
+            },
+          }}
+          bordered
+          dataSource={data}
+          columns={mergedColumns}
           rowClassName="editable-row"
           size='middle'
-        pagination={{
-          onChange: cancel,
-        }}
-      />
+          pagination={{
+            onChange: cancel,
+          }}
+        />
       </Form>
-      </div>
+    </div>
   );
 
 }
+
 
 export default TablaGeneralProyects
 
