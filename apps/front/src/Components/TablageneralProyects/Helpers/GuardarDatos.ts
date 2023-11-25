@@ -1,11 +1,8 @@
-import { Form, Input, InputNumber, Popconfirm, Table, Typography } from 'antd';
 import { Item } from '../../../Interfaces/TableInterfaces';
 import { typeDatosEnviarTabla } from '../../../Types/Tablas';
 import { RutaServer } from '../../../Helpers/RutaServer';
 import { FetchService } from '../../../Services/FetchService';
 import { ALerta } from '../../../Services/Alerta';
-import { reloadTabla } from '../services/ReloadTabla';
-
 
 
 /**

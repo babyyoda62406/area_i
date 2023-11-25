@@ -1,5 +1,5 @@
 import { RutaServer } from "../../../Helpers/RutaServer";
-import { Item } from "../../../Interfaces/TableInterfaces";
+
 import { ALerta } from "../../../Services/Alerta";
 import { FetchService } from "../../../Services/FetchService";
 import { reloadTabla } from "../services/ReloadTabla";
@@ -11,12 +11,12 @@ import { reloadTabla } from "../services/ReloadTabla";
  * @param data 
  * @param token 
  */
-export const EliminarFila = (arg:any,data:Item[],token:string,setData:Function) => {
+export const EliminarFila = (arg:any,token:string,setData:Function) => {
     
     
         let elemento = arg
     
-        const newData = data.filter((item) => item.id !== arg.id);
+        
     
         FetchService(`${RutaServer.getProyectos}/${elemento.id}`, {
           method: 'DELETE',
