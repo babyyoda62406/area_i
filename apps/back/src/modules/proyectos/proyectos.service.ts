@@ -131,7 +131,7 @@ export class ProyectosService {
                 }
             })
 
-            if (NombreEnUso) throw new HttpException('Nombre de proyecto no disonible', HttpStatus.BAD_REQUEST)
+            if (NombreEnUso) throw new HttpException('Nombre de proyecto no disonible', HttpStatus.CONFLICT)
 
         }
 
