@@ -32,10 +32,10 @@ const ModalFormulario: FC<typeModalFormulario> = ({ tipoModal }) => {
         const datos: typeDatosProyServer = {
             ownerId: 2,
             nombre: modeloForm.getQuestionByName('NombreProyecto').value,
-            organizacion: modeloForm.getQuestionByName('IdProyecto').value,
-            uid: modeloForm.getQuestionByName('NombreOrganizacion').value
+            organizacion: modeloForm.getQuestionByName('NombreOrganizacion').value,
+            uid: modeloForm.getQuestionByName('IdProyecto').value
         }
-
+        
         // const actualizarDatosTabla = (tabla:typeActualizarTabla):typeActualizarTabla => {
         //     return {
         //         ...tabla,
