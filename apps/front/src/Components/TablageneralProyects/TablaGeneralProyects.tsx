@@ -1,13 +1,11 @@
 import React, { FC, useContext, useEffect, useState } from 'react'
 import './TablaGeneralProyects.css'
 import { typeTablaProyectos } from '../../Types/TpHlayout'
-import { FetchService } from '../../Services/FetchService';
-import { RutaServer } from '../../Helpers/RutaServer';
 import { GlobalContext } from '../../Contexts/GlobalContext';
-import { ALerta } from '../../Services/Alerta';
-import { Table, Form, Input, Popconfirm, Typography, Select, Space, Button } from 'antd';
+import { Table, Form, Input, Select, Space, Button } from 'antd';
 import { Item, EditableCellProps } from '../../Interfaces/TableInterfaces';
-import { typeDatosEnviarTabla } from '../../Types/Tablas';
+import { reloadTabla } from './services/ReloadTabla';
+import { modeloColumnas } from './Model/modeloColumnas';
 
 
 
@@ -27,133 +25,16 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
 
   const isEditing = (record: Item) => record.key === editingKey;
 
+  let columnas = modeloColumnas(isEditing, editingKey, token, form, estadoProyecto, data, setEditingKey,setData)
 
- const reloadTabla = () => {
-    FetchService(RutaServer.getProyectos, {
-      headers: {
-        'Content-Type': 'application/json',
-        "token": token
-      }
-    })
-      .then(async (res: Response) => {
 
-        switch (res.status) {
-          case 200:
-            let datos = await res.json()
-            setData(datos)
-            datos.map((element: Item) => {
-              return element.key = element.id
-            })
-
-            break
-
-          case 204:
-            ALerta({ title: 'por favor agregue algun proyecto', icon: 'warning' })
-            break
-
-          case 304:
-            let dataNM = await res.json()
-            dataNM.map((element: Item) => {
-              return element.key = element.id
-            })
-            setData(datos)
-            break
-
-          case 400:
-            const { message: errorMess } = await res.json()
-            ALerta({ title: errorMess, icon: 'error' })
-            break
-
-          case 500:
-            const { message: messErr } = await res.json()
-            ALerta({ title: messErr, icon: 'error' })
-            break
-
-          default:
-            console.log('error en tabla de gestion general')
-            break
-        }
-      })
-
-  }
   // get proyectos para msotrar en la tabla
   useEffect(() => {
-    reloadTabla()
+     reloadTabla(token,setData)
+    
+    
   }, [actualizarTabla])
 
-  const columns = [
-    {
-      title: 'Nombre',
-      dataIndex: 'nombre',
-      width: '30%',
-      sorter: (a: Item, b: Item) => (a.nombre > b.nombre) ? 1 : -1,
-      editable: true,
-    },
-    {
-      title: 'Organizacion',
-      dataIndex: 'organizacion',
-      sorter: (a: Item, b: Item) => (a.nombre > b.nombre) ? 1 : -1,
-      width: '30%',
-      editable: true,
-    },
-    {
-      title: 'Estado',
-      dataIndex: 'estado',
-      sorter: (a: Item, b: Item) => (a.nombre > b.nombre) ? 1 : -1,
-      width: '15%',
-      editable: true,
-      filters: [
-        {
-          text: 'Activo',
-          value: 'Activo',
-        },
-        {
-          text: 'Inactivo',
-          value: 'Inactivo',
-        },
-      ],
-
-      onFilter: (value: React.Key | boolean, record: Item) => record.estado == value,
-      filterSearch: true,
-    },
-    {
-      title: 'Operacion',
-      dataIndex: 'operation',
-      render: (_: any, record: Item) => {
-        const editable = isEditing(record);
-        return editable ? (
-          <span>
-            <Typography.Link onClick={() => {
-
-              save(record.key)
-            }} style={{ marginRight: 8 }}>
-              Guardar
-            </Typography.Link>
-            <Popconfirm title="Estas seguro de que quieres Cancelar?" onConfirm={cancel}>
-              <a>Cancelar</a>
-            </Popconfirm>
-          </span>
-        ) : (
-          <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-            Editar
-          </Typography.Link>
-        );
-
-      },
-    },
-
-    {
-      title: '',
-      dataIndex: "eliminar",
-      render: (_: any, record: Item) =>
-
-        <Popconfirm title="Estas seguro que quieres eliminarlo?" okText='Confirmar' cancelText='Cancelar' onConfirm={() => eliminarFila(record)}>
-          <a>Eliminar</a>
-        </Popconfirm>
-
-
-    }
-  ];
 
 
   const EditableCell: React.FC<EditableCellProps> = ({
@@ -177,8 +58,6 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
 
         ]}
       />
-
-
     </Space> : <Input />;
 
     return (
@@ -205,7 +84,7 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
 
 
 
-  const mergedColumns = columns.map((col) => {
+  const mergedColumns = columnas.map((col) => {
     if (!col.editable) {
       return col;
     }
@@ -222,121 +101,48 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
   });
 
   //editar
-  const edit = (record: Partial<Item> & { key: React.Key }) => {
-    form.setFieldsValue({ nombre: '', organizacion: '', estado: '', ...record });
-    setEditingKey(record.key);
-  };
+  // const edit = (record: Partial<Item> & { key: React.Key }) => {
+  //   form.setFieldsValue({ nombre: '', organizacion: '', estado: '', ...record });
+  //   setEditingKey(record.key);
+  // };
 
-  // cancelar edicion
-  const cancel = () => {
-    setEditingKey('');
-  };
+  // // cancelar edicion
+  // const cancel = () => {
+  //   setEditingKey('');
+  // };
 
 
   // guardar los datos modificados 
-  const save = async (key: React.Key) => {
-
-    try {
-      form.setFieldValue('estado', estadoProyecto)
-      const row = (await form.validateFields()) as Item;
-
-      const newData = [...data];
-      const index = newData.findIndex((item) => key === item.id);
-      if (index > -1) {
-
-        row.estado = estadoProyecto
-        const item = newData[index];
-
-        
-       
-
-        const datosEnviar: typeDatosEnviarTabla = {}
-        // validacion de campos para generar un nuevo objeto con las propiedades modificadas
-        row.nombre !== item.nombre ? datosEnviar.nombre = row.nombre : ''
-        row.organizacion !== item.organizacion ? datosEnviar.organizacion = row.organizacion : ''
-        row.estado !== item.estado ? datosEnviar.estado = row.estado : ''
-
-        // url para hacer peticion PATH al server
-        let newUrl = ` ${RutaServer.getProyectos}/${item.id}`
-        console.log(datosEnviar)
-
-        FetchService(newUrl, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'token': token,
-          },
-          body: JSON.stringify(datosEnviar),
-        })
-          .then(async (res: Response) => {
-            switch (res.status) {
-
-              case 200:
-                const { message: mesSucces, newProyecto } = await res.json()
-                ALerta({ title: mesSucces, icon: "success", position: 'top-right' })
-                newData[index] = {
-                  ...newData[index],
-                  ...newProyecto
-                }
-                setData(newData)
-                reloadTabla()
-                break;
-
-            }
-          })
 
 
-        setEditingKey('');
 
-      } else {
-        console.log(row)
-        newData.push(row);
-        setData(newData);
-        setEditingKey('');
-      }
-    } catch (errInfo) {
-      console.log('Validate Failed:', errInfo);
-    }
-  };
 
-  const agregarFila = () => {
-    // const newData: Item = {
-    //   key: '',
-    //   id: '',
-    //   name: '',
-    //   organizacion: '',
-    //   estado: estadoProyecto,
-    // };
-    // setData([...data, newData]);
-    // setCount(count + 1);
-  }
+  // const eliminarFila = (arg: any) => {
+  //   let elemento = arg
 
-  const eliminarFila = (arg: any) => {
-    let elemento = arg
+  //   const newData = data.filter((item) => item.id !== arg.id);
 
-    const newData = data.filter((item) => item.id !== arg.id);
+  //   FetchService(`${RutaServer.getProyectos}/${elemento.id}`, {
+  //     method: 'DELETE',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       "token": token
+  //     },
+  //     body: JSON.stringify(elemento)
 
-    FetchService(`${RutaServer.getProyectos}/${elemento.id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        "token": token
-      },
-      body: JSON.stringify(elemento)
+  //   })
+  //     .then(async (res: Response) => {
+  //       switch (res.status) {
+  //         case 200:
+  //           const { message: messSucces, idElement } = await res.json()
+  //           ALerta({ text: messSucces, icon: 'success' })
+  //           setData(data.filter((item) => item.id !== idElement))
+  //           reloadTabla()
+  //           break
+  //       }
+  //     })
 
-    })
-      .then(async (res: Response) => {
-        switch (res.status) {
-          case 200:
-            const { message: messSucces, idElement } = await res.json()
-            ALerta({ text: messSucces, icon: 'success' })
-            setData(data.filter((item) => item.id !== idElement))
-            reloadTabla()
-            break
-        }
-      })
-
-  }
+  // }
 
   const onChangePage = (page: number) => {
     setCurrentPage(page);
@@ -347,7 +153,7 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
   return (
     < div className={`TablageneralProyects ${showSidebar ? 'MovDer' : 'MovIzq'}`}>
       <Form form={form} component={false}>
-        <Button onClick={agregarFila} type="primary" style={{ marginBottom: 16 }}>
+        <Button onClick={() => alert('usted quiere agregar una fila')} type="primary" style={{ marginBottom: 16 }}>
           Agregar Proyecto
         </Button>
 
