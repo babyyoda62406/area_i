@@ -4,7 +4,7 @@ import './ModalFormulario.css'
 import { Modal } from 'antd'
 import 'survey-core/defaultV2.css'
 import { GlobalContext } from '../../Contexts/GlobalContext'
-import { typeActualizarTabla, typeShowModal } from '../../Types/UseStates'
+import {  typeShowModal } from '../../Types/UseStates'
 import { FormulariosTPModal } from '../../Helpers/FormulariosTPModal'
 import { Model } from 'survey-core'
 import { Survey } from 'survey-react-ui';
