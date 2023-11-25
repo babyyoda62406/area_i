@@ -87,7 +87,7 @@ export const modeloColumnas = (isEditing: Function, editingKey: string, token: s
       dataIndex: "eliminar",
       render: (_: any, record: Item) =>
 
-        <Popconfirm title="Estas seguro que quieres eliminarlo?" okText='Confirmar' cancelText='Cancelar' onConfirm={() => EliminarFila(record, data, token, setData)}>
+        <Popconfirm title="Estas seguro que quieres eliminarlo?" okText='Confirmar' cancelText='Cancelar' onConfirm={() => EliminarFila(record, token, setData)}>
           <a>Eliminar</a>
         </Popconfirm>
 

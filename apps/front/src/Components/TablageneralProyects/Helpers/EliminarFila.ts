@@ -8,8 +8,8 @@ import { reloadTabla } from "../services/ReloadTabla";
 /**
  * 
  * @param arg 
- * @param data 
  * @param token 
+ * @param  setData
  */
 export const EliminarFila = (arg:any,token:string,setData:Function) => {
     
