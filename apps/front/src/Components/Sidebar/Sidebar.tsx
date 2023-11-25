@@ -79,7 +79,7 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
 
   return <div className={`Sidebar ${Show ? 'ShowAside' : 'CerrarAside'}`}>
 
-    <Collapse accordion expandIconPosition='end' size='large' items={ElementSidebar} defaultActiveKey={['1']}>
+    <Collapse accordion expandIconPosition='end' size='large' items={ElementSidebar} defaultActiveKey={['0']}>
     </Collapse>
 
   </div>
