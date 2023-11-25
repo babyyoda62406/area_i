@@ -7,7 +7,7 @@ type typeDataTypesProyects = {
 }
 
 type typeDatosEnviarTabla = {
-    name?: string
+    nombre?: string
     organizacion?: string
     estado?:string
  }

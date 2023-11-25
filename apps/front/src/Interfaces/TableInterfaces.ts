@@ -1,7 +1,8 @@
 export interface Item {
     key: string;
     id: string;
-    name: string;
+    // name: string;
+    nombre:string
     organizacion: string;
     estado: string;
   }

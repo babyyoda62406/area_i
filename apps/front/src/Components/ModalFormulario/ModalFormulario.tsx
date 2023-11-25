@@ -59,7 +59,10 @@ const ModalFormulario: FC<typeModalFormulario> = ({ tipoModal }) => {
                         ALerta({ title: message, icon: 'success' })
                         cerrarModal()
                         
-                        setActualizarTabla(5)
+                        setActualizarTabla({
+                            ...actualizarTabla,
+                            ['tablaProyectos']:actualizarTabla.tablaProyectos+1
+                        })
                         break
                     
                     case 400:

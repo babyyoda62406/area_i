@@ -5,7 +5,7 @@ import { FetchService } from '../../Services/FetchService';
 import { RutaServer } from '../../Helpers/RutaServer';
 import { GlobalContext } from '../../Contexts/GlobalContext';
 import { ALerta } from '../../Services/Alerta';
-import { Table, Form, Input, Popconfirm, Typography, Select, Space, Button, Pagination } from 'antd';
+import { Table, Form, Input, Popconfirm, Typography, Select, Space, Button } from 'antd';
 import { Item, EditableCellProps } from '../../Interfaces/TableInterfaces';
 import { typeDatosEnviarTabla } from '../../Types/Tablas';
 
@@ -14,7 +14,7 @@ import { typeDatosEnviarTabla } from '../../Types/Tablas';
 const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
 
 
-  const { token, showSidebar, actualizarTabla, setActualizarTabla } = useContext(GlobalContext)
+  const { token, showSidebar, actualizarTabla } = useContext(GlobalContext)
   const [form] = Form.useForm();
   const [data, setData] = useState<Item[]>([]);
   const [estadoProyecto, setEstadoProyecto] = useState<string>('Activo')
@@ -22,15 +22,13 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
 
   // paginacion
   const [currentPage, setCurrentPage] = useState(1);
-  const tamannoPagina = data.length /2
+  const tamannoPagina = data.length / 2
 
 
   const isEditing = (record: Item) => record.key === editingKey;
 
 
-  // get proyectos para msotrar en la tabla
-  useEffect(() => {
-
+ const reloadTabla = () => {
     FetchService(RutaServer.getProyectos, {
       headers: {
         'Content-Type': 'application/json',
@@ -76,6 +74,11 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
             break
         }
       })
+
+  }
+  // get proyectos para msotrar en la tabla
+  useEffect(() => {
+    reloadTabla()
   }, [actualizarTabla])
 
   const columns = [
@@ -83,20 +86,20 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
       title: 'Nombre',
       dataIndex: 'nombre',
       width: '30%',
-      sorter: (a: Item, b: Item) => (a.name > b.name) ? 1 : -1,
+      sorter: (a: Item, b: Item) => (a.nombre > b.nombre) ? 1 : -1,
       editable: true,
     },
     {
       title: 'Organizacion',
       dataIndex: 'organizacion',
-      sorter: (a: Item, b: Item) => (a.name > b.name) ? 1 : -1,
+      sorter: (a: Item, b: Item) => (a.nombre > b.nombre) ? 1 : -1,
       width: '30%',
       editable: true,
     },
     {
       title: 'Estado',
       dataIndex: 'estado',
-      sorter: (a: Item, b: Item) => (a.name > b.name) ? 1 : -1,
+      sorter: (a: Item, b: Item) => (a.nombre > b.nombre) ? 1 : -1,
       width: '15%',
       editable: true,
       filters: [
@@ -142,10 +145,10 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
     {
       title: '',
       dataIndex: "eliminar",
-      render: (record: { key: React.Key }) =>
-        
-        <Popconfirm title="Estas seguro que quieres eliminarlo?" okText='Confirmar' cancelText='Cancelar' >  
-       <a>Eliminar</a>
+      render: (_: any, record: Item) =>
+
+        <Popconfirm title="Estas seguro que quieres eliminarlo?" okText='Confirmar' cancelText='Cancelar' onConfirm={() => eliminarFila(record)}>
+          <a>Eliminar</a>
         </Popconfirm>
 
 
@@ -220,7 +223,7 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
 
   //editar
   const edit = (record: Partial<Item> & { key: React.Key }) => {
-    form.setFieldsValue({ name: '', organizacion: '', estado: '', ...record });
+    form.setFieldsValue({ nombre: '', organizacion: '', estado: '', ...record });
     setEditingKey(record.key);
   };
 
@@ -234,27 +237,28 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
   const save = async (key: React.Key) => {
 
     try {
-      form.setFieldValue('estado',estadoProyecto)
-      const row = (await form.validateFields({ validateOnly: false})) as Item;
+      form.setFieldValue('estado', estadoProyecto)
+      const row = (await form.validateFields()) as Item;
 
       const newData = [...data];
       const index = newData.findIndex((item) => key === item.id);
-      
-      console.log(key)
-      console.log(index)
       if (index > -1) {
 
         row.estado = estadoProyecto
         const item = newData[index];
 
+        
+       
+
         const datosEnviar: typeDatosEnviarTabla = {}
         // validacion de campos para generar un nuevo objeto con las propiedades modificadas
-        row.name !== item.name ? datosEnviar.name = row.name : ''
+        row.nombre !== item.nombre ? datosEnviar.nombre = row.nombre : ''
         row.organizacion !== item.organizacion ? datosEnviar.organizacion = row.organizacion : ''
         row.estado !== item.estado ? datosEnviar.estado = row.estado : ''
 
         // url para hacer peticion PATH al server
         let newUrl = ` ${RutaServer.getProyectos}/${item.id}`
+        console.log(datosEnviar)
 
         FetchService(newUrl, {
           method: 'PATCH',
@@ -270,12 +274,13 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
               case 200:
                 const { message: mesSucces, newProyecto } = await res.json()
                 ALerta({ title: mesSucces, icon: "success", position: 'top-right' })
-                newData.splice(index, 1, {
-                  ...item,
-                  ...newProyecto,
-                });
+                newData[index] = {
+                  ...newData[index],
+                  ...newProyecto
+                }
                 setData(newData)
-                setActualizarTabla(2)
+                reloadTabla()
+                break;
 
             }
           })
@@ -306,18 +311,38 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
     // setCount(count + 1);
   }
 
-  // const eliminarFila = (key: React.Key) => {
-  //   console.log(key)
-  //   const newData = data.filter((item) => item.key !== key);
-  //   console.log(newData)
-  //   setData(newData);
-  // }
+  const eliminarFila = (arg: any) => {
+    let elemento = arg
 
-  const onChangePage = (page:number) => {
+    const newData = data.filter((item) => item.id !== arg.id);
+
+    FetchService(`${RutaServer.getProyectos}/${elemento.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        "token": token
+      },
+      body: JSON.stringify(elemento)
+
+    })
+      .then(async (res: Response) => {
+        switch (res.status) {
+          case 200:
+            const { message: messSucces, idElement } = await res.json()
+            ALerta({ text: messSucces, icon: 'success' })
+            setData(data.filter((item) => item.id !== idElement))
+            reloadTabla()
+            break
+        }
+      })
+
+  }
+
+  const onChangePage = (page: number) => {
     setCurrentPage(page);
   };
 
- 
+
 
   return (
     < div className={`TablageneralProyects ${showSidebar ? 'MovDer' : 'MovIzq'}`}>
@@ -325,7 +350,7 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
         <Button onClick={agregarFila} type="primary" style={{ marginBottom: 16 }}>
           Agregar Proyecto
         </Button>
-        
+
         <Table
           components={{
             body: {
@@ -343,9 +368,9 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
             total: data.length,
             onChange: onChangePage,
           }}
-          
+
         />
-        
+
       </Form>
     </div>
   );

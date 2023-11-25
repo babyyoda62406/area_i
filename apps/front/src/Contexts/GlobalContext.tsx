@@ -36,7 +36,7 @@ export const GlobalContextProvider: FC<typeProviderContext> = ({children}) => {
         proyectos:false
     })
     const [actualizarTabla, setActualizarTabla] = useState<typeActualizarTabla>({
-        tablaProyectos:0
+        tablaProyectos: 0
     })
 
     return <GlobalContext.Provider value={{token, setToken,showSidebar,setShowSidebar,showModal,setShowModal,actualizarTabla,setActualizarTabla}}>
