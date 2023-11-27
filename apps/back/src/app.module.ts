@@ -23,6 +23,7 @@ import { TarifaModule } from './modules/tarifa/tarifa.module';
 import { Tarifa } from './entities/tarifa.entity';
 import { IndicadoresModule } from './modules/indicadores/indicadores.module';
 import { Indicador } from './entities/indicador.entity';
+import { PersonasModule } from './modules/personas/personas.module';
 
 dotenv.config();
 
@@ -49,7 +50,8 @@ dotenv.config();
     RolesProyectosModule,
     NivelExperticiaModule,
     TarifaModule,
-    IndicadoresModule
+    IndicadoresModule,
+    PersonasModule
   ],
   controllers: [AppController],
   providers: [AppService, 
