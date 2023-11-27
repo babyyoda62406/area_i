@@ -10,32 +10,34 @@ export const itemsASide: typeOptionAside[] = [
         name: 'Gestion General',
         children: [
             {
-                name: 'Agregar Proyecto',
-                optionFunc: 'proyectos'
+                name: 'Gestionar Proyectos',
+                optionFunc: 'GestionProyectos'
             },
             {
-                name: 'itemExample1',
-                optionFunc: ''
+                name: 'Agregar Proyecto',
+                optionFunc: 'AgregarProyectos'
             },
             {
                 name: 'ItemExample2',
-            optionFunc:''},
+                optionFunc: ''
+            },
         ]
     },
     {
-        name: 'Personal',
+        name: 'Control Personal',
         children: [
             {
                 name: 'Control Personal',
-                optionFunc: ''
+                optionFunc: 'mostrarPersonal'
             },
             {
-                name: 'item2',
-                optionFunc: ''
+                name: 'Agregar persona',
+                optionFunc: 'mostrar modal de agregar persona'
             },
             {
                 name: 'item3',
-            optionFunc:''},
+                optionFunc: ''
+            },
         ]
     },
     {
@@ -51,7 +53,8 @@ export const itemsASide: typeOptionAside[] = [
             },
             {
                 name: 'item3',
-            optionFunc:''},
+                optionFunc: ''
+            },
         ]
     },
     {
@@ -67,7 +70,8 @@ export const itemsASide: typeOptionAside[] = [
             },
             {
                 name: 'item3',
-            optionFunc:''},
+                optionFunc: ''
+            },
         ]
     },
 ]

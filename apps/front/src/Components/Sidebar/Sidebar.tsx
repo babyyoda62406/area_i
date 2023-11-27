@@ -7,11 +7,12 @@ import { Collapse, CollapseProps } from 'antd'
 import { itemsASide } from '../../Helpers/OptionsSidebar'
 import { typeShowModal, typeSubElAside } from '../../Types/UseStates'
 import { GlobalContext } from '../../Contexts/GlobalContext'
+import { HandlerSidebar } from './Services/ServicesSidebar'
 
 
 const Sidebar: FC<typeSidebar> = ({ Show }) => {
 
-  const {setShowModal} = useContext(GlobalContext)
+  const {setShowModal,showLayout,setShowLayout} = useContext(GlobalContext)
 
   const ElementsStyle = {
     marginBottom: '',
@@ -23,13 +24,15 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
     element: ''
   })
 
+/**
+ * 
+ * @param arg:   nombre del elemento k se kiere activar en el aside
+ * @param elementFunc 
+ */
+  const activarSubItem = (arg: string, elementFunc: string) => {
+    
+    HandlerSidebar(elementFunc,showLayout,setShowLayout,setShowModal)
 
-  /**
-   * 
-   * @param arg 
-   *nombre del elemento k se kiere activar en el aside
-   */
-  const activarSubItem = (arg: string) => {
     setElementActive((prevelementActive) => {
       return {
         ...prevelementActive,
@@ -39,23 +42,13 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
   }
 
 
-/**
- * 
- * @param arg 
- * arg: tipo de modal a mostrar
- */
-  const mostrarModal = (arg:string) => {
-    setShowModal((prevShowModal: typeShowModal) => {
-      return{...prevShowModal,
-      [arg]:true,}
-    })
 
-  } 
 
 
 /**
  * recibe un array de objetos para generar los componentes del sidebar
  */
+  
   const ElementSidebar: CollapseProps['items'] = itemsASide.map((element, index) => {
     return {
       key: index,
@@ -70,16 +63,17 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
       */
       children: element.children.map((elemento, index) => {
         
-        return <span key={index} onClickCapture={()=>mostrarModal(elemento.optionFunc)} className={`SubElementCollapse ${elementActive.element == elemento.name ? "SubElementActive" : ''}`}  onClick={()=>{activarSubItem(elemento.name)}} >{elemento.name }</span>
+        return <span  key={index} onClickCapture={()=>console.log('se ha ejecutado')} className={`SubElementCollapse ${elementActive.element == elemento.name ? "SubElementActive" : ''}`}  onClick={()=>{activarSubItem(elemento.name,elemento.optionFunc)}} >{elemento.name }</span>
       }),
-      style: ElementsStyle
+      style: ElementsStyle,
+      
     }
   })
 
 
   return <div className={`Sidebar ${Show ? 'ShowAside' : 'CerrarAside'}`}>
 
-    <Collapse accordion expandIconPosition='end' size='large' items={ElementSidebar} defaultActiveKey={['0']}>
+    <Collapse accordion  expandIconPosition='end' size='large' items={ElementSidebar} defaultActiveKey={['0']}>
     </Collapse>
 
   </div>

@@ -18,10 +18,16 @@ type typeSubElAside = {
 
 type typeShowModal = {
     proyectos: boolean
+
 }
 
 type typeActualizarTabla = {
     tablaProyectos:number
+}
+
+type typeShowLayout = {
+    gestionGeneral: boolean
+    gestionUsuarios: boolean
 }
 
 export type {
@@ -29,5 +35,6 @@ export type {
     typeErrorForm,
     typeSubElAside,
     typeShowModal,
-    typeActualizarTabla
+    typeActualizarTabla,
+    typeShowLayout
 }

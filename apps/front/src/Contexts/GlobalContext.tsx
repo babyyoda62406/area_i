@@ -1,6 +1,6 @@
 import  { FC, createContext, useState } from "react";
 import { typeGlobalContext, typeProviderContext } from "../Types/GlobalContext";
-import { typeActualizarTabla, typeShowModal } from "../Types/UseStates";
+import { typeActualizarTabla, typeShowLayout, typeShowModal } from "../Types/UseStates";
 
 
 /**
@@ -12,13 +12,19 @@ export const GlobalContext = createContext<typeGlobalContext>({
     showModal: {
         proyectos:false
     },
-    actualizarTabla:{tablaProyectos:0},
+    actualizarTabla: { tablaProyectos: 0 },
+    
+    showLayout: {
+        gestionGeneral: false,
+        gestionUsuarios:false
+    },
     
 
     setToken: () => { },
     setShowSidebar: () => { },
     setShowModal: () => { },
     setActualizarTabla: () => { },
+    setShowLayout:()=>{}
 
 })
 
@@ -33,13 +39,18 @@ export const GlobalContextProvider: FC<typeProviderContext> = ({children}) => {
     const [token, setToken] = useState<string>('')
     const [showSidebar,setShowSidebar] = useState<boolean>(false)
     const [showModal, setShowModal] = useState<typeShowModal>({
-        proyectos:false
+        proyectos:false,
     })
     const [actualizarTabla, setActualizarTabla] = useState<typeActualizarTabla>({
         tablaProyectos: 0
     })
 
-    return <GlobalContext.Provider value={{token, setToken,showSidebar,setShowSidebar,showModal,setShowModal,actualizarTabla,setActualizarTabla}}>
+    const [showLayout, setShowLayout] = useState<typeShowLayout>({
+        gestionGeneral: false,
+        gestionUsuarios:false,
+    })
+
+    return <GlobalContext.Provider value={{token, setToken,showSidebar,setShowSidebar,showModal,setShowModal,actualizarTabla,setActualizarTabla,showLayout, setShowLayout}}>
         {children}
     </GlobalContext.Provider>
 }

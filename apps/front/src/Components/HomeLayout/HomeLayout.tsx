@@ -12,10 +12,10 @@ import ModalFormulario from '../ModalFormulario/ModalFormulario'
 
 const HomeLayout:FC<typeHomeLayout> = () => {
     
-    const { token } = useContext(GlobalContext)
+    const { token,showLayout } = useContext(GlobalContext)
     
     const navigation = useNavigate()
-
+    let elemento 
    
     useEffect(() => {
         
@@ -25,10 +25,22 @@ const HomeLayout:FC<typeHomeLayout> = () => {
      },[])
     
     
+    switch (true) {
+        case showLayout.gestionGeneral:
+            
+            elemento = <GestionGeneral />
+            break
+        case showLayout.gestionUsuarios:
+            console.log('la gestion personal esta activa')
+            break
+        
+        
+    }
+    
     
     return <div className="HomeLayout">
         <Navbar />
-        <GestionGeneral /> 
+        {elemento} 
         <ModalFormulario tipoModal='proyectos'/>
         
     </div>
