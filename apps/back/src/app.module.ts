@@ -24,6 +24,7 @@ import { Tarifa } from './entities/tarifa.entity';
 import { IndicadoresModule } from './modules/indicadores/indicadores.module';
 import { Indicador } from './entities/indicador.entity';
 import { PersonasModule } from './modules/personas/personas.module';
+import { Persona } from './entities/persona.entity';
 
 dotenv.config();
 
@@ -36,7 +37,7 @@ dotenv.config();
       port: Number(process.env.PORT_DB),
       password: process.env.PASSWORD,
       synchronize: true,
-      entities: [Usuario, Proyecto, RolesProyectos, NivelExperticia, Tarifa, Indicador]
+      entities: [Usuario, Proyecto, RolesProyectos, NivelExperticia, Tarifa, Indicador,Persona]
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../../front/dist'),
