@@ -5,10 +5,12 @@ import { Not, Repository } from 'typeorm';
 import { CrearPersonaDTO } from './dto/crearPersona.dto';
 import { nomenclador } from 'src/enums/nomenclador';
 import { EditarPersonaDTO } from './dto/editarPersona.dto';
+import { IndicadoresService } from '../indicadores/indicadores.service';
+
 
 @Injectable()
 export class PersonasService {
-    constructor(@InjectRepository(Persona) private dbPersona: Repository<Persona>){
+    constructor(@InjectRepository(Persona) private dbPersona: Repository<Persona>, private svIndicador: IndicadoresService){
 
     }
 
@@ -46,7 +48,8 @@ export class PersonasService {
             where: {
                 id, 
                 estado: Not(nomenclador.Eliminado)
-            }
+            },
+            relations: ['Indicadores']
         })
 
         if(!tempPersona) throw new HttpException(`No existe persona con el id ${id}`, HttpStatus.NOT_FOUND)
@@ -87,4 +90,21 @@ export class PersonasService {
         return newPersona
     }
 
+    async addIndicador(personaId: number, indicadorId: number){
+        const tempPersona  = await this.getPersona(personaId)
+        const tempIndicador  = await this.svIndicador.getIdnicador(indicadorId)
+
+        const indicadorDuplicado = tempPersona.Indicadores.some(
+            (indicador) => indicador.id === tempIndicador.id
+          );
+        
+
+        if(indicadorDuplicado) throw new HttpException(`El indicador ${tempIndicador.nombre} ya esta asociado a esta persona`, HttpStatus.CONFLICT)
+        
+        tempPersona.Indicadores.push(tempIndicador)
+
+        await this.dbPersona.save(tempPersona)
+        
+        return {message: "Indicador agregado" , personaId , indicadorId}
+    }
 }

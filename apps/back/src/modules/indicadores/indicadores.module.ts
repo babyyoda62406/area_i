@@ -11,7 +11,8 @@ import { Indicador } from 'src/entities/indicador.entity';
     Indicador
   ]), JwtModule],
   providers: [IndicadoresService],
-  controllers: [IndicadoresController]
+  controllers: [IndicadoresController],
+  exports: [IndicadoresService]
 })
 export class IndicadoresModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

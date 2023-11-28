@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put } from '@nestjs/common';
 import { CrearPersonaDTO } from './dto/crearPersona.dto';
 import { PersonasService } from './personas.service';
 import { EditarPersonaDTO } from './dto/editarPersona.dto';
@@ -38,7 +38,11 @@ export class PersonasController {
 
         return {message: 'Persona editada', id: personaEditada.id}
     }
-    
 
+
+    @Put(':personaId/indicador/:indicadorId')
+    async agregarIndicador(@Param('personaId', ParseIntPipe) personaId: number , @Param('indicadorId', ParseIntPipe) indicadorId: number){
+        return await this.svPersonas.addIndicador(personaId , indicadorId)
+    }
 
 }
