@@ -40,4 +40,21 @@ export class PersonasService {
 
         return tempPersonas
     }
+
+    async getPersona(id: number){
+        const tempPersona = await this.dbPersona.findOne({
+            where: {
+                id, 
+                estado: Not(nomenclador.Eliminado)
+            }
+        })
+
+        if(!tempPersona) throw new HttpException(`No existe persona con el id ${id}`, HttpStatus.NOT_FOUND)
+
+
+
+        return tempPersona
+    }
+
+
 }

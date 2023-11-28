@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { CrearPersonaDTO } from './dto/crearPersona.dto';
 import { PersonasService } from './personas.service';
 
@@ -8,16 +8,24 @@ export class PersonasController {
     constructor(private svPersonas: PersonasService ){
 
     }
-    
+
+    @Post()
+    async crearPersona(@Body() persona: CrearPersonaDTO){
+        const newPersona = await this.svPersonas.addPersona(persona); 
+        return {message:'Persona creada' , id: newPersona.id}
+    }
+
     @Get()
     async obtenerPersonas(){
         return await this.svPersonas.getPersonas()
     }
 
-    @Post()
-    async crearPersona(@Body() persona: CrearPersonaDTO){
-        const newPersona = await this.svPersonas.addPersona(persona); 
-
-        return {message:'Persona creada' , id: newPersona.id}
+    @Get(':id')
+    async obtenerPersona(@Param('id', ParseIntPipe) id: number){
+        return await this.svPersonas.getPersona(id)
     }
+
+    
+
+
 }
