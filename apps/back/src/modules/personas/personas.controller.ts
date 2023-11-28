@@ -1,6 +1,8 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { CrearPersonaDTO } from './dto/crearPersona.dto';
 import { PersonasService } from './personas.service';
+import { EditarPersonaDTO } from './dto/editarPersona.dto';
+
 
 @Controller('personas')
 export class PersonasController {
@@ -25,12 +27,17 @@ export class PersonasController {
         return await this.svPersonas.getPersona(id)
     }
 
-
     @Delete(':id')
     async eliminarPersona(@Param('id' , ParseIntPipe) id:number){
         return await this.svPersonas.deletePersona(id)
     }
 
+    @Patch(':id')
+    async editarPersona(@Param('id', ParseIntPipe) id: number , @Body() persona: EditarPersonaDTO){
+        const personaEditada =  await this.svPersonas.setPersona(id, persona)
+
+        return {message: 'Persona editada', id: personaEditada.id}
+    }
     
 
 

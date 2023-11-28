@@ -4,6 +4,7 @@ import { Persona } from 'src/entities/persona.entity';
 import { Not, Repository } from 'typeorm';
 import { CrearPersonaDTO } from './dto/crearPersona.dto';
 import { nomenclador } from 'src/enums/nomenclador';
+import { EditarPersonaDTO } from './dto/editarPersona.dto';
 
 @Injectable()
 export class PersonasService {
@@ -63,5 +64,27 @@ export class PersonasService {
         return {message: 'Persona eliminada', id: tempPersona.id}
     }
 
+
+    async setPersona(id: number, persona: EditarPersonaDTO){
+        if(!Object.keys(persona).length) throw new HttpException('Es necesario al menos un campo a editar', HttpStatus.BAD_REQUEST)
+
+        const tempPersona = await this.getPersona(id)
+        if(persona.CI){
+            const existePersona  = await this.dbPersona.findOne({
+                where:{
+                    CI: persona.CI,
+                    estado: Not(nomenclador.Eliminado)
+                }
+            })
+
+            if( existePersona) throw new HttpException(`El CI ${persona.CI} no esta disponible` , HttpStatus.CONFLICT)
+        }
+
+        const newPersona: Persona = Object.assign(tempPersona, persona)
+              
+        await this.dbPersona.save(newPersona)
+
+        return newPersona
+    }
 
 }
