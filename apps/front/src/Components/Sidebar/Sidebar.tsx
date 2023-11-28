@@ -12,7 +12,7 @@ import { HandlerSidebar } from './Services/ServicesSidebar'
 
 const Sidebar: FC<typeSidebar> = ({ Show }) => {
 
-  const {setShowModal,showLayout,setShowLayout} = useContext(GlobalContext)
+  const {showModal,setShowModal,showLayout,setShowLayout} = useContext(GlobalContext)
 
   const ElementsStyle = {
     marginBottom: '',
@@ -31,7 +31,7 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
  */
   const activarSubItem = (arg: string, elementFunc: string) => {
     
-    HandlerSidebar(elementFunc,showLayout,setShowLayout,setShowModal)
+    HandlerSidebar(elementFunc,showLayout,setShowLayout,setShowModal,showModal)
 
     elementActive.element == arg ? setElementActive({...elementActive, ['element']:''}):setElementActive((prevelementActive) => {
       return {
@@ -41,10 +41,6 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
     })
   }
     
-
-
-
-
 
 /**
  * recibe un array de objetos para generar los componentes del sidebar

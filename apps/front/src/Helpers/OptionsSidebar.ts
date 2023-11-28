@@ -11,7 +11,7 @@ export const itemsASide: typeOptionAside[] = [
         children: [
             {
                 name: 'Gestionar Proyectos',
-                optionFunc: 'GestionProyectos'
+                optionFunc: 'gestionProyectos'
             },
             {
                 name: 'Agregar Proyecto',
@@ -24,11 +24,11 @@ export const itemsASide: typeOptionAside[] = [
         ]
     },
     {
-        name: 'Control Personal',
+        name: 'Control Usuarios',
         children: [
             {
-                name: 'Control Personal',
-                optionFunc: 'mostrarPersonal'
+                name: 'Control Usuarios',
+                optionFunc: 'gestionUsuarios'
             },
             {
                 name: 'Agregar persona',

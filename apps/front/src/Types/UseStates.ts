@@ -26,7 +26,7 @@ type typeActualizarTabla = {
 }
 
 type typeShowLayout = {
-    gestionGeneral: boolean
+    gestionProyectos: boolean
     gestionUsuarios: boolean
 }
 

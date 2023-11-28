@@ -37,6 +37,9 @@ type typeModificar = {
 
 }
 
+type typeGestionarUsuarios = {
+
+}
 
 
 
@@ -49,5 +52,6 @@ export type {
     typeGestionG,
     typeTablaProyectos,
     typeDatosTablaProyectos,
-    typeModificar
+    typeModificar,
+    typeGestionarUsuarios
  }

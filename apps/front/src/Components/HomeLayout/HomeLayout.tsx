@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect } from 'react'
+import { FC, ReactElement, useContext, useEffect, useState } from 'react'
 import './HomeLayout.css'
 import { typeHomeLayout } from '../../Types/TpHlayout'
 import Navbar from '../NavBar/Navbar'
@@ -6,16 +6,23 @@ import GestionGeneral from '../Gestiongeneral/Gestiongeneral'
 import { useNavigate } from 'react-router-dom'
 import { GlobalContext } from '../../Contexts/GlobalContext'
 import ModalFormulario from '../ModalFormulario/ModalFormulario'
+import GestionarUsuarios from '../GestionarUsuarios/GestionarUsuarios'
 
 
 
 
 const HomeLayout:FC<typeHomeLayout> = () => {
     
-    const { token,showLayout } = useContext(GlobalContext)
+    const { token,showLayout,setShowLayout } = useContext(GlobalContext)
+    // const [vista , setVista]= useState<ReactElement>()  
+    let elemento:any = null
     
+    
+    
+    
+  
     const navigation = useNavigate()
-    let elemento 
+    
    
     useEffect(() => {
         
@@ -26,21 +33,24 @@ const HomeLayout:FC<typeHomeLayout> = () => {
     
     
     switch (true) {
-        case showLayout.gestionGeneral:
-            
+        case showLayout.gestionProyectos:
+            // se renderiza infinitamente 
             elemento = <GestionGeneral />
-            break
-        case showLayout.gestionUsuarios:
-            console.log('la gestion personal esta activa')
-            break
+            break;
+          case showLayout.gestionUsuarios:
+            
+            elemento =  <GestionarUsuarios />
+            break;
         
         
     }
-    
+    // console.log(elemento)
     
     return <div className="HomeLayout">
         <Navbar />
-        {elemento} 
+         {elemento} 
+         
+        
         <ModalFormulario tipoModal='proyectos'/>
         
     </div>
