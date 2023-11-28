@@ -33,13 +33,14 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
     
     HandlerSidebar(elementFunc,showLayout,setShowLayout,setShowModal)
 
-    setElementActive((prevelementActive) => {
+    elementActive.element == arg ? setElementActive({...elementActive, ['element']:''}):setElementActive((prevelementActive) => {
       return {
         ...prevelementActive,
         ['element']:arg
       }
     })
   }
+    
 
 
 

@@ -12,7 +12,7 @@ import { modeloColumnas } from './Model/modeloColumnas';
 const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
 
 
-  const { token, showSidebar, actualizarTabla,showLayout } = useContext(GlobalContext)
+  const { token, showSidebar, actualizarTabla } = useContext(GlobalContext)
   const [form] = Form.useForm();
   const [data, setData] = useState<Item[]>([]);
   const [estadoProyecto, setEstadoProyecto] = useState<string>('Activo')
