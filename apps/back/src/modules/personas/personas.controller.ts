@@ -45,4 +45,9 @@ export class PersonasController {
         return await this.svPersonas.addIndicador(personaId , indicadorId)
     }
 
+    @Delete(':personaId/indicador/:indicadorId')
+    async eliminarIndicador(@Param('personaId', ParseIntPipe) personaId: number , @Param('indicadorId', ParseIntPipe) indicadorId: number){
+        return await this.svPersonas.deleteIndicador(personaId , indicadorId)
+    }
+
 }
