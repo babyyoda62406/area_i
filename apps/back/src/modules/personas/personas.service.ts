@@ -1,8 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Persona } from 'src/entities/persona.entity';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { CrearPersonaDTO } from './dto/crearPersona.dto';
+import { nomenclador } from 'src/enums/nomenclador';
 
 @Injectable()
 export class PersonasService {
@@ -25,5 +26,18 @@ export class PersonasService {
         await this.dbPersona.save(newPersona)
 
         return newPersona
+    }
+
+
+    async getPersonas(){
+        const tempPersonas = await this.dbPersona.find({
+            where:{
+                estado: Not(nomenclador.Eliminado)
+            }
+        })
+
+        if(!tempPersonas.length) throw new HttpException('', HttpStatus.NO_CONTENT)
+
+        return tempPersonas
     }
 }

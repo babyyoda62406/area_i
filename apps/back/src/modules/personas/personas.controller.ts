@@ -8,9 +8,10 @@ export class PersonasController {
     constructor(private svPersonas: PersonasService ){
 
     }
+    
     @Get()
-    obtenerPersonas(){
-        return []
+    async obtenerPersonas(){
+        return await this.svPersonas.getPersonas()
     }
 
     @Post()
