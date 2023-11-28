@@ -1,38 +1,38 @@
 .TablageneralProyects{
     width: 80%;
-    
-    
     margin-left: 1.0rem;
     margin-top: 0.5rem;
     border-radius: 0.5rem; 
+    transition: all 500ms;
     
 }
 
-.MovDer{
-    animation: moverDer 500ms linear forwards;
+.MostrarTabla{
+    animation: mostrarTabla 500ms linear forwards  ;
 }
 
-@keyframes moverDer{
+@keyframes mostrarTabla{
     from{
-        margin-left: 0px;
+        transform: translateX(1000px);
     }
+
     to{
-        margin-left: 14%;
+        transform: translateX(0px);
+          
     }
 }
 
-.MovIzq{
-    animation: moverIzq 500ms linear forwards;
+.WidthTablaLarge{
+    width:85% !important;
+    margin-left: 0% !important;
 }
 
-@keyframes moverIzq{
-    from{
-        margin-left: 14%;
-    }
-    to{
-        margin-left: 0px;
-    }
+.WidthTablaSmall{
+    /* width:70% !important; */
+    margin-left: 14% !important;
 }
+
+
 
 .ant-tooltip-inner{
     display: none;

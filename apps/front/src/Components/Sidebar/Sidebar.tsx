@@ -5,7 +5,7 @@ import { typeSidebar } from '../../Types/TpHlayout'
 
 import { Collapse, CollapseProps } from 'antd'
 import { itemsASide } from '../../Helpers/OptionsSidebar'
-import { typeShowModal, typeSubElAside } from '../../Types/UseStates'
+import {  typeSubElAside } from '../../Types/UseStates'
 import { GlobalContext } from '../../Contexts/GlobalContext'
 import { HandlerSidebar } from './Services/ServicesSidebar'
 
