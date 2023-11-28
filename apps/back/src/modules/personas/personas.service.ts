@@ -28,7 +28,6 @@ export class PersonasService {
         return newPersona
     }
 
-
     async getPersonas(){
         const tempPersonas = await this.dbPersona.find({
             where:{
@@ -51,9 +50,17 @@ export class PersonasService {
 
         if(!tempPersona) throw new HttpException(`No existe persona con el id ${id}`, HttpStatus.NOT_FOUND)
 
-
-
         return tempPersona
+    }
+
+    async deletePersona(id: number){
+        const tempPersona = await  this.getPersona(id)
+
+        tempPersona.estado = nomenclador.Eliminado
+
+        await this.dbPersona.save(tempPersona)
+
+        return {message: 'Persona eliminada', id: tempPersona.id}
     }
 
 

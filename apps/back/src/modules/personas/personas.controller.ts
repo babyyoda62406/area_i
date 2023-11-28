@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { CrearPersonaDTO } from './dto/crearPersona.dto';
 import { PersonasService } from './personas.service';
 
@@ -23,6 +23,12 @@ export class PersonasController {
     @Get(':id')
     async obtenerPersona(@Param('id', ParseIntPipe) id: number){
         return await this.svPersonas.getPersona(id)
+    }
+
+
+    @Delete(':id')
+    async eliminarPersona(@Param('id' , ParseIntPipe) id:number){
+        return await this.svPersonas.deletePersona(id)
     }
 
     
