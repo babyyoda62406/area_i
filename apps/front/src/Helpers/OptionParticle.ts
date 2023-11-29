@@ -1,5 +1,6 @@
 import { ISourceOptions } from "tsparticles-engine";
 
+
 export const OptionParticle:ISourceOptions =  {
                     
     background: {

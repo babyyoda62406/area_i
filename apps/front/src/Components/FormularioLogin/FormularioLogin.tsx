@@ -65,7 +65,7 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
             /**
              * envio de datos para inciar sesion en el usuario via post 
              *  */
-            FetchService(RutaServer.iniciarUsuario, { method: "POST", body: JSON.stringify(datosForm) })
+            FetchService(RutaServer.iniciarSesion, { method: "POST", body: JSON.stringify(datosForm) })
                 .then(async (res) => {
 
 

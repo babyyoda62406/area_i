@@ -4,12 +4,17 @@ import { ALerta } from "../../../Services/Alerta"
 import { FetchService } from "../../../Services/FetchService"
 
 
+/**
+ * 
+ * @param token 
+ * @param setData 
+ */
 
 export const reloadUsuarios= (token: string,setData:Function) => {
   
    
       
-    FetchService(RutaServer.getProyectos, {
+    FetchService(RutaServer.getUsuarios, {
       headers: {
         'Content-Type': 'application/json',
         "token": token
@@ -25,13 +30,14 @@ export const reloadUsuarios= (token: string,setData:Function) => {
             datos.map((element: Item) => {
               return element.key = element.id
             })
+            console.log(datos)
             setData(datos)
            
             
             break
 
           case 204:
-            ALerta({ title: 'por favor agregue algun proyecto', icon: 'warning' })
+            ALerta({ title: 'por favor agregue algun usuario', icon: 'warning' })
             break
 
           case 304:
@@ -53,7 +59,7 @@ export const reloadUsuarios= (token: string,setData:Function) => {
             break
 
           default:
-            console.log('error en tabla de gestion general')
+            console.log('error en tabla de gestion Usuarios')
             break
         }
       })

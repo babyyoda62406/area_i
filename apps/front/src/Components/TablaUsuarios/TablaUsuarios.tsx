@@ -4,6 +4,7 @@ import { Table, Form, Input, Select, Space, Button } from 'antd';
 import { GlobalContext } from '../../Contexts/GlobalContext';
 import { EditableCellPropsUsuario, INTUsuario } from './interfaces/Usuario';
 import { modeloColumnasUsuario } from './Model/modeloColumnasUsuario';
+import { reloadUsuarios } from './services/ReloadUsuarios';
 
 const TablaUsuarios = () => {
     
@@ -25,13 +26,14 @@ const TablaUsuarios = () => {
 
   // get proyectos para msotrar en la tabla
   useEffect(() => {
-    //  reloadTabla(token,setData)
+    reloadUsuarios(token,setData)
     
     
   }, [actualizarTabla])
 
 
-
+  
+  
   const EditableCell: React.FC<EditableCellPropsUsuario> = ({
     editing,
     dataIndex,
