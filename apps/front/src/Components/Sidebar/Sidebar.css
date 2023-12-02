@@ -6,10 +6,10 @@
     position: absolute;
     width: 210px;
     height: 80%;
-    border: 1px solid white;
-    margin-top: 6.1rem;
+    
+    margin-top: 5.5rem;
    
-    background-color: var(--bg-blue-6);
+    background-color:var(--bg-blue-7);
     left: -300px;
     padding-top: 1.0rem;
     
@@ -25,7 +25,7 @@
         transform: translateX(0px)
     }
     to{
-        transform: translateX(300px);
+        transform: translateX(302px);
     }
 }
 
@@ -47,14 +47,14 @@
 
 /* estilos a los items visibles */
 .ElementCollapse{
-    background-color: var(--bg-blue-4) ;
-    border-radius: 0px !important;
-    
-    
+    background-color: var(--bg-blue-7) ;
+    border-radius: 0px !important;  
 }
 
 .ElementCollapse div:nth-child(1){
     border-radius: 0px !important;
+     padding:10px !important; 
+     
 }
 
 .ElementCollapse div:nth-child(1)>span{
@@ -65,6 +65,7 @@
 
 .ElementCollapse div:nth-child(1)>div>span>svg{
     color: var(--bg-white-1);
+    
 }
 
 .ElementCollapse:hover div:nth-child(1)>span,
@@ -74,15 +75,11 @@
 }
 
 
-
-
-
-
 /* estilos a la caja desplegable */
 .ElementCollapse  div:nth-child(2)>div{
     display: flex;
     flex-direction: column;
-    background-color: var(--bg-blue-5);
+    background-color: var(--bg-blue-6);
 
 
 }
@@ -93,23 +90,37 @@
     text-transform: capitalize;
     color: var(--bg-white-1) ;
     font-size: 1.3rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    /* padding-top: 0.5rem;
+    padding-bottom: 0.5rem; */
     transition: all 500ms;
     
 }
 
 .SubElementCollapse:hover{
-    padding-left: 2.0rem;  
+    
     cursor: pointer;
 }
 
 .SubElementActive{
-    padding-left: 2.3rem;
+    color:var(--bg-blue-10)!important;
+    padding-left: 0.1rem;
+    
 }
 
 /* estilo al interior de la caja desplegable */
 .ElementCollapse  div:nth-child(2)>div{
-    background-color: var(--bg-blue-5);
+    background-color: var(--bg-blue-6);
    
+}
+
+div .ant-collapse{
+    border: none !important;
+}
+
+div .ant-collapse-content{
+    border:none !important;
+}
+
+div .ant-collapse-item{
+    border:none !important;
 }
