@@ -1,3 +1,4 @@
+import { INTUsuario } from "../Components/TablaUsuarios/interfaces/Usuario"
 
 type typeHomeLayout = {
 
@@ -41,6 +42,9 @@ type typeGestionarUsuarios = {
 
 }
 
+type typeTablaUsuarios = {
+    datos:INTUsuario[]
+}
 
 
 export type { 
@@ -53,5 +57,6 @@ export type {
     typeTablaProyectos,
     typeDatosTablaProyectos,
     typeModificar,
-    typeGestionarUsuarios
+    typeGestionarUsuarios,
+    typeTablaUsuarios
  }

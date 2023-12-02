@@ -1,15 +1,14 @@
 
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import './GestionarUsuarios.css'
 import { typeGestionarUsuarios } from '../../Types/TpHlayout'
 import TablaUsuarios from '../TablaUsuarios/TablaUsuarios'
+import { INTUsuario } from '../TablaUsuarios/interfaces/Usuario'
 
-const GestionarUsuarios:FC<typeGestionarUsuarios> = () => {
+const GestionarUsuarios: FC<typeGestionarUsuarios> = () => {
     
-
     return <div className="GestionarUsuarios">
-         <TablaUsuarios/> 
-        
+        <TablaUsuarios />
     </div>
 }
 

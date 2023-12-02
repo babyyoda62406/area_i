@@ -47,7 +47,7 @@ export const GlobalContextProvider: FC<typeProviderContext> = ({children}) => {
 
     const [showLayout, setShowLayout] = useState<typeShowLayout>({
         gestionProyectos: false,
-        gestionUsuarios:true,
+        gestionUsuarios:false,
     })
 
     return <GlobalContext.Provider value={{token, setToken,showSidebar,setShowSidebar,showModal,setShowModal,actualizarTabla,setActualizarTabla,showLayout, setShowLayout}}>

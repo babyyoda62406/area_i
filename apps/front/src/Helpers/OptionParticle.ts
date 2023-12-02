@@ -39,10 +39,10 @@ export const OptionParticle:ISourceOptions =  {
         },
         links: {
             color: "#e2ecf5c1",
-            distance: 160,
+            distance: 250,
             enable: true,
-            opacity: 1.0,
-            width: 3.0,
+            opacity: 0.45,
+            width: 0.35,
         },
         move: {
             direction: "none",
@@ -50,19 +50,19 @@ export const OptionParticle:ISourceOptions =  {
             outModes: {
                 default: 'bounceHorizontal',
             },
-            random: true,
+            random: false,
             speed: 0.4,
-            straight: false,
+            straight: true,
         },
         number: {
             density: {
                 enable: true,
-                area: 550,
+                area: 100,
             },
-            value: 65,
+            value: 20,
         },
         opacity: {
-            value: 0,
+            value: 0.1,
         },
         shape: {
             type: "bounce",

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { GlobalContext } from '../../Contexts/GlobalContext'
 import ModalFormulario from '../ModalFormulario/ModalFormulario'
 import GestionarUsuarios from '../GestionarUsuarios/GestionarUsuarios'
+import { ALerta } from '../../Services/Alerta'
 
 
 
@@ -38,8 +39,8 @@ const HomeLayout:FC<typeHomeLayout> = () => {
             elemento = <GestionGeneral />
             break;
           case showLayout.gestionUsuarios:
-            
-            elemento =  <GestionarUsuarios />
+            ALerta({title:'el gestor de usuarios', icon:'info'})
+            // elemento =  <GestionarUsuarios />
             break;
         
         
