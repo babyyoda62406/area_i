@@ -34,6 +34,7 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
     
     
   }, [actualizarTabla])
+  
 
 
 

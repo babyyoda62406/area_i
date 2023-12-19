@@ -3,37 +3,37 @@ import {  GridColDef } from '@mui/x-data-grid';
 export const columns: GridColDef[] = [
 	{ field: 'id', headerName: 'ID', width: 90 },
 	{
-		field: 'primer nombre',
-		headerName: 'First name',
+		field: 'uid',
+		headerName: 'UId',
 		width: 150,
 		editable: true,
 		filterable: true,
 
 	},
 	{
-		field: 'segundo nombre',
-		headerName: 'Last name',
+		field: 'nombre',
+		headerName: 'Nombre',
 		width: 150,
 		editable: true,
 	},
 	{
-		field: 'age',
-		headerName: 'Age',
-		type: 'number',
+		field: 'organizacion',
+		headerName: 'Organizacion',
+		type: 'text',
 		width: 100,
 		editable: true,
 		align:"right"
 	},
 	{
-		field: 'fullName',
-		headerName: 'Full name',
-		description: 'This column has a value getter and is not sortable.',
+		field: 'estado',
+		headerName: 'Estado',
+		
 		sortable: true,
 		width: 160,
 		editable: true,
-		// valueGetter: (params: GridValueGetterParams) =>
-		//   `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+		
 	},
+	
 	// {
 	//   field: 'operaciones',
 	//   type: 'actions',
