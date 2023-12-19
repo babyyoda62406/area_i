@@ -1,13 +1,12 @@
-import { FC, ReactElement, useContext, useEffect, useState } from 'react'
+import { FC, useContext, useEffect } from 'react'
 import './HomeLayout.css'
 import { typeHomeLayout } from '../../Types/TpHlayout'
 import Navbar from '../NavBar/Navbar'
-import GestionGeneral from '../Gestiongeneral/Gestiongeneral'
+
 import { Outlet, useNavigate } from 'react-router-dom'
 import { GlobalContext } from '../../Contexts/GlobalContext'
 import ModalFormulario from '../ModalFormulario/ModalFormulario'
-import GestionarUsuarios from '../GestionarUsuarios/GestionarUsuarios'
-import { ALerta } from '../../Services/Alerta'
+
 
 
 
