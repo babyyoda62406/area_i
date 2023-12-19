@@ -8,11 +8,13 @@ import { itemsASide } from '../../Helpers/OptionsSidebar'
 import {  typeSubElAside } from '../../Types/UseStates'
 import { GlobalContext } from '../../Contexts/GlobalContext'
 import { HandlerSidebar } from './Services/ServicesSidebar'
+import { useNavigate } from 'react-router-dom'
 
 
 const Sidebar: FC<typeSidebar> = ({ Show }) => {
 
-  const {showModal,setShowModal,showLayout,setShowLayout} = useContext(GlobalContext)
+  const { showModal, setShowModal } = useContext(GlobalContext)
+  const ruta = useNavigate()
 
   const ElementsStyle = {
     marginBottom: '',
@@ -31,7 +33,7 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
  */
   const activarSubItem = (arg: string, elementFunc: string) => {
     
-    HandlerSidebar(elementFunc,showLayout,setShowLayout,setShowModal,showModal)
+    HandlerSidebar(elementFunc,setShowModal,showModal,ruta)
 
     elementActive.element == arg ? setElementActive({...elementActive, ['element']:''}):setElementActive((prevelementActive) => {
       return {

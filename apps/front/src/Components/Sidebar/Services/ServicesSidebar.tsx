@@ -1,10 +1,10 @@
 
 import { ALerta } from "../../../Services/Alerta"
-import { typeShowLayout, typeShowModal } from "../../../Types/UseStates"
+import { typeShowModal } from "../../../Types/UseStates"
 
 
 
-export const HandlerSidebar = (arg: string, showLayout: typeShowLayout, setShowLayout: Function, setShowModal: Function,showModal:typeShowModal) => {
+export const HandlerSidebar = (arg: string, setShowModal: Function,showModal:typeShowModal,ruta:any) => {
 
 
   const mostrarModal = (arg: string) => {
@@ -17,12 +17,12 @@ export const HandlerSidebar = (arg: string, showLayout: typeShowLayout, setShowL
 
   }
 
-  console.log(showLayout)
+  
 
   switch (arg) {
     case 'gestionProyectos':
+      ruta('gestiongeneral')
       
-      setShowLayout({ ...showLayout, [arg]: !showLayout.gestionProyectos,['mostrarUsuarios']:false })
       break
       
       
@@ -31,7 +31,7 @@ export const HandlerSidebar = (arg: string, showLayout: typeShowLayout, setShowL
 
     case 'AgregarProyectos':
     
-      if (!showLayout.gestionProyectos) {
+      if (false) {
         ALerta({title:'por favor abra la gestion de proyectos ',icon:'warning'})
       } else {
          mostrarModal('proyectos')
@@ -41,7 +41,7 @@ export const HandlerSidebar = (arg: string, showLayout: typeShowLayout, setShowL
     
     case 'gestionUsuarios':
       
-      setShowLayout({ ...showLayout, [arg]: !showLayout.gestionUsuarios,['gestionProyectos']:false})
+      console.log('candela')
 
       break
 

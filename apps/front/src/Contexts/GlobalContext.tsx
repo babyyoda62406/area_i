@@ -1,6 +1,6 @@
 import  { FC, createContext, useState } from "react";
 import { typeGlobalContext, typeProviderContext } from "../Types/GlobalContext";
-import { typeActualizarTabla, typeShowLayout, typeShowModal } from "../Types/UseStates";
+import { typeActualizarTabla, typeShowModal } from "../Types/UseStates";
 
 
 /**
@@ -14,17 +14,14 @@ export const GlobalContext = createContext<typeGlobalContext>({
     },
     actualizarTabla: { tablaProyectos: 0 },
     
-    showLayout: {
-        gestionProyectos: false,
-        gestionUsuarios:false
-    },
+    
     
 
     setToken: () => { },
     setShowSidebar: () => { },
     setShowModal: () => { },
     setActualizarTabla: () => { },
-    setShowLayout:()=>{}
+    
 
 })
 
@@ -45,12 +42,9 @@ export const GlobalContextProvider: FC<typeProviderContext> = ({children}) => {
         tablaProyectos: 0
     })
 
-    const [showLayout, setShowLayout] = useState<typeShowLayout>({
-        gestionProyectos: false,
-        gestionUsuarios:false,
-    })
+    
 
-    return <GlobalContext.Provider value={{token, setToken,showSidebar,setShowSidebar,showModal,setShowModal,actualizarTabla,setActualizarTabla,showLayout, setShowLayout}}>
+    return <GlobalContext.Provider value={{token, setToken,showSidebar,setShowSidebar,showModal,setShowModal,actualizarTabla,setActualizarTabla}}>
         {children}
     </GlobalContext.Provider>
 }

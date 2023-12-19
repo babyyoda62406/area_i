@@ -16,7 +16,9 @@ const App = () => {
     <FondoPantalla />
     <Routes>
       <Route path='/' element={<Login />} />
-      <Route path='Home' element={ <Home/> } />  
+      <Route path='Home' element={<Home />} >
+      <Route path='gestiongeneral' element={<GestionGeneral/>}></Route>
+      </Route>  
     </Routes>
     
     
