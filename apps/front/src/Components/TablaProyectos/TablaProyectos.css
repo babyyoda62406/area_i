@@ -1,0 +1,11 @@
+.ContainerTable{
+    width: max-content;
+    height: min-content;
+    background-color: white;
+}
+
+.TablaProyectos>div>div{
+
+    /* height:max-content; */
+
+}
