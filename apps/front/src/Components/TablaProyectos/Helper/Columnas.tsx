@@ -27,7 +27,6 @@ export const columns: GridColDef[] = [
 	{
 		field: 'estado',
 		headerName: 'Estado',
-		
 		sortable: true,
 		width: 160,
 		editable: true,
