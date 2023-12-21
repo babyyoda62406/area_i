@@ -15,7 +15,7 @@ const FormularioAddProyect: FC<tpFormularioAddProyecto> = ({ setShowModal }) => 
     const [dataServer, setDataServer] = useState<typeDatosProyServer>({
         nombre: '',
         organizacion: '',
-        ownerId: 0,
+        ownerId: 2,
         uid: ''
     })
 
@@ -41,44 +41,44 @@ const FormularioAddProyect: FC<tpFormularioAddProyecto> = ({ setShowModal }) => 
     const enviarDatos = (event: any) => {
         event.preventDefault()
 
-        // FetchService(RutaServer.setProyectos, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'token': token
-        //     },
-        //     body: JSON.stringify(dataServer)
-        // })
-        //     .then(async (res: Response) => {
-        //         switch (res.status) {
-        //             case 201:
-        //                 const { message } = await res.json()
-        //                 ALerta({ title: message, icon: 'success' })
-        //                 setShowModal(false)
-        //                 break
+        FetchService(RutaServer.setProyectos, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'token': token
+            },
+            body: JSON.stringify(dataServer)
+        })
+            .then(async (res: Response) => {
+                switch (res.status) {
+                    case 201:
+                        const { message } = await res.json()
+                        ALerta({ title: message, icon: 'success' })
+                        setShowModal(false)
+                        break
 
-        //             case 400:
-        //                 //@ts-ignore
-        //                 const { message: messageError } = await res.json()
-        //                 ALerta({ title: messageError, icon: 'error' })
-        //                 break
-        //             case 404:
-        //                 //@ts-ignore
-        //                 const { message: messageError } = await res.json()
-        //                 ALerta({ title: messageError, icon: 'error' })
-        //                 break
+                    case 400:
+                       
+                        const { message: messageError } = await res.json()
+                        ALerta({ title: messageError, icon: 'error' })
+                        break
+                    case 404:
+                        
+                        const { message: messageErrorN } = await res.json()
+                        ALerta({ title: messageErrorN, icon: 'error' })
+                        break
 
-        //             case 409:
-        //                 const { messageConflicto } = await res.json()
-        //                 ALerta({ title: messageConflicto, icon: 'error' })
-        //                 break
+                    case 409:
+                        const { messageConflicto } = await res.json()
+                        ALerta({ title: messageConflicto, icon: 'error' })
+                        break
 
-        //             default:
-        //                 ALerta({ title: 'status desconocido', icon: 'warning' })
-        //                 break
-        //         }
+                    default:
+                        ALerta({ title: 'status desconocido', icon: 'warning' })
+                        break
+                }
 
-        //     })
+            })
 
 
 
