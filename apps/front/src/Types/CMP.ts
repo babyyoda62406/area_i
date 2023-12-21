@@ -1,5 +1,6 @@
 
 
+
 type typeLoginLayout = {
 
 }
@@ -28,7 +29,9 @@ type typeFormularioTPModal = {
 }
 
 type typeModalFormulario = {
-    tipoModal:string
+    Formulario: any
+    showModal: boolean
+    setShowModal:(arg:boolean)=>void
     
 }
 
@@ -40,6 +43,12 @@ type typeDatosProyServer = {
     
 }
 
+type tpInputForm = {
+    label?: string
+    tipo: 'text' | 'select' | 'number' | 'submit' 
+    evento:(arg:string)=>void
+}
+
 
 
 
@@ -49,7 +58,8 @@ export type {
     typeBienvenida,
     typeModalFormulario,
     typeFormularioTPModal,
-    typeDatosProyServer
+    typeDatosProyServer,
+    tpInputForm
     
 
 }

@@ -1,0 +1,52 @@
+.InputForm{
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem;
+    
+}
+
+.InputForm>*{
+    margin:0.1rem 0.5rem;
+    padding:0.5rem;
+}
+
+.InputForm>label{
+    text-transform: capitalize;
+    font-size: 1.2rem;
+    color: var(--bg-white-8);
+}
+
+.InputForm>input:focus-visible{
+    outline: none;
+}
+
+.InputForm>input{
+    border: 0.1px solid var(--bg-white-7);
+}
+ .InputEnviar{
+    display: flex;
+    justify-content: end;
+    flex-direction: row;
+    padding-right:1rem ;
+    
+}
+
+
+.InputForm>input[type='submit']{
+    width: 20%;
+
+    border-radius: 3px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    background-color: var(--bg-blue-4);
+    color: var(--bg-black-4);
+    transition: all 500ms;
+}
+
+.InputForm>input[type='submit']:hover{
+    cursor: pointer;
+    background-color: var(--bg-blue-7);
+    color: var(--bg-blue-2);
+}

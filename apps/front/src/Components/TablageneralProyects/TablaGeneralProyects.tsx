@@ -12,7 +12,7 @@ import { modeloColumnas } from './Model/modeloColumnas';
 const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
 
 
-  const { token, showSidebar, actualizarTabla } = useContext(GlobalContext)
+  const { token, showSidebar} = useContext(GlobalContext)
   const [form] = Form.useForm();
   const [data, setData] = useState<Item[]>([]);
   const [estadoProyecto, setEstadoProyecto] = useState<string>('Activo')
@@ -33,7 +33,7 @@ const TablaGeneralProyects: FC<typeTablaProyectos> = () => {
      reloadTabla(token,setData)
     
     
-  }, [actualizarTabla])
+  }, [])
   
 
 

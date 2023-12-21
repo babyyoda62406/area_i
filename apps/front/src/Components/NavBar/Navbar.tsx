@@ -5,7 +5,7 @@ import { typeNavbar } from '../../Types/TpHlayout'
 import Hamburguer from 'hamburger-react'
 import TitleNavbar from '../TitleNavbar/TitleNavbar'
 import Sidebar from '../Sidebar/Sidebar'
-import { MagicMotion } from 'react-magic-motion'
+
 import { GlobalContext } from '../../Contexts/GlobalContext'
 
 const Navbar: FC<typeNavbar> = () => {
@@ -22,9 +22,9 @@ const Navbar: FC<typeNavbar> = () => {
             <Hamburguer toggled={showSidebar} toggle={()=>setShowSidebar(!showSidebar)} />
         </div>
 
-        <MagicMotion>
+        
             <Sidebar Show={showSidebar} />
-        </MagicMotion>
+        
         <TitleNavbar />
         {/* <HerramientasNavbar /> */}
 

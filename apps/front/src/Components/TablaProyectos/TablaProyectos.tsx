@@ -28,13 +28,9 @@ const TablaProyectos = () => {
 
     }, [actualizarTabla])
 
-
     const HandlerModified = (arg: any) => { setcolumnModified({ ['idRow']: arg.id, ['column']: arg.field })}
 
     
-
-
-
     return <Box className='ContainerTable'  >
 
         <DataGrid

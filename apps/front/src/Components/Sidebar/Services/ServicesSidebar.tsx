@@ -1,21 +1,9 @@
 
-import { ALerta } from "../../../Services/Alerta"
-import { typeShowModal } from "../../../Types/UseStates"
 
 
 
-export const HandlerSidebar = (arg: string, setShowModal: Function,showModal:typeShowModal,ruta:any) => {
+export const HandlerSidebar = (arg: string,ruta:any,setShowModal:(arg:boolean)=>void) => {
 
-
-  const mostrarModal = (arg: string) => {
-    setShowModal((prevShowModal: typeShowModal) => {
-      return {
-        ...prevShowModal,
-        [arg]: true,
-      }
-    })
-
-  }
 
   
 
@@ -30,12 +18,10 @@ export const HandlerSidebar = (arg: string, setShowModal: Function,showModal:typ
       break
 
     case 'AgregarProyectos':
+      setShowModal(true)
+      
     
-      if (false) {
-        ALerta({title:'por favor abra la gestion de proyectos ',icon:'warning'})
-      } else {
-         mostrarModal('proyectos')
-      }
+      
     
       break
     

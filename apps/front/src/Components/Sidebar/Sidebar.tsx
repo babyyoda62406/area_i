@@ -1,20 +1,23 @@
 
-import { FC, useContext, useState } from 'react'
+import { FC, useState } from 'react'
 import './Sidebar.css'
 import { typeSidebar } from '../../Types/TpHlayout'
 
 import { Collapse, CollapseProps } from 'antd'
 import { itemsASide } from '../../Helpers/OptionsSidebar'
 import {  typeSubElAside } from '../../Types/UseStates'
-import { GlobalContext } from '../../Contexts/GlobalContext'
+
 import { HandlerSidebar } from './Services/ServicesSidebar'
 import { useNavigate } from 'react-router-dom'
+import ModalFormulario from '../ModalFormulario/ModalFormulario'
+import FormularioAddProyect from './Components/FormularioAddProyect/FormularioAddProyect'
 
 
 const Sidebar: FC<typeSidebar> = ({ Show }) => {
 
-  const { showModal, setShowModal } = useContext(GlobalContext)
+
   const ruta = useNavigate()
+  const [showModal, setShowModal] = useState<boolean>(false)
 
   const ElementsStyle = {
     marginBottom: '',
@@ -33,7 +36,7 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
  */
   const activarSubItem = (arg: string, elementFunc: string) => {
     
-    HandlerSidebar(elementFunc,setShowModal,showModal,ruta)
+    HandlerSidebar(elementFunc,ruta,setShowModal)
 
     elementActive.element == arg ? setElementActive({...elementActive, ['element']:''}):setElementActive((prevelementActive) => {
       return {
@@ -72,8 +75,9 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
 
   return <div className={`Sidebar ${Show ? 'ShowAside' : 'CerrarAside'}`}>
 
-    <Collapse accordion  expandIconPosition='end' size='large' items={ElementSidebar} defaultActiveKey={['0']}>
+    <Collapse accordion expandIconPosition='end' size='large' items={ElementSidebar} defaultActiveKey={['0']}>
     </Collapse>
+    <ModalFormulario showModal={showModal } setShowModal={()=>setShowModal(false)} Formulario = {<FormularioAddProyect setShowModal={()=>setShowModal(false)}/>} />
 
   </div>
 }

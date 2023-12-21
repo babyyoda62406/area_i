@@ -1,4 +1,6 @@
 
+
+
 type typeDatosForm = {
     correo: string|string
     password:string
@@ -16,25 +18,15 @@ type typeSubElAside = {
     element:string
 }
 
-type typeShowModal = {
-    proyectos: boolean
 
-}
 
-type typeActualizarTabla = {
-    tablaProyectos:number
-}
 
-type typeShowLayout = {
-    gestionProyectos: boolean
-    gestionUsuarios: boolean
-}
+
+
 
 export type {
     typeDatosForm,
     typeErrorForm,
     typeSubElAside,
-    typeShowModal,
-    typeActualizarTabla,
-    typeShowLayout
+    
 }
