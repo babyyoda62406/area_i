@@ -7,20 +7,23 @@ import { ALerta } from '../../../../Services/Alerta'
 import { FetchService } from '../../../../Services/FetchService'
 import { typeDatosProyServer } from '../../../../Types/CMP'
 import { tpFormularioAddProyecto } from '../../../../Types/Formularios'
+import { ReadToken } from '../../../../Services/DecodingToken'
 
 const FormularioAddProyect: FC<tpFormularioAddProyecto> = ({ setShowModal }) => {
 
     const { token } = useContext(GlobalContext)
 
+    
+
     const [dataServer, setDataServer] = useState<typeDatosProyServer>({
         nombre: '',
         organizacion: '',
-        ownerId: 2,
+        ownerId: ReadToken(token),
         uid: ''
     })
 
     const guardarDatos = (arg: string, type: keyof typeDatosProyServer) => {
-
+        
         switch (type) {
             case 'nombre':
                 setDataServer({ ...dataServer, [type]: arg })
@@ -58,12 +61,12 @@ const FormularioAddProyect: FC<tpFormularioAddProyecto> = ({ setShowModal }) => 
                         break
 
                     case 400:
-                       
+
                         const { message: messageError } = await res.json()
                         ALerta({ title: messageError, icon: 'error' })
                         break
                     case 404:
-                        
+
                         const { message: messageErrorN } = await res.json()
                         ALerta({ title: messageErrorN, icon: 'error' })
                         break
