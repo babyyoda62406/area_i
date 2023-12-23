@@ -1,6 +1,6 @@
 import './TablaProyectos.css'
 import Box from '@mui/material/Box';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridRowHeightParams } from '@mui/x-data-grid';
 import { columns } from './Helper/Columnas';
 import { esES } from "@mui/x-data-grid/locales";
 import { reloadTabla } from './services/ReloadTabla';
@@ -9,6 +9,7 @@ import { GlobalContext } from '../../Contexts/GlobalContext';
 import { Item } from '../../Interfaces/TableInterfaces';
 import { DatoModificado } from './services/Update';
 import { tpColumnModified } from './types/tpcolumnas';
+import SelectorHeight from './Components/Selectorheight/SelectorHeight';
 
 
 const TablaProyectos = () => {
@@ -37,6 +38,16 @@ const TablaProyectos = () => {
             className='TablaProyectos'
             localeText={idioma}
             rows={data}
+            getRowHeight={({ id, densityFactor }: GridRowHeightParams) => {
+                if ((id as number) % 2 === 0) {
+                  return 50 * densityFactor;
+                }
+      
+                return null;
+              }}
+              slots={{
+                toolbar: SelectorHeight,
+              }}
             columns={columns}
             initialState={{
                 pagination: {
@@ -46,11 +57,8 @@ const TablaProyectos = () => {
                 },
             }}
             pageSizeOptions={[2, 5, 7]}
-
             disableRowSelectionOnClick
-
             onCellEditStop={HandlerModified}
-
             processRowUpdate={(updatedRow,paramsold) =>
                 DatoModificado(token,updatedRow,paramsold,columnModified, data,setData)
             }

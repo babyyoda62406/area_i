@@ -13,8 +13,6 @@ const FormularioAddProyect: FC<tpFormularioAddProyecto> = ({ setShowModal }) => 
 
     const { token } = useContext(GlobalContext)
 
-    
-
     const [dataServer, setDataServer] = useState<typeDatosProyServer>({
         nombre: '',
         organizacion: '',
