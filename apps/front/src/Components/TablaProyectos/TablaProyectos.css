@@ -9,3 +9,31 @@
     /* height:max-content; */
 
 }
+
+.PopoverProyects {
+    width: max-content;
+    padding: 0.6rem;
+    display:flex;
+    flex-direction: column;
+}
+
+.PopoverProyects .TitlePopover{
+    font-size: 1.2rem;
+    color: var(--bg-black-4);
+}
+.PopoverProyects .BodyPopover{
+    display: flex;
+    margin-top: 1rem;
+    justify-content: end;
+
+}
+
+
+
+.PopoverProyects .BodyPopover .ButtonPop.yes{
+    background-color: var(--bg-succes-1);
+    color: var(--bg-white-2);
+}
+.PopoverProyects .BodyPopover .ButtonPop.yes:hover{
+    color: white;
+}

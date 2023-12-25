@@ -1,6 +1,6 @@
 import './TablaProyectos.css'
 import Box from '@mui/material/Box';
-import { DataGrid, GridRowHeightParams, } from '@mui/x-data-grid';
+import { DataGrid, GridRowHeightParams, GridRowId, } from '@mui/x-data-grid';
 import { esES } from "@mui/x-data-grid/locales";
 import { reloadTabla } from './services/ReloadTabla';
 import { useContext, useEffect, useState } from 'react';
@@ -13,19 +13,21 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SelectorHeight from './Components/Selectorheight/SelectorHeight';
 import { DeleteElement } from './services/Delete';
+import { Button, Popover } from 'antd';
 
 
 
 const TablaProyectos = () => {
 	// idioma de las opciones de la tabla
 	const idioma = esES.components.MuiDataGrid.defaultProps.localeText
+	const { token, actualizarTabla, setActualizarTabla } = useContext(GlobalContext)
 	const [data, setData] = useState<Item[]>([])
 	const [columnModified, setcolumnModified] = useState<tpColumnModified>({
 		idRow: 0,
 		column: ''
 	})
+	const [idRowDelete,setIdRowDelete]= useState<GridRowId>(0)
 
-	const { token,actualizarTabla,setActualizarTabla } = useContext(GlobalContext)
 
 	useEffect(() => {
 		reloadTabla(token, setData)
@@ -34,6 +36,15 @@ const TablaProyectos = () => {
 
 	const HandlerModified = (arg: any) => { setcolumnModified({ ['idRow']: arg.id, ['column']: arg.field }) }
 
+	const contenidoPopover = <div className='PopoverProyects'>
+		<span className='TitlePopover'>Estas seguro que deseas eliminar este proyecto?</span>
+		<div className='BodyPopover '>
+		
+		<Button className='ButtonPop yes' onClick={()=>DeleteElement(idRowDelete, token, actualizarTabla, setActualizarTabla)}>
+			Si
+		</Button>
+		</div>
+	</div>
 
 	// estrutura de columnas
 	const columns: GridColDef[] = [
@@ -44,7 +55,7 @@ const TablaProyectos = () => {
 			width: 150,
 			editable: true,
 			filterable: true,
-	
+
 		},
 		{
 			field: 'nombre',
@@ -58,7 +69,7 @@ const TablaProyectos = () => {
 			type: 'text',
 			width: 100,
 			editable: true,
-			align:"right"
+			align: "right"
 		},
 		{
 			field: 'estado',
@@ -66,7 +77,7 @@ const TablaProyectos = () => {
 			sortable: true,
 			width: 160,
 			editable: true,
-			
+
 		},
 		{
 			field: 'actions',
@@ -74,26 +85,30 @@ const TablaProyectos = () => {
 			headerName: 'Operaciones',
 			width: 100,
 			cellClassName: 'actions',
-			getActions: ({ id,row }) => {
-			  
-	  
-			  return [
-				<GridActionsCellItem
-				  icon={<EditIcon />}
-				  label="Editar"
-				  className="textPrimary"
-				  onClick={()=> alert(row)}
-				  color="inherit"
-				/>,
-				<GridActionsCellItem
-				  icon={<DeleteIcon />}
-				  label="Eliminar"
-				  onClick={()=>DeleteElement(id,token,actualizarTabla,setActualizarTabla)}
-				  color="inherit"
-				/>,
-			  ];
+			getActions: ({ id, row }) => {
+				
+
+				return [
+					<GridActionsCellItem
+						icon={<EditIcon />}
+						label="Editar"
+						className="textPrimary"
+						onClick={() => alert(row)}
+						color="inherit"
+					/>,
+					<Popover content={contenidoPopover} onOpenChange={()=>setIdRowDelete(id)}  >
+						<GridActionsCellItem
+							icon={<DeleteIcon />}
+							label="Eliminar"
+							// 
+							
+							color="inherit"
+						/>
+					</Popover>
+					,
+				];
 			},
-		  }
+		}
 	];
 
 
