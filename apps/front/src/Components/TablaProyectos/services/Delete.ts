@@ -2,8 +2,13 @@ import { GridRowId } from "@mui/x-data-grid";
 import { FetchService } from "../../../Services/FetchService";
 import { RutaServer } from "../../../Helpers/RutaServer";
 import { ALerta } from "../../../Services/Alerta";
+import { tpActulizarTabla } from "../../../Types/UseStates";
 
-export const DeleteElement = (idData: GridRowId,token:string) => {
+export const DeleteElement = (
+    idData: GridRowId,
+    token: string,
+    actualizarTabla: tpActulizarTabla,
+    setActualizarTabla: (arg: tpActulizarTabla) => void) => {
     
     
     
@@ -19,6 +24,7 @@ export const DeleteElement = (idData: GridRowId,token:string) => {
                 case 200:
                     const {message}= await res.json() 
                     ALerta({ text: message, icon: 'success' })
+                    setActualizarTabla({...actualizarTabla,['tablaProyectos']:!actualizarTabla.tablaProyectos})
                     
                     break
                 case 400:

@@ -6,7 +6,7 @@ import { reloadTabla } from './services/ReloadTabla';
 import { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../../Contexts/GlobalContext';
 import { Item } from '../../Interfaces/TableInterfaces';
-import { DatoModificado } from './services/Update';
+import { DatoModificado } from './services/Update.ts';
 import { tpColumnModified } from './types/tpcolumnas';
 import { GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
@@ -19,14 +19,13 @@ import { DeleteElement } from './services/Delete';
 const TablaProyectos = () => {
 	// idioma de las opciones de la tabla
 	const idioma = esES.components.MuiDataGrid.defaultProps.localeText
-	const [actualizarTabla, setActualizarTabla] = useState<boolean>(false)
 	const [data, setData] = useState<Item[]>([])
 	const [columnModified, setcolumnModified] = useState<tpColumnModified>({
 		idRow: 0,
 		column: ''
 	})
 
-	const { token } = useContext(GlobalContext)
+	const { token,actualizarTabla,setActualizarTabla } = useContext(GlobalContext)
 
 	useEffect(() => {
 		reloadTabla(token, setData)
@@ -89,7 +88,7 @@ const TablaProyectos = () => {
 				<GridActionsCellItem
 				  icon={<DeleteIcon />}
 				  label="Eliminar"
-				  onClick={()=>DeleteElement(id,token)}
+				  onClick={()=>DeleteElement(id,token,actualizarTabla,setActualizarTabla)}
 				  color="inherit"
 				/>,
 			  ];

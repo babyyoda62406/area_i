@@ -1,5 +1,6 @@
-import  { FC, createContext, useState } from "react";
+import { FC, createContext, useState } from "react";
 import { typeGlobalContext, typeProviderContext } from "../Types/GlobalContext";
+import { tpActulizarTabla } from "../Types/UseStates";
 
 
 
@@ -9,17 +10,21 @@ import { typeGlobalContext, typeProviderContext } from "../Types/GlobalContext";
 export const GlobalContext = createContext<typeGlobalContext>({
     token: '',
     showSidebar: false,
-    
-    
-    
-    
-    
+    actualizarTabla: {
+        tablaProyectos: false
+    },
+
+
+
+
+
 
     setToken: () => { },
     setShowSidebar: () => { },
-   
-    
-    
+    setActualizarTabla: () => { },
+
+
+
 
 })
 
@@ -29,16 +34,19 @@ export const GlobalContext = createContext<typeGlobalContext>({
  * variables globales de la APP
  * @returns 
  */
-export const GlobalContextProvider: FC<typeProviderContext> = ({children}) => {
-    
+export const GlobalContextProvider: FC<typeProviderContext> = ({ children }) => {
+
     const [token, setToken] = useState<string>('')
-    const [showSidebar,setShowSidebar] = useState<boolean>(false)
-    
-    
+    const [showSidebar, setShowSidebar] = useState<boolean>(false)
+    const [actualizarTabla, setActualizarTabla] = useState<tpActulizarTabla>({
+        tablaProyectos: false
+    })
 
-    
 
-    return <GlobalContext.Provider value={{token, setToken,showSidebar,setShowSidebar}}>
+
+
+
+    return <GlobalContext.Provider value={{ token, setToken, showSidebar, setShowSidebar, actualizarTabla, setActualizarTabla }}>
         {children}
     </GlobalContext.Provider>
 }
