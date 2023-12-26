@@ -1,7 +1,8 @@
+import { GridRowId } from "@mui/x-data-grid"
 
 
 type tpColumnModified = {
-    idRow: number,
+    idRow: GridRowId,
     column:string
 }
 

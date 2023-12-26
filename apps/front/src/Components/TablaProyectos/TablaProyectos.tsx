@@ -3,9 +3,9 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridRowHeightParams, GridRowId, } from '@mui/x-data-grid';
 import { esES } from "@mui/x-data-grid/locales";
 import { reloadTabla } from './services/ReloadTabla';
-import { useContext, useEffect, useState } from 'react';
+import {  useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../../Contexts/GlobalContext';
-import { Item } from '../../Interfaces/TableInterfaces';
+
 import { DatoModificado } from './services/Update.ts';
 import { tpColumnModified } from './types/tpcolumnas';
 import { GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
@@ -14,6 +14,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SelectorHeight from './Components/Selectorheight/SelectorHeight';
 import { DeleteElement } from './services/Delete';
 import { Button, Popover } from 'antd';
+import ModalFormulario from '../ModalFormulario/ModalFormulario.tsx';
+import FormularioProyectsUpdate from './Components/FormularioUpdate/FormularioProyectsUpdate.tsx';
+import { typeDatosProyServer } from '../../Types/CMP.ts';
 
 
 
@@ -21,30 +24,44 @@ const TablaProyectos = () => {
 	// idioma de las opciones de la tabla
 	const idioma = esES.components.MuiDataGrid.defaultProps.localeText
 	const { token, actualizarTabla, setActualizarTabla } = useContext(GlobalContext)
-	const [data, setData] = useState<Item[]>([])
+	const [data, setData] = useState<typeDatosProyServer[]>([])
 	const [columnModified, setcolumnModified] = useState<tpColumnModified>({
 		idRow: 0,
 		column: ''
 	})
-	const [idRowDelete,setIdRowDelete]= useState<GridRowId>(0)
-
+	const [idRowDelete, setIdRowDelete] = useState<GridRowId>(0)
+	const [showModal, setShowModal] = useState<boolean>(false)
+	const [rowEdit, setRowEdit] = useState<typeDatosProyServer>({ ...data[0] })
+	
 
 	useEffect(() => {
 		reloadTabla(token, setData)
 
 	}, [actualizarTabla])
 
+	
+
 	const HandlerModified = (arg: any) => { setcolumnModified({ ['idRow']: arg.id, ['column']: arg.field }) }
 
 	const contenidoPopover = <div className='PopoverProyects'>
 		<span className='TitlePopover'>Estas seguro que deseas eliminar este proyecto?</span>
 		<div className='BodyPopover '>
-		
-		<Button className='ButtonPop yes' onClick={()=>DeleteElement(idRowDelete, token, actualizarTabla, setActualizarTabla)}>
-			Si
-		</Button>
+
+			<Button className='ButtonPop yes' onClick={() => DeleteElement(idRowDelete, token, actualizarTabla, setActualizarTabla)}>
+				Si
+			</Button>
 		</div>
 	</div>
+
+
+	
+	const EditarRow = (row: typeDatosProyServer, id: GridRowId) => {
+
+		setRowEdit(row)
+		setcolumnModified({ ...columnModified, ['idRow']: id })
+		setShowModal(true)
+	}
+
 
 	// estrutura de columnas
 	const columns: GridColDef[] = [
@@ -86,22 +103,20 @@ const TablaProyectos = () => {
 			width: 100,
 			cellClassName: 'actions',
 			getActions: ({ id, row }) => {
-				
+
 
 				return [
 					<GridActionsCellItem
 						icon={<EditIcon />}
 						label="Editar"
 						className="textPrimary"
-						onClick={() => alert(row)}
+						onClick={() => EditarRow(row, id)}
 						color="inherit"
 					/>,
-					<Popover content={contenidoPopover} onOpenChange={()=>setIdRowDelete(id)}  >
+					<Popover content={contenidoPopover} onOpenChange={() => setIdRowDelete(id)}  >
 						<GridActionsCellItem
 							icon={<DeleteIcon />}
 							label="Eliminar"
-							// 
-							
 							color="inherit"
 						/>
 					</Popover>
@@ -141,10 +156,11 @@ const TablaProyectos = () => {
 			disableRowSelectionOnClick
 			onCellEditStop={HandlerModified}
 			processRowUpdate={(updatedRow, paramsold) =>
-				DatoModificado(token, updatedRow, paramsold, columnModified, data, setData)
+				DatoModificado(token, updatedRow, paramsold, columnModified, data, setData,actualizarTabla,setActualizarTabla)
 			}
 			onProcessRowUpdateError={(err) => console.log(err)}
 		/>
+		<ModalFormulario showModal={showModal} setShowModal={() => setShowModal(false)} Formulario={<FormularioProyectsUpdate data={rowEdit} id={columnModified.idRow} setShowModal={() => setShowModal(false)} />} />
 	</Box>
 }
 

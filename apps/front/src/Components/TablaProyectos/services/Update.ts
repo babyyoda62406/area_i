@@ -1,7 +1,9 @@
 import { RutaServer } from "../../../Helpers/RutaServer"
-import { Item } from "../../../Interfaces/TableInterfaces"
+
 import { ALerta } from "../../../Services/Alerta"
 import { FetchService } from "../../../Services/FetchService"
+import { typeDatosProyServer } from "../../../Types/CMP"
+import { tpActualizarTabla } from "../../../Types/UseStates"
 import { tpColumnModified } from "../types/tpcolumnas"
 
 export const DatoModificado = (
@@ -9,18 +11,20 @@ export const DatoModificado = (
     paramsUpdate: any,
     paramsold: any,
     columnModified: tpColumnModified,
-    data: Item[],
-    setData:(arg:Item[])=>void) => {
+    data: typeDatosProyServer[],
+    setData: (arg: typeDatosProyServer[]) => void,
+    actualizarTabla: tpActualizarTabla,
+    setActualizarTabla:(arg:tpActualizarTabla)=>void) => {
 
     const elementModified = paramsUpdate
     
 
+    
     const newValue = {
         'id': elementModified.id,
         [columnModified.column]: elementModified[columnModified.column]
-
     }
-
+    console.log(newValue)
     let newUrl = ` ${RutaServer.getProyectos}/${elementModified.id}`
     FetchService(newUrl, {
         method: 'PATCH',
@@ -36,7 +40,7 @@ export const DatoModificado = (
                 case 200:
                     
                     const { message: mesSucces, newProyecto } = await res.json()
-                    let position = data.findIndex(element => element.id === newProyecto.id)
+                    let position = data.findIndex(element => element.uid === newProyecto.id)
                     
                     const newData = [...data]
                     newData[position] = {
@@ -46,6 +50,7 @@ export const DatoModificado = (
                     
                     setData(newData)
                     ALerta({ title: mesSucces, icon: "success", position: 'top-right' })
+                    setActualizarTabla({...actualizarTabla,['tablaProyectos']:!actualizarTabla.tablaProyectos})
                     break;
 
                 case 400:

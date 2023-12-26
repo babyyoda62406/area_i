@@ -1,6 +1,6 @@
 import { FC, createContext, useState } from "react";
 import { typeGlobalContext, typeProviderContext } from "../Types/GlobalContext";
-import { tpActulizarTabla } from "../Types/UseStates";
+import { tpActualizarTabla } from "../Types/UseStates";
 
 
 
@@ -38,7 +38,7 @@ export const GlobalContextProvider: FC<typeProviderContext> = ({ children }) => 
 
     const [token, setToken] = useState<string>('')
     const [showSidebar, setShowSidebar] = useState<boolean>(false)
-    const [actualizarTabla, setActualizarTabla] = useState<tpActulizarTabla>({
+    const [actualizarTabla, setActualizarTabla] = useState<tpActualizarTabla>({
         tablaProyectos: false
     })
 

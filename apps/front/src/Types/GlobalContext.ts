@@ -1,17 +1,17 @@
-import { tpActulizarTabla } from "./UseStates"
+import { tpActualizarTabla } from "./UseStates"
 
 
 
 export type typeGlobalContext = {
     token: string
     showSidebar: boolean
-    actualizarTabla:tpActulizarTabla
+    actualizarTabla:tpActualizarTabla
    
     
 
     setToken: (arg: string) => void
     setShowSidebar: (value: boolean) => void
-    setActualizarTabla: (arg:tpActulizarTabla)=>void
+    setActualizarTabla: (arg:tpActualizarTabla)=>void
     
    
 }

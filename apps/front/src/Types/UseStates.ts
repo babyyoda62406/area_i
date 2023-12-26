@@ -1,4 +1,4 @@
-type tpActulizarTabla = {
+type tpActualizarTabla = {
     tablaProyectos:boolean
 }
 
@@ -30,5 +30,5 @@ export type {
     typeDatosForm,
     typeErrorForm,
     typeSubElAside,
-    tpActulizarTabla
+    tpActualizarTabla
 }
