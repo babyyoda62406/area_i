@@ -1,5 +1,5 @@
 import './FormularioProyectsUpdate.css'
-import { FC, useContext, useEffect, useState } from "react"
+import React, { FC, useContext, useEffect, useState } from "react"
 import { tpFormularioUpdateProyects } from "../../types/FormularioProyects"
 import InputForm from "../../../InputForm/InputForm"
 import { typeDatosProyServer } from "../../../../Types/CMP"
@@ -39,17 +39,22 @@ const FormularioProyectsUpdate: FC<tpFormularioUpdateProyects> = ({ data,id,setS
     const enviarDatos = (event: any) => {
         event.preventDefault()
         
-        const newObject:any= Object.entries(newData).find(([key, value]) => {
-            return Object.entries(data).some(([key2, value2]) => {
-              return key === key2 && value !== value2;
-            });
-        });
+
+        const newObject = {}
+        let claves:string[]= Object.keys(newData)
         
+        for (let i of claves) {
+            // @ts-ignore
+            if (newData[i] !== data[i]) {
+                // @ts-ignore
+               newObject[i]=newData[i]
+            }   
+        }
 
         const newValue = {
             'id': id,
-            [newObject?.key]:newObject.value
             
+            ...newObject
         }
     
         let newUrl = ` ${RutaServer.getProyectos}/${id}`
