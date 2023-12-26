@@ -37,3 +37,10 @@
 .PopoverProyects .BodyPopover .ButtonPop.yes:hover{
     color: white;
 }
+
+.HeaderTable{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.1px solid var(--bg-blue-2);
+}

@@ -11,7 +11,7 @@ import { ReadToken } from '../../../../Services/DecodingToken'
 
 const FormularioAddProyect: FC<tpFormularioAddProyecto> = ({ setShowModal }) => {
 
-    const { token } = useContext(GlobalContext)
+    const { token,actualizarTabla,setActualizarTabla } = useContext(GlobalContext)
 
     const [dataServer, setDataServer] = useState<typeDatosProyServer>({
         nombre: '',
@@ -56,6 +56,7 @@ const FormularioAddProyect: FC<tpFormularioAddProyecto> = ({ setShowModal }) => 
                         const { message } = await res.json()
                         ALerta({ title: message, icon: 'success' })
                         setShowModal(false)
+                        setActualizarTabla({...actualizarTabla,['tablaProyectos']:!actualizarTabla.tablaProyectos})
                         break
 
                     case 400:

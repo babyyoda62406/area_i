@@ -24,7 +24,7 @@ export const DatoModificado = (
         'id': elementModified.id,
         [columnModified.column]: elementModified[columnModified.column]
     }
-    console.log(newValue)
+    
     let newUrl = ` ${RutaServer.getProyectos}/${elementModified.id}`
     FetchService(newUrl, {
         method: 'PATCH',

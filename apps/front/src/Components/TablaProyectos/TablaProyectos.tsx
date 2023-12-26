@@ -5,7 +5,6 @@ import { esES } from "@mui/x-data-grid/locales";
 import { reloadTabla } from './services/ReloadTabla';
 import {  useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../../Contexts/GlobalContext';
-
 import { DatoModificado } from './services/Update.ts';
 import { tpColumnModified } from './types/tpcolumnas';
 import { GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
@@ -17,6 +16,7 @@ import { Button, Popover } from 'antd';
 import ModalFormulario from '../ModalFormulario/ModalFormulario.tsx';
 import FormularioProyectsUpdate from './Components/FormularioUpdate/FormularioProyectsUpdate.tsx';
 import { typeDatosProyServer } from '../../Types/CMP.ts';
+import BtnAddProyect from './Components/AgregarProyecto/AgregarProyecto.tsx';
 
 
 
@@ -142,9 +142,16 @@ const TablaProyectos = () => {
 				return null;
 			}}
 			slots={{
-				toolbar: SelectorHeight,
+				toolbar: () => {
+					return <div className='HeaderTable'>
+						<SelectorHeight />
+						<BtnAddProyect/>
+					</div>
+				},
+				
+				
 			}}
-
+// toolbar:BtnAddProyect
 			initialState={{
 				pagination: {
 					paginationModel: {
@@ -159,6 +166,7 @@ const TablaProyectos = () => {
 				DatoModificado(token, updatedRow, paramsold, columnModified, data, setData,actualizarTabla,setActualizarTabla)
 			}
 			onProcessRowUpdateError={(err) => console.log(err)}
+			
 		/>
 		<ModalFormulario showModal={showModal} setShowModal={() => setShowModal(false)} Formulario={<FormularioProyectsUpdate data={rowEdit} id={columnModified.idRow} setShowModal={() => setShowModal(false)} />} />
 	</Box>
