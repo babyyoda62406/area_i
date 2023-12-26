@@ -1,5 +1,5 @@
 import './FormularioProyectsUpdate.css'
-import React, { FC, useContext, useEffect, useState } from "react"
+import { FC, useContext, useEffect, useState } from "react"
 import { tpFormularioUpdateProyects } from "../../types/FormularioProyects"
 import InputForm from "../../../InputForm/InputForm"
 import { typeDatosProyServer } from "../../../../Types/CMP"
@@ -10,11 +10,9 @@ import { GlobalContext } from '../../../../Contexts/GlobalContext'
 
 const FormularioProyectsUpdate: FC<tpFormularioUpdateProyects> = ({ data,id,setShowModal }) => {
     
-    
     const [newData, setNewData] = useState<typeDatosProyServer>({ ...data })
     const { token, actualizarTabla, setActualizarTabla } = useContext(GlobalContext)
     
-   
     useEffect(()=>{setNewData(data)},[data])
 
     const guardarDatos = (arg: string, type: keyof typeDatosProyServer) => {
