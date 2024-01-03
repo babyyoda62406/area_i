@@ -1,12 +1,11 @@
 import { nomenclador } from "src/enums/nomenclador";
-import { Column, Entity,   OneToMany,  PrimaryGeneratedColumn } from 'typeorm';
-import { Tarifa } from "./tarifa.entity";
+import { Column, Entity,   PrimaryGeneratedColumn } from 'typeorm';
 
 
 /**
  * Entidad Nivel de experticia
  */
-@Entity()
+@Entity('nivelExperticia')
 export class NivelExperticia{
     @PrimaryGeneratedColumn()
     id: number
@@ -17,7 +16,7 @@ export class NivelExperticia{
     @Column({enum: nomenclador, default: nomenclador.Activo})
     estado: nomenclador
 
-    @OneToMany(()=>Tarifa , tarifa => tarifa.nivelExperticia )
-    tarifas: Tarifa[]
+    // @OneToMany(()=>Tarifa , tarifa => tarifa.nivelExperticia )
+    // tarifas: Tarifa[]
 
 }
