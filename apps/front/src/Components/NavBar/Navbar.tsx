@@ -7,6 +7,7 @@ import TitleNavbar from '../TitleNavbar/TitleNavbar'
 import Sidebar from '../Sidebar/Sidebar'
 
 import { GlobalContext } from '../../Contexts/GlobalContext'
+import HerramientasNavbar from '../HerramientasNavbar/herramientasNavbar'
 
 const Navbar: FC<typeNavbar> = () => {
 
@@ -26,7 +27,7 @@ const Navbar: FC<typeNavbar> = () => {
             <Sidebar Show={showSidebar} />
         
         <TitleNavbar />
-        {/* <HerramientasNavbar /> */}
+        <HerramientasNavbar />
 
     </div>
 }

@@ -1,12 +1,13 @@
 import { FC } from 'react'
 import { typeHerrmtasNavb } from '../../Types/TpHlayout'
 import './HerramientasNavbar.css'
-import SearchNavbar from '../SearchNavbar/SearchNavbar'
+import LogoApp from '/src/assets/Logo/FINANCIUS_LOGO.fw.png'
+
 
 const HerramientasNavbar:FC<typeHerrmtasNavb> = () => {
     
     return <div className="HerramientasNavbar">
-        <SearchNavbar/>
+        <img src={LogoApp} alt="" />
     </div>
 }
 

@@ -10,6 +10,7 @@ import { GlobalContext } from '../../../../Contexts/GlobalContext'
 
 const FormularioProyectsUpdate: FC<tpFormularioUpdateProyects> = ({ data,id,setShowModal }) => {
     
+    
     const [newData, setNewData] = useState<typeDatosProyServer>({ ...data })
     const { token, actualizarTabla, setActualizarTabla } = useContext(GlobalContext)
     

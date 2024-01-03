@@ -1,4 +1,19 @@
 
 .HerramientasNavbar{
-    
+    width: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.HerramientasNavbar>img{
+    width:12rem;
+    height:max-content;
+    margin: 0px auto;
+    border: 1px solid var(--bg-blue-10);
+    transition: all 500ms;
+}
+
+.HerramientasNavbar>img:hover{
+    border: 1.5px solid var(--bg-blue-1);
 }
