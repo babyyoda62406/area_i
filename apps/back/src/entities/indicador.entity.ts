@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { nomenclador } from 'src/enums/nomenclador';
+import { nomencladorEstados } from 'src/enums/nomenclador';
 
 @Entity()
 export class Indicador{
@@ -13,6 +13,6 @@ export class Indicador{
     value: number
 
 
-    @Column({default: nomenclador.Activo})
-    estado: nomenclador
+    @Column({default: nomencladorEstados.Activo})
+    estado: nomencladorEstados
 }

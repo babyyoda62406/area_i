@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Indicador } from 'src/entities/indicador.entity';
 import { Not, Repository } from 'typeorm';
 import { CrearIndicadorDTO } from './dto/crearIndicador.dto';
-import { nomenclador } from 'src/enums/nomenclador';
+import { nomencladorEstados } from 'src/enums/nomenclador';
 import { EditarIndicadorDTO } from './dto/editarIndicador.dto';
 
 @Injectable()
@@ -29,7 +29,7 @@ export class IndicadoresService {
     async getIdnicadores(){
         const tempIndicadores = await this.dbIndicador.find({
             where: {
-                estado: Not(nomenclador.Eliminado)
+                estado: Not(nomencladorEstados.Eliminado)
             }
         })
 
@@ -42,7 +42,7 @@ export class IndicadoresService {
         const tempIndicador = await this.dbIndicador.findOne({
             where:{
                 id , 
-                estado: Not(nomenclador.Eliminado)
+                estado: Not(nomencladorEstados.Eliminado)
             }
         })
 
@@ -54,7 +54,7 @@ export class IndicadoresService {
     async deleteIndicador(id: number){
         const tempIndicador = await this.getIdnicador(id)
 
-        tempIndicador.estado = nomenclador.Eliminado
+        tempIndicador.estado = nomencladorEstados.Eliminado
         
         await this.dbIndicador.save(tempIndicador)
 
@@ -69,7 +69,7 @@ export class IndicadoresService {
             const existeIndicador  =  await this.dbIndicador.findOne({
                 where:{
                     nombre: indicador.nombre,
-                    estado: nomenclador.Activo
+                    estado: nomencladorEstados.Activo
                 }
             })    
 

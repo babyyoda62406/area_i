@@ -5,7 +5,7 @@ import { Not, Repository } from 'typeorm';
 import { CrearUsuarioDTO } from './dto/CrearUsuario.dto';
 import * as bycrypt from 'bcrypt';
 import { EditarUsuarioDTO } from './dto/EditarUsuario.dto';
-import { nomenclador } from 'src/enums/nomenclador';
+import { nomencladorEstados } from 'src/enums/nomenclador';
 
 
 @Injectable()
@@ -42,7 +42,7 @@ export class UsuarioService {
     async getUsuarios() {
         return await this.dbUsuario.find({
             where: {
-                estado: Not(nomenclador.Eliminado)
+                estado: Not(nomencladorEstados.Eliminado)
             }
         });
     }
@@ -56,7 +56,7 @@ export class UsuarioService {
         const tempUser = await this.dbUsuario.findOne({
             where: {
                 id,
-                estado: Not(nomenclador.Eliminado)
+                estado: Not(nomencladorEstados.Eliminado)
             },
             relations: ['proyectos'] 
         })
@@ -75,7 +75,7 @@ export class UsuarioService {
         const tempUser = await this.dbUsuario.findOne({
             where: {
                 correo,
-                estado: Not(nomenclador.Eliminado)
+                estado: Not(nomencladorEstados.Eliminado)
             }
         })
 
@@ -125,7 +125,7 @@ export class UsuarioService {
      */
     async softDeleteUsuarioById(id: number) {
         const tempUser = await this.getUsuario(id);
-        tempUser.estado = nomenclador.Eliminado
+        tempUser.estado = nomencladorEstados.Eliminado
 
         await this.dbUsuario.save(tempUser)
         return tempUser;

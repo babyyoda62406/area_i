@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { RolesProyectos } from '../../entities/roles-proyectos.entity';
 import { Not, Repository } from 'typeorm';
 import { CrearRolProyectoDTO } from './dto/CrearRolProyecto.dto';
-import { nomenclador } from 'src/enums/nomenclador';
+import { nomencladorEstados } from 'src/enums/nomenclador';
 import { EditarRolProyecto } from './dto/EditarRolProyecto.dto';
 
 /**
@@ -22,7 +22,7 @@ export class RolesProyectosService {
 
         const tempRolProyecto = await this.dbRolProyectos.findOne({
             where: {
-                estado: Not(nomenclador.Eliminado),
+                estado: Not(nomencladorEstados.Eliminado),
                 nombre: rolProyecto.nombre
             }
         })
@@ -46,7 +46,7 @@ export class RolesProyectosService {
         const tempRolProyecto = await this.dbRolProyectos.findOne({
             where: {
                 id,
-                estado: Not(nomenclador.Eliminado)
+                estado: Not(nomencladorEstados.Eliminado)
             }
         })
 
@@ -62,7 +62,7 @@ export class RolesProyectosService {
     async obtenerRolesProyectos() {
         const tempRolesProyectos = await this.dbRolProyectos.find({
             where: {
-                estado: Not(nomenclador.Eliminado)
+                estado: Not(nomencladorEstados.Eliminado)
             }
         })
 
@@ -79,7 +79,7 @@ export class RolesProyectosService {
     async eliminarRolesProyectos(id: number) {
         const tempRolesProyecto = await this.obtenerRolPRoyectos(id)
 
-        tempRolesProyecto.estado = nomenclador.Eliminado
+        tempRolesProyecto.estado = nomencladorEstados.Eliminado
 
         await this.dbRolProyectos.save(tempRolesProyecto)
 

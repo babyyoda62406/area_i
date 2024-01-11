@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Persona } from 'src/entities/persona.entity';
 import { Not, Repository } from 'typeorm';
 import { CrearPersonaDTO } from './dto/crearPersona.dto';
-import { nomenclador } from 'src/enums/nomenclador';
+import { nomencladorEstados } from 'src/enums/nomenclador';
 import { EditarPersonaDTO } from './dto/editarPersona.dto';
 import { IndicadoresService } from '../indicadores/indicadores.service';
 
@@ -34,7 +34,7 @@ export class PersonasService {
     async getPersonas() {
         const tempPersonas = await this.dbPersona.find({
             where: {
-                estado: Not(nomenclador.Eliminado)
+                estado: Not(nomencladorEstados.Eliminado)
             }
         })
 
@@ -47,7 +47,7 @@ export class PersonasService {
         const tempPersona = await this.dbPersona.findOne({
             where: {
                 id,
-                estado: Not(nomenclador.Eliminado)
+                estado: Not(nomencladorEstados.Eliminado)
             },
             relations: ['Indicadores']
         })
@@ -60,7 +60,7 @@ export class PersonasService {
     async deletePersona(id: number) {
         const tempPersona = await this.getPersona(id)
 
-        tempPersona.estado = nomenclador.Eliminado
+        tempPersona.estado = nomencladorEstados.Eliminado
 
         await this.dbPersona.save(tempPersona)
 
@@ -76,7 +76,7 @@ export class PersonasService {
             const existePersona = await this.dbPersona.findOne({
                 where: {
                     CI: persona.CI,
-                    estado: Not(nomenclador.Eliminado)
+                    estado: Not(nomencladorEstados.Eliminado)
                 }
             })
 

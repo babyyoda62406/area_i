@@ -1,4 +1,4 @@
-import { nomenclador } from 'src/enums/nomenclador';
+import { nomencladorEstados } from 'src/enums/nomenclador';
 import { Column, Entity,  JoinTable,  ManyToMany,  PrimaryGeneratedColumn } from 'typeorm';
 import { Indicador } from './indicador.entity';
 
@@ -19,8 +19,8 @@ export class Persona{
     @Column()
     segundoApellido: string
 
-    @Column({default: nomenclador.Activo})
-    estado: nomenclador;
+    @Column({default: nomencladorEstados.Activo})
+    estado: nomencladorEstados;
 
     @ManyToMany(()=> Indicador)
     @JoinTable()

@@ -1,8 +1,9 @@
 /**
- * Enum que reprecenta los diferentes estados de las entidades.
+ * Enum que representa los diferentes estados de las entidades.
  */
-export enum nomenclador {
+export enum nomencladorEstados {
     Activo   = "Activo",
     Inactivo = 'Inactivo',
     Eliminado = 'Eliminado'
 }
+

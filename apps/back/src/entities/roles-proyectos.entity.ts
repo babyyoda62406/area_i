@@ -1,4 +1,4 @@
-import { nomenclador } from 'src/enums/nomenclador';
+import { nomencladorEstados } from 'src/enums/nomenclador';
 import {Column, Entity,  PrimaryGeneratedColumn } from 'typeorm';
 
 /**
@@ -12,8 +12,8 @@ export class RolesProyectos {
     @Column()
     nombre: string
 
-    @Column({default: nomenclador.Activo})
-    estado: nomenclador
+    @Column({default: nomencladorEstados.Activo})
+    estado: nomencladorEstados
 
 
 }

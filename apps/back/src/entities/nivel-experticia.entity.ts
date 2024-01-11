@@ -1,4 +1,4 @@
-import { nomenclador } from "src/enums/nomenclador";
+import { nomencladorEstados } from "src/enums/nomenclador";
 import { Column, Entity,   PrimaryGeneratedColumn } from 'typeorm';
 
 
@@ -13,8 +13,8 @@ export class NivelExperticia{
     @Column()
     nombre: string
 
-    @Column({enum: nomenclador, default: nomenclador.Activo})
-    estado: nomenclador
+    @Column({enum: nomencladorEstados, default: nomencladorEstados.Activo})
+    estado: nomencladorEstados
 
     // @OneToMany(()=>Tarifa , tarifa => tarifa.nivelExperticia )
     // tarifas: Tarifa[]

@@ -3,7 +3,7 @@ import { CrearNivelExperticia } from './dto/CrearNivelExperticia.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NivelExperticia } from '../../entities/nivel-experticia.entity';
 import { Not, Repository } from 'typeorm';
-import { nomenclador } from 'src/enums/nomenclador';
+import { nomencladorEstados } from 'src/enums/nomenclador';
 import { EditarNivelExperticiaDTO } from './dto/EditarNivelExperticia.dto';
 
 /**
@@ -41,7 +41,7 @@ export class NivelExperticiaService {
         const tempNivelEperticia = await this.dbNivelExperticia.findOne({
             where: {
                 id, 
-                estado: Not(nomenclador.Eliminado)
+                estado: Not(nomencladorEstados.Eliminado)
             }
         })
 
@@ -59,7 +59,7 @@ export class NivelExperticiaService {
 
         const tempNivelExperticia = await this.dbNivelExperticia.find({
             where: {
-                estado: Not(nomenclador.Eliminado)
+                estado: Not(nomencladorEstados.Eliminado)
             }
         })
 
@@ -76,7 +76,7 @@ export class NivelExperticiaService {
     async eliminarNivelExperticia(id: number){
         const tempNivelExperticia = await this.obtenerNivelExperticia(id)
 
-        tempNivelExperticia.estado = nomenclador.Eliminado
+        tempNivelExperticia.estado = nomencladorEstados.Eliminado
 
         return await this.dbNivelExperticia.save(tempNivelExperticia)
     }

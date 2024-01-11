@@ -21,6 +21,8 @@ import { IndicadoresModule } from './modules/indicadores/indicadores.module';
 import { Indicador } from './entities/indicador.entity';
 import { PersonasModule } from './modules/personas/personas.module';
 import { Persona } from './entities/persona.entity';
+import { OrganizacionModule } from './modules/organizacion/organizacion.module';
+import { Organizacion } from './entities/organizacion.entity';
 
 dotenv.config();
 
@@ -33,7 +35,7 @@ dotenv.config();
       port: Number(process.env.PORT_DB),
       password: process.env.PASSWORD,
       synchronize: true,
-      entities: [Usuario, RolesProyectos, NivelExperticia,  Indicador,Persona]
+      entities: [Usuario, RolesProyectos, NivelExperticia,  Indicador,Persona, Organizacion]
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../../front/dist'),
@@ -46,7 +48,8 @@ dotenv.config();
     RolesProyectosModule,
     NivelExperticiaModule,
     IndicadoresModule,
-    PersonasModule
+    PersonasModule,
+    OrganizacionModule
   ],
   controllers: [AppController],
   providers: [AppService, 
