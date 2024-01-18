@@ -6,6 +6,7 @@ export const OptionParticle:ISourceOptions =  {
     background: {
         color: {
             value: "#69adf6d6",
+           
         },
     },
     
@@ -36,13 +37,25 @@ export const OptionParticle:ISourceOptions =  {
         
         color: {
             value: "#b2c3ded4",
+             // value: [
+            //     "#633421",
+            //     "#7986d2",
+            //     "#f94270",
+            //     "#b7daff",
+            //     "#ed5b00",
+            //   ],
         },
         links: {
-            color: "#e2ecf5c1",
+            color: {
+                value:"#e2ecf5c1"
+            } ,
             distance: 250,
             enable: true,
             opacity: 0.45,
             width: 0.35,
+            outModes: {
+                default: "none",
+              },
         },
         move: {
             direction: "none",
@@ -70,6 +83,10 @@ export const OptionParticle:ISourceOptions =  {
         size: {
             value: { min: 1, max: 6 },
         },
+        life: {
+            max: Infinity,
+            outMode: "none",
+        }
     },
     detectRetina: true,
                  }
