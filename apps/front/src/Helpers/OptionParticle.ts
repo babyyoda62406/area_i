@@ -37,13 +37,7 @@ export const OptionParticle:ISourceOptions =  {
         
         color: {
             value: "#b2c3ded4",
-             // value: [
-            //     "#633421",
-            //     "#7986d2",
-            //     "#f94270",
-            //     "#b7daff",
-            //     "#ed5b00",
-            //   ],
+             
         },
         links: {
             color: {
@@ -86,7 +80,8 @@ export const OptionParticle:ISourceOptions =  {
         life: {
             max: Infinity,
             outMode: "none",
-        }
+        },
+        autoremove:false
     },
     detectRetina: true,
                  }
