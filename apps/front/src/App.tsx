@@ -9,20 +9,20 @@ import GestionGeneral from './Components/Gestiongeneral/Gestiongeneral'
 
 
 const App = () => {
-  
-  
 
-  return <div className='App'>
-    <FondoPantalla />
-    <Routes>
-      <Route path='/' element={<Login />} />
-      <Route path='Home' element={<Home />} >
-      <Route path='gestiongeneral' element={<GestionGeneral/>}></Route>
-      </Route>  
-    </Routes>
-    
-    
-  </div>
+
+
+	return <div className='App'>
+		<FondoPantalla />
+		<Routes>
+			<Route path='/' element={<Login />} />
+			<Route path='Home' element={<Home />} >
+				<Route path='gestiongeneral' element={<GestionGeneral />}></Route>
+			</Route>
+		</Routes>
+
+
+	</div>
 }
 
 export default App

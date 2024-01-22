@@ -2,7 +2,22 @@
     width: max-content;
     height: min-content;
     background-color: white;
+    animation: showTable 600ms linear forwards;
 }
+
+@keyframes showTable {
+    from{
+        z-index: 1;
+        transform:translateY(-50px);
+        opacity: 0;
+    }
+
+    to{
+        transform:translateY(0px);
+        opacity:1;
+    }
+}
+
 
 .TablaProyectos>div>div{
 
