@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridRowHeightParams, GridRowId, } from '@mui/x-data-grid';
 import { esES } from "@mui/x-data-grid/locales";
 import { reloadTabla } from './services/ReloadTabla';
-import {  useContext, useEffect, useMemo, useState } from 'react';
+import {  useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../../Contexts/GlobalContext';
 import { DatoModificado } from './services/Update.ts';
 import { tpColumnModified } from './types/tpcolumnas';
