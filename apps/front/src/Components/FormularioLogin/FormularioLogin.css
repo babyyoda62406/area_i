@@ -105,11 +105,7 @@
     border-left-width: 35px;
   }
   
-  .login a {
-    font-size: 0.9rem;
-    color: var(--bg-celeste);
-    text-decoration: none;
-  }
+ 
   
   .login .title {
     color: #444;

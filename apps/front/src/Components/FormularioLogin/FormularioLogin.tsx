@@ -42,8 +42,6 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
     }
 
 
-
-
     /** 
      * 
      * @param event
@@ -55,9 +53,6 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
 
         const errorEmail = ValidarCampos('email', datosForm.correo);
         const errorPassword = ValidarCampos('password', datosForm.password)
-
-        console.log(errorEmail)
-        console.log(errorPassword)
 
         if (!errorPassword && !errorEmail) {
             setFormState({ loading: true, message: 'Autenticando' })
@@ -131,7 +126,6 @@ const FormularioLogin: FC<typeFormularioLogin> = () => {
                     <i className="fa fa-user"></i>
                     <input type="password" required className="InputLogin" placeholder="Contraseña" onChange={(e => GuardarDatos('password', e.target.value))} />
                     <i className="fa fa-key"></i>
-                    <a href="#" className='RecupPass'>Ha olvidado su contraseña?</a>
                     <button className="BTNLogin">
                         <i className="spinner"></i>
                         <span className="state">{formState.message}</span>
