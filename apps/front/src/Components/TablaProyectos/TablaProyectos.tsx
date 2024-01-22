@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridRowHeightParams, GridRowId, } from '@mui/x-data-grid';
 import { esES } from "@mui/x-data-grid/locales";
 import { reloadTabla } from './services/ReloadTabla';
-import {  useContext, useEffect, useState } from 'react';
+import {  useContext, useEffect, useMemo, useState } from 'react';
 import { GlobalContext } from '../../Contexts/GlobalContext';
 import { DatoModificado } from './services/Update.ts';
 import { tpColumnModified } from './types/tpcolumnas';
@@ -41,6 +41,8 @@ const TablaProyectos = () => {
 
 	
 
+	
+
 	const HandlerModified = (arg: any) => { setcolumnModified({ ['idRow']: arg.id, ['column']: arg.field }) }
 
 	const contenidoPopover = <div className='PopoverProyects'>
@@ -62,17 +64,22 @@ const TablaProyectos = () => {
 		setShowModal(true)
 	}
 
+	
 
 	// estrutura de columnas
 	const columns: GridColDef[] = [
-		{ field: 'id', headerName: 'ID', width: 90 },
+		{
+			field: 'numElement',
+			headerName: '',
+			width:30
+			
+		},
 		{
 			field: 'uid',
-			headerName: 'UId',
-			width: 150,
+			headerName: 'Id',
+			width: 100,
 			editable: true,
 			filterable: true,
-
 		},
 		{
 			field: 'nombre',
@@ -84,15 +91,15 @@ const TablaProyectos = () => {
 			field: 'organizacion',
 			headerName: 'Organizacion',
 			type: 'text',
-			width: 100,
+			width: 150,
 			editable: true,
-			align: "right"
+			align: "left"
 		},
 		{
 			field: 'estado',
 			headerName: 'Estado',
 			sortable: true,
-			width: 160,
+			width: 80,
 			editable: true,
 
 		},

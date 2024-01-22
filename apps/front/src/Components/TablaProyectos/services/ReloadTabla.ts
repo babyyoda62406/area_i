@@ -22,8 +22,8 @@ export const reloadTabla = (token: string, setData: Function) => {
 				case 200:
 					let datos = await res.json()
 
-					datos.map((element: Item) => {
-						return element.key = element.id
+					datos.map((element: Item, index: number) => {
+						return (element.key = element.id, element.numElement = String(index + 1))
 					})
 					setData(datos)
 
@@ -36,8 +36,8 @@ export const reloadTabla = (token: string, setData: Function) => {
 
 				case 304:
 					let dataNM = await res.json()
-					dataNM.map((element: Item) => {
-						return element.key = element.id
+					dataNM.map((element: Item, index:number) => {
+						return (element.key = element.id , element.numElement = String(index+1))
 					})
 					setData(dataNM)
 					break
