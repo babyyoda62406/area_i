@@ -78,7 +78,7 @@ const TablaProyectos = () => {
 			field: 'uid',
 			headerName: 'Id',
 			width: 100,
-			editable: true,
+			editable: false,
 			filterable: true,
 		},
 		{
