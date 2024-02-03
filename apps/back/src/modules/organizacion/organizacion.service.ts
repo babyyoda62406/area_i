@@ -21,7 +21,6 @@ export class OrganizacionService {
 
         if(nombreOcupado) throw new  HttpException(`El nombre de organización ${nombre} no está disponible` , HttpStatus.CONFLICT)
 
-
         const tempOrganizacion  = this.dbOrganizacion.create(createOrganizacionDto)
 
         await this.dbOrganizacion.save(tempOrganizacion)
@@ -30,7 +29,11 @@ export class OrganizacionService {
     }
 
     async findAll() {
-        const tempOrganizaciones  = await this.dbOrganizacion.find()
+        const tempOrganizaciones  = await this.dbOrganizacion.find({
+            order:{
+                id:"ASC"
+            }
+        })
         
         if(!tempOrganizaciones.length) throw new HttpException( ``, HttpStatus.NO_CONTENT)
 
@@ -66,7 +69,7 @@ export class OrganizacionService {
         const results =  await this.dbOrganizacion.save(newOrganizacion)
 
 
-        return { message: `Organización editada`, results}
+        return { message: `Organización editada`, id:results.id}
     }
 
     async remove(id: number) {

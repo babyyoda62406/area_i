@@ -1,5 +1,6 @@
 import { nomencladorEstados } from "src/enums/nomenclador";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity,  OneToMany,  PrimaryGeneratedColumn } from "typeorm";
+import { Proyecto } from "./proyecto.entity";
 
 @Entity()
 export class Organizacion {
@@ -9,7 +10,9 @@ export class Organizacion {
     @Column({unique: true})
     nombre: string
 
-    // Aqui relacionar el proyecto
+    @OneToMany(()=> Proyecto , pry => pry.organizacion)
+    proyectos: Proyecto[]
+    
 
     @Column({enum: nomencladorEstados, default: nomencladorEstados.Activo})
     estado: nomencladorEstados

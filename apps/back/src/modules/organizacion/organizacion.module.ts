@@ -11,6 +11,7 @@ import { JwtModule } from '../jwt/jwt.module';
   imports: [TypeOrmModule.forFeature([Organizacion]) , JwtModule], 
   controllers: [OrganizacionController],
   providers: [OrganizacionService],
+  exports: [OrganizacionService]
 })
 export class OrganizacionModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
