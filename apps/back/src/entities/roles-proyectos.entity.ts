@@ -1,5 +1,6 @@
 import { nomencladorEstados } from 'src/enums/nomenclador';
-import {Column, Entity,  PrimaryGeneratedColumn } from 'typeorm';
+import {Column, Entity,  OneToMany,  PrimaryGeneratedColumn } from 'typeorm';
+import { Tarifa } from './tarifa.entity';
 
 /**
  * Entidad Roles de Proyectos
@@ -15,5 +16,10 @@ export class RolesProyectos {
     @Column({default: nomencladorEstados.Activo})
     estado: nomencladorEstados
 
+    @OneToMany(()=> Tarifa , trf=> trf.Rol)
+    tarifa: Tarifa
+
+    @Column({default: false})
+    enUso: boolean
 
 }

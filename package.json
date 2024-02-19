@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@nestjs/mapped-types": "*",
     "turbo": "^1.10.16"
   },
   "workspaces":[
