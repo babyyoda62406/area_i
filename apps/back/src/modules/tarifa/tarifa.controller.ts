@@ -23,12 +23,12 @@ export class TarifaController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTarifaDto: UpdateTarifaDto) {
-    return this.tarifaService.update(+id, updateTarifaDto);
+  async update(@Param('id',  ParseIntPipe) id: number, @Body() updateTarifaDto: UpdateTarifaDto) {
+    return await  this.tarifaService.update(+id, updateTarifaDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tarifaService.remove(+id);
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    return await  this.tarifaService.remove(id);
   }
 }
