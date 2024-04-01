@@ -30,6 +30,8 @@ export class ProyectoService {
 
         await this.dbProyecto.save(tempProyecto)
 
+        await this.svOrganizacion.useOrganization(tempOrganizacion.id)
+
         return {message: "Proyecto Creado" , id: tempProyecto.id}
     }
 

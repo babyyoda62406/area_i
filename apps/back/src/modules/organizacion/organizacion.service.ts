@@ -42,7 +42,8 @@ export class OrganizacionService {
 
     async findOne(id: number) {
         const tempOrganizacion = await this.dbOrganizacion.findOne({
-            where: {id}
+            where: {id}, 
+            relations: ['proyectos']
         })
 
         if(!tempOrganizacion) throw new HttpException(`No existe organización con id ${id}`, HttpStatus.NOT_FOUND)
@@ -75,10 +76,32 @@ export class OrganizacionService {
     async remove(id: number) {
         const tempOrganizacion = await this.findOne(id)
 
-        if(tempOrganizacion.enUso) throw new HttpException(`La roganizacion ${tempOrganizacion.nombre} esta en uso`, HttpStatus.FORBIDDEN)
+        if(tempOrganizacion.enUso) throw new HttpException(`La organización ${tempOrganizacion.nombre} esta en uso`, HttpStatus.FORBIDDEN)
         
         const results = await this.dbOrganizacion.remove(tempOrganizacion)
 
         return {message: 'Organización eliminada' , results}
     }
+    
+    async useOrganization(id: number){
+        const tempOrganization = await this.findOne(id)
+
+        tempOrganization.enUso  = true  ; 
+
+        await this.dbOrganizacion.save(tempOrganization)
+        return true 
+    }
+
+    async desUseOrganization(id: number){
+        const tempOrganization = await this.findOne(id)
+
+        if(tempOrganization.proyectos.length) return false
+
+        tempOrganization.enUso = false 
+
+        await this.dbOrganizacion.save(tempOrganization)
+
+        return true
+    }
+    
 }
