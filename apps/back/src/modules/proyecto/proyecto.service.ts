@@ -55,7 +55,7 @@ export class ProyectoService {
             where:{
                 id
             }, 
-            relations:['organizacion']
+            relations:['organizacion', 'proyectoTarifas']
         })
 
         if(!tempProyecto) throw new HttpException(`No existe proyecto con id ${id}`, HttpStatus.NOT_FOUND)
@@ -109,7 +109,26 @@ export class ProyectoService {
         return {message: 'Proyecto editado', id: tempProyecto.id}
     }
 
+    async useProyecto(id: number){
+        const tempProyecto = await this.findOne(id)
 
+         tempProyecto.enUso = true 
+
+         await this.dbProyecto.save(tempProyecto)
+         return true 
+
+    }
+
+    async desUseProyecto(id: number){
+        const tempProyecto = await this.findOne(id)
+
+        if(tempProyecto.proyectoTarifas.length) return false 
+
+        tempProyecto.enUso = false
+
+        await this.dbProyecto.save(tempProyecto)
+        return true 
+    }
 
     async remove(id: number) {
         return `This action removes a #${id} proyecto`;

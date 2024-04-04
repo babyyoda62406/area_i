@@ -20,6 +20,12 @@ export class TarifaService {
         const tempNivelExperticia = await this.svNivelExperticia.obtenerNivelExperticia(idNivelExperticia)
         const tempRol = await this.svRol.obtenerRolPRoyectos(idRol)
 
+        const tempTarifas  = await this.dbTarifa.find({
+            relations:['NivelExperticia', 'Rol']
+        })
+
+        if(tempTarifas.findIndex(arg => (arg.NivelExperticia.id ==idNivelExperticia && arg.Rol.id == idRol && arg.valor==value)) !=-1) throw new HttpException(`Ya existe  una tarifa idéntia`, HttpStatus.CONFLICT)
+
         const newTarifa = this.dbTarifa.create(
             {
                 NivelExperticia: tempNivelExperticia,
@@ -27,8 +33,9 @@ export class TarifaService {
                 valor: value
             }
         )
+
         await this.dbTarifa.save(newTarifa)
-        return { message: "Tarifa Creada", newTarifa }
+        return { message: "Tarifa Creada", id:newTarifa.id }
     }
 
     async findAll() {
@@ -36,7 +43,7 @@ export class TarifaService {
             order: {
                 id: 'ASC'
             },
-            relations: ['Rol', 'NivelExperticia']
+            relations: ['Rol', 'NivelExperticia', 'proyectoTarifas']
         })
 
         if (!tempTarifas.length) throw new HttpException(``, HttpStatus.NO_CONTENT)
@@ -89,11 +96,29 @@ export class TarifaService {
         return { message:" Tarifa editada?" , id: tempTarifa.id, results}
     }
 
+    async useTarifa(id: number){
+        const tempTarifa = await this.findOne(id)
+        
+        tempTarifa.enUso  = true 
+
+        await this.dbTarifa.save(tempTarifa)
+
+        return true 
+    }
+
+    async desUseTarifa(id: number){
+        const tempTarifa = await this.findOne(id)
+
+        if(tempTarifa.proyectoTarifas.length) return false 
+
+        tempTarifa.enUso = false 
+        await this.dbTarifa.save(tempTarifa)
+        
+        return true 
+    }
 
     async remove(id: number) {
         const tempTarifa = await this.findOne(id)
-
-        if (!tempTarifa) throw new HttpException(`No existe tarifa con el id ${id}`, HttpStatus.NOT_FOUND)
 
         if (tempTarifa.enUso) throw new HttpException(`La tarifa con id ${id} no se puede eliminar porque esta en uso`, HttpStatus.FORBIDDEN)
 

@@ -1,34 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { ProyectoTarifaService } from './proyecto-tarifa.service';
 import { CreateProyectoTarifaDto } from './dto/create-proyecto-tarifa.dto';
-import { UpdateProyectoTarifaDto } from './dto/update-proyecto-tarifa.dto';
 
 @Controller('proyecto-tarifa')
 export class ProyectoTarifaController {
   constructor(private readonly proyectoTarifaService: ProyectoTarifaService) {}
 
   @Post()
-  create(@Body() createProyectoTarifaDto: CreateProyectoTarifaDto) {
-    return this.proyectoTarifaService.create(createProyectoTarifaDto);
+  async create(@Body() createProyectoTarifaDto: CreateProyectoTarifaDto) {
+    return await this.proyectoTarifaService.create(createProyectoTarifaDto);
   }
 
   @Get()
-  findAll() {
-    return this.proyectoTarifaService.findAll();
+  async findAll() {
+    return await this.proyectoTarifaService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.proyectoTarifaService.findOne(+id);
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return await this.proyectoTarifaService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProyectoTarifaDto: UpdateProyectoTarifaDto) {
-    return this.proyectoTarifaService.update(+id, updateProyectoTarifaDto);
-  }
-
+  
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.proyectoTarifaService.remove(+id);
+  async remove(@Param('id',ParseIntPipe) id: number) {
+    return await this.proyectoTarifaService.remove(id);
   }
 }

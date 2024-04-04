@@ -19,3 +19,6 @@ export class UsuarioModule implements NestModule {
     .forRoutes('usuarios/')
   }
 }
+
+// export class UsuarioModule {
+// }

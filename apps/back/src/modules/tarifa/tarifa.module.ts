@@ -12,6 +12,7 @@ import { ValidarToken } from '../security/ValidarToken.middleware';
   imports: [TypeOrmModule.forFeature([Tarifa]), JwtModule, RolesProyectosModule, NivelExperticiaModule],
   controllers: [TarifaController],
   providers: [TarifaService],
+  exports:[TarifaService]
 })
 export class TarifaModule  implements NestModule{
   configure(consumer: MiddlewareConsumer) {

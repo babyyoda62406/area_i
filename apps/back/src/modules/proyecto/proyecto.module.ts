@@ -11,6 +11,7 @@ import { JwtModule } from '../jwt/jwt.module';
   imports: [TypeOrmModule.forFeature([Proyecto]), OrganizacionModule, JwtModule],
   controllers: [ProyectoController],
   providers: [ProyectoService],
+  exports:[ProyectoService]
 })
 export class ProyectoModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
