@@ -12,10 +12,7 @@ import 'survey-core/defaultV2.css'
  * @returns 
  */
 const ModalFormulario: FC<typeModalFormulario> = ({ Formulario,showModal,setShowModal }) => {
-
-    
-
-    
+  
 
 
     return < Modal

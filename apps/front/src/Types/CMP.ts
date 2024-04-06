@@ -36,6 +36,7 @@ type typeModalFormulario = {
 }
 
 type typeDatosProyServer = {
+    id?:number
     ownerId: number
     nombre: string
     organizacion: string

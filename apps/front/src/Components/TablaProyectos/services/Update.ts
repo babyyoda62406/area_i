@@ -17,15 +17,23 @@ export const DatoModificado = (
     setActualizarTabla:(arg:tpActualizarTabla)=>void) => {
 
     const elementModified = paramsUpdate
-    
-
-    
+    const element = data.find(item => item.id == elementModified.id)
+    const newUrl = ` ${RutaServer.getProyectos}/${elementModified.id}`
+        
     const newValue = {
         'id': elementModified.id,
         [columnModified.column]: elementModified[columnModified.column]
     }
     
-    let newUrl = ` ${RutaServer.getProyectos}/${elementModified.id}`
+    if (element ) {
+        
+        if (element[columnModified.column as keyof typeof element] == elementModified[columnModified.column]) {
+           
+            return paramsUpdate
+        }
+  
+        }
+
     FetchService(newUrl, {
         method: 'PATCH',
         headers: {
@@ -67,6 +75,7 @@ export const DatoModificado = (
                     ALerta({ title: 'por favor revise su conexion', icon: 'warning' })
             }
         })
+        .catch(err=>console.log(err))
 
     return paramsold
 }

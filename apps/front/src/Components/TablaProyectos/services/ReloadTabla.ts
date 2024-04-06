@@ -2,10 +2,11 @@ import { RutaServer } from "../../../Helpers/RutaServer"
 import { Item } from "../../../Interfaces/TableInterfaces"
 import { ALerta } from "../../../Services/Alerta"
 import { FetchService } from "../../../Services/FetchService"
+import { typeDatosProyServer } from "../../../Types/CMP"
 
 
 
-export const reloadTabla = (token: string, setData: Function) => {
+export const reloadTabla = (token: string, setData: (arg:typeDatosProyServer[])=>void) => {
 
 
 
