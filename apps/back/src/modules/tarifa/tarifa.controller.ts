@@ -1,45 +1,34 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post} from '@nestjs/common';
-import { CrearTarfiaDTO } from './dto/crearTarifa.dto';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { TarifaService } from './tarifa.service';
-import { EditarTarfiaDTO } from './dto/editarTarifa.dto';
-
+import { CreateTarifaDto } from './dto/create-tarifa.dto';
+import { UpdateTarifaDto } from './dto/update-tarifa.dto';
 
 @Controller('tarifa')
 export class TarifaController {
-    constructor(private svTarifa :TarifaService){
+  constructor(private readonly tarifaService: TarifaService) {}
 
-    }
-    @Post()
-    async addTarifa(@Body() tarfia: CrearTarfiaDTO){
-        const newTarifa = await this.svTarifa.crearTarifa(tarfia); 
-        return {message:'Tarifa Creada' , id: newTarifa.id}
-    }
+  @Post()
+  async create(@Body() createTarifaDto: CreateTarifaDto) {
+    return  await this.tarifaService.create(createTarifaDto);
+  }
 
-    @Get()
-    async getAllTarfias(){
-        return  await this.svTarifa.obtenerTarifas()
-    }
+  @Get()
+  async findAll() {
+    return await  this.tarifaService.findAll();
+  }
 
-    @Get(':id')
-    async getTarfiaById(@Param('id', ParseIntPipe) id: number){
-        return await this.svTarifa.obtenerTarifaById(id)
-    }
+  @Get(':id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return await this.tarifaService.findOne(id);
+  }
 
+  @Patch(':id')
+  async update(@Param('id',  ParseIntPipe) id: number, @Body() updateTarifaDto: UpdateTarifaDto) {
+    return await  this.tarifaService.update(+id, updateTarifaDto);
+  }
 
-    @Get('proyecto/:id')
-    async getTarifasPorProyetos(@Param('id', ParseIntPipe) id: number){
-        return await this.svTarifa.obtenerTarifaByproyectId(id); 
-    }
-
-    @Delete(':id')
-    async deleteTarifa(@Param('id',ParseIntPipe) id:number ){
-        const tempTarifa = await  this.svTarifa.eliminarTarifa(id)
-        return {message: 'Tarifa eliminada' , id: tempTarifa.id}
-    }
-
-    @Patch(':id')
-    async setTarfia(@Param('id', ParseIntPipe) id:number ,@Body() tarifa:EditarTarfiaDTO){
-        return await this.svTarifa.editarTarifa(id , tarifa) ; 
-    }
-
+  @Delete(':id')
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    return await  this.tarifaService.remove(id);
+  }
 }

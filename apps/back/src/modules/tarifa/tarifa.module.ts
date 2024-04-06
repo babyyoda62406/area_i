@@ -1,23 +1,22 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { TarifaController } from './tarifa.controller';
 import { TarifaService } from './tarifa.service';
+import { TarifaController } from './tarifa.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Tarifa } from 'src/entities/tarifa.entity';
-import { ValidarToken } from 'src/modules/security/ValidarToken.middleware';
-import { JwtModule } from 'src/modules/jwt/jwt.module';
-import { ProyectosModule } from '../proyectos/proyectos.module';
-import { NivelExperticiaModule } from '../nivel-experticia/nivel-experticia.module';
+import { JwtModule } from '../jwt/jwt.module';
 import { RolesProyectosModule } from '../roles-proyectos/roles-proyectos.module';
+import { NivelExperticiaModule } from '../nivel-experticia/nivel-experticia.module';
+import { ValidarToken } from '../security/ValidarToken.middleware';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Tarifa]), JwtModule, ProyectosModule , NivelExperticiaModule , RolesProyectosModule],
+  imports: [TypeOrmModule.forFeature([Tarifa]), JwtModule, RolesProyectosModule, NivelExperticiaModule],
   controllers: [TarifaController],
-  providers: [TarifaService]
+  providers: [TarifaService],
+  exports:[TarifaService]
 })
-export class TarifaModule implements NestModule {
+export class TarifaModule  implements NestModule{
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(ValidarToken)
-      .forRoutes('tarifa')
+    consumer.apply(ValidarToken).forRoutes('/tarifa')
   }
+
 }

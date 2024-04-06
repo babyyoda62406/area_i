@@ -9,50 +9,62 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Usuario } from './entities/usuario.entity';
 import { JwtModule } from './modules/jwt/jwt.module';
 import { SecurityModule } from './modules/security/security.module';
-import { ProyectosModule } from './modules/proyectos/proyectos.module';
 import * as dotenv from "dotenv";
-import { Proyecto } from './entities/proyecto.entity';
 import { HelpersModule } from './modules/helpers/helpers.module';
 import { RolesProyectosModule } from './modules/roles-proyectos/roles-proyectos.module';
 import { RolesProyectos } from './entities/roles-proyectos.entity';
 import { NivelExperticiaModule } from './modules/nivel-experticia/nivel-experticia.module';
 import { NivelExperticia } from './entities/nivel-experticia.entity';
-import {  APP_PIPE } from '@nestjs/core';
+import { APP_PIPE } from '@nestjs/core';
 import { CustomValidationPipe } from './CustomValidationPipe';
+import { IndicadoresModule } from './modules/indicadores/indicadores.module';
+import { Indicador } from './entities/indicador.entity';
+import { PersonasModule } from './modules/personas/personas.module';
+import { Persona } from './entities/persona.entity';
+import { OrganizacionModule } from './modules/organizacion/organizacion.module';
+import { Organizacion } from './entities/organizacion.entity';
+import { ProyectoModule } from './modules/proyecto/proyecto.module';
+import { Proyecto } from './entities/proyecto.entity';
 import { TarifaModule } from './modules/tarifa/tarifa.module';
 import { Tarifa } from './entities/tarifa.entity';
+import { ProyectoTarifaModule } from './modules/proyecto-tarifa/proyecto-tarifa.module';
+import { ProyectoTarifa } from './entities/proyecto-tarifa.entity';
 
 dotenv.config();
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres', 
-      database: process.env.DATABASE,
-      username: process.env.USERNAME,
-      port: Number(process.env.PORT_DB),
-      password: process.env.PASSWORD,
-      synchronize: true,
-      entities: [Usuario, Proyecto, RolesProyectos, NivelExperticia, Tarifa]
-    }),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../../front/dist'),
-    }),
-    AuthModule,
-    UsuarioModule,
-    JwtModule,
-    SecurityModule,
-    ProyectosModule,
-    HelpersModule,
-    RolesProyectosModule,
-    NivelExperticiaModule,
-    TarifaModule
-  ],
-  controllers: [AppController],
-  providers: [AppService, 
-  {
-    provide: APP_PIPE, 
-    useClass: CustomValidationPipe
-  }],
+	imports: [
+		TypeOrmModule.forRoot({
+			type: 'postgres',
+			database: process.env.DATABASE,
+			username: process.env.USERNAME,
+			port: Number(process.env.PORT_DB),
+			password: process.env.PASSWORD,
+			synchronize: true,
+			entities: [Usuario, RolesProyectos, NivelExperticia, Indicador, Persona, Organizacion, Proyecto, Tarifa, ProyectoTarifa]
+		}),
+		ServeStaticModule.forRoot({
+			rootPath: join(__dirname, '../../front/dist'),
+		}),
+		AuthModule,
+		UsuarioModule,
+		JwtModule,
+		SecurityModule,
+		HelpersModule,
+		RolesProyectosModule,
+		NivelExperticiaModule,
+		IndicadoresModule,
+		PersonasModule,
+		OrganizacionModule,
+		ProyectoModule,
+		TarifaModule,
+		ProyectoTarifaModule
+	],
+	controllers: [AppController],
+	providers: [AppService,
+		{
+			provide: APP_PIPE,
+			useClass: CustomValidationPipe
+		}],
 })
-export class AppModule {}
+export class AppModule { }

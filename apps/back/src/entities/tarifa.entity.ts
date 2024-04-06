@@ -1,30 +1,30 @@
-import { Column, Entity,  ManyToOne,  PrimaryGeneratedColumn } from "typeorm";
-import { nomenclador } from "src/enums/nomenclador";
-import { Proyecto } from "./proyecto.entity";
-import { NivelExperticia } from "./nivel-experticia.entity";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { RolesProyectos } from "./roles-proyectos.entity";
-
-
+import { NivelExperticia } from "./nivel-experticia.entity";
+import { nomencladorEstados } from "src/enums/nomenclador";
+import { ProyectoTarifa } from "./proyecto-tarifa.entity";
 
 @Entity()
-export class Tarifa{
+export class Tarifa {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({type:'decimal' , precision:  10 , scale: 3})
-    value: number
-    
-    @Column({default: nomenclador.Activo})
-    estado: nomenclador
+    @ManyToOne( ()=> RolesProyectos, rp=>rp.tarifa )
+    Rol: RolesProyectos
 
-    @ManyToOne(()=> Proyecto, proyecto=>proyecto.tarifas)
-    proyecto: Proyecto
+    @ManyToOne(()=> NivelExperticia , np=>np.tarifa )
+    NivelExperticia: NivelExperticia
 
+    @OneToMany(()=> ProyectoTarifa , pyt=>pyt.tarifa)
+    proyectoTarifas: ProyectoTarifa[]
 
-    @ManyToOne(()=> NivelExperticia , nivelExperticia => nivelExperticia.tarifas)
-    nivelExperticia: NivelExperticia
+    @Column({enum: nomencladorEstados , default: nomencladorEstados.Activo})
+    estado: nomencladorEstados
 
-    @ManyToOne(()=> RolesProyectos , rolProyectos => rolProyectos.tarifas)
-    rolProyecto: RolesProyectos
+    @Column({type: "decimal", precision: 4, scale:2})
+    valor: number
+
+    @Column({default: false})
+    enUso: boolean
 
 }

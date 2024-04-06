@@ -1,34 +1,32 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Usuario } from "./usuario.entity";
-import { nomenclador } from "src/enums/nomenclador";
-import { Tarifa } from "./tarifa.entity";
+import { nomencladorEstados } from 'src/enums/nomenclador';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Organizacion } from './organizacion.entity';
+import { ProyectoTarifa } from './proyecto-tarifa.entity';
 
-/**
- * Entidad que reprecenta los proyectos
- */
+
+
 @Entity()
-export class Proyecto{ 
+export class Proyecto {
     @PrimaryGeneratedColumn()
-    id: number
+    id: number 
 
     @Column()
-    uid: string 
+    identificador: string
 
     @Column()
-    nombre: string  
+    nombre: string
 
-    @Column()
-    organizacion: string
+    @ManyToOne(()=> Organizacion , org => org.proyectos)
+    organizacion: Organizacion
 
-    @ManyToOne(()=> Usuario  , user=> user.proyectos)
-    owner: Usuario
+    @OneToMany(()=> ProyectoTarifa , pyt => pyt.proyecto)
+    proyectoTarifas: ProyectoTarifa[]
 
-    @OneToMany(()=> Tarifa, tarfia=> tarfia.proyecto)
-    tarifas: Tarifa[]
+    @Column({enum: nomencladorEstados, default: nomencladorEstados.Activo})
+    estado: nomencladorEstados
 
 
-    @Column({default: nomenclador.Activo})
-    estado: nomenclador
-
+    @Column({default: false})
+    enUso: boolean
 
 }

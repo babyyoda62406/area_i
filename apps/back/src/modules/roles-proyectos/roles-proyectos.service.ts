@@ -3,18 +3,26 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { RolesProyectos } from '../../entities/roles-proyectos.entity';
 import { Not, Repository } from 'typeorm';
 import { CrearRolProyectoDTO } from './dto/CrearRolProyecto.dto';
-import { nomenclador } from 'src/enums/nomenclador';
+import { nomencladorEstados } from 'src/enums/nomenclador';
 import { EditarRolProyecto } from './dto/EditarRolProyecto.dto';
 
+/**
+ * Servicio de roles de proyectos
+ */
 @Injectable()
 export class RolesProyectosService {
     constructor(@InjectRepository(RolesProyectos) private dbRolProyectos: Repository<RolesProyectos>) { }
 
+    /**
+     * Servicio para crear roles de proyectos
+     * @param rolProyecto :CrearRolProyectoDTO
+     * @returns RolProyecto | HttpException
+     */
     async crearRolProyecto(rolProyecto: CrearRolProyectoDTO) {
 
         const tempRolProyecto = await this.dbRolProyectos.findOne({
             where: {
-                estado: Not(nomenclador.Eliminado),
+                estado: Not(nomencladorEstados.Eliminado),
                 nombre: rolProyecto.nombre
             }
         })
@@ -29,12 +37,16 @@ export class RolesProyectosService {
 
     }
 
-
+    /**
+     * Servicio para obtener un nivel de experticia por id
+     * @param id :number Id del rol de proyecto que se desea obtener. 
+     * @returns RolesProyectos | HttpException
+     */
     async obtenerRolPRoyectos(id: number) {
         const tempRolProyecto = await this.dbRolProyectos.findOne({
             where: {
                 id,
-                estado: Not(nomenclador.Eliminado)
+                estado: Not(nomencladorEstados.Eliminado)
             }
         })
 
@@ -43,10 +55,14 @@ export class RolesProyectosService {
         return tempRolProyecto
     }
 
+    /**
+     * Servicio para obtener roles de proyectos
+     * @returns RolesProyectos[]
+     */
     async obtenerRolesProyectos() {
         const tempRolesProyectos = await this.dbRolProyectos.find({
             where: {
-                estado: Not(nomenclador.Eliminado)
+                estado: Not(nomencladorEstados.Eliminado)
             }
         })
 
@@ -55,11 +71,15 @@ export class RolesProyectosService {
         return tempRolesProyectos;
     }
 
-
+    /**
+     * Servicio para eliminar un  rol de proyectos 
+     * @param id :number Id del rol de proyecto que se desea eliminar.
+     * @returns 
+     */
     async eliminarRolesProyectos(id: number) {
         const tempRolesProyecto = await this.obtenerRolPRoyectos(id)
 
-        tempRolesProyecto.estado = nomenclador.Eliminado
+        tempRolesProyecto.estado = nomencladorEstados.Eliminado
 
         await this.dbRolProyectos.save(tempRolesProyecto)
 
@@ -68,6 +88,12 @@ export class RolesProyectosService {
 
     }
 
+    /**
+     * Servicio para editar proyecto por id
+     * @param id :number Id del rol de proyecto que se desea editar
+     * @param rolProyecto 
+     * @returns 
+     */
     async editarRolProyecto(id: number, rolProyecto: EditarRolProyecto) {
         if (!Object.keys(rolProyecto).length) throw new HttpException('Debe intentar editar al menos un campo ', HttpStatus.BAD_REQUEST)
 
@@ -92,6 +118,5 @@ export class RolesProyectosService {
 
 
     }
-
 
 }

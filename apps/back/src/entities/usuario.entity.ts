@@ -1,6 +1,5 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Proyecto } from "./proyecto.entity";
-import { nomenclador } from "src/enums/nomenclador";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { nomencladorEstados } from "src/enums/nomenclador";
 
 
 /**
@@ -18,11 +17,8 @@ export class Usuario{
     password: string
 
 
-    @OneToMany(()=>Proyecto , proyecto=> proyecto.owner)
-    proyectos: Proyecto[]
-
-    @Column({default: nomenclador.Activo})
-    estado: nomenclador
+    @Column({default: nomencladorEstados.Activo})
+    estado: nomencladorEstados
 
 
 }
