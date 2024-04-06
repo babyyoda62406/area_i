@@ -12,13 +12,13 @@ import { JwtModule } from 'src/modules/jwt/jwt.module';
   providers: [UsuarioService],
   exports: [UsuarioService]
 })
-export class UsuarioModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-    .apply(ValidarToken)
-    .forRoutes('usuarios/')
-  }
-}
-
-// export class UsuarioModule {
+// export class UsuarioModule implements NestModule {
+//   configure(consumer: MiddlewareConsumer) {
+//     consumer
+//     .apply(ValidarToken)
+//     .forRoutes('usuarios/')
+//   }
 // }
+
+export class UsuarioModule {
+}
