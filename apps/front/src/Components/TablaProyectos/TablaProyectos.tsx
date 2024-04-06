@@ -37,7 +37,7 @@ const TablaProyectos = () => {
 	useEffect(() => {
 		reloadTabla(token, setData)
 
-	}, [actualizarTabla])
+	}, [actualizarTabla.tablaProyectos])
 
 	
 

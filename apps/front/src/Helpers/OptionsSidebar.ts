@@ -41,10 +41,10 @@ export const itemsASide: typeOptionAside[] = [
         ]
     },
     {
-        name: 'Example3',
+        name: 'Gestionar Roles',
         children: [
             {
-                name: 'item1',
+                name: 'Mostrar Roles',
                 optionFunc: ''
             },
             {

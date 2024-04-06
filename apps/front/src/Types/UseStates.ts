@@ -1,5 +1,6 @@
 type tpActualizarTabla = {
-    tablaProyectos:boolean
+    tablaProyectos: boolean
+    tablaUsuarios:boolean
 }
 
 

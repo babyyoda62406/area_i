@@ -23,6 +23,11 @@ export const HandlerSidebar = (arg: string, ruta: any, setShowModal: (arg: boole
 			ruta('/home/gestionusuarios')
 			break
 		
+			case 'gestionRoles':
+			
+			ruta('/home/gestionRoles')
+			break
+		
 		default:
 			console.log('el sidebar no tiene este elemento configurado')
 			console.log(arg)
