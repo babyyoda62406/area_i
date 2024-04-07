@@ -1,3 +1,7 @@
 .FormularioProyectsUpdate{
     margin: 1rem;
 }
+.SelectsElements{
+    display: flex;
+    justify-content: space-around;
+}

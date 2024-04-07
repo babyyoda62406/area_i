@@ -103,7 +103,7 @@ const TablaProyectos = () => {
 			headerName: 'Uso',
 			sortable: true,
 			width: 80,
-			editable: true,
+			editable: false,
 
 		},
 		

@@ -7,7 +7,18 @@ type tpFormularioUpdateProyects = {
     id:GridRowId
     setShowModal:(arg:boolean)=>void
 }
+
+type tpDataUpdateProyect = {
+    id: number
+    nombre:string
+    identificador: string
+    nombreOrg: string
+    estado:'Activo'|'Inactivo'
+
+}
 export type {
-    tpFormularioUpdateProyects
+    tpFormularioUpdateProyects,
+    tpDataUpdateProyect,
+
     
 }
