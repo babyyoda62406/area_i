@@ -66,7 +66,8 @@ const TablaProyectos = () => {
 		{
 			field: 'numElement',
 			headerName: '',
-			width:30
+			width: 30,
+			type:'number'
 			
 		},
 		{
@@ -75,6 +76,7 @@ const TablaProyectos = () => {
 			width: 100,
 			editable: true,
 			filterable: true,
+			
 		},
 		{
 			field: 'nombre',
@@ -104,7 +106,7 @@ const TablaProyectos = () => {
 			sortable: true,
 			width: 80,
 			editable: false,
-
+			type: 'boolean'
 		},
 		
 		{
