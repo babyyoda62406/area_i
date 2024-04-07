@@ -5,7 +5,8 @@ import { typeDatosProyServer } from "../../../Types/CMP"
 
 
 
-export const reloadTabla = (token: string, setData: (arg:typeDatosProyServer[])=>void) => {
+
+export const getProyectos = (token: string, setData: (arg:typeDatosProyServer[])=>void) => {
 
 
 

@@ -11,7 +11,9 @@ export const GlobalContext = createContext<typeGlobalContext>({
     token: '',
     showSidebar: false,
     actualizarTabla: {
-        tablaProyectos: false
+        tablaProyectos: false,
+        tablaUsuarios: false,
+        tablaOrganizaciones:false
     },
 
 
@@ -39,7 +41,9 @@ export const GlobalContextProvider: FC<typeProviderContext> = ({ children }) => 
     const [token, setToken] = useState<string>('')
     const [showSidebar, setShowSidebar] = useState<boolean>(false)
     const [actualizarTabla, setActualizarTabla] = useState<tpActualizarTabla>({
-        tablaProyectos: false
+        tablaProyectos: false,
+        tablaOrganizaciones: false,
+        tablaUsuarios:false
     })
 
 

@@ -2,21 +2,21 @@ import './TablaProyectos.css'
 import Box from '@mui/material/Box';
 import { DataGrid, GridRowHeightParams, GridRowId, } from '@mui/x-data-grid';
 import { esES } from "@mui/x-data-grid/locales";
-import { reloadTabla } from './services/ReloadTabla';
+import { getProyectos } from './services/getProyectos.ts';
 import {  useContext, useEffect, useState } from 'react';
-import { GlobalContext } from '../../Contexts/GlobalContext';
 import { DatoModificado } from './services/Update.ts';
-import { tpColumnModified } from './types/tpcolumnas';
+import { tpColumnModified } from './types/tpcolumnas.ts';
 import { GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import SelectorHeight from './Components/Selectorheight/SelectorHeight';
-import { DeleteElement } from './services/Delete';
+import SelectorHeight from '../Selectorheight/SelectorHeight.tsx';
+import { DeleteElement } from './services/Delete.ts';
 import { Button, Popover } from 'antd';
-import ModalFormulario from '../ModalFormulario/ModalFormulario.tsx';
 import FormularioProyectsUpdate from './Components/FormularioUpdate/FormularioProyectsUpdate.tsx';
-import { typeDatosProyServer } from '../../Types/CMP.ts';
 import BtnAddProyect from './Components/AgregarProyecto/AgregarProyecto.tsx';
+import { GlobalContext } from '../../Contexts/GlobalContext.tsx';
+import { typeDatosProyServer } from '../../Types/CMP.ts';
+import ModalFormulario from '../ModalFormulario/ModalFormulario.tsx';
 
 
 
@@ -35,7 +35,7 @@ const TablaProyectos = () => {
 	
 
 	useEffect(() => {
-		reloadTabla(token, setData)
+		getProyectos(token, setData)
 		
 	}, [actualizarTabla.tablaProyectos])
 
