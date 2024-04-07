@@ -5,15 +5,12 @@
     flex-direction: column;
     position: absolute;
     width: 210px;
-    height: 80%;
-    
+    height: 92%;
     margin-top: 5.5rem;
-   
-    background-color:var(--bg-blue-7);
+    background-color:rgb(33,150,243);
     left: -300px;
     padding-top: 1.0rem;
     
-
 }
 
 .ShowAside{
@@ -47,7 +44,7 @@
 
 /* estilos a los items visibles */
 .ElementCollapse{
-    background-color: var(--bg-blue-7) ;
+    background-color: rgb(33,150,243) ;
     border-radius: 0px !important;  
 }
 
@@ -102,14 +99,20 @@
 }
 
 .SubElementActive{
-    color:var(--bg-blue-10)!important;
+    color: var(--bg-white-8) !important;
+    filter: brightness(1.4);
     padding-left: 0.1rem;
     
 }
 
 /* estilo al interior de la caja desplegable */
 .ElementCollapse  div:nth-child(2)>div{
-    background-color: var(--bg-blue-7);
+    background-color: rgb(33,150,243);
+   
+}
+
+.ElementCollapse  div:nth-child(2)>div>span:hover{
+    color: var(--bg-blue-1);
    
 }
 
