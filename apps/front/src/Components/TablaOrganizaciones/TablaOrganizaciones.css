@@ -1,0 +1,61 @@
+.ContainerTable{
+    width: max-content;
+    height: min-content;
+    background-color: white;
+    animation: showTable 600ms linear forwards;
+}
+
+@keyframes showTable {
+    from{
+        z-index: 1;
+        transform:translateY(-50px);
+        opacity: 0;
+    }
+
+    to{
+        transform:translateY(0px);
+        opacity:1;
+    }
+}
+
+
+.TablaOrganizaciones>div>div{
+
+    height:max-content;
+
+}
+
+.PopoverOrganizations {
+    width: max-content;
+    padding: 0.6rem;
+    display:flex;
+    flex-direction: column;
+}
+
+.PopoverOrganizations .TitlePopover{
+    font-size: 1.2rem;
+    color: var(--bg-black-4);
+}
+.PopoverOrganizations .BodyPopover{
+    display: flex;
+    margin-top: 1rem;
+    justify-content: end;
+
+}
+
+
+
+.PopoverOrganizations .BodyPopover .ButtonPop.yes{
+    background-color: var(--bg-succes-1);
+    color: var(--bg-white-2);
+}
+.PopoverOrganizations .BodyPopover .ButtonPop.yes:hover{
+    color: white;
+}
+
+.HeaderTable{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.1px solid var(--bg-blue-2);
+}

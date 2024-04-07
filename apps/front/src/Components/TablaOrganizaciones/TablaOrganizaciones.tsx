@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-
+import './TablaOrganizaciones.css'
 import { DataGrid, esES, GridActionsCellItem, GridColDef, GridRowHeightParams, GridRowId } from '@mui/x-data-grid'
 import { useContext, useMemo, useState } from 'react'
 import { GlobalContext } from '../../Contexts/GlobalContext'
@@ -40,7 +40,7 @@ const TablaOrganizaciones = () => {
 		setShowModal(true)
 	}
 
-    const contenidoPopover = <div className='PopoverProyects'>
+    const contenidoPopover = <div className='PopoverOrganizations'>
 		<span className='TitlePopover'>Estas seguro que deseas eliminar este proyecto?</span>
         <div className='BodyPopover '>
             
@@ -58,14 +58,7 @@ const TablaOrganizaciones = () => {
 			type:'number'
 			
 		},
-		{
-			field: 'identificador',
-			headerName: 'Identificador',
-			width: 100,
-			editable: true,
-			filterable: true,
-			
-		},
+		
 		{
 			field: 'nombre',
 			headerName: 'Nombre',
@@ -80,14 +73,7 @@ const TablaOrganizaciones = () => {
 			editable: true,
 
 		},
-		{
-			field: 'nombreOrg',
-			headerName: 'Organizacion',
-			type: 'text',
-			width: 150,
-			editable: true,
-			align: "left"
-		},
+		
 		{
 			field: 'enUso',
 			headerName: 'Uso',
@@ -126,9 +112,9 @@ const TablaOrganizaciones = () => {
 		}
 	];
 
-    return <Box>
+    return <Box className='ContainerTable' >
         <DataGrid
-			className='TablaProyectos'
+			className='TablaOrganizaciones'
 			localeText={idioma}
 			columns={columns}
 			rows={data}
