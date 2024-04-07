@@ -1,5 +1,4 @@
 import { RutaServer } from "../../../Helpers/RutaServer"
-import { Item } from "../../../Interfaces/TableInterfaces"
 import { ALerta } from "../../../Services/Alerta"
 import { FetchService } from "../../../Services/FetchService"
 import { typeDatosProyServer } from "../../../Types/CMP"
@@ -18,17 +17,15 @@ export const reloadTabla = (token: string, setData: (arg:typeDatosProyServer[])=
 	})
 		.then(async (res: Response) => {
 
-
+			
 			switch (res.status) {
 				case 200:
 					let datos = await res.json()
-
-					datos.map((element: Item, index: number) => {
-						return (element.key = element.id, element.numElement = String(index + 1))
+					datos = datos.map((item:typeDatosProyServer) => {
+						const {  organizacion } = item
+						return {...item,['nombreOrg']:organizacion?.nombre,['idOrg']:organizacion?.id}
 					})
 					setData(datos)
-
-
 					break
 
 				case 204:
@@ -37,14 +34,16 @@ export const reloadTabla = (token: string, setData: (arg:typeDatosProyServer[])=
 
 				case 304:
 					let dataNM = await res.json()
-					dataNM.map((element: Item, index:number) => {
-						return (element.key = element.id , element.numElement = String(index+1))
+					dataNM = dataNM.map((item:typeDatosProyServer) => {
+						const { organizacion } = item
+						return {...item,['nombreOrg']:organizacion?.nombre,['idOrg']:organizacion?.id}
 					})
 					setData(dataNM)
 					break
 
 				case 400:
 					const { message: errorMess } = await res.json()
+					
 					ALerta({ title: errorMess, icon: 'error' })
 					break
 

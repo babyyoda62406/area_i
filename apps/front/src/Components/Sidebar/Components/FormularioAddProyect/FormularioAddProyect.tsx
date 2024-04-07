@@ -8,30 +8,37 @@ import { FetchService } from '../../../../Services/FetchService'
 import { typeDatosProyServer } from '../../../../Types/CMP'
 import { tpFormularioAddProyecto } from '../../../../Types/Formularios'
 import { ReadToken } from '../../../../Services/DecodingToken'
+import InputSelect from '../../../InputSelect/InputSelect'
 
 const FormularioAddProyect: FC<tpFormularioAddProyecto> = ({ setShowModal }) => {
 
     const { token,actualizarTabla,setActualizarTabla } = useContext(GlobalContext)
 
-    const [dataServer, setDataServer] = useState<typeDatosProyServer>({
+    const [dataServer, setDataServer] = useState<{
+        id: number,
+        nombre: string,
+        identificador: string,
+        idOrganizacion:number
+    }>({
         nombre: '',
-        organizacion: '',
-        ownerId: ReadToken(token),
-        uid: ''
+        id: ReadToken(token),
+        identificador: '',
+        idOrganizacion:1
     })
 
-    const guardarDatos = (arg: string, type: keyof typeDatosProyServer) => {
+    const guardarDatos = (arg: string, type: keyof typeDatosProyServer | 'idOrganizacion') => {
         
         switch (type) {
             case 'nombre':
                 setDataServer({ ...dataServer, [type]: arg })
                 break;
-            case 'uid':
+            case 'identificador':
+                console.log(arg)
                 setDataServer({ ...dataServer, [type]: arg })
 
                 break;
-            case 'organizacion':
-                setDataServer({ ...dataServer, [type]: arg })
+            case 'idOrganizacion':
+                setDataServer({ ...dataServer, [type]: Number(arg) })
 
                 break;
 
@@ -41,6 +48,12 @@ const FormularioAddProyect: FC<tpFormularioAddProyecto> = ({ setShowModal }) => 
 
     const enviarDatos = (event: any) => {
         event.preventDefault()
+
+        if (Object.keys(dataServer).find((item: string) => { dataServer[item as keyof typeof dataServer] == '' })) {
+            console.log('candela')
+            alert('eso')
+            return
+        }
 
         FetchService(RutaServer.setProyectos, {
             method: 'POST',
@@ -71,7 +84,8 @@ const FormularioAddProyect: FC<tpFormularioAddProyecto> = ({ setShowModal }) => 
                         break
 
                     case 409:
-                        const { messageConflicto } = await res.json()
+                        const { message:messageConflicto } = await res.json()
+                       
                         ALerta({ title: messageConflicto, icon: 'error' })
                         break
 
@@ -91,9 +105,10 @@ const FormularioAddProyect: FC<tpFormularioAddProyecto> = ({ setShowModal }) => 
         <InputForm tipo={'text'} label='Introduzca el nombre de su proyecto'
             evento={(arg) => guardarDatos(arg, 'nombre')} />
         <InputForm tipo={'text'} label='Introduzca el id  de su proyecto'
-            evento={(arg) => guardarDatos(arg, 'uid')} />
-        <InputForm tipo={'text'} label='Introduzca la organizacion de su proyecto'
-            evento={(arg) => guardarDatos(arg, 'organizacion')} />
+            evento={(arg) => guardarDatos(arg, 'identificador')} />
+        <InputSelect data={[]} defaultValue='candela' updateSize={(arg) => guardarDatos(arg, 'idOrganizacion')}/>
+        {/* <InputForm tipo={'text'} label='Introduzca la organizacion de su proyecto'
+            evento={(arg) => guardarDatos(arg, 'nombreOrg')} /> */}
         <InputForm tipo={'submit'} evento={() => guardarDatos} />
 
     </form>

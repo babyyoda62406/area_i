@@ -5,6 +5,6 @@ export const FetchService = (url: string, bag: object) => fetch(url, {
     headers: {
         'Content-Type': 'application/json'
     },
-    body: undefined,
+    
     ...bag
 })

@@ -1,0 +1,18 @@
+.InputSelect{
+    margin: 0.4rem;
+}
+
+.theme-light .InputSelect .InputSelectMoney .ant-select-selector{
+    background-color: var(--color-gray-white);
+    
+}
+
+.theme-dark .InputSelect .InputSelectMoney .ant-select-selector{
+    background-color: var(--color-gray-white);
+
+}
+
+.theme-dark .InputSelect .InputSelectMoney .rc-virtual-list-holder-inner{
+    background-color: var(--color-gray-white);
+
+}

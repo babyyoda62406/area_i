@@ -39,10 +39,6 @@ const TablaProyectos = () => {
 
 	}, [actualizarTabla.tablaProyectos])
 
-	
-
-	
-
 	const HandlerModified = (arg: any) => { setcolumnModified({ ['idRow']: arg.id, ['column']: arg.field }) }
 
 	const contenidoPopover = <div className='PopoverProyects'>
@@ -75,10 +71,10 @@ const TablaProyectos = () => {
 			
 		},
 		{
-			field: 'uid',
-			headerName: 'Id',
+			field: 'identificador',
+			headerName: 'Identificador',
 			width: 100,
-			editable: false,
+			editable: true,
 			filterable: true,
 		},
 		{
@@ -86,14 +82,6 @@ const TablaProyectos = () => {
 			headerName: 'Nombre',
 			width: 150,
 			editable: true,
-		},
-		{
-			field: 'organizacion',
-			headerName: 'Organizacion',
-			type: 'text',
-			width: 150,
-			editable: true,
-			align: "left"
 		},
 		{
 			field: 'estado',
@@ -104,13 +92,29 @@ const TablaProyectos = () => {
 
 		},
 		{
+			field: 'nombreOrg',
+			headerName: 'Organizacion',
+			type: 'text',
+			width: 150,
+			editable: true,
+			align: "left"
+		},
+		{
+			field: 'enUso',
+			headerName: 'Uso',
+			sortable: true,
+			width: 80,
+			editable: true,
+
+		},
+		
+		{
 			field: 'actions',
 			type: 'actions',
 			headerName: 'Operaciones',
 			width: 100,
 			cellClassName: 'actions',
 			getActions: ({ id, row }) => {
-
 
 				return [
 					<GridActionsCellItem

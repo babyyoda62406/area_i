@@ -1,3 +1,4 @@
+import { tpOrganization } from "./Entities"
 
 
 
@@ -35,13 +36,16 @@ type typeModalFormulario = {
     
 }
 
+
+
 type typeDatosProyServer = {
-    id?:number
-    ownerId: number
+    id:number
+    identificador: string
     nombre: string
-    organizacion: string
-    uid:string
-    
+    nombreOrg:string
+    estado: 'Activo' | 'Inactivo'
+    enUso:boolean
+    organizacion?: tpOrganization 
 }
 
 type tpInputForm = {
@@ -51,7 +55,11 @@ type tpInputForm = {
     evento:(arg:string)=>void
 }
 
-
+type tpInputSelect = {
+    data:any
+    updateSize:(arg:string)=>void
+    defaultValue:string
+}
 
 
 export type {
@@ -61,7 +69,8 @@ export type {
     typeModalFormulario,
     typeFormularioTPModal,
     typeDatosProyServer,
-    tpInputForm
+    tpInputForm,
+    tpInputSelect
     
 
 }

@@ -6,7 +6,7 @@ export const ALerta = (arg: TPAlert) => {
 
     Swal.fire(
         {
-            title: '',
+            title: arg.title,
             text:'',
             icon: 'success',            
             showConfirmButton: true,

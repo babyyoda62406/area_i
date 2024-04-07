@@ -48,7 +48,7 @@ export const DatoModificado = (
                 case 200:
                     
                     const { message: mesSucces, newProyecto } = await res.json()
-                    let position = data.findIndex(element => element.uid === newProyecto.id)
+                    let position = data.findIndex(element => element.id === newProyecto.id)
                     
                     const newData = [...data]
                     newData[position] = {
