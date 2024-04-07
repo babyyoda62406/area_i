@@ -36,7 +36,7 @@ const TablaProyectos = () => {
 
 	useEffect(() => {
 		reloadTabla(token, setData)
-
+		
 	}, [actualizarTabla.tablaProyectos])
 
 	const HandlerModified = (arg: any) => { setcolumnModified({ ['idRow']: arg.id, ['column']: arg.field }) }
@@ -52,7 +52,6 @@ const TablaProyectos = () => {
 	</div>
 
 
-	
 	const EditarRow = (row: typeDatosProyServer, id: GridRowId) => {
 
 		setRowEdit(row)
@@ -174,7 +173,7 @@ const TablaProyectos = () => {
 			disableRowSelectionOnClick
 			onCellEditStop={HandlerModified}
 			processRowUpdate={(updatedRow, paramsold) =>
-				DatoModificado(token, updatedRow, paramsold, columnModified, data, setData,actualizarTabla,setActualizarTabla)
+				DatoModificado(token, updatedRow, paramsold, columnModified, data, actualizarTabla,setActualizarTabla)
 			}
 			onProcessRowUpdateError={(err) => console.log(err)}
 			
