@@ -2,6 +2,7 @@ import { nomencladorEstados } from 'src/enums/nomenclador';
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Organizacion } from './organizacion.entity';
 import { ProyectoTarifa } from './proyecto-tarifa.entity';
+import { Plaza } from './plaza.entity';
 
 
 
@@ -21,6 +22,9 @@ export class Proyecto {
 
     @OneToMany(()=> ProyectoTarifa , pyt => pyt.proyecto)
     proyectoTarifas: ProyectoTarifa[]
+
+    @OneToMany(()=> Plaza , plz=> plz.proyecto)
+    plazas: Plaza[]
 
     @Column({enum: nomencladorEstados, default: nomencladorEstados.Activo})
     estado: nomencladorEstados

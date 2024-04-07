@@ -29,6 +29,9 @@ import { TarifaModule } from './modules/tarifa/tarifa.module';
 import { Tarifa } from './entities/tarifa.entity';
 import { ProyectoTarifaModule } from './modules/proyecto-tarifa/proyecto-tarifa.module';
 import { ProyectoTarifa } from './entities/proyecto-tarifa.entity';
+import { PlazaModule } from './modules/plaza/plaza.module';
+import { Plaza } from './entities/plaza.entity';
+
 
 dotenv.config();
 
@@ -41,7 +44,7 @@ dotenv.config();
 			port: Number(process.env.PORT_DB),
 			password: process.env.PASSWORD,
 			synchronize: true,
-			entities: [Usuario, RolesProyectos, NivelExperticia, Indicador, Persona, Organizacion, Proyecto, Tarifa, ProyectoTarifa]
+			entities: [Usuario, RolesProyectos, NivelExperticia, Indicador, Persona, Organizacion, Proyecto, Tarifa, ProyectoTarifa, Plaza]
 		}),
 		ServeStaticModule.forRoot({
 			rootPath: join(__dirname, '../../front/dist'),
@@ -58,7 +61,8 @@ dotenv.config();
 		OrganizacionModule,
 		ProyectoModule,
 		TarifaModule,
-		ProyectoTarifaModule
+		ProyectoTarifaModule,
+		PlazaModule
 	],
 	controllers: [AppController],
 	providers: [AppService,
