@@ -6,6 +6,7 @@ import Login from './Pages/Login'
 import Home from './Pages/Home'
 import GestionGeneral from './Components/Gestiongeneral/Gestiongeneral'
 import GestionUsuarios from './Components/GestionUsuarios/GestionUsuarios'
+import GestionOrganizaciones from './Components/GestionOrganizaciones/GestionOrganizaciones'
 
 
 
@@ -19,6 +20,7 @@ const App = () => {
 			<Route path='/' element={<Login />} />
 			<Route path='Home' element={<Home />} >
 				<Route path='gestiongeneral' element={<GestionGeneral />}></Route>
+				<Route path='gestion_organizaciones' element={<GestionOrganizaciones/>}></Route>
 				<Route path='gestionusuarios' element={<GestionUsuarios/>}></Route>
 			</Route>
 		</Routes>

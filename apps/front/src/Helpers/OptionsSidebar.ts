@@ -2,10 +2,7 @@
 import { typeOptionAside } from "../Types/OptionsAside";
 
 
-
-
-
-export const itemsASide: typeOptionAside[] = [
+export const itemsSidebar: typeOptionAside[] = [
     {
         name: 'Gestion General',
         children: [
@@ -24,15 +21,15 @@ export const itemsASide: typeOptionAside[] = [
         ]
     },
     {
-        name: 'Control Usuarios',
+        name: 'Gestionar Empresas',
         children: [
             {
-                name: 'Control Usuarios',
-                optionFunc: 'gestionUsuarios'
+                name: 'Control Organizaciones',
+                optionFunc: 'GestionOrganizaciones'
             },
             {
-                name: 'Agregar persona',
-                optionFunc: 'mostrar modal de agregar persona'
+                name: 'Agregar Organizacion',
+                optionFunc: 'candela'
             },
             {
                 name: 'item3',

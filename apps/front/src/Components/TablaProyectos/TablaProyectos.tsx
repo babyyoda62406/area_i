@@ -10,7 +10,7 @@ import { GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SelectorHeight from '../Selectorheight/SelectorHeight.tsx';
-import { DeleteElement } from './services/Delete.ts';
+import { DeleteProyects } from './services/DeleteProyects.ts';
 import { Button, Popover } from 'antd';
 import FormularioProyectsUpdate from './Components/FormularioUpdate/FormularioProyectsUpdate.tsx';
 import BtnAddProyect from './Components/AgregarProyecto/AgregarProyecto.tsx';
@@ -45,7 +45,7 @@ const TablaProyectos = () => {
 		<span className='TitlePopover'>Estas seguro que deseas eliminar este proyecto?</span>
 		<div className='BodyPopover '>
 
-			<Button className='ButtonPop yes' onClick={() => DeleteElement(idRowDelete, token, actualizarTabla, setActualizarTabla)}>
+			<Button className='ButtonPop yes' onClick={() => DeleteProyects(idRowDelete, token, actualizarTabla, setActualizarTabla)}>
 				Si
 			</Button>
 		</div>

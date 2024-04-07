@@ -4,7 +4,7 @@ import './Sidebar.css'
 import { typeSidebar } from '../../Types/TpHlayout'
 
 import { Collapse, CollapseProps } from 'antd'
-import { itemsASide } from '../../Helpers/OptionsSidebar'
+import {  itemsSidebar } from '../../Helpers/OptionsSidebar'
 import {  typeSubElAside } from '../../Types/UseStates'
 
 import { HandlerSidebar } from './Services/ServicesSidebar'
@@ -51,7 +51,7 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
  * recibe un array de objetos para generar los componentes del sidebar
  */
   
-  const ElementSidebar: CollapseProps['items'] = itemsASide.map((element, index) => {
+  const ElementSidebar: CollapseProps['items'] = itemsSidebar.map((element, index) => {
     return {
       key: index,
       className: 'ElementCollapse',

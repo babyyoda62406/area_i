@@ -4,7 +4,7 @@ import { RutaServer } from "../../../Helpers/RutaServer";
 import { ALerta } from "../../../Services/Alerta";
 import { tpActualizarTabla } from "../../../Types/UseStates";
 
-export const DeleteElement = (
+export const DeleteProyects = (
     idData: GridRowId,
     token: string,
     actualizarTabla: tpActualizarTabla,
