@@ -17,16 +17,9 @@ export const GlobalContext = createContext<typeGlobalContext>({
     },
 
 
-
-
-
-
     setToken: () => { },
     setShowSidebar: () => { },
     setActualizarTabla: () => { },
-
-
-
 
 })
 

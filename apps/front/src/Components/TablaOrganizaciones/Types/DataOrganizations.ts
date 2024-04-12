@@ -6,7 +6,12 @@ type tpDataOrganizations = {
     enUSo:boolean
 }
 
+type tpDataCreateOrg = {
+    nombre:string
+}
+
 
 export type {
-    tpDataOrganizations
+    tpDataOrganizations,
+    tpDataCreateOrg
 }

@@ -17,7 +17,6 @@ export const getOrganizations = (token:string,setData:(arg:tpDataOrganizations[]
                 case 200:
                     const data = await res.json()
                     setData([...data ])
-                ALerta({title:'estado 200', icon:'success'})
                     break
                 
                 case 204:
