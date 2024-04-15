@@ -14,7 +14,7 @@ const Navbar: FC<typeNavbar> = () => {
     const {setShowSidebar,showSidebar} = useContext(GlobalContext)
     
 
-        
+          
 
     return <div className="Navbar">
 

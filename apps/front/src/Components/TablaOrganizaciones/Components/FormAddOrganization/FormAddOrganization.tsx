@@ -20,7 +20,7 @@ const FormAddOrganization: FC<ItfFormAddOrg> = ({ setShowModal }) => {
 
     const sendData = () => {
         
-        if (data.nombre) return
+        if (!data.nombre) return
 
         FetchService(RutaServer.getOrganizaciones, {
             method: 'POST',
