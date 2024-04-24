@@ -50,6 +50,7 @@ type typeDatosProyServer = {
 
 type tpInputForm = {
     label?: string
+    classElement?:string
     tipo: 'text' | 'select' | 'number' | 'submit' 
     value?:string|number
     evento:(arg:string)=>void

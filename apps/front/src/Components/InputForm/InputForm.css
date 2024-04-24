@@ -35,7 +35,7 @@
 
 
 .InputForm>input[type='submit']{
-    width: 20%;
+    width: max-content;
 
     border-radius: 3px;
     font-size: 1rem;
@@ -49,4 +49,8 @@
     cursor: pointer;
     background-color: var(--bg-blue-7);
     color: var(--bg-blue-2);
+}
+
+.InputForm.InputSM>input[type='submit'] {
+    margin-inline: 0px;
 }

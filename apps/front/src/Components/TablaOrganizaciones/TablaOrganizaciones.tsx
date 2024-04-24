@@ -12,6 +12,8 @@ import { Button, Popover } from 'antd'
 import { DeleteOrganizations } from './Services/DeleteOrganizations'
 import SelectorHeight from '../TablaUsuarios/Components/Selectorheight/SelectorHeight'
 import BtnAddOrganization from './Components/AgregarOrganizacion/AgregarOrganizacion'
+import ModalFormulario from '../ModalFormulario/ModalFormulario'
+import FormularioUpdateOrganization from './Components/FormularioUpdateOrganization/FormularioUpdateOrganization'
 
 const TablaOrganizaciones = () => {
 
@@ -152,6 +154,7 @@ const TablaOrganizaciones = () => {
 			onProcessRowUpdateError={(err) => console.log(err)}
 			
 		/>
+		<ModalFormulario showModal={showModal} setShowModal={() => setShowModal(false)} Formulario={<FormularioUpdateOrganization data={rowEdit} id={columnModified.idRow} setShowModal={() => setShowModal(false)} />} />
 
 
     </Box>
