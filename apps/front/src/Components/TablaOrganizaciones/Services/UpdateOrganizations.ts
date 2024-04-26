@@ -13,7 +13,8 @@ export const UpdateOrganization = (
     setShowModal:(arg:boolean)=>void) => {
 
 
-    const sendValue = {"nombre":data}
+    const sendValue = { "nombre": data }
+    
     
     FetchService(`${RutaServer.getOrganizaciones}/${id}`, {
         method: 'PATCH',

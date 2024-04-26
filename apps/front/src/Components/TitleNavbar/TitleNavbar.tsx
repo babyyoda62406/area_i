@@ -5,7 +5,7 @@ import './TitleNavbar.css'
 const TitleNavbar:FC<typeTitleNavb> = () => {
     
     return <section className="TitleNavbar">
-        <span>Por Favor Cree Un proyecto</span>
+        <span></span>
 
     </section>
 }
