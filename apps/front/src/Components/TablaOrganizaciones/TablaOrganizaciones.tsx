@@ -27,7 +27,7 @@ const TablaOrganizaciones = () => {
 		idRow: 0,
 		column: ''
 	})
-	const [idRowDelete, setIdRowDelete] = useState<GridRowId>(0)
+	const [idRowDelete, setIdRowDelete] = useState<GridRowId>(1)
 	const [showModal, setShowModal] = useState<boolean>(false)
 	const [rowEdit, setRowEdit] = useState<tpDataOrganizations>({ ...data[0] })
 	
@@ -59,12 +59,10 @@ const TablaOrganizaciones = () => {
     const columns: GridColDef[] = [
 		{
 			field: 'numElement',
-			headerName: '',
+			headerName: 'Orden',
 			width: 30,
 			flex: 1,
-			
-			type:'number'
-			
+			type:'text'
 		},
 		
 		{

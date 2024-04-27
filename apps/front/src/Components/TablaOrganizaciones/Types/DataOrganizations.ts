@@ -1,5 +1,6 @@
 
 type tpDataOrganizations = {
+    numElement:number
     id: number
     nombre: string
     estado: 'Activo' | 'Inactivo'
