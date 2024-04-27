@@ -16,9 +16,20 @@ type tpDataUpdateProyect = {
     estado:'Activo'|'Inactivo'
 
 }
+
+type tpDataSendProyect = {
+    id: number
+    nombre?:string
+    identificador?: string
+    nombreOrg?: string
+    estado?: 'Activo' | 'Inactivo'
+    organizacionId?:number
+}
+
 export type {
     tpFormularioUpdateProyects,
     tpDataUpdateProyect,
+    tpDataSendProyect
 
     
 }

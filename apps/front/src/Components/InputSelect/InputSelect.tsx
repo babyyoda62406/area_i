@@ -15,9 +15,9 @@ const InputSelect: FC<tpInputSelect> = ({   data,updateSize,defaultValue }) => {
         <Space wrap  >
 
             <Select
-                
-                className='InputSelectMoney'
-                style={{ width: 110, height:25,fontSize:'smaller' }}
+                // style={{background:'red'}}
+                className='InputSelectItem'
+                style={{ width:'max-content',minWidth:110, height:25,fontSize:'smaller' }}
                 allowClear={false}
                 options={data}
                 defaultValue={defaultValue }

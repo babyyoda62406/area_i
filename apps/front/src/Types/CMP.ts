@@ -1,6 +1,7 @@
 
 
 
+
 type typeLoginLayout = {
 
 }
@@ -52,8 +53,13 @@ type tpInputForm = {
     evento:(arg:string)=>void
 }
 
+type tpOptionsSelect = {
+    value: number|string
+    label:string
+}
+
 type tpInputSelect = {
-    data:any
+    data:tpOptionsSelect[]
     updateSize:(arg:string)=>void
     defaultValue:string
 }
@@ -67,6 +73,7 @@ export type {
     typeFormularioTPModal,
     typeDatosProyServer,
     tpInputForm,
+    tpOptionsSelect,
     tpInputSelect
     
 

@@ -1,13 +1,19 @@
 import './FormularioProyectsUpdate.css'
 import { FC, SyntheticEvent, useContext, useEffect, useMemo, useState } from "react"
-import { tpDataUpdateProyect, tpFormularioUpdateProyects } from "../../types/FormularioProyects"
+import { tpDataSendProyect, tpDataUpdateProyect, tpFormularioUpdateProyects } from "../../types/FormularioProyects"
 import InputForm from "../../../InputForm/InputForm"
 import { RutaServer } from '../../../../Helpers/RutaServer'
 import { ALerta } from '../../../../Services/Alerta'
 import { FetchService } from '../../../../Services/FetchService'
 import { GlobalContext } from '../../../../Contexts/GlobalContext'
 import InputSelect from '../../../InputSelect/InputSelect'
+import { tpDataOrganizations } from '../../../TablaOrganizaciones/Types/DataOrganizations'
+import { getOrganizations } from '../../../TablaOrganizaciones/Services/getOrganizations'
+import { tpOptionsSelect } from '../../../../Types/CMP'
 
+
+
+/** */
 const FormularioProyectsUpdate: FC<tpFormularioUpdateProyects> = ({ data, id, setShowModal }) => {
 
 
@@ -18,16 +24,13 @@ const FormularioProyectsUpdate: FC<tpFormularioUpdateProyects> = ({ data, id, se
         nombreOrg: data.nombreOrg,
         estado: data.estado
     })
-    const [dataSend, setDataSend] = useState<{ //objeto k recoge unicamente la propiedad modificada con su valor
-        id: number,
-        nombre?: string,
-        identificador?: string,
-        nombreOrg?: string
-        estado?: 'Activo' | 'Inactivo'
-    }>({ id: newData.id })
+    const [dataSend, setDataSend] = useState<tpDataSendProyect>({ id: newData.id }) //objeto k recoge unicamente la propiedad modificada con su valor
+
     const [refreshDataSend, setRefreshDataSend] = useState<boolean>(false) //booleano k permite modificar el dataSend despues de cargado el componente
     const { token, actualizarTabla, setActualizarTabla } = useContext(GlobalContext)
-
+    const [dataOrganizations, setDataOrganizations] = useState<tpDataOrganizations[]>([])
+    const [elementsOrganizations, setElementsOrganizations] = useState<tpOptionsSelect[]>([])
+    
 
     useMemo(() => { //recoge los datos a mostrar antes de renderizar el componente
         setNewData({
@@ -35,6 +38,7 @@ const FormularioProyectsUpdate: FC<tpFormularioUpdateProyects> = ({ data, id, se
             ['identificador']: data.identificador,
             ['nombreOrg']: data.nombreOrg
         })
+        getOrganizations(token,setDataOrganizations)
     }, [data])
 
     useEffect(() => {
@@ -46,12 +50,37 @@ const FormularioProyectsUpdate: FC<tpFormularioUpdateProyects> = ({ data, id, se
                 }
             })
         }
+
         setRefreshDataSend(true)
     }, [newData])
 
-    //funcion apra guardar lso datos del formulario
-    // recibe un arg: dato introducido
-    //type: el input modificado
+    useEffect(() => {
+
+        dataOrganizations.find(item=>item.nombre ===newData.nombreOrg)?.id
+        setElementsOrganizations(dataOrganizations.map(item => {
+            return {value:item.id,label:item.nombre}
+        }))
+        
+    }, [dataOrganizations])
+    
+    
+    const handlerInput = (type: 'organizacion'| '', arg: string) => {
+        
+        console.log(arg)
+        console.log('candela')
+        switch (type) {
+            case 'organizacion':
+                setDataSend({...dataSend,['organizacionId']: Number(arg)})
+                
+                break
+        }
+    }
+
+    /**
+     * 
+     * @param arg 
+     * @param type 
+     */
     const guardarDatos = (arg: string, type: keyof tpDataUpdateProyect) => {
 
         switch (type) {
@@ -73,7 +102,7 @@ const FormularioProyectsUpdate: FC<tpFormularioUpdateProyects> = ({ data, id, se
 
     const enviarDatos = (event: SyntheticEvent) => {
         event.preventDefault()
-
+        console.log(dataSend)
         let newUrl = ` ${RutaServer.getProyectos}/${id}`
         FetchService(newUrl, {
             method: 'PATCH',
@@ -93,7 +122,6 @@ const FormularioProyectsUpdate: FC<tpFormularioUpdateProyects> = ({ data, id, se
                         setActualizarTabla({ ...actualizarTabla, ['tablaProyectos']: !actualizarTabla.tablaProyectos })
                         ALerta({ title: mesSucces, icon: "success", position: 'top-right' })
                         setShowModal(false)
-
                         break;
 
                     case 400:
@@ -123,7 +151,7 @@ const FormularioProyectsUpdate: FC<tpFormularioUpdateProyects> = ({ data, id, se
             label='Modifique el identificador de su proyecto'
             value={newData.identificador} />
         <div className='SelectsElements'>
-            <InputSelect data={[]} defaultValue='Organizacion' updateSize={(arg) => { arg }} />
+            <InputSelect data={elementsOrganizations} defaultValue="Organizacion" updateSize={(arg) => { handlerInput('organizacion',arg)}} />
             <InputSelect data={[]} defaultValue='Activo' updateSize={(arg) => { arg }} />
         </div>
 
