@@ -14,7 +14,8 @@ import SelectorHeight from '../TablaUsuarios/Components/Selectorheight/SelectorH
 import BtnAddOrganization from './Components/AgregarOrganizacion/AgregarOrganizacion'
 import ModalFormulario from '../ModalFormulario/ModalFormulario'
 import FormularioUpdateOrganization from './Components/FormularioUpdateOrganization/FormularioUpdateOrganization'
-import { UpdateOrganization } from './Services/UpdateOrganizations'
+import { UpdateInlineTable } from '../../Services/UpdateInlineTable'
+import { RutaServer } from '../../Helpers/RutaServer'
 
 const TablaOrganizaciones = () => {
 
@@ -151,9 +152,17 @@ const TablaOrganizaciones = () => {
 			pageSizeOptions={[2, 5, 7]}
 			disableRowSelectionOnClick
 			onCellEditStop={handlerModified}
-			// processRowUpdate={(updatedRow, paramsold) =>
-			// 	UpdateOrganization(token, updatedRow, paramsold, columnModified, data, actualizarTabla,setActualizarTabla)
-			// }
+			processRowUpdate={(updatedRow, paramsold) =>
+				UpdateInlineTable({
+					url: RutaServer.getOrganizaciones,
+					token: token,
+					tableType: 'tablaOrganizaciones',
+					paramsUpdate: updatedRow,
+					paramsOld: paramsold,
+					actualizarTabla: actualizarTabla,
+					setActualizarTabla
+				})
+			}
 			onProcessRowUpdateError={(err) => console.log(err)}
 			
 		/>

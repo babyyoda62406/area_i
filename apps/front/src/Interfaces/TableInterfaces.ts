@@ -1,4 +1,3 @@
-import { tpColumnModified } from "../Components/TablaProyectos/types/tpcolumnas";
 import { tpActualizarTabla } from "../Types/UseStates";
 
 export interface Item {
