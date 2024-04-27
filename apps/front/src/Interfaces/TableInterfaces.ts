@@ -27,7 +27,7 @@ export interface ItfUpdateTablesInline{
   url: string,
   tableType:keyof tpActualizarTabla
   token: string,
-  columnModified: tpColumnModified,
+  // columnModified: tpColumnModified,
   actualizarTabla: tpActualizarTabla,
   setActualizarTabla: (arg: tpActualizarTabla) => void,
   paramsUpdate: {[key:string]:string},

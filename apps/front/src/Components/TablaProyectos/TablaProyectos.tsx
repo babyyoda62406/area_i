@@ -180,7 +180,6 @@ const TablaProyectos = () => {
 					url: RutaServer.getProyectos,
 					tableType:'tablaProyectos',
 					token: token,
-					columnModified:columnModified,
 					paramsUpdate: updatedRow,
 					paramsOld: paramsold,
 					actualizarTabla: actualizarTabla,
