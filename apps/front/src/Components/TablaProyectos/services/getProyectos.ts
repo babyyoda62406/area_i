@@ -23,9 +23,14 @@ export const getProyectos = (token: string, setData: (arg:typeDatosProyServer[])
 			switch (res.status) {
 				case 200:
 					let datos = await res.json()
-					datos = datos.map((item:{organizacion:tpOrganization}) => {
+					datos = datos.map((item:{organizacion:tpOrganization},index:number) => {
 						const {  organizacion } = item
-						return {...item,['nombreOrg']:organizacion?.nombre,['idOrg']:organizacion?.id}
+						return {
+							...item,
+							['nombreOrg']: organizacion?.nombre,
+							['idOrg']: organizacion?.id,
+							['numElement']:index+1
+						}
 					})
 					setData(datos)
 					break
@@ -36,9 +41,14 @@ export const getProyectos = (token: string, setData: (arg:typeDatosProyServer[])
 
 				case 304:
 					let dataNM = await res.json()
-					dataNM = dataNM.map((item:{organizacion:tpOrganization}) => {
+					dataNM = dataNM.map((item:{organizacion:tpOrganization},index:number) => {
 						const { organizacion } = item
-						return {...item,['nombreOrg']:organizacion?.nombre,['idOrg']:organizacion?.id}
+						return {
+							...item,
+							['nombreOrg']: organizacion?.nombre,
+							['idOrg']: organizacion?.id,
+							['numElement']:index+1
+						}
 					})
 					setData(dataNM)
 					break

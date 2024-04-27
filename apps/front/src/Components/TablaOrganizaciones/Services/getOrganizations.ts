@@ -20,13 +20,13 @@ export const getOrganizations = (token: string, setData: (arg: tpDataOrganizatio
                         item['numElement'] = index + 1
                         return item
                     })
-                    
                     setData([...elementFinallly])
                     break
 
                 case 204:
-                    // ALerta({:'estado 200', icon:'success'})
-                    alert('candela')
+                    const {message:messNoContent} = await res.json()
+                    ALerta({title:messNoContent, icon:'warning'})
+                    
                     break
                 
                 case 304:
@@ -39,15 +39,18 @@ export const getOrganizations = (token: string, setData: (arg: tpDataOrganizatio
                     break
 
                 case 400:
-                    ALerta({ title: 'estado 200', icon: 'success' })
+                    const {message:messError} = await res.json()
+                    ALerta({ title: messError, icon: 'error' })
                     break
 
                 case 404:
-                    ALerta({ title: 'estado 200', icon: 'success' })
+                    const {message:messNf} = await res.json()
+                    ALerta({ title: messNf, icon: 'error' })
                     break
 
                 case 409:
-                    ALerta({ title: 'estado 200', icon: 'success' })
+                    const {message:messConflict} = await res.json()
+                    ALerta({ title: messConflict, icon: 'warning' })
                     break
                 
                 default:

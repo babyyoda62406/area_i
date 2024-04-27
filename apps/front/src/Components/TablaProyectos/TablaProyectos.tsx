@@ -65,15 +65,18 @@ const TablaProyectos = () => {
 	const columns: GridColDef[] = [
 		{
 			field: 'numElement',
-			headerName: '',
+			headerName: 'Orden',
 			width: 30,
-			type:'number'
-			
+			flex:1,
+			type:'number',
+			align:"center"
 		},
 		{
 			field: 'identificador',
 			headerName: 'Identificador',
 			width: 100,
+			flex: 2,
+			align:'left',
 			editable: true,
 			filterable: true,
 			
@@ -82,30 +85,34 @@ const TablaProyectos = () => {
 			field: 'nombre',
 			headerName: 'Nombre',
 			width: 150,
+			flex:3,
 			editable: true,
-		},
-		{
-			field: 'estado',
-			headerName: 'Estado',
-			sortable: true,
-			width: 80,
-			editable: true,
-
 		},
 		{
 			field: 'nombreOrg',
 			headerName: 'Organizacion',
 			type: 'text',
 			width: 150,
+			flex:3,
 			editable: false,
 			align: "left"
 
 		},
 		{
+			field: 'estado',
+			headerName: 'Estado',
+			sortable: true,
+			width: 80,
+			flex:1,
+			editable: false,
+		},
+		
+		{
 			field: 'enUso',
 			headerName: 'Uso',
 			sortable: true,
 			width: 80,
+			flex:1,
 			editable: false,
 			type: 'boolean'
 		},
@@ -115,6 +122,7 @@ const TablaProyectos = () => {
 			type: 'actions',
 			headerName: 'Operaciones',
 			width: 100,
+			flex:3,
 			cellClassName: 'actions',
 			getActions: ({ id, row }) => {
 
