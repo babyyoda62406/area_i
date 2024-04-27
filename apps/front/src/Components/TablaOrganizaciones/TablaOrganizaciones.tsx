@@ -61,6 +61,8 @@ const TablaOrganizaciones = () => {
 			field: 'numElement',
 			headerName: '',
 			width: 30,
+			flex: 1,
+			
 			type:'number'
 			
 		},
@@ -69,6 +71,7 @@ const TablaOrganizaciones = () => {
 			field: 'nombre',
 			headerName: 'Nombre',
 			width: 150,
+			flex: 3,
 			editable: true,
 		},
 		{
@@ -76,8 +79,9 @@ const TablaOrganizaciones = () => {
 			headerName: 'Estado',
 			sortable: true,
 			width: 80,
-			editable: true,
+			flex: 2,
 
+			editable: false,
 		},
 		
 		{
@@ -85,6 +89,8 @@ const TablaOrganizaciones = () => {
 			headerName: 'Uso',
 			sortable: true,
 			width: 80,
+			flex: 2,
+
 			editable: false,
 			type: 'boolean'
 		},
@@ -94,6 +100,8 @@ const TablaOrganizaciones = () => {
 			type: 'actions',
 			headerName: 'Operaciones',
 			width: 100,
+			flex: 2,
+
 			cellClassName: 'actions',
 			getActions: ({ id, row }) => {
 

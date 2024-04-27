@@ -1,5 +1,5 @@
 .ContainerTable{
-    width: max-content;
+    width: 60%;
     height: min-content;
     background-color: white;
     animation: showTable 600ms linear forwards;
