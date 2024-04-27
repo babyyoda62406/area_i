@@ -13,7 +13,7 @@ const FondoPantalla = () => {
     }, []);
 
     const particlesLoaded = useCallback(async (container: Container | undefined) => {
-        console.log(container)
+        ()=>container
 
     }, []);
 
