@@ -2,19 +2,28 @@
 
 
 
-export const HandlerSidebar = (arg: string, ruta: any, setShowModal: (arg: boolean) => void) => {
-
+export const handlerSidebar = (arg: string, ruta:(arg:string)=>void , setShowModal: (arg: boolean) => void,location:any) => {
 
 
 
 	switch (arg) {
 		case 'gestionProyectos':
-			ruta('/Home/gestiongeneral')
+			if (!location.pathname.includes('gestiongeneral')) {
+				ruta('/Home/gestiongeneral')
+
+			} else {
+				ruta('/Home')
+				
+			}
 
 			break
 
 		case 'GestionOrganizaciones':
-			ruta('/Home/gestion_organizaciones')
+			if (!location.pathname.includes('gestion_organizaciones')) {
+				ruta('/Home/gestion_organizaciones')
+			} else {
+				ruta('/Home')
+			}
 			break
 
 		case 'AgregarProyectos':

@@ -7,8 +7,8 @@ import { Collapse, CollapseProps } from 'antd'
 import {  itemsSidebar } from '../../Helpers/OptionsSidebar'
 import {  typeSubElAside } from '../../Types/UseStates'
 
-import { HandlerSidebar } from './Services/ServicesSidebar'
-import { useNavigate } from 'react-router-dom'
+import { handlerSidebar } from './Services/HandlerSidebar'
+import { useLocation, useNavigate } from 'react-router-dom'
 import ModalFormulario from '../ModalFormulario/ModalFormulario'
 import FormularioAddProyect from './Components/FormularioAddProyect/FormularioAddProyect'
 
@@ -17,12 +17,13 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
 
 
   const ruta = useNavigate()
+  const location = useLocation()
+
   const [showModal, setShowModal] = useState<boolean>(false)
 
   const ElementsStyle = {
     marginBottom: '',
     borderRadius: 'none'
-
   }
 
   const [elementActive, setElementActive] = useState<typeSubElAside>({
@@ -36,7 +37,7 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
  */
   const activarSubItem = (arg: string, elementFunc: string) => {
     
-    HandlerSidebar(elementFunc,ruta,setShowModal)
+    handlerSidebar(elementFunc,ruta,setShowModal,location)
 
     elementActive.element == arg ? setElementActive({...elementActive, ['element']:''}):setElementActive((prevelementActive) => {
       return {
@@ -65,7 +66,7 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
       */
       children: element.children.map((elemento, index) => {
         
-        return <span  key={index} onClickCapture={()=>console.log('se ha ejecutado')} className={`SubElementCollapse ${elementActive.element == elemento.name ? "SubElementActive" : ''}`}  onClick={()=>{activarSubItem(elemento.name,elemento.optionFunc)}} >{elemento.name }</span>
+        return <span  key={index} onClickCapture={()=>{}} className={`SubElementCollapse ${elementActive.element == elemento.name ? "SubElementActive" : ''}`}  onClick={()=>{activarSubItem(elemento.name,elemento.optionFunc)}} >{elemento.name }</span>
       }),
       style: ElementsStyle,
       

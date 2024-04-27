@@ -86,7 +86,8 @@
     
     text-transform: capitalize;
     color: var(--bg-white-1) ;
-    font-size: 1.3rem;
+    opacity: 0.8;
+    font-size: 1.2rem;
     /* padding-top: 0.5rem;
     padding-bottom: 0.5rem; */
     transition: all 500ms;
@@ -94,12 +95,14 @@
 }
 
 .SubElementCollapse:hover{
-    
+    opacity: 1;
     cursor: pointer;
 }
 
 .SubElementActive{
-    color: var(--bg-white-8) !important;
+    opacity: 5;
+    text-shadow: 0.5px 0.5px 1px var(--bg-white-1);
+    color: var(--bg-blue-1) !important;
     filter: brightness(1.4);
     padding-left: 0.1rem;
     

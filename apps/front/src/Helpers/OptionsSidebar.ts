@@ -10,14 +10,11 @@ export const itemsSidebar: typeOptionAside[] = [
                 name: 'Gestionar Proyectos',
                 optionFunc: 'gestionProyectos'
             },
-            {
-                name: 'Agregar Proyecto',
-                optionFunc: 'AgregarProyectos'
-            },
-            {
-                name: 'ItemExample2',
-                optionFunc: ''
-            },
+            // {
+            //     name: 'Agregar Proyecto',
+            //     optionFunc: 'AgregarProyectos'
+            // },
+           
         ]
     },
     {
@@ -27,31 +24,28 @@ export const itemsSidebar: typeOptionAside[] = [
                 name: 'Control Organizaciones',
                 optionFunc: 'GestionOrganizaciones'
             },
-            {
-                name: 'Agregar Organizacion',
-                optionFunc: 'candela'
-            },
-            {
-                name: 'item3',
-                optionFunc: ''
-            },
+            // {
+            //     name: 'Agregar Organizacion',
+            //     optionFunc: 'candela'
+            // },
+            
         ]
     },
     {
         name: 'Gestionar Roles',
         children: [
             {
-                name: 'Mostrar Roles',
+                name:'En Desarrollo',
                 optionFunc: ''
             },
-            {
-                name: 'item2',
-                optionFunc: ''
-            },
-            {
-                name: 'item3',
-                optionFunc: ''
-            },
+            // {
+            //     name: 'item2',
+            //     optionFunc: ''
+            // },
+            // {
+            //     name: 'item3',
+            //     optionFunc: ''
+            // },
         ]
     },
     {
