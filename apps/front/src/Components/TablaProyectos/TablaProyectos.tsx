@@ -61,7 +61,6 @@ const TablaProyectos = () => {
 	}
 
 	
-
 	// estrutura de columnas
 	const columns: GridColDef[] = [
 		{
@@ -98,8 +97,9 @@ const TablaProyectos = () => {
 			headerName: 'Organizacion',
 			type: 'text',
 			width: 150,
-			editable: true,
+			editable: false,
 			align: "left"
+
 		},
 		{
 			field: 'enUso',
