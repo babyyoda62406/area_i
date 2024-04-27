@@ -14,6 +14,7 @@ import SelectorHeight from '../TablaUsuarios/Components/Selectorheight/SelectorH
 import BtnAddOrganization from './Components/AgregarOrganizacion/AgregarOrganizacion'
 import ModalFormulario from '../ModalFormulario/ModalFormulario'
 import FormularioUpdateOrganization from './Components/FormularioUpdateOrganization/FormularioUpdateOrganization'
+import { UpdateOrganization } from './Services/UpdateOrganizations'
 
 const TablaOrganizaciones = () => {
 
@@ -41,6 +42,8 @@ const TablaOrganizaciones = () => {
 		setcolumnModified({ ...columnModified, ['idRow']: id })
 		setShowModal(true)
 	}
+
+	const handlerModified = (arg:any)=>{setcolumnModified({ ['idRow']: arg.id, ['column']: arg.field })}
 
     const contenidoPopover = <div className='PopoverOrganizations'>
 		<span className='TitlePopover'>Estas seguro que deseas eliminar este proyecto?</span>
@@ -147,9 +150,9 @@ const TablaOrganizaciones = () => {
 			}}
 			pageSizeOptions={[2, 5, 7]}
 			disableRowSelectionOnClick
-			// onCellEditStop={HandlerModified}
+			onCellEditStop={handlerModified}
 			// processRowUpdate={(updatedRow, paramsold) =>
-			// 	// DatoModificado(token, updatedRow, paramsold, columnModified, data, actualizarTabla,setActualizarTabla)
+			// 	UpdateOrganization(token, updatedRow, paramsold, columnModified, data, actualizarTabla,setActualizarTabla)
 			// }
 			onProcessRowUpdateError={(err) => console.log(err)}
 			

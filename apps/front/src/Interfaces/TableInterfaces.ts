@@ -1,3 +1,6 @@
+import { tpColumnModified } from "../Components/TablaProyectos/types/tpcolumnas";
+import { tpActualizarTabla } from "../Types/UseStates";
+
 export interface Item {
     numElement?:string
     key: string;
@@ -20,3 +23,13 @@ export   interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
     children: React.ReactNode;
   }
 
+export interface ItfUpdateTablesInline{
+  url: string,
+  tableType:keyof tpActualizarTabla
+  token: string,
+  columnModified: tpColumnModified,
+  actualizarTabla: tpActualizarTabla,
+  setActualizarTabla: (arg: tpActualizarTabla) => void,
+  paramsUpdate: {[key:string]:string},
+  paramsOld: {[key:string]:string}
+} 

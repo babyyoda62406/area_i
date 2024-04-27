@@ -1,4 +1,3 @@
-import { tpOrganization } from "./Entities"
 
 
 
@@ -36,8 +35,6 @@ type typeModalFormulario = {
     
 }
 
-
-
 type typeDatosProyServer = {
     id:number
     identificador: string
@@ -45,7 +42,6 @@ type typeDatosProyServer = {
     nombreOrg:string
     estado: 'Activo' | 'Inactivo'
     enUso:boolean
-    organizacion?: tpOrganization 
 }
 
 type tpInputForm = {

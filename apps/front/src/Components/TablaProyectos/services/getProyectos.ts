@@ -2,6 +2,7 @@ import { RutaServer } from "../../../Helpers/RutaServer"
 import { ALerta } from "../../../Services/Alerta"
 import { FetchService } from "../../../Services/FetchService"
 import { typeDatosProyServer } from "../../../Types/CMP"
+import { tpOrganization } from "../../../Types/Entities"
 
 
 
@@ -22,7 +23,7 @@ export const getProyectos = (token: string, setData: (arg:typeDatosProyServer[])
 			switch (res.status) {
 				case 200:
 					let datos = await res.json()
-					datos = datos.map((item:typeDatosProyServer) => {
+					datos = datos.map((item:{organizacion:tpOrganization}) => {
 						const {  organizacion } = item
 						return {...item,['nombreOrg']:organizacion?.nombre,['idOrg']:organizacion?.id}
 					})
@@ -35,7 +36,7 @@ export const getProyectos = (token: string, setData: (arg:typeDatosProyServer[])
 
 				case 304:
 					let dataNM = await res.json()
-					dataNM = dataNM.map((item:typeDatosProyServer) => {
+					dataNM = dataNM.map((item:{organizacion:tpOrganization}) => {
 						const { organizacion } = item
 						return {...item,['nombreOrg']:organizacion?.nombre,['idOrg']:organizacion?.id}
 					})

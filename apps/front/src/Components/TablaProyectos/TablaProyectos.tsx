@@ -4,7 +4,6 @@ import { DataGrid, GridRowHeightParams, GridRowId, } from '@mui/x-data-grid';
 import { esES } from "@mui/x-data-grid/locales";
 import { getProyectos } from './services/getProyectos.ts';
 import {  useContext, useEffect, useState } from 'react';
-import { DatoModificado } from './services/Update.ts';
 import { tpColumnModified } from './types/tpcolumnas.ts';
 import { GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
@@ -17,6 +16,8 @@ import BtnAddProyect from './Components/AgregarProyecto/AgregarProyecto.tsx';
 import { GlobalContext } from '../../Contexts/GlobalContext.tsx';
 import { typeDatosProyServer } from '../../Types/CMP.ts';
 import ModalFormulario from '../ModalFormulario/ModalFormulario.tsx';
+import { UpdateInlineTable } from '../../Services/UpdateInlineTable.ts';
+import { RutaServer } from '../../Helpers/RutaServer.ts';
 
 
 
@@ -175,7 +176,16 @@ const TablaProyectos = () => {
 			disableRowSelectionOnClick
 			onCellEditStop={HandlerModified}
 			processRowUpdate={(updatedRow, paramsold) =>
-				DatoModificado(token, updatedRow, paramsold, columnModified, data, actualizarTabla,setActualizarTabla)
+				UpdateInlineTable({
+					url: RutaServer.getProyectos,
+					tableType:'tablaProyectos',
+					token: token,
+					columnModified:columnModified,
+					paramsUpdate: updatedRow,
+					paramsOld: paramsold,
+					actualizarTabla: actualizarTabla,
+					setActualizarTabla: setActualizarTabla
+				})
 			}
 			onProcessRowUpdateError={(err) => console.log(err)}
 			
