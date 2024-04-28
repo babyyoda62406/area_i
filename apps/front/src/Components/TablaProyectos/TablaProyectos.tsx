@@ -114,7 +114,8 @@ const TablaProyectos = () => {
 			width: 80,
 			flex:1,
 			editable: false,
-			type: 'boolean'
+			type: 'boolean',
+			cellClassName: 'probando'			
 		},
 		
 		{
@@ -143,10 +144,9 @@ const TablaProyectos = () => {
 					</Popover>
 					,
 				];
-			},
+			}
 		}
 	];
-
 
 	return <Box className='ContainerTable'  >
 

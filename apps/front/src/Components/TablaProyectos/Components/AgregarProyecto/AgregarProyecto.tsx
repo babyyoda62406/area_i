@@ -2,7 +2,7 @@ import { GridToolbarContainer } from "@mui/x-data-grid"
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
 import ModalFormulario from "../../../ModalFormulario/ModalFormulario";
-import FormularioAddProyect from "../../../Sidebar/Components/FormularioAddProyect/FormularioAddProyect";
+import FormularioAddProyect from "../FormularioAddProyect/FormularioAddProyect";
 import { useState } from "react";
 
 const BtnAddProyect = () => {

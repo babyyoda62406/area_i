@@ -10,7 +10,7 @@ import {  typeSubElAside } from '../../Types/UseStates'
 import { handlerSidebar } from './Services/HandlerSidebar'
 import { useLocation, useNavigate } from 'react-router-dom'
 import ModalFormulario from '../ModalFormulario/ModalFormulario'
-import FormularioAddProyect from './Components/FormularioAddProyect/FormularioAddProyect'
+import FormularioAddProyect from '../TablaProyectos/Components/FormularioAddProyect/FormularioAddProyect'
 
 
 const Sidebar: FC<typeSidebar> = ({ Show }) => {
