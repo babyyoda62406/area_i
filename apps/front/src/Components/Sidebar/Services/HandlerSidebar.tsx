@@ -2,7 +2,7 @@
 
 
 
-export const handlerSidebar = (arg: string, ruta:(arg:string)=>void , setShowModal: (arg: boolean) => void,location:any) => {
+export const handlerSidebar = (arg: string, ruta:(arg:string)=>void ,location:any) => {
 
 
 
@@ -10,12 +10,9 @@ export const handlerSidebar = (arg: string, ruta:(arg:string)=>void , setShowMod
 		case 'gestionProyectos':
 			if (!location.pathname.includes('gestiongeneral')) {
 				ruta('/Home/gestiongeneral')
-
 			} else {
 				ruta('/Home')
-				
 			}
-
 			break
 
 		case 'GestionOrganizaciones':
@@ -26,19 +23,10 @@ export const handlerSidebar = (arg: string, ruta:(arg:string)=>void , setShowMod
 			}
 			break
 
-		case 'AgregarProyectos':
-			setShowModal(true)
-			break
-
-		case 'gestionUsuarios':
-
-
-			ruta('/home/gestionusuarios')
-			break
 
 		case 'gestionRoles':
-
-			ruta('/home/gestionRoles')
+			!location.pathname.includes('gestion_organizaciones') ?
+				ruta('/home/gestion_roles'):ruta('/Home')
 			break
 
 		default:

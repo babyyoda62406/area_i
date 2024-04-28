@@ -35,8 +35,8 @@ export const itemsSidebar: typeOptionAside[] = [
         name: 'Gestionar Roles',
         children: [
             {
-                name:'En Desarrollo',
-                optionFunc: ''
+                name:'Administrar Roles',
+                optionFunc: 'gestionRoles'
             },
             // {
             //     name: 'item2',

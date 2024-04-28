@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import './TablaRoles.css'
-import { DataGrid, GridColDef, GridRowHeightParams } from '@mui/x-data-grid'
+import { DataGrid, esES, GridColDef, GridRowHeightParams } from '@mui/x-data-grid'
 import { ItfTableRoles } from './interfaces/ItfTableRoles'
 import { useState } from 'react'
 import SelectorHeight from '../Selectorheight/SelectorHeight'
@@ -8,7 +8,11 @@ import BtnAddRol from './Components/AgregarRol/AgregarRol'
 
 const TablaRoles = () => {
     
+	const idioma = esES.components.MuiDataGrid.defaultProps.localeText
     const [data,setData] = useState<ItfTableRoles[]>([])
+
+
+    
 
     const columns: GridColDef[] = [
         {
@@ -41,9 +45,10 @@ const TablaRoles = () => {
 		},
     ]
 
-    return <Box className="TablaRoles">
+    return <Box className="ContainerTable">
         <DataGrid
             className='TablaRoles'
+            localeText={idioma}
             columns={columns}
 			rows={data}
             getRowHeight={({ id, densityFactor }: GridRowHeightParams) => {
@@ -61,9 +66,17 @@ const TablaRoles = () => {
 					</div>
 				},
 				
-				
+            }}
+            // toolbar:BtnAddProyect
+			initialState={{
+				pagination: {
+					paginationModel: {
+						pageSize: 5,
+					},
+				},
 			}}
-        
+            pageSizeOptions={[2, 5, 7]}
+			disableRowSelectionOnClick
         
         />
         

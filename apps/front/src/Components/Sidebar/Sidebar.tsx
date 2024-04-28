@@ -37,7 +37,7 @@ const Sidebar: FC<typeSidebar> = ({ Show }) => {
  */
   const activarSubItem = (arg: string, elementFunc: string) => {
     
-    handlerSidebar(elementFunc,ruta,setShowModal,location)
+    handlerSidebar(elementFunc,ruta,location)
 
     elementActive.element == arg ? setElementActive({...elementActive, ['element']:''}):setElementActive((prevelementActive) => {
       return {
