@@ -50,8 +50,7 @@ const FormularioAddProyect: FC<tpFormularioAddProyecto> = ({ setShowModal }) => 
         event.preventDefault()
 
         if (Object.keys(dataServer).find((item: string) => { dataServer[item as keyof typeof dataServer] == '' })) {
-            console.log('candela')
-            alert('eso')
+            
             return
         }
 

@@ -12,7 +12,6 @@ const BtnAddProyect = () => {
         setShowModal(true)
     }
 
-
     return <GridToolbarContainer>
         <Button color="primary" startIcon={<AddIcon />} onClick={mostrarAlgo}>
             Agregar Proyecto
