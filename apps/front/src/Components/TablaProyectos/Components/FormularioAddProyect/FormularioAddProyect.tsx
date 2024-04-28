@@ -105,7 +105,7 @@ const FormularioAddProyect: FC<tpFormularioAddProyecto> = ({ setShowModal }) => 
             evento={(arg) => guardarDatos(arg, 'nombre')} />
         <InputForm tipo={'text'} label='Introduzca el id  de su proyecto'
             evento={(arg) => guardarDatos(arg, 'identificador')} />
-        <InputSelect data={[]} defaultValue='candela' updateSize={(arg) => guardarDatos(arg, 'idOrganizacion')}/>
+        <InputSelect data={[]} defaultValue='En Desarrollo' updateSize={(arg) => guardarDatos(arg, 'idOrganizacion')}/>
         {/* <InputForm tipo={'text'} label='Introduzca la organizacion de su proyecto'
             evento={(arg) => guardarDatos(arg, 'nombreOrg')} /> */}
         <InputForm tipo={'submit'} evento={() => guardarDatos} />

@@ -30,6 +30,8 @@ const FormularioUpdateOrganization:FC<ItfFormUpdateOrg> = ({id,data,setShowModal
             value={newData}
             evento={handleChange}
             tipo='text' />
+        
+            
         <InputForm
             tipo='submit'
             classElement='InputSM'

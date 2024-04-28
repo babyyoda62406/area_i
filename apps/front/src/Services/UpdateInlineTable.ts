@@ -60,11 +60,9 @@ export const UpdateInlineTable = (arg: ItfUpdateTablesInline) => {
             })
             .catch(err => console.error(err))
         
-        return paramsUpdate
+        
 
-    } else {
-        return paramsOld
-    }
-
+    } 
+    return paramsOld
 
 }
