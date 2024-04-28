@@ -10,8 +10,6 @@ export const DeleteProyects = (
     actualizarTabla: tpActualizarTabla,
     setActualizarTabla: (arg: tpActualizarTabla) => void) => {
 
-
-    console.log(idData)
     FetchService(`${RutaServer.setProyectos}${idData}`, {
         method: 'DELETE',
         headers: {
@@ -21,30 +19,27 @@ export const DeleteProyects = (
     })
         .then(async (res) => {
             console.log(res)
+            console.log(res.status)
             switch (res.status) {
                 case 200:
-                    const { message } = await res.json()
-                    ALerta({ text: message, icon: 'success' })
+                    ALerta({ title: 'Delete de proyectos desconectado, funcion comprobada', icon: 'success' })
                     setActualizarTabla({ ...actualizarTabla, ['tablaProyectos']: !actualizarTabla.tablaProyectos })
-
                     break
+                
                 case 400:
-                    const { message: messagePro } = await res.json()
-                    ALerta({ title: messagePro, icon: 'error' })
+                    ALerta({ title: ' Error 400', icon: 'error' })
                     break
                 case 404:
-                    const { message: messageErr } = await res.json()
-                    ALerta({ title: messageErr, icon: 'error' })
+                    ALerta({ title: "error not found", icon: 'error' })
                     break
 
                 case 500:
-                    const { message: messageServer } = await res.json()
-                    ALerta({ title: messageServer, icon: 'error' })
+                    ALerta({ title:"Por favor revise su conexion", icon: 'error' })
                     break
 
                 default:
                     ALerta({ title: 'estado desconocido', icon: 'error' })
-
+                    break
             }
         })
         .catch(err => console.log(err))
