@@ -1,18 +1,52 @@
 import { Box } from '@mui/material'
-import './TablaRoles.css'
-import { DataGrid, esES, GridColDef, GridRowHeightParams } from '@mui/x-data-grid'
+import './TablaRolesProyectos.css'
+import { DataGrid, esES, GridActionsCellItem, GridColDef, GridRowHeightParams, GridRowId } from '@mui/x-data-grid'
 import { ItfTableRolesProyectos } from './interfaces/ItfTableRoles'
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import SelectorHeight from '../Selectorheight/SelectorHeight'
 import BtnAddRol from './Components/AgregarRol/AgregarRol'
+import { getRolesProyectos } from './Services/getRolesProyectos'
+import { GlobalContext } from '../../Contexts/GlobalContext'
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { tpColumnModified } from '../TablaProyectos/types/tpcolumnas'
+import { Button, Popover } from 'antd'
 
 const TablaRolesProyectos = () => {
     
 	const idioma = esES.components.MuiDataGrid.defaultProps.localeText
-    const [data,setData] = useState<ItfTableRolesProyectos[]>([])
+    const {token,actualizarTabla,setActualizarTabla} = useContext(GlobalContext)
+	const [data, setData] = useState<ItfTableRolesProyectos[]>([])
+	const [columnModified, setcolumnModified] = useState<tpColumnModified>({
+		idRow: 0,
+		column: ''
+	})
+	const [idRowDelete, setIdRowDelete] = useState<GridRowId>(0)
+	const [showModal, setShowModal] = useState<boolean>(false)
+	const [rowEdit, setRowEdit] = useState<ItfTableRolesProyectos>({ ...data[0] })
 
-
+	useEffect(() => {
+		getRolesProyectos(token, setData)
+	}, [actualizarTabla])
     
+
+	const EditarRow = (row: ItfTableRolesProyectos, id: GridRowId) => {
+
+		setRowEdit(row)
+		setcolumnModified({ ...columnModified, ['idRow']: id })
+		setShowModal(true)
+	}
+
+
+	const contenidoPopover = <div className='PopoverOrganizations'>
+		<span className='TitlePopover'>Estas seguro que deseas eliminar este proyecto?</span>
+        <div className='BodyPopover '>
+            
+			<Button className='ButtonPop yes' onClick={() => {}}>
+				Si
+			</Button>
+		</div>
+	</div>
 
     const columns: GridColDef[] = [
         {
@@ -23,26 +57,55 @@ const TablaRolesProyectos = () => {
 			type:'text'
         },
         {
-			field: 'numElement',
-			headerName: 'Orden',
+			field: 'nombre',
+			headerName: 'Nombre',
 			width: 30,
 			flex: 1,
 			type:'text'
         },
         {
-			field: 'numElement',
-			headerName: 'Orden',
+			field: 'estado',
+			headerName: 'Estado',
 			width: 30,
 			flex: 1,
 			type:'text'
         },
         {
-			field: 'numElement',
-			headerName: 'Orden',
+			field: 'enUso',
+			headerName: 'Uso',
 			width: 30,
 			flex: 1,
-			type:'text'
+			type:'boolean'
 		},
+		{
+			field: 'actions',
+			type: 'actions',
+			headerName: 'Operaciones',
+			width: 100,
+			flex: 2,
+
+			cellClassName: 'actions',
+			getActions: ({ id, row }) => {
+
+				return [
+					<GridActionsCellItem
+						icon={<EditIcon />}
+						label="Editar"
+						className="textPrimary"
+						onClick={() => EditarRow(row, id)}
+						color="inherit"
+					/>,
+					<Popover content={contenidoPopover} onOpenChange={() => setIdRowDelete(id)}  >
+						<GridActionsCellItem
+							icon={<DeleteIcon />}
+							label="Eliminar"
+							color="inherit"
+						/>
+					</Popover>
+					,
+				];
+			},
+		}
     ]
 
     return <Box className="ContainerTable">

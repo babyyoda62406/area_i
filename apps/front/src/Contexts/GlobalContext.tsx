@@ -13,7 +13,8 @@ export const GlobalContext = createContext<typeGlobalContext>({
     actualizarTabla: {
         tablaProyectos: false,
         tablaUsuarios: false,
-        tablaOrganizaciones:false
+        tablaOrganizaciones: false,
+        tablaRolesProyectos:false
     },
 
 
@@ -36,7 +37,8 @@ export const GlobalContextProvider: FC<typeProviderContext> = ({ children }) => 
     const [actualizarTabla, setActualizarTabla] = useState<tpActualizarTabla>({
         tablaProyectos: false,
         tablaOrganizaciones: false,
-        tablaUsuarios:false
+        tablaUsuarios: false,
+        tablaRolesProyectos:false
     })
 
 
