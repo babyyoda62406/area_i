@@ -1,15 +1,15 @@
 import { Box } from '@mui/material'
 import './TablaRoles.css'
 import { DataGrid, esES, GridColDef, GridRowHeightParams } from '@mui/x-data-grid'
-import { ItfTableRoles } from './interfaces/ItfTableRoles'
+import { ItfTableRolesProyectos } from './interfaces/ItfTableRoles'
 import { useState } from 'react'
 import SelectorHeight from '../Selectorheight/SelectorHeight'
 import BtnAddRol from './Components/AgregarRol/AgregarRol'
 
-const TablaRoles = () => {
+const TablaRolesProyectos = () => {
     
 	const idioma = esES.components.MuiDataGrid.defaultProps.localeText
-    const [data,setData] = useState<ItfTableRoles[]>([])
+    const [data,setData] = useState<ItfTableRolesProyectos[]>([])
 
 
     
@@ -47,7 +47,7 @@ const TablaRoles = () => {
 
     return <Box className="ContainerTable">
         <DataGrid
-            className='TablaRoles'
+            className='TablaRolesProyectos'
             localeText={idioma}
             columns={columns}
 			rows={data}
@@ -86,4 +86,4 @@ const TablaRoles = () => {
     </Box>
 }
 
-export default TablaRoles
+export default TablaRolesProyectos

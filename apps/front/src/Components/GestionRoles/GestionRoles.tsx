@@ -1,4 +1,4 @@
-import TablaRoles from '../TablaRoles/TablaRoles'
+import TablaRoles from '../TablaRolesProyectos/TablaRolesProyectos'
 import './GestionRoles.css'
 
 const GestionRoles = () => {
