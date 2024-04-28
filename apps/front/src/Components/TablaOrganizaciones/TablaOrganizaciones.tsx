@@ -10,12 +10,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { tpColumnModified } from '../TablaProyectos/types/tpcolumnas'
 import { Button, Popover } from 'antd'
 import { DeleteOrganizations } from './Services/DeleteOrganizations'
-import SelectorHeight from '../TablaUsuarios/Components/Selectorheight/SelectorHeight'
 import BtnAddOrganization from './Components/AgregarOrganizacion/AgregarOrganizacion'
 import ModalFormulario from '../ModalFormulario/ModalFormulario'
 import FormularioUpdateOrganization from './Components/FormularioUpdateOrganization/FormularioUpdateOrganization'
 import { UpdateInlineTable } from '../../Services/UpdateInlineTable'
 import { RutaServer } from '../../Helpers/RutaServer'
+import SelectorHeight from '../Selectorheight/SelectorHeight'
 
 const TablaOrganizaciones = () => {
 
