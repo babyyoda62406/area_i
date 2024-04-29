@@ -9,7 +9,7 @@ import { ALerta } from "../../../../Services/Alerta"
 
 const FormularioAddRol: FC<ItfFormAddRolProy> = ({ setShowModal}) => {
 
-    const {token} = useContext(GlobalContext)
+    const {token,actualizarTabla,setActualizarTabla} = useContext(GlobalContext)
     const [data, setData] = useState<ItfDataAddRolProy>({
         nombre: ''
     })
@@ -43,6 +43,7 @@ const FormularioAddRol: FC<ItfFormAddRolProy> = ({ setShowModal}) => {
                     case 201:
                         const { message: messOk } = await res.json()
                         ALerta({ text: messOk, icon: 'success' })
+                        setActualizarTabla({...actualizarTabla,['tablaRolesProyectos']:!actualizarTabla.tablaRolesProyectos})
                         setShowModal(false)
                         
                         break;
