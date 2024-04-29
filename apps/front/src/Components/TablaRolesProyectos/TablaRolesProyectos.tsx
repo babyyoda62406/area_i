@@ -13,6 +13,7 @@ import { tpColumnModified } from '../TablaProyectos/types/tpcolumnas'
 import { Button, Popover } from 'antd'
 import ModalFormulario from '../ModalFormulario/ModalFormulario'
 import FormularioAddRol from './Components/FormularioAddRol/FormularioAddRol'
+import { DeleteRolProyectos } from './Services/DeleteRolesProyectos'
 
 const TablaRolesProyectos = () => {
     
@@ -44,7 +45,7 @@ const TablaRolesProyectos = () => {
 		<span className='TitlePopover'>Estas seguro que deseas eliminar este proyecto?</span>
         <div className='BodyPopover '>
             
-			<Button className='ButtonPop yes' onClick={() => {}}>
+			<Button className='ButtonPop yes' onClick={() => {DeleteRolProyectos(token,idRowDelete,actualizarTabla,setActualizarTabla)}}>
 				Si
 			</Button>
 		</div>
