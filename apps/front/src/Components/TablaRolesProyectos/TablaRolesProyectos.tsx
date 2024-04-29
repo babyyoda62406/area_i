@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import './TablaRolesProyectos.css'
 import { DataGrid, esES, GridActionsCellItem, GridColDef, GridRowHeightParams, GridRowId } from '@mui/x-data-grid'
-import { ItfTableRolesProyectos } from './interfaces/ItfTableRoles'
+import { ItfDataRolesProyectos } from './interfaces/ItfTableRoles'
 import { useContext, useEffect, useState } from 'react'
 import SelectorHeight from '../Selectorheight/SelectorHeight'
 import BtnAddRol from './Components/AgregarRol/AgregarRol'
@@ -11,26 +11,28 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { tpColumnModified } from '../TablaProyectos/types/tpcolumnas'
 import { Button, Popover } from 'antd'
+import ModalFormulario from '../ModalFormulario/ModalFormulario'
+import FormularioAddRol from './Components/FormularioAddRol/FormularioAddRol'
 
 const TablaRolesProyectos = () => {
     
 	const idioma = esES.components.MuiDataGrid.defaultProps.localeText
     const {token,actualizarTabla,setActualizarTabla} = useContext(GlobalContext)
-	const [data, setData] = useState<ItfTableRolesProyectos[]>([])
+	const [data, setData] = useState<ItfDataRolesProyectos[]>([])
 	const [columnModified, setcolumnModified] = useState<tpColumnModified>({
 		idRow: 0,
 		column: ''
 	})
 	const [idRowDelete, setIdRowDelete] = useState<GridRowId>(0)
 	const [showModal, setShowModal] = useState<boolean>(false)
-	const [rowEdit, setRowEdit] = useState<ItfTableRolesProyectos>({ ...data[0] })
-
+	const [rowEdit, setRowEdit] = useState<ItfDataRolesProyectos>({ ...data[0] })
+	
 	useEffect(() => {
 		getRolesProyectos(token, setData)
 	}, [actualizarTabla])
     
 
-	const EditarRow = (row: ItfTableRolesProyectos, id: GridRowId) => {
+	const EditarRow = (row: ItfDataRolesProyectos, id: GridRowId) => {
 
 		setRowEdit(row)
 		setcolumnModified({ ...columnModified, ['idRow']: id })
@@ -143,7 +145,7 @@ const TablaRolesProyectos = () => {
         
         />
         
-        
+		 
       
 
     </Box>

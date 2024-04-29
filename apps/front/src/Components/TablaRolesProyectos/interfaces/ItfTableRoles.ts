@@ -1,5 +1,5 @@
 
-export interface ItfTableRolesProyectos {
+export interface ItfDataRolesProyectos {
     id: number
     nombre: string
     estado: "Activo" | "Inactivo"

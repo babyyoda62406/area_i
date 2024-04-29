@@ -1,10 +1,10 @@
 import { RutaServer } from "../../../Helpers/RutaServer";
 import { ALerta } from "../../../Services/Alerta";
 import { FetchService } from "../../../Services/FetchService";
-import { ItfTableRolesProyectos } from "../interfaces/ItfTableRoles";
+import { ItfDataRolesProyectos } from "../interfaces/ItfTableRoles";
 
 
-export const getRolesProyectos = (token: string, setData: (arg: ItfTableRolesProyectos[]) => void) => {
+export const getRolesProyectos = (token: string, setData: (arg: ItfDataRolesProyectos[]) => void) => {
     
     FetchService(RutaServer.getRolsProyecto, {
         headers: {
@@ -17,7 +17,7 @@ export const getRolesProyectos = (token: string, setData: (arg: ItfTableRolesPro
             switch (res.status) {
                 case 200:
                     const elements = await res.json()
-                    const result = elements.map((item:ItfTableRolesProyectos, index: number) => {
+                    const result = elements.map((item:ItfDataRolesProyectos, index: number) => {
                         
                         return {...item,['numElement']:index+1}
                     })
@@ -31,7 +31,7 @@ export const getRolesProyectos = (token: string, setData: (arg: ItfTableRolesPro
                 
                 case 304:
                     const elementsCache = await res.json()
-                    const resultCache = elementsCache.map((item:ItfTableRolesProyectos, index: number) => {
+                    const resultCache = elementsCache.map((item:ItfDataRolesProyectos, index: number) => {
                         
                         return {...item,['numElement']:index+1}
                     })

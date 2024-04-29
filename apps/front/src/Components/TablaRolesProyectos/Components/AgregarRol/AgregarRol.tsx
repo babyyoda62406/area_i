@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { useState } from "react";
 
 import ModalFormulario from "../../../ModalFormulario/ModalFormulario";
+import FormularioAddRol from "../FormularioAddRol/FormularioAddRol";
 
 const BtnAddRol = () => {
 
@@ -19,7 +20,7 @@ const BtnAddRol = () => {
         <Button color="primary" startIcon={<AddIcon />} onClick={mostrarAlgo}>
             Agregar Rol
         </Button>
-        <ModalFormulario showModal={showModal } setShowModal={()=>setShowModal(false)} Formulario = {<></>} />
+        <ModalFormulario showModal={showModal } setShowModal={()=>setShowModal(false)} Formulario = {<FormularioAddRol setShowModal={setShowModal}/>} />
     </GridToolbarContainer>
 }
 
