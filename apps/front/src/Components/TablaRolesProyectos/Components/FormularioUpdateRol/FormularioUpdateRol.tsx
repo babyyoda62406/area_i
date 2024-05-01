@@ -14,13 +14,11 @@ const FormularioUpdateRol: FC<ItfFormUpdateRol> = ({ data,setShowModal }) => {
     
     const {token,actualizarTabla,setActualizarTabla} = useContext(GlobalContext)
 
-    const [dataNew, setDataNew] = useState<ItfDataUpdateRoles>({
-        nombre:data.nombre
-    })
+    
     const [datoModificado,setDatoModificado] =useState<ItfDataUpdateRoles>({nombre:''})
     
     useEffect(()=>{
-        setDatoModificado({...datoModificado, ...dataNew})
+        setDatoModificado({...datoModificado,['nombre']:data.nombre})
     },[])
 
     const saveData = (type: keyof ItfDataUpdateRoles, arg: string) => {
@@ -30,7 +28,7 @@ const FormularioUpdateRol: FC<ItfFormUpdateRol> = ({ data,setShowModal }) => {
 
     const handlerSubmit = () => {
         
-        if (dataNew.nombre !== datoModificado.nombre) {
+        if (data.nombre !== datoModificado.nombre) {
           
             FetchService(`${RutaServer.getRolsProyecto}/${data.id}`, {
                 method: 'PATCH',
