@@ -12,8 +12,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { tpColumnModified } from '../TablaProyectos/types/tpcolumnas'
 import { Button, Popover } from 'antd'
 import ModalFormulario from '../ModalFormulario/ModalFormulario'
-import FormularioAddRol from './Components/FormularioAddRol/FormularioAddRol'
 import { DeleteRolProyectos } from './Services/DeleteRolesProyectos'
+import FormularioUpdateRol from './Components/FormularioUpdateRol/FormularioUpdateRol'
 
 const TablaRolesProyectos = () => {
     
@@ -145,7 +145,11 @@ const TablaRolesProyectos = () => {
 			disableRowSelectionOnClick
         
         />
-        
+		<ModalFormulario
+			showModal={showModal}
+			setShowModal={setShowModal}
+
+			Formulario={<FormularioUpdateRol data={rowEdit}  setShowModal={setShowModal}/>} />
 		 
       
 

@@ -7,3 +7,11 @@ export interface ItfFormAddRolProy {
 export interface ItfDataAddRolProy {
     nombre?:string
 }
+
+
+export interface ItfDataUpdateRoles {
+    
+    nombre?: string
+    estado?: "Activo" | "Inactivo"
+    
+}

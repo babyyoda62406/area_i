@@ -6,3 +6,9 @@ export interface ItfDataRolesProyectos {
     enUso: boolean
     numElement?:number
 }
+
+export interface ItfFormUpdateRol {
+    data: ItfDataRolesProyectos
+    
+    setShowModal:(arg:boolean)=>void
+}
