@@ -14,6 +14,8 @@ import { Button, Popover } from 'antd'
 import ModalFormulario from '../ModalFormulario/ModalFormulario'
 import { DeleteRolProyectos } from './Services/DeleteRolesProyectos'
 import FormularioUpdateRol from './Components/FormularioUpdateRol/FormularioUpdateRol'
+import { UpdateInlineTable } from '../../Services/UpdateInlineTable'
+import { RutaServer } from '../../Helpers/RutaServer'
 
 const TablaRolesProyectos = () => {
     
@@ -40,6 +42,8 @@ const TablaRolesProyectos = () => {
 		setShowModal(true)
 	}
 
+	const HandlerModified = (arg: any) => { setcolumnModified({ ['idRow']: arg.id, ['column']: arg.field }) }
+
 
 	const contenidoPopover = <div className='PopoverOrganizations'>
 		<span className='TitlePopover'>Estas seguro que deseas eliminar este proyecto?</span>
@@ -57,14 +61,16 @@ const TablaRolesProyectos = () => {
 			headerName: 'Orden',
 			width: 30,
 			flex: 1,
-			type:'text'
+			type: 'text',
         },
         {
 			field: 'nombre',
 			headerName: 'Nombre',
 			width: 30,
 			flex: 1,
-			type:'text'
+			type: 'text',
+			editable:true
+			
         },
         {
 			field: 'estado',
@@ -143,6 +149,20 @@ const TablaRolesProyectos = () => {
 			}}
             pageSizeOptions={[2, 5, 7]}
 			disableRowSelectionOnClick
+
+			onCellEditStop={HandlerModified}
+			processRowUpdate={(updatedRow, paramsold) =>
+				UpdateInlineTable({
+					url: RutaServer.getProyectos,
+					tableType:'tablaProyectos',
+					token: token,
+					paramsUpdate: updatedRow,
+					paramsOld: paramsold,
+					actualizarTabla: actualizarTabla,
+					setActualizarTabla: setActualizarTabla
+				})
+			}
+			onProcessRowUpdateError={(err) => console.log(err)}
         
         />
 		<ModalFormulario
